@@ -1,0 +1,10 @@
+ต้อง 
+python -m pip install djangorestframework django-cors-headers 
+เพื่อใช้ rest_framework และ corheader
+
+ขั้นตอนการ commit
+1. git status
+2. git add .
+3. git commit -m "text"
+3.5 git pull origin main
+4. git push origin main
