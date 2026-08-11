@@ -12,3 +12,9 @@ def intro(request):
         'django_version': django.get_version(),
     }
     return render(request, 'intro.html', context)
+
+def result(request):
+    context = {
+        'django_version': django.get_version(),
+    }
+    return render(request, 'result.html', context)
