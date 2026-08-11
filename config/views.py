@@ -5,4 +5,10 @@ def home(request):
     context = {
         'django_version': django.get_version(),
     }
-    return render(request, 'index.html', context)
+    return render(request, 'home.html', context)
+
+def intro(request):
+    context = {
+        'django_version': django.get_version(),
+    }
+    return render(request, 'intro.html', context)

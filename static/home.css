@@ -1,0 +1,1123 @@
+/* =====================================================
+RESET
+===================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+/* =====================================================
+BODY
+===================================================== */
+
+body {
+
+
+width: 100%;
+height: 100vh;
+
+overflow: hidden;
+
+font-family:
+    "Noto Sans Thai",
+    "Segoe UI",
+    sans-serif;
+
+/*
+    ใช้ background.png เต็มทั้งหน้า
+    พร้อม Green Overlay
+*/
+
+background-image:
+
+    linear-gradient(
+        135deg,
+        rgba(22, 101, 52, 0.72),
+        rgba(34, 197, 94, 0.38),
+        rgba(240, 253, 244, 0.72)
+    ),
+
+    url("background.png");
+
+background-size: cover;
+
+background-position: center;
+
+background-repeat: no-repeat;
+
+
+}
+
+/* =====================================================
+MAIN CONTAINER
+===================================================== */
+
+.container {
+
+
+width: 100%;
+height: 100vh;
+
+display: flex;
+
+position: relative;
+
+
+}
+
+/* =====================================================
+LEFT SECTION — 50%
+===================================================== */
+
+.left-section {
+
+width: 50%;
+
+position:
+ relative;
+
+padding-left: 70px;
+
+overflow: hidden;
+
+/*
+    เขียวฝั่งซ้ายจางลง
+    เพื่อให้เห็น background.png ชัดขึ้น
+*/
+
+background:
+    linear-gradient(
+        135deg,
+        rgba(20, 83, 45, 0.10),
+        rgba(34, 197, 94, 0.06)
+    );
+
+}
+
+/* =====================================================
+LEFT DECORATION
+===================================================== */
+
+.left-section::before {
+
+
+content: "";
+
+position: absolute;
+
+width: 500px;
+height: 500px;
+
+top: -220px;
+right: -200px;
+
+border-radius: 50%;
+
+background:
+    rgba(74, 222, 128, 0.12);
+
+filter:
+    blur(30px);
+
+pointer-events: none;
+
+
+}
+
+.left-section::after {
+
+
+content: "☯";
+
+position: absolute;
+
+right: -100px;
+bottom: -130px;
+
+font-size: 360px;
+
+color:
+    rgba(255, 255, 255, 0.08);
+
+transform:
+    rotate(15deg);
+
+pointer-events: none;
+
+
+}
+
+/* =====================================================
+LOGO
+===================================================== */
+
+.logo {
+
+
+position: absolute;
+
+top: 50px;
+left: 70px;
+
+display: flex;
+
+align-items: center;
+
+gap: 20px;
+
+z-index: 3;
+
+
+}
+
+.logo-circle {
+
+
+width: 65px;
+height: 65px;
+
+border:
+    3px solid
+    rgba(255, 255, 255, 0.9);
+
+border-radius: 50%;
+
+display: flex;
+
+align-items: center;
+justify-content: center;
+
+color: white;
+
+font-size: 35px;
+
+background:
+    rgba(22, 101, 52, 0.35);
+
+box-shadow:
+
+    0 8px 25px
+    rgba(0, 0, 0, 0.15),
+
+    inset 0 0 20px
+    rgba(255, 255, 255, 0.08);
+
+backdrop-filter:
+    blur(8px);
+
+
+}
+
+.logo h1 {
+
+
+font-size: 28px;
+
+color: white;
+
+letter-spacing: 2px;
+
+text-shadow:
+    0 2px 10px
+    rgba(0, 0, 0, 0.20);
+
+
+}
+
+.logo p {
+
+
+margin-top: 5px;
+
+color:
+    rgba(255, 255, 255, 0.80);
+
+font-size: 14px;
+
+
+}
+
+/* =====================================================
+YIN YANG
+===================================================== */
+
+.yin-yang {
+
+
+position: absolute;
+
+top: 150px;
+
+left: 160px;
+
+z-index: 2;
+
+
+}
+
+.yin-yang img {
+
+
+width: 330px;
+
+filter:
+
+    drop-shadow(
+        0 15px 30px
+        rgba(0, 0, 0, 0.20)
+    );
+
+
+}
+
+/* =====================================================
+CHINESE QUOTE
+===================================================== */
+
+.quote-chinese {
+
+
+position: absolute;
+
+top: 310px;
+
+left: 65px;
+
+display: flex;
+
+gap: 35px;
+
+font-family:
+    "Songti SC",
+    serif;
+
+font-size: 38px;
+
+line-height: 1.35;
+
+color:
+    rgba(255, 255, 255, 0.96);
+
+text-shadow:
+    0 2px 12px
+    rgba(0, 0, 0, 0.20);
+
+z-index: 3;
+
+
+}
+
+.quote-chinese span {
+
+
+writing-mode: vertical-rl;
+
+
+}
+
+/* =====================================================
+DESCRIPTION
+===================================================== */
+
+.description {
+
+
+position: absolute;
+
+bottom: 90px;
+
+left: 80px;
+
+font-size: 17px;
+
+line-height: 1.8;
+
+color:
+    rgba(255, 255, 255, 0.80);
+
+text-shadow:
+    0 2px 8px
+    rgba(0, 0, 0, 0.15);
+
+z-index: 3;
+
+
+}
+
+/* =====================================================
+RIGHT SECTION — 50%
+===================================================== */
+
+.right-section {
+
+width: 50%;
+
+display: flex;
+
+justify-content: center;
+
+align-items: center;
+
+/*
+    ฝั่งขวาเขียวชัดกว่าฝั่งซ้าย
+    แต่ยังเห็น background.png อยู่
+*/
+
+background:
+    linear-gradient(
+        135deg,
+        rgba(240, 253, 244, 0.38),
+        rgba(34, 197, 94, 0.16)
+    );
+
+}
+
+/* =====================================================
+FORM CARD
+===================================================== */
+
+.card {
+
+
+width: 470px;
+
+min-height: 480px;
+
+padding: 38px 44px 38px;
+
+background:
+    rgba(255, 255, 255, 0.90);
+
+border:
+    1px solid
+    rgba(22, 163, 74, 0.20);
+
+border-radius: 30px;
+
+box-shadow:
+
+    0 20px 60px
+    rgba(21, 128, 61, 0.14),
+
+    0 4px 20px
+    rgba(255, 255, 255, 0.90) inset;
+
+backdrop-filter:
+    blur(18px);
+
+-webkit-backdrop-filter:
+    blur(18px);
+
+display: flex;
+
+flex-direction: column;
+
+justify-content: center;
+
+align-items: center;
+
+
+}
+
+/* =====================================================
+FORM HEADER
+===================================================== */
+
+.form-header {
+
+
+width: 100%;
+
+text-align: center;
+
+margin-bottom: 25px;
+
+
+}
+
+.form-kicker {
+
+
+display: inline-block;
+
+margin-bottom: 7px;
+
+color: #15803d;
+
+font-size: 11px;
+
+font-weight: 600;
+
+letter-spacing: 3px;
+
+
+}
+
+.form-header h2 {
+
+
+margin: 0;
+
+color: #123524;
+
+font-size: 30px;
+
+font-weight: 600;
+
+letter-spacing: 0.5px;
+
+line-height: 1.3;
+
+
+}
+
+.form-header p {
+
+
+margin: 7px 0 0;
+
+color: #708276;
+
+font-size: 13px;
+
+font-weight: 400;
+
+line-height: 1.6;
+
+
+}
+
+/* =====================================================
+FORM GROUP
+===================================================== */
+
+.form-group {
+
+
+width: 100%;
+
+margin-bottom: 17px;
+
+
+}
+
+.form-group > label {
+
+
+display: flex;
+
+align-items: center;
+
+margin-bottom: 7px;
+
+color: #294536;
+
+font-size: 14px;
+
+font-weight: 500;
+
+line-height: 1.4;
+
+
+}
+
+/* =====================================================
+LABEL ICON
+===================================================== */
+
+.label-icon {
+
+
+display: inline-flex;
+
+align-items: center;
+justify-content: center;
+
+margin-right: 7px;
+
+color: #16a34a;
+
+font-size: 10px;
+
+
+}
+
+/* =====================================================
+OPTIONAL
+===================================================== */
+
+.optional {
+
+
+margin-left: 7px;
+
+color: #9aaa9f;
+
+font-size: 11px;
+
+font-weight: 400;
+
+
+}
+
+/* =====================================================
+INPUT WRAPPER
+===================================================== */
+
+.input-wrapper {
+
+
+position: relative;
+
+width: 100%;
+
+
+}
+
+/* =====================================================
+TEXT / DATE / TIME INPUT
+===================================================== */
+
+.input-wrapper input {
+
+
+width: 100%;
+
+height: 48px;
+
+padding:
+    0 15px;
+
+box-sizing: border-box;
+
+border:
+    1px solid
+    rgba(151, 176, 160, 0.45);
+
+border-radius: 14px;
+
+background:
+    rgba(248, 252, 249, 0.90);
+
+color: #234333;
+
+font-family: inherit;
+
+font-size: 14px;
+
+outline: none;
+
+transition:
+
+    border-color 0.25s ease,
+
+    box-shadow 0.25s ease,
+
+    background 0.25s ease,
+
+    transform 0.25s ease;
+
+
+}
+
+/* =====================================================
+PLACEHOLDER
+===================================================== */
+
+.input-wrapper input::placeholder {
+
+
+color: #a7b4ab;
+
+
+}
+
+/* =====================================================
+INPUT HOVER
+===================================================== */
+
+.input-wrapper input:hover {
+
+
+border-color:
+    rgba(22, 163, 74, 0.50);
+
+
+}
+
+/* =====================================================
+INPUT FOCUS
+===================================================== */
+
+.input-wrapper input:focus {
+
+
+background:
+    rgba(255, 255, 255, 0.98);
+
+border-color:
+    #16a34a;
+
+box-shadow:
+
+    0 0 0 4px
+    rgba(22, 163, 74, 0.10),
+
+    0 6px 20px
+    rgba(22, 163, 74, 0.07);
+
+
+}
+
+/* =====================================================
+DATE / TIME
+===================================================== */
+
+.input-wrapper input[type="date"],
+.input-wrapper input[type="time"] {
+
+
+color: #294536;
+
+cursor: pointer;
+
+
+}
+
+.input-wrapper input::-webkit-calendar-picker-indicator {
+
+
+opacity: 0.65;
+
+cursor: pointer;
+
+transition:
+    opacity 0.2s ease;
+
+
+}
+
+.input-wrapper input::-webkit-calendar-picker-indicator:hover {
+
+
+opacity: 1;
+
+
+}
+
+/* =====================================================
+NAME INPUTS
+===================================================== */
+
+.name-inputs {
+
+
+display: grid;
+
+grid-template-columns:
+    1fr 1fr;
+
+gap: 12px;
+
+width: 100%;
+
+
+}
+
+/* =====================================================
+GENDER
+===================================================== */
+
+.gender-options {
+
+
+width: 100%;
+
+display: grid;
+
+grid-template-columns:
+    1fr 1fr;
+
+gap: 12px;
+
+
+}
+
+/* =====================================================
+GENDER OPTION
+===================================================== */
+
+.gender-option {
+
+
+position: relative;
+
+margin: 0 !important;
+
+cursor: pointer;
+
+
+}
+
+/* Hide original radio */
+
+.gender-option input {
+
+
+position: absolute;
+
+width: 1px;
+
+height: 1px;
+
+opacity: 0;
+
+
+}
+
+/* =====================================================
+GENDER CARD
+===================================================== */
+
+.gender-card {
+
+
+display: flex;
+
+align-items: center;
+
+width: 100%;
+
+height: 48px;
+
+padding:
+    0 17px;
+
+box-sizing: border-box;
+
+border:
+    1px solid
+    rgba(151, 176, 160, 0.45);
+
+border-radius: 14px;
+
+background:
+    rgba(248, 252, 249, 0.90);
+
+color: #52685a;
+
+font-size: 14px;
+
+transition:
+    all 0.25s ease;
+
+
+}
+
+/* =====================================================
+CUSTOM RADIO
+===================================================== */
+
+.radio-custom {
+
+
+position: relative;
+
+width: 17px;
+
+height: 17px;
+
+margin-right: 10px;
+
+border:
+    1.5px solid
+    #aebdb3;
+
+border-radius: 50%;
+
+box-sizing: border-box;
+
+transition:
+    all 0.25s ease;
+
+
+}
+
+/* =====================================================
+GENDER SELECTED
+===================================================== */
+
+.gender-option input:checked + .gender-card {
+
+
+background:
+
+    linear-gradient(
+        135deg,
+        rgba(240, 253, 244, 0.98),
+        rgba(220, 252, 231, 0.92)
+    );
+
+border-color:
+    #16a34a;
+
+color:
+    #166534;
+
+box-shadow:
+
+    0 5px 18px
+    rgba(22, 163, 74, 0.10);
+
+
+}
+
+.gender-option input:checked
+
+* .gender-card
+  .radio-custom {
+
+  border-color:
+  #16a34a;
+
+  background:
+  #16a34a;
+
+  box-shadow:
+
+  
+    0 0 0 3px
+    rgba(22, 163, 74, 0.10);
+  
+
+}
+
+/* =====================================================
+RADIO DOT
+===================================================== */
+
+.gender-option input:checked
+
+* .gender-card
+  .radio-custom::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 5px;
+
+  height: 5px;
+
+  top: 50%;
+
+  left: 50%;
+
+  transform:
+  translate(-50%, -50%);
+
+  background:
+  white;
+
+  border-radius: 50%;
+
+}
+
+/* =====================================================
+GENDER HOVER
+===================================================== */
+
+.gender-option:hover
+.gender-card {
+
+
+border-color:
+    rgba(22, 163, 74, 0.55);
+
+transform:
+    translateY(-1px);
+
+
+}
+
+/* =====================================================
+NEXT BUTTON
+===================================================== */
+
+.card .next-btn {
+
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+gap: 12px;
+
+width: 100%;
+
+height: 56px;
+
+margin-top: 8px;
+
+border: none;
+
+border-radius: 15px;
+
+background:
+
+    linear-gradient(
+        135deg,
+        #166534 0%,
+        #15803d 45%,
+        #22c55e 100%
+    );
+
+color: white;
+
+font-family: inherit;
+
+font-size: 18px;
+
+font-weight: 500;
+
+cursor: pointer;
+
+box-shadow:
+
+    0 8px 22px
+    rgba(22, 163, 74, 0.25),
+
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.25);
+
+transition:
+
+    transform 0.25s ease,
+
+    box-shadow 0.25s ease,
+
+    filter 0.25s ease;
+
+
+}
+
+/* =====================================================
+NEXT ARROW
+===================================================== */
+
+.next-btn .arrow {
+
+
+font-size: 20px;
+
+transition:
+    transform 0.25s ease;
+
+
+}
+
+/* =====================================================
+NEXT HOVER
+===================================================== */
+
+.card .next-btn:hover {
+
+
+transform:
+    translateY(-2px);
+
+box-shadow:
+
+    0 12px 28px
+    rgba(22, 163, 74, 0.32),
+
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.25);
+
+filter:
+    brightness(1.03);
+
+
+}
+
+.card .next-btn:hover
+.arrow {
+
+
+transform:
+    translateX(4px);
+
+
+}
+
+/* =====================================================
+NEXT ACTIVE
+===================================================== */
+
+.card .next-btn:active {
+
+
+transform:
+    translateY(0);
+
+box-shadow:
+
+    0 5px 15px
+    rgba(22, 163, 74, 0.18);
+
+
+}
+
+/* =====================================================
+RESPONSIVE 1100px
+===================================================== */
+
+@media (max-width: 1100px) {
+
+.left-section {
+
+    width: 50%;
+
+}
+
+.right-section {
+
+    width: 50%;
+
+}
+
+.logo {
+
+    left: 40px;
+
+}
+
+.quote-chinese {
+
+    left: 50px;
+
+}
+
+.description {
+
+    left: 60px;
+
+}
+
+.yin-yang {
+
+    left: 100px;
+
+}
+
+.card {
+
+    width: 440px;
+
+}
+
+}
