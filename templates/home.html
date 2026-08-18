@@ -116,54 +116,205 @@
             </div>
 
 
-            <!-- =================================
-                 NAME
-            ================================== -->
+            <form method="POST" action="{% url 'home' %}">
 
-            <div class="form-group name-group">
+                {% csrf_token %}
 
 
-                <label>
+                <!-- =================================
+                     NAME
+                ================================== -->
 
-                    <span class="label-icon">
-                        ✦
-                    </span>
-
-                    ชื่อ - นามสกุล
-
-                </label>
+                <div class="form-group name-group">
 
 
-                <div class="name-inputs">
+                    <label>
+
+                        <span class="label-icon">
+                            ✦
+                        </span>
+
+                        ชื่อ - นามสกุล
+
+                    </label>
 
 
-                    <!-- FIRST NAME -->
+                    <div class="name-inputs">
+
+
+                        <!-- FIRST NAME -->
+
+                        <div class="input-wrapper">
+
+                            <input
+                                type="text"
+                                id="firstName"
+                                name="firstName"
+                                placeholder="ชื่อจริง"
+                                autocomplete="given-name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- LAST NAME -->
+
+                        <div class="input-wrapper">
+
+                            <input
+                                type="text"
+                                id="lastName"
+                                name="lastName"
+                                placeholder="นามสกุล"
+                                autocomplete="family-name"
+                                required
+                            >
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================
+                     GENDER
+                ================================== -->
+
+                <div class="form-group">
+
+
+                    <label>
+
+                        <span class="label-icon">
+                            ✦
+                        </span>
+
+                        เพศ
+
+                    </label>
+
+
+                    <div class="gender-options">
+
+
+                        <!-- MALE -->
+
+                        <label class="gender-option">
+
+                            <input
+                                type="radio"
+                                name="gender"
+                                value="male"
+                                required
+                            >
+
+                            <span class="gender-card">
+
+                                <span class="radio-custom"></span>
+
+                                <span>
+                                    ชาย
+                                </span>
+
+                            </span>
+
+                        </label>
+
+
+                        <!-- FEMALE -->
+
+                        <label class="gender-option">
+
+                            <input
+                                type="radio"
+                                name="gender"
+                                value="female"
+                            >
+
+                            <span class="gender-card">
+
+                                <span class="radio-custom"></span>
+
+                                <span>
+                                    หญิง
+                                </span>
+
+                            </span>
+
+                        </label>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================
+                     BIRTH DATE
+                ================================== -->
+
+                <div class="form-group">
+
+
+                    <label for="birthDate">
+
+                        <span class="label-icon">
+                            ✦
+                        </span>
+
+                        วันเดือนปีเกิด
+
+                    </label>
+
 
                     <div class="input-wrapper">
 
                         <input
-                            type="text"
-                            id="firstName"
-                            name="firstName"
-                            placeholder="ชื่อจริง"
-                            autocomplete="given-name"
+                            type="date"
+                            id="birthDate"
+                            name="birthDate"
                             required
                         >
 
                     </div>
 
 
-                    <!-- LAST NAME -->
+                </div>
+
+
+                <!-- =================================
+                     BIRTH TIME
+                ================================== -->
+
+                <div class="form-group">
+
+
+                    <label for="birthTime">
+
+                        <span class="label-icon">
+                            ✦
+                        </span>
+
+                        เวลาเกิด
+
+                        <span class="optional">
+                            Optional
+                        </span>
+
+                    </label>
+
 
                     <div class="input-wrapper">
 
                         <input
-                            type="text"
-                            id="lastName"
-                            name="lastName"
-                            placeholder="นามสกุล"
-                            autocomplete="family-name"
-                            required
+                            type="time"
+                            id="birthTime"
+                            name="birthTime"
                         >
 
                     </div>
@@ -172,170 +323,27 @@
                 </div>
 
 
-            </div>
+                <!-- =================================
+                     NEXT BUTTON
+                ================================== -->
 
+                <button
+                    class="next-btn"
+                    type="submit"
+                >
 
-            <!-- =================================
-                 GENDER
-            ================================== -->
-
-            <div class="form-group">
-
-
-                <label>
-
-                    <span class="label-icon">
-                        ✦
+                    <span>
+                        Next
                     </span>
 
-                    เพศ
-
-                </label>
-
-
-                <div class="gender-options">
-
-
-                    <!-- MALE -->
-
-                    <label class="gender-option">
-
-                        <input
-                            type="radio"
-                            name="gender"
-                            value="male"
-                            required
-                        >
-
-                        <span class="gender-card">
-
-                            <span class="radio-custom"></span>
-
-                            <span>
-                                ชาย
-                            </span>
-
-                        </span>
-
-                    </label>
-
-
-                    <!-- FEMALE -->
-
-                    <label class="gender-option">
-
-                        <input
-                            type="radio"
-                            name="gender"
-                            value="female"
-                        >
-
-                        <span class="gender-card">
-
-                            <span class="radio-custom"></span>
-
-                            <span>
-                                หญิง
-                            </span>
-
-                        </span>
-
-                    </label>
-
-
-                </div>
-
-
-            </div>
-
-
-            <!-- =================================
-                 BIRTH DATE
-            ================================== -->
-
-            <div class="form-group">
-
-
-                <label for="birthDate">
-
-                    <span class="label-icon">
-                        ✦
+                    <span class="arrow">
+                        →
                     </span>
 
-                    วันเดือนปีเกิด
-
-                </label>
+                </button>
 
 
-                <div class="input-wrapper">
-
-                    <input
-                        type="date"
-                        id="birthDate"
-                        name="birthDate"
-                        required
-                    >
-
-                </div>
-
-
-            </div>
-
-
-            <!-- =================================
-                 BIRTH TIME
-            ================================== -->
-
-            <div class="form-group">
-
-
-                <label for="birthTime">
-
-                    <span class="label-icon">
-                        ✦
-                    </span>
-
-                    เวลาเกิด
-
-                    <span class="optional">
-                        Optional
-                    </span>
-
-                </label>
-
-
-                <div class="input-wrapper">
-
-                    <input
-                        type="time"
-                        id="birthTime"
-                        name="birthTime"
-                    >
-
-                </div>
-
-
-            </div>
-
-
-            <!-- =================================
-                 NEXT BUTTON
-            ================================== -->
-
-            <button
-                class="next-btn"
-                type="button"
-            >
-
-                <span>
-                    Next
-                </span>
-
-                <span class="arrow">
-                    →
-                </span>
-
-            </button>
+            </form>
 
 
         </div>
