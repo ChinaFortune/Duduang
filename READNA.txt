@@ -10,7 +10,10 @@ python -m pip install djangorestframework django-cors-headers
 4. git push origin main
 
 ขั้นตอนการสร้าง webpage เพิ่ม
-1. เพิ่ม def ใน config/views.py
-2. เพิ่ม import และ path ใน config/urls.py
+1. เพิ่ม def ใน main_control/views.py
+2. เพิ่ม import และ path ใน main_control/urls.py
 3. สร้างไฟล์ css ใน static/
-4. สร้างไฟลื html ใน templates/
+4. สร้างไฟล์ html ใน templates/
+
+ขั้นตอนการสร้าง app
+1. python manage.py startapp {ชื่อแอพ}
