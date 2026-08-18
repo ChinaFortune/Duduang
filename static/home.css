@@ -1,1123 +1,742 @@
-/* =====================================================
-RESET
-===================================================== */
+/* =========================================================
+   RESET
+   รีเซ็ต margin / padding และกำหนด box-sizing ให้ทุก element
+   ========================================================= */
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  }
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-/* =====================================================
-BODY
-===================================================== */
+
+/* =========================================================
+   BODY / PAGE BACKGROUND
+   พื้นหลังทั้งหน้าจอ
+   ใช้ background_homepage.jpg โดยตรง
+   ไม่มี Green Overlay และไม่มีการปรับสีภาพ
+   ========================================================= */
 
 body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
 
+    font-family: "Noto Sans Thai", "Segoe UI", sans-serif;
 
-width: 100%;
-height: 100vh;
-
-overflow: hidden;
-
-font-family:
-    "Noto Sans Thai",
-    "Segoe UI",
-    sans-serif;
-
-/*
-    ใช้ background.png เต็มทั้งหน้า
-    พร้อม Green Overlay
-*/
-
-background-image:
-
-    linear-gradient(
-        135deg,
-        rgba(22, 101, 52, 0.72),
-        rgba(34, 197, 94, 0.38),
-        rgba(240, 253, 244, 0.72)
-    ),
-
-    url("background.png");
-
-background-size: cover;
-
-background-position: center;
-
-background-repeat: no-repeat;
-
-
+    background: url("background_homepage.jpg") center / cover no-repeat;
 }
 
-/* =====================================================
-MAIN CONTAINER
-===================================================== */
+
+/* =========================================================
+   MAIN LAYOUT
+   Container หลัก แบ่งหน้าจอเป็นซ้าย 50% / ขวา 50%
+   ========================================================= */
 
 .container {
+    width: 100%;
+    height: 100vh;
 
-
-width: 100%;
-height: 100vh;
-
-display: flex;
-
-position: relative;
-
-
+    display: flex;
+    position: relative;
 }
 
-/* =====================================================
-LEFT SECTION — 50%
-===================================================== */
+
+/* =========================================================
+   LEFT SECTION
+   พื้นที่ด้านซ้าย 50%
+   ไม่มีการแต่งสีทับ background_homepage.jpg
+   ========================================================= */
 
 .left-section {
+    width: 50%;
 
-width: 50%;
+    position: relative;
+    padding-left: 70px;
+    overflow: hidden;
 
-position:
- relative;
-
-padding-left: 70px;
-
-overflow: hidden;
-
-/*
-    เขียวฝั่งซ้ายจางลง
-    เพื่อให้เห็น background.png ชัดขึ้น
-*/
-
-background:
-    linear-gradient(
-        135deg,
-        rgba(20, 83, 45, 0.10),
-        rgba(34, 197, 94, 0.06)
-    );
-
+    background: transparent;
 }
 
-/* =====================================================
-LEFT DECORATION
-===================================================== */
 
-.left-section::before {
-
-
-content: "";
-
-position: absolute;
-
-width: 500px;
-height: 500px;
-
-top: -220px;
-right: -200px;
-
-border-radius: 50%;
-
-background:
-    rgba(74, 222, 128, 0.12);
-
-filter:
-    blur(30px);
-
-pointer-events: none;
-
-
-}
-
-.left-section::after {
-
-
-content: "☯";
-
-position: absolute;
-
-right: -100px;
-bottom: -130px;
-
-font-size: 360px;
-
-color:
-    rgba(255, 255, 255, 0.08);
-
-transform:
-    rotate(15deg);
-
-pointer-events: none;
-
-
-}
-
-/* =====================================================
-LOGO
-===================================================== */
+/* =========================================================
+   LOGO
+   โลโก้บริเวณมุมซ้ายบน
+   ========================================================= */
 
 .logo {
+    position: absolute;
 
+    top: 50px;
+    left: 70px;
 
-position: absolute;
+    display: flex;
+    align-items: center;
 
-top: 50px;
-left: 70px;
+    gap: 20px;
 
-display: flex;
-
-align-items: center;
-
-gap: 20px;
-
-z-index: 3;
-
-
+    z-index: 3;
 }
+
+
+/* ----- วงกลม Icon ของ Logo ----- */
 
 .logo-circle {
+    width: 65px;
+    height: 65px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-width: 65px;
-height: 65px;
+    border: 3px solid rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
 
-border:
-    3px solid
-    rgba(255, 255, 255, 0.9);
+    color: white;
+    font-size: 35px;
 
-border-radius: 50%;
+    background: rgba(22, 101, 52, 0.35);
 
-display: flex;
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.15),
+        inset 0 0 20px rgba(255, 255, 255, 0.08);
 
-align-items: center;
-justify-content: center;
-
-color: white;
-
-font-size: 35px;
-
-background:
-    rgba(22, 101, 52, 0.35);
-
-box-shadow:
-
-    0 8px 25px
-    rgba(0, 0, 0, 0.15),
-
-    inset 0 0 20px
-    rgba(255, 255, 255, 0.08);
-
-backdrop-filter:
-    blur(8px);
-
-
+    backdrop-filter: blur(8px);
 }
+
+
+/* ----- ชื่อ Logo ----- */
 
 .logo h1 {
+    font-size: 28px;
+    color: white;
+    letter-spacing: 2px;
 
-
-font-size: 28px;
-
-color: white;
-
-letter-spacing: 2px;
-
-text-shadow:
-    0 2px 10px
-    rgba(0, 0, 0, 0.20);
-
-
+    text-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.20);
 }
+
+
+/* ----- Subtitle ใต้ Logo ----- */
 
 .logo p {
+    margin-top: 5px;
 
-
-margin-top: 5px;
-
-color:
-    rgba(255, 255, 255, 0.80);
-
-font-size: 14px;
-
-
+    color: rgba(255, 255, 255, 0.80);
+    font-size: 14px;
 }
 
-/* =====================================================
-YIN YANG
-===================================================== */
+
+/* =========================================================
+   YIN YANG IMAGE
+   รูป Yin Yang ที่วางอยู่บนฝั่งซ้าย
+   ========================================================= */
 
 .yin-yang {
+    position: absolute;
 
+    top: 150px;
+    left: 160px;
 
-position: absolute;
-
-top: 150px;
-
-left: 160px;
-
-z-index: 2;
-
-
+    z-index: 2;
 }
+
+
+/* ----- รูปภาพ Yin Yang ----- */
 
 .yin-yang img {
+    width: 330px;
 
-
-width: 330px;
-
-filter:
-
-    drop-shadow(
-        0 15px 30px
-        rgba(0, 0, 0, 0.20)
-    );
-
-
+    filter:
+        drop-shadow(
+            0 15px 30px rgba(0, 0, 0, 0.20)
+        );
 }
 
-/* =====================================================
-CHINESE QUOTE
-===================================================== */
+
+/* =========================================================
+   CHINESE QUOTE
+   ข้อความภาษาจีนแนวตั้งด้านซ้าย
+   ========================================================= */
 
 .quote-chinese {
+    position: absolute;
 
+    top: 310px;
+    left: 65px;
 
-position: absolute;
+    display: flex;
+    gap: 35px;
 
-top: 310px;
+    font-family: "Songti SC", serif;
+    font-size: 38px;
+    line-height: 1.35;
 
-left: 65px;
+    color: rgba(255, 255, 255, 0.96);
 
-display: flex;
+    text-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.20);
 
-gap: 35px;
-
-font-family:
-    "Songti SC",
-    serif;
-
-font-size: 38px;
-
-line-height: 1.35;
-
-color:
-    rgba(255, 255, 255, 0.96);
-
-text-shadow:
-    0 2px 12px
-    rgba(0, 0, 0, 0.20);
-
-z-index: 3;
-
-
+    z-index: 3;
 }
+
+
+/* ----- ทำให้ข้อความจีนเรียงแนวตั้ง ----- */
 
 .quote-chinese span {
-
-
-writing-mode: vertical-rl;
-
-
+    writing-mode: vertical-rl;
 }
 
-/* =====================================================
-DESCRIPTION
-===================================================== */
+
+/* =========================================================
+   DESCRIPTION
+   ข้อความคำอธิบายบริเวณด้านล่างซ้าย
+   ========================================================= */
 
 .description {
+    position: absolute;
 
+    bottom: 90px;
+    left: 80px;
 
-position: absolute;
+    font-size: 17px;
+    line-height: 1.8;
 
-bottom: 90px;
+    color: rgba(255, 255, 255, 0.80);
 
-left: 80px;
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.15);
 
-font-size: 17px;
-
-line-height: 1.8;
-
-color:
-    rgba(255, 255, 255, 0.80);
-
-text-shadow:
-    0 2px 8px
-    rgba(0, 0, 0, 0.15);
-
-z-index: 3;
-
-
+    z-index: 3;
 }
 
-/* =====================================================
-RIGHT SECTION — 50%
-===================================================== */
+
+/* =========================================================
+   RIGHT SECTION
+   พื้นที่ด้านขวา 50%
+   ไม่มีการแต่งสีทับ background_homepage.jpg
+   ========================================================= */
 
 .right-section {
+    width: 50%;
 
-width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-display: flex;
-
-justify-content: center;
-
-align-items: center;
-
-/*
-    ฝั่งขวาเขียวชัดกว่าฝั่งซ้าย
-    แต่ยังเห็น background.png อยู่
-*/
-
-background:
-    linear-gradient(
-        135deg,
-        rgba(240, 253, 244, 0.38),
-        rgba(34, 197, 94, 0.16)
-    );
-
+    background: transparent;
 }
 
-/* =====================================================
-FORM CARD
-===================================================== */
+
+/* =========================================================
+   FORM CARD
+   กล่องฟอร์มสีขาวตรงกลางฝั่งขวา
+   ========================================================= */
 
 .card {
+    width: 470px;
+    min-height: 480px;
 
+    padding: 38px 44px;
 
-width: 470px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-min-height: 480px;
+    background: rgba(255, 255, 255, 0.90);
 
-padding: 38px 44px 38px;
+    border: 1px solid rgba(22, 163, 74, 0.20);
+    border-radius: 30px;
 
-background:
-    rgba(255, 255, 255, 0.90);
+    box-shadow:
+        0 20px 60px rgba(21, 128, 61, 0.14),
+        0 4px 20px rgba(255, 255, 255, 0.90) inset;
 
-border:
-    1px solid
-    rgba(22, 163, 74, 0.20);
-
-border-radius: 30px;
-
-box-shadow:
-
-    0 20px 60px
-    rgba(21, 128, 61, 0.14),
-
-    0 4px 20px
-    rgba(255, 255, 255, 0.90) inset;
-
-backdrop-filter:
-    blur(18px);
-
--webkit-backdrop-filter:
-    blur(18px);
-
-display: flex;
-
-flex-direction: column;
-
-justify-content: center;
-
-align-items: center;
-
-
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 }
 
-/* =====================================================
-FORM HEADER
-===================================================== */
+
+/* =========================================================
+   FORM HEADER
+   หัวข้อด้านบนของ Form Card
+   ========================================================= */
 
 .form-header {
+    width: 100%;
+    margin-bottom: 25px;
 
-
-width: 100%;
-
-text-align: center;
-
-margin-bottom: 25px;
-
-
+    text-align: center;
 }
+
+
+/* ----- ข้อความเล็กด้านบน เช่น INFORMATION ----- */
 
 .form-kicker {
+    display: inline-block;
 
+    margin-bottom: 7px;
 
-display: inline-block;
+    color: #15803d;
 
-margin-bottom: 7px;
-
-color: #15803d;
-
-font-size: 11px;
-
-font-weight: 600;
-
-letter-spacing: 3px;
-
-
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
 }
+
+
+/* ----- ชื่อหัวข้อหลักของ Form ----- */
 
 .form-header h2 {
+    color: #123524;
 
-
-margin: 0;
-
-color: #123524;
-
-font-size: 30px;
-
-font-weight: 600;
-
-letter-spacing: 0.5px;
-
-line-height: 1.3;
-
-
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
 }
+
+
+/* ----- คำอธิบายใต้หัวข้อ ----- */
 
 .form-header p {
+    margin-top: 7px;
 
+    color: #708276;
 
-margin: 7px 0 0;
-
-color: #708276;
-
-font-size: 13px;
-
-font-weight: 400;
-
-line-height: 1.6;
-
-
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.6;
 }
 
-/* =====================================================
-FORM GROUP
-===================================================== */
+
+/* =========================================================
+   FORM GROUP
+   แต่ละชุดของ Label + Input
+   ========================================================= */
 
 .form-group {
-
-
-width: 100%;
-
-margin-bottom: 17px;
-
-
+    width: 100%;
+    margin-bottom: 17px;
 }
+
+
+/* ----- Label ของแต่ละช่อง ----- */
 
 .form-group > label {
+    display: flex;
+    align-items: center;
 
+    margin-bottom: 7px;
 
-display: flex;
+    color: #294536;
 
-align-items: center;
-
-margin-bottom: 7px;
-
-color: #294536;
-
-font-size: 14px;
-
-font-weight: 500;
-
-line-height: 1.4;
-
-
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
 }
 
-/* =====================================================
-LABEL ICON
-===================================================== */
+
+/* ----- Icon เล็กหน้า Label ----- */
 
 .label-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
+    margin-right: 7px;
 
-display: inline-flex;
-
-align-items: center;
-justify-content: center;
-
-margin-right: 7px;
-
-color: #16a34a;
-
-font-size: 10px;
-
-
+    color: #16a34a;
+    font-size: 10px;
 }
 
-/* =====================================================
-OPTIONAL
-===================================================== */
+
+/* ----- ข้อความ Optional ----- */
 
 .optional {
+    margin-left: 7px;
 
+    color: #9aaa9f;
 
-margin-left: 7px;
-
-color: #9aaa9f;
-
-font-size: 11px;
-
-font-weight: 400;
-
-
+    font-size: 11px;
+    font-weight: 400;
 }
 
-/* =====================================================
-INPUT WRAPPER
-===================================================== */
+
+/* =========================================================
+   INPUT WRAPPER
+   Container ของ Input แต่ละช่อง
+   ========================================================= */
 
 .input-wrapper {
-
-
-position: relative;
-
-width: 100%;
-
-
+    position: relative;
+    width: 100%;
 }
 
-/* =====================================================
-TEXT / DATE / TIME INPUT
-===================================================== */
+
+/* =========================================================
+   TEXT / DATE / TIME INPUT
+   ช่องกรอกข้อมูลทั่วไป
+   ========================================================= */
 
 .input-wrapper input {
+    width: 100%;
+    height: 48px;
 
+    padding: 0 15px;
 
-width: 100%;
+    border: 1px solid rgba(151, 176, 160, 0.45);
+    border-radius: 14px;
 
-height: 48px;
+    background: rgba(248, 252, 249, 0.90);
+    color: #234333;
 
-padding:
-    0 15px;
+    font-family: inherit;
+    font-size: 14px;
 
-box-sizing: border-box;
+    outline: none;
 
-border:
-    1px solid
-    rgba(151, 176, 160, 0.45);
-
-border-radius: 14px;
-
-background:
-    rgba(248, 252, 249, 0.90);
-
-color: #234333;
-
-font-family: inherit;
-
-font-size: 14px;
-
-outline: none;
-
-transition:
-
-    border-color 0.25s ease,
-
-    box-shadow 0.25s ease,
-
-    background 0.25s ease,
-
-    transform 0.25s ease;
-
-
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease,
+        transform 0.25s ease;
 }
 
-/* =====================================================
-PLACEHOLDER
-===================================================== */
+
+/* ----- Placeholder ใน Input ----- */
 
 .input-wrapper input::placeholder {
-
-
-color: #a7b4ab;
-
-
+    color: #a7b4ab;
 }
 
-/* =====================================================
-INPUT HOVER
-===================================================== */
+
+/* ----- Hover Input ----- */
 
 .input-wrapper input:hover {
-
-
-border-color:
-    rgba(22, 163, 74, 0.50);
-
-
+    border-color: rgba(22, 163, 74, 0.50);
 }
 
-/* =====================================================
-INPUT FOCUS
-===================================================== */
+
+/* ----- Focus Input ----- */
 
 .input-wrapper input:focus {
+    background: rgba(255, 255, 255, 0.98);
 
+    border-color: #16a34a;
 
-background:
-    rgba(255, 255, 255, 0.98);
-
-border-color:
-    #16a34a;
-
-box-shadow:
-
-    0 0 0 4px
-    rgba(22, 163, 74, 0.10),
-
-    0 6px 20px
-    rgba(22, 163, 74, 0.07);
-
-
+    box-shadow:
+        0 0 0 4px rgba(22, 163, 74, 0.10),
+        0 6px 20px rgba(22, 163, 74, 0.07);
 }
 
-/* =====================================================
-DATE / TIME
-===================================================== */
+
+/* =========================================================
+   DATE / TIME INPUT
+   ช่องเลือกวันที่และเวลา
+   ========================================================= */
 
 .input-wrapper input[type="date"],
 .input-wrapper input[type="time"] {
-
-
-color: #294536;
-
-cursor: pointer;
-
-
+    color: #294536;
+    cursor: pointer;
 }
+
+
+/* ----- Icon ปฏิทิน / เวลา ----- */
 
 .input-wrapper input::-webkit-calendar-picker-indicator {
+    opacity: 0.65;
 
+    cursor: pointer;
 
-opacity: 0.65;
-
-cursor: pointer;
-
-transition:
-    opacity 0.2s ease;
-
-
+    transition:
+        opacity 0.2s ease;
 }
+
+
+/* ----- Hover Icon ปฏิทิน / เวลา ----- */
 
 .input-wrapper input::-webkit-calendar-picker-indicator:hover {
-
-
-opacity: 1;
-
-
+    opacity: 1;
 }
 
-/* =====================================================
-NAME INPUTS
-===================================================== */
+
+/* =========================================================
+   NAME INPUTS
+   ช่อง First Name / Last Name ที่อยู่แถวเดียวกัน
+   ========================================================= */
 
 .name-inputs {
+    display: grid;
 
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
 
-display: grid;
-
-grid-template-columns:
-    1fr 1fr;
-
-gap: 12px;
-
-width: 100%;
-
-
+    width: 100%;
 }
 
-/* =====================================================
-GENDER
-===================================================== */
+
+/* =========================================================
+   GENDER OPTIONS
+   ตัวเลือกเพศ 2 ช่อง
+   ========================================================= */
 
 .gender-options {
+    width: 100%;
 
+    display: grid;
 
-width: 100%;
-
-display: grid;
-
-grid-template-columns:
-    1fr 1fr;
-
-gap: 12px;
-
-
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
 }
 
-/* =====================================================
-GENDER OPTION
-===================================================== */
+
+/* ----- Container ของแต่ละ Gender Option ----- */
 
 .gender-option {
+    position: relative;
 
+    margin: 0 !important;
 
-position: relative;
-
-margin: 0 !important;
-
-cursor: pointer;
-
-
+    cursor: pointer;
 }
 
-/* Hide original radio */
+
+/* ----- ซ่อน Radio Button HTML เดิม ----- */
 
 .gender-option input {
+    position: absolute;
 
+    width: 1px;
+    height: 1px;
 
-position: absolute;
-
-width: 1px;
-
-height: 1px;
-
-opacity: 0;
-
-
+    opacity: 0;
 }
 
-/* =====================================================
-GENDER CARD
-===================================================== */
+
+/* =========================================================
+   GENDER CARD
+   กล่อง Male / Female
+   ========================================================= */
 
 .gender-card {
+    width: 100%;
+    height: 48px;
 
+    display: flex;
+    align-items: center;
 
-display: flex;
+    padding: 0 17px;
 
-align-items: center;
+    border: 1px solid rgba(151, 176, 160, 0.45);
+    border-radius: 14px;
 
-width: 100%;
+    background: rgba(248, 252, 249, 0.90);
+    color: #52685a;
 
-height: 48px;
+    font-size: 14px;
 
-padding:
-    0 17px;
-
-box-sizing: border-box;
-
-border:
-    1px solid
-    rgba(151, 176, 160, 0.45);
-
-border-radius: 14px;
-
-background:
-    rgba(248, 252, 249, 0.90);
-
-color: #52685a;
-
-font-size: 14px;
-
-transition:
-    all 0.25s ease;
-
-
+    transition:
+        all 0.25s ease;
 }
 
-/* =====================================================
-CUSTOM RADIO
-===================================================== */
+
+/* =========================================================
+   CUSTOM RADIO
+   วงกลม Radio แบบ Custom
+   ========================================================= */
 
 .radio-custom {
+    position: relative;
 
+    width: 17px;
+    height: 17px;
 
-position: relative;
+    margin-right: 10px;
 
-width: 17px;
+    border: 1.5px solid #aebdb3;
+    border-radius: 50%;
 
-height: 17px;
-
-margin-right: 10px;
-
-border:
-    1.5px solid
-    #aebdb3;
-
-border-radius: 50%;
-
-box-sizing: border-box;
-
-transition:
-    all 0.25s ease;
-
-
+    transition:
+        all 0.25s ease;
 }
 
-/* =====================================================
-GENDER SELECTED
-===================================================== */
+
+/* =========================================================
+   GENDER SELECTED
+   สีของ Gender Card เมื่อถูกเลือก
+   ========================================================= */
 
 .gender-option input:checked + .gender-card {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(240, 253, 244, 0.98),
+            rgba(220, 252, 231, 0.92)
+        );
 
+    border-color: #16a34a;
+    color: #166534;
 
-background:
-
-    linear-gradient(
-        135deg,
-        rgba(240, 253, 244, 0.98),
-        rgba(220, 252, 231, 0.92)
-    );
-
-border-color:
-    #16a34a;
-
-color:
-    #166534;
-
-box-shadow:
-
-    0 5px 18px
-    rgba(22, 163, 74, 0.10);
-
-
+    box-shadow:
+        0 5px 18px rgba(22, 163, 74, 0.10);
 }
 
-.gender-option input:checked
 
-* .gender-card
-  .radio-custom {
+/* ----- วง Radio เปลี่ยนเป็นสีเขียวเมื่อเลือก ----- */
 
-  border-color:
-  #16a34a;
+.gender-option input:checked + .gender-card .radio-custom {
+    border-color: #16a34a;
+    background: #16a34a;
 
-  background:
-  #16a34a;
-
-  box-shadow:
-
-  
-    0 0 0 3px
-    rgba(22, 163, 74, 0.10);
-  
-
+    box-shadow:
+        0 0 0 3px rgba(22, 163, 74, 0.10);
 }
 
-/* =====================================================
-RADIO DOT
-===================================================== */
 
-.gender-option input:checked
+/* ----- จุดสีขาวตรงกลาง Radio ----- */
 
-* .gender-card
-  .radio-custom::after {
+.gender-option input:checked + .gender-card .radio-custom::after {
+    content: "";
 
-  content: "";
+    position: absolute;
 
-  position: absolute;
+    width: 5px;
+    height: 5px;
 
-  width: 5px;
+    top: 50%;
+    left: 50%;
 
-  height: 5px;
+    transform: translate(-50%, -50%);
 
-  top: 50%;
-
-  left: 50%;
-
-  transform:
-  translate(-50%, -50%);
-
-  background:
-  white;
-
-  border-radius: 50%;
-
+    background: white;
+    border-radius: 50%;
 }
 
-/* =====================================================
-GENDER HOVER
-===================================================== */
 
-.gender-option:hover
-.gender-card {
+/* ----- Hover Gender Card ----- */
 
+.gender-option:hover .gender-card {
+    border-color: rgba(22, 163, 74, 0.55);
 
-border-color:
-    rgba(22, 163, 74, 0.55);
-
-transform:
-    translateY(-1px);
-
-
+    transform: translateY(-1px);
 }
 
-/* =====================================================
-NEXT BUTTON
-===================================================== */
+
+/* =========================================================
+   NEXT BUTTON
+   ปุ่ม Next ด้านล่างของ Form
+   ========================================================= */
 
 .card .next-btn {
+    width: 100%;
+    height: 56px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-display: flex;
+    gap: 12px;
+    margin-top: 8px;
 
-align-items: center;
+    border: none;
+    border-radius: 15px;
 
-justify-content: center;
+    background:
+        linear-gradient(
+            135deg,
+            #166534 0%,
+            #15803d 45%,
+            #22c55e 100%
+        );
 
-gap: 12px;
+    color: white;
 
-width: 100%;
+    font-family: inherit;
 
-height: 56px;
+    font-size: 18px;
+    font-weight: 500;
 
-margin-top: 8px;
+    cursor: pointer;
 
-border: none;
+    box-shadow:
+        0 8px 22px rgba(22, 163, 74, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
 
-border-radius: 15px;
-
-background:
-
-    linear-gradient(
-        135deg,
-        #166534 0%,
-        #15803d 45%,
-        #22c55e 100%
-    );
-
-color: white;
-
-font-family: inherit;
-
-font-size: 18px;
-
-font-weight: 500;
-
-cursor: pointer;
-
-box-shadow:
-
-    0 8px 22px
-    rgba(22, 163, 74, 0.25),
-
-    inset 0 1px 0
-    rgba(255, 255, 255, 0.25);
-
-transition:
-
-    transform 0.25s ease,
-
-    box-shadow 0.25s ease,
-
-    filter 0.25s ease;
-
-
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
 }
 
-/* =====================================================
-NEXT ARROW
-===================================================== */
+
+/* ----- ลูกศรในปุ่ม Next ----- */
 
 .next-btn .arrow {
+    font-size: 20px;
 
-
-font-size: 20px;
-
-transition:
-    transform 0.25s ease;
-
-
+    transition:
+        transform 0.25s ease;
 }
 
-/* =====================================================
-NEXT HOVER
-===================================================== */
+
+/* ----- Hover ปุ่ม Next ----- */
 
 .card .next-btn:hover {
+    transform: translateY(-2px);
 
+    box-shadow:
+        0 12px 28px rgba(22, 163, 74, 0.32),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
 
-transform:
-    translateY(-2px);
-
-box-shadow:
-
-    0 12px 28px
-    rgba(22, 163, 74, 0.32),
-
-    inset 0 1px 0
-    rgba(255, 255, 255, 0.25);
-
-filter:
-    brightness(1.03);
-
-
+    filter: brightness(1.03);
 }
 
-.card .next-btn:hover
-.arrow {
 
+/* ----- ลูกศรเลื่อนไปทางขวาเมื่อ Hover ----- */
 
-transform:
-    translateX(4px);
-
-
+.card .next-btn:hover .arrow {
+    transform: translateX(4px);
 }
 
-/* =====================================================
-NEXT ACTIVE
-===================================================== */
+
+/* ----- Active / ตอนกดปุ่ม ----- */
 
 .card .next-btn:active {
+    transform: translateY(0);
 
-
-transform:
-    translateY(0);
-
-box-shadow:
-
-    0 5px 15px
-    rgba(22, 163, 74, 0.18);
-
-
+    box-shadow:
+        0 5px 15px rgba(22, 163, 74, 0.18);
 }
 
-/* =====================================================
-RESPONSIVE 1100px
-===================================================== */
+
+/* =========================================================
+   RESPONSIVE — หน้าจอกว้างไม่เกิน 1100px
+   ปรับตำแหน่งองค์ประกอบฝั่งซ้ายและขนาด Card
+   ========================================================= */
 
 @media (max-width: 1100px) {
 
-.left-section {
+    .logo {
+        left: 40px;
+    }
 
-    width: 50%;
+    .quote-chinese {
+        left: 50px;
+    }
 
+    .description {
+        left: 60px;
+    }
+
+    .yin-yang {
+        left: 100px;
+    }
+
+    .card {
+        width: 440px;
+    }
 }
 
-.right-section {
-
-    width: 50%;
-
-}
-
-.logo {
-
-    left: 40px;
-
-}
-
-.quote-chinese {
-
-    left: 50px;
-
-}
-
-.description {
-
-    left: 60px;
-
-}
-
-.yin-yang {
-
-    left: 100px;
-
-}
-
-.card {
-
-    width: 440px;
-
-}
-
-}
