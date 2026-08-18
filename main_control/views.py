@@ -13,7 +13,7 @@ def home(request):
         birth_date = request.POST.get("birthDate")
         birth_time = request.POST.get("birthTime")
 
-        UserInput.objects.create(
+        user_input = UserInput.objects.create(
             first_name=first_name,
             last_name=last_name,
             gender=gender,
@@ -21,7 +21,7 @@ def home(request):
             birth_time=birth_time or None,
         )
 
-        return redirect("result")
+        return redirect("result", user_id=user_input.id)
 
     context = {
         'django_version': django.get_version(),
@@ -39,10 +39,12 @@ def intro(request):
     return render(request, 'intro.html', context)
 
 
-def result(request):
+def result(request, user_id):
+
+    user_input = UserInput.objects.get(id=user_id)
 
     context = {
-        'django_version': django.get_version(),
+        'user_input': user_input,
     }
 
     return render(request, 'result.html', context)

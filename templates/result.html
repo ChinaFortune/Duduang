@@ -1,1 +1,135 @@
-รอทำต่อหลังจากได้มูลในวันอังคารที่ 18 สิงหาคม
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ผลลัพธ์ - ดูดวงศาสตร์จีน</title>
+
+    <link rel="stylesheet" href="{% static 'result.css' %}">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="result-card">
+
+
+        <div class="header">
+
+            <span class="kicker">
+                DESTINY JOURNEY
+            </span>
+
+            <h1>
+                ข้อมูลของคุณ
+            </h1>
+
+            <p>
+                ข้อมูลที่คุณกรอกถูกบันทึกเรียบร้อยแล้ว
+            </p>
+
+        </div>
+
+
+        <div class="result-section">
+
+
+            <div class="result-item">
+
+                <span class="label">
+                    ชื่อ - นามสกุล
+                </span>
+
+                <span class="value">
+                    {{ user_input.first_name }}
+                    {{ user_input.last_name }}
+                </span>
+
+            </div>
+
+
+            <div class="result-item">
+
+                <span class="label">
+                    เพศ
+                </span>
+
+                <span class="value">
+
+                    {% if user_input.gender == "male" %}
+                        ชาย
+                    {% elif user_input.gender == "female" %}
+                        หญิง
+                    {% else %}
+                        {{ user_input.gender }}
+                    {% endif %}
+
+                </span>
+
+            </div>
+
+
+            <div class="result-item">
+
+                <span class="label">
+                    วันเดือนปีเกิด
+                </span>
+
+                <span class="value">
+                    {{ user_input.birth_date }}
+                </span>
+
+            </div>
+
+
+            <div class="result-item">
+
+                <span class="label">
+                    เวลาเกิด
+                </span>
+
+                <span class="value">
+
+                    {% if user_input.birth_time %}
+                        {{ user_input.birth_time }}
+                    {% else %}
+                        ไม่ได้ระบุ
+                    {% endif %}
+
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer">
+
+            <p>
+                ข้อมูลของคุณถูกบันทึกเข้าสู่ระบบแล้ว
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

@@ -23,7 +23,7 @@ from .views import home, intro, result
 urlpatterns = [
     path('', intro, name='intro'),
     path('home/', home, name='home'),
-    path('result/', result, name='result'),
+    path('result/<int:user_id>/', result, name='result'),
 ]
 
 if settings.DEBUG:
