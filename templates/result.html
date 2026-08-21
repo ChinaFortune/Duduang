@@ -32,6 +32,27 @@
 
 
         <!-- =========================
+             BACK TO HOME
+        ========================== -->
+
+        <a
+            href="{% url 'home' %}"
+            class="back-home-button"
+            aria-label="กลับหน้าหลัก"
+        >
+
+            <span class="back-home-icon">
+                ←
+            </span>
+
+            <span class="back-home-text">
+                กลับหน้าหลัก
+            </span>
+
+        </a>
+
+
+        <!-- =========================
              HEADER
         ========================== -->
 
@@ -456,7 +477,17 @@
                 </span>
 
                 <h2 id="meaningTitle">
-                    ความหมายของดวง 8 ตัว
+
+                    {% if element_meaning %}
+
+                        ความหมายของ {{ element_meaning.title }}
+
+                    {% else %}
+
+                        ความหมายของดวง 8 ตัว
+
+                    {% endif %}
+
                 </h2>
 
             </div>
@@ -474,74 +505,96 @@
         </div>
 
 
-        <!-- Modal Content -->
+        <!-- =================================================
+             Modal Content
+        ================================================== -->
 
         <div class="modal-content">
 
 
-            <div class="meaning-block">
-
-                <h3>
-                    ความหมายโดยรวม
-                </h3>
-
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-                </p>
-
-            </div>
+            {% if element_meaning %}
 
 
-            <div class="meaning-block">
+                <!-- =========================
+                     GOOD
+                ========================== -->
 
-                <h3>
-                    ราศีบน
-                </h3>
+                <div class="meaning-block">
 
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur.
-                </p>
+                    <h3>
+                        ข้อดี
+                    </h3>
 
-            </div>
+                    <p>
+                        {{ element_meaning.good }}
+                    </p>
 
-
-            <div class="meaning-block">
-
-                <h3>
-                    ราศีล่าง
-                </h3>
-
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Excepteur sint occaecat cupidatat non proident,
-                    sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-
-            </div>
+                </div>
 
 
-            <div class="meaning-block">
+                <!-- =========================
+                     BAD
+                ========================== -->
 
-                <h3>
-                    หมายเหตุ
-                </h3>
+                <div class="meaning-block">
 
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Integer posuere erat a ante venenatis dapibus posuere velit aliquet.
-                </p>
+                    <h3>
+                        ข้อเสีย
+                    </h3>
 
-            </div>
+                    <p>
+                        {{ element_meaning.bad }}
+                    </p>
+
+                </div>
+
+
+                <!-- =========================
+                     ADVICE
+                ========================== -->
+
+                <div class="meaning-block">
+
+                    <h3>
+                        คำแนะนำ
+                    </h3>
+
+                    <p>
+                        {{ element_meaning.advice }}
+                    </p>
+
+                </div>
+
+
+            {% else %}
+
+
+                <!-- =========================
+                     NO DATA
+                ========================== -->
+
+                <div class="meaning-block">
+
+                    <h3>
+                        ยังไม่มีข้อมูล
+                    </h3>
+
+                    <p>
+                        ยังไม่พบข้อมูลความหมายของธาตุนี้
+                    </p>
+
+                </div>
+
+
+            {% endif %}
 
 
         </div>
 
 
-        <!-- Modal Footer -->
+        <!-- =================================================
+             Modal Footer
+        ================================================== -->
 
         <div class="modal-footer">
 
