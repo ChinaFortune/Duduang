@@ -17,3 +17,8 @@ python -m pip install djangorestframework django-cors-headers
 
 ขั้นตอนการสร้าง app
 1. python manage.py startapp {ชื่อแอพ}
+
+ขั้นตอนการดู Database
+1. สร้าง ID admin โดยรัน python manage.py createsuperuser
+2. กรอก username, gmail and password
+3. runserver แล้วดูที่ /admin/
