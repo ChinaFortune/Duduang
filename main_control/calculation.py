@@ -25,3 +25,33 @@ rasi_down = [
     {"zh": "戌", "th": "จอ"},
     {"zh": "亥", "th": "กุน"},
 ]
+
+def calculate_birth_date(user_input):
+    """
+    รับข้อมูล UserInput
+    แล้วแยกวัน เดือน ปี และเวลาเกิดออกมา
+    """
+
+    birth_date = user_input.birth_date
+    birth_time = user_input.birth_time
+
+    # แยก วัน / เดือน / ปี
+    day = birth_date.day
+    month = birth_date.month
+    year = birth_date.year
+
+    # แยกเวลา
+    hour = None
+    minute = None
+
+    if birth_time:
+        hour = birth_time.hour
+        minute = birth_time.minute
+
+    return {
+        "day": day,
+        "month": month,
+        "year": year,
+        "hour": hour,
+        "minute": minute,
+    }

@@ -1,7 +1,7 @@
 import django
 from django.shortcuts import render, redirect
 from .models import UserInput
-
+from .calculation import calculate_birth_date
 
 def home(request):
 
@@ -42,9 +42,11 @@ def intro(request):
 def result(request, user_id):
 
     user_input = UserInput.objects.get(id=user_id)
+    birth_result = calculate_birth_date(user_input)
 
     context = {
         'user_input': user_input,
+        'birth_result': birth_result,
     }
 
     return render(request, 'result.html', context)
