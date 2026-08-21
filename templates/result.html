@@ -7,11 +7,17 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>ผลลัพธ์ - ดูดวงศาสตร์จีน</title>
 
-    <link rel="stylesheet" href="{% static 'result.css' %}">
+    <link
+        rel="stylesheet"
+        href="{% static 'result.css' %}"
+    >
 
 </head>
 
@@ -19,148 +25,533 @@
 <body>
 
 
-<div class="container">
+<div class="page">
 
 
-    <div class="result-card">
+    <main class="result-card">
 
 
-        <div class="header">
+        <!-- =========================
+             HEADER
+        ========================== -->
+
+        <header class="header">
 
             <span class="kicker">
                 DESTINY JOURNEY
             </span>
 
             <h1>
-                ข้อมูลของคุณ
+                ผลการคำนวณดวง
             </h1>
 
             <p>
-                ข้อมูลที่คุณกรอกถูกบันทึกเรียบร้อยแล้ว
+                ข้อมูลวันเกิดของคุณถูกนำมาคำนวณเรียบร้อยแล้ว
             </p>
 
+        </header>
+
+
+        <!-- =========================
+             MAIN CONTENT
+        ========================== -->
+
+        <div class="main-content">
+
+
+            <!-- =====================
+                 INPUT
+            ====================== -->
+
+            <section class="input-section">
+
+
+                <div class="section-header">
+
+                    <span class="section-kicker">
+                        YOUR INFORMATION
+                    </span>
+
+                    <h2>
+                        ข้อมูลของคุณ
+                    </h2>
+
+                </div>
+
+
+                <div class="input-list">
+
+
+                    <!-- ชื่อ -->
+
+                    <div class="result-item">
+
+                        <span class="label">
+                            ชื่อ - นามสกุล
+                        </span>
+
+                        <span class="value">
+
+                            {{ user_input.first_name }}
+                            {{ user_input.last_name }}
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- เพศ -->
+
+                    <div class="result-item">
+
+                        <span class="label">
+                            เพศ
+                        </span>
+
+                        <span class="value">
+
+                            {% if user_input.gender == "male" %}
+
+                                ชาย
+
+                            {% elif user_input.gender == "female" %}
+
+                                หญิง
+
+                            {% else %}
+
+                                {{ user_input.gender }}
+
+                            {% endif %}
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- วันเกิด -->
+
+                    <div class="result-item">
+
+                        <span class="label">
+                            วันเดือนปีเกิด
+                        </span>
+
+                        <span class="value">
+
+                            {{ user_input.birth_date }}
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- เวลาเกิด -->
+
+                    <div class="result-item">
+
+                        <span class="label">
+                            เวลาเกิด
+                        </span>
+
+                        <span class="value">
+
+                            {% if user_input.birth_time %}
+
+                                {{ user_input.birth_time }}
+
+                            {% else %}
+
+                                ไม่ได้ระบุ
+
+                            {% endif %}
+
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =====================
+                 OUTPUT
+            ====================== -->
+
+            <section class="output-section">
+
+
+                <div class="section-header output-header">
+
+                    <span class="section-kicker">
+                        DESTINY RESULT
+                    </span>
+
+                    <h2>
+                        ดวง 8 ตัว
+                    </h2>
+
+                    <p>
+                        ราศีบนและราศีล่างของแต่ละเสา
+                    </p>
+
+                </div>
+
+
+                <!-- =================
+                     BAZI
+                ================== -->
+
+                <div class="bazi-container">
+
+
+                    <!-- Header -->
+
+                    <div class="bazi-header">
+
+
+                        <div class="bazi-side-title">
+                            &nbsp;
+                        </div>
+
+
+                        <div class="bazi-column-title">
+                            ยาม
+                        </div>
+
+
+                        <div class="bazi-column-title">
+                            ดิถี
+                        </div>
+
+
+                        <div class="bazi-column-title">
+                            เดือน
+                        </div>
+
+
+                        <div class="bazi-column-title">
+                            ปี
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- =================
+                         ราศีบน
+                    ================== -->
+
+                    <div class="bazi-row">
+
+
+                        <div class="bazi-side-title">
+                            ราศีบน
+                        </div>
+
+
+                        <!-- ยาม -->
+
+                        <div class="bazi-cell">
+
+                        </div>
+
+
+                        <!-- ดิถี -->
+
+                        <div class="bazi-cell">
+
+                            {% if birth_result.rasi_up %}
+
+
+                                {% if birth_result.rasi_up.zh %}
+
+                                    <span class="bazi-zh">
+                                        {{ birth_result.rasi_up.zh }}
+                                    </span>
+
+                                {% endif %}
+
+
+                                {% if birth_result.rasi_up.th %}
+
+                                    <span class="bazi-th">
+                                        {{ birth_result.rasi_up.th }}
+                                    </span>
+
+                                {% endif %}
+
+
+                                {% if birth_result.rasi_up.symbol %}
+
+                                    <span class="bazi-symbol">
+                                        {{ birth_result.rasi_up.symbol }}
+                                    </span>
+
+                                {% endif %}
+
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- เดือน -->
+
+                        <div class="bazi-cell">
+
+                        </div>
+
+
+                        <!-- ปี -->
+
+                        <div class="bazi-cell">
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- =================
+                         ราศีล่าง
+                    ================== -->
+
+                    <div class="bazi-row">
+
+
+                        <div class="bazi-side-title">
+                            ราศีล่าง
+                        </div>
+
+
+                        <!-- ยาม -->
+
+                        <div class="bazi-cell">
+
+                        </div>
+
+
+                        <!-- ดิถี -->
+
+                        <div class="bazi-cell">
+
+                            {% if birth_result.rasi_down %}
+
+
+                                {% if birth_result.rasi_down.zh %}
+
+                                    <span class="bazi-zh">
+                                        {{ birth_result.rasi_down.zh }}
+                                    </span>
+
+                                {% endif %}
+
+
+                                {% if birth_result.rasi_down.th %}
+
+                                    <span class="bazi-th">
+                                        {{ birth_result.rasi_down.th }}
+                                    </span>
+
+                                {% endif %}
+
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- เดือน -->
+
+                        <div class="bazi-cell">
+
+                        </div>
+
+
+                        <!-- ปี -->
+
+                        <div class="bazi-cell">
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
         </div>
 
 
-        <div class="result-section">
-
-
-            <div class="result-item">
-
-                <span class="label">
-                    ชื่อ - นามสกุล
-                </span>
-
-                <span class="value">
-                    {{ user_input.first_name }}
-                    {{ user_input.last_name }}
-                </span>
-
-            </div>
-
-
-            <div class="result-item">
-
-                <span class="label">
-                    เพศ
-                </span>
-
-                <span class="value">
-
-                    {% if user_input.gender == "male" %}
-                        ชาย
-                    {% elif user_input.gender == "female" %}
-                        หญิง
-                    {% else %}
-                        {{ user_input.gender }}
-                    {% endif %}
-
-                </span>
-
-            </div>
-
-
-            <div class="result-item">
-
-                <span class="label">
-                    วันเดือนปีเกิด
-                </span>
-
-                <span class="value">
-                    {{ user_input.birth_date }}
-                </span>
-
-            </div>
-
-
-            <div class="result-item">
-
-                <span class="label">
-                    เวลาเกิด
-                </span>
-
-                <span class="value">
-
-                    {% if user_input.birth_time %}
-                        {{ user_input.birth_time }}
-                    {% else %}
-                        ไม่ได้ระบุ
-                    {% endif %}
-
-                </span>
-
-            </div>
-
-
-        </div>
-
-
-        <!-- ราศีบน -->
-
-        <div class="result-section">
-
-            <div class="result-item">
-
-                <span class="label">
-                    ราศีบน
-                </span>
-
-                <span class="value">
-                    {{ birth_result.rasi_up.zh }}
-                    {{ birth_result.rasi_up.th }}
-                    {{ birth_result.rasi_up.symbol }}
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <!-- ราศีล่าง -->
-
-        <div class="result-section">
-
-            <div class="result-item">
-
-                <span class="label">
-                    ราศีล่าง
-                </span>
-
-                <span class="value">
-                    {{ birth_result.rasi_down.zh }}
-                    {{ birth_result.rasi_down.th }}
-                </span>
-
-            </div>
-
-        </div>
-
+        <!-- =========================
+             MEANING BUTTON
+        ========================== -->
 
         <div class="footer">
 
-            <p>
-                ข้อมูลของคุณถูกบันทึกเข้าสู่ระบบแล้ว
-            </p>
+            <button
+                type="button"
+                class="meaning-button"
+                id="meaningButton"
+            >
+
+                <span class="meaning-icon">
+                    ✦
+                </span>
+
+                <span>
+                    ความหมาย
+                </span>
+
+                <span class="meaning-arrow">
+                    →
+                </span>
+
+            </button>
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+<!-- =====================================================
+     MEANING MODAL
+===================================================== -->
+
+<div
+    class="modal-overlay"
+    id="meaningModal"
+    aria-hidden="true"
+>
+
+
+    <div
+        class="meaning-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="meaningTitle"
+    >
+
+
+        <!-- Modal Header -->
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="modal-kicker">
+                    DESTINY MEANING
+                </span>
+
+                <h2 id="meaningTitle">
+                    ความหมายของดวง 8 ตัว
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="modal-close"
+                id="closeMeaning"
+                aria-label="ปิด"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- Modal Content -->
+
+        <div class="modal-content">
+
+
+            <div class="meaning-block">
+
+                <h3>
+                    ความหมายโดยรวม
+                </h3>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+                </p>
+
+            </div>
+
+
+            <div class="meaning-block">
+
+                <h3>
+                    ราศีบน
+                </h3>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur.
+                </p>
+
+            </div>
+
+
+            <div class="meaning-block">
+
+                <h3>
+                    ราศีล่าง
+                </h3>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Excepteur sint occaecat cupidatat non proident,
+                    sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+
+            </div>
+
+
+            <div class="meaning-block">
+
+                <h3>
+                    หมายเหตุ
+                </h3>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Integer posuere erat a ante venenatis dapibus posuere velit aliquet.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- Modal Footer -->
+
+        <div class="modal-footer">
+
+            <button
+                type="button"
+                class="modal-done-button"
+                id="closeMeaningBottom"
+            >
+                ปิด
+            </button>
 
         </div>
 
@@ -169,6 +560,110 @@
 
 
 </div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+    const meaningButton =
+        document.getElementById("meaningButton");
+
+    const meaningModal =
+        document.getElementById("meaningModal");
+
+    const closeMeaning =
+        document.getElementById("closeMeaning");
+
+    const closeMeaningBottom =
+        document.getElementById("closeMeaningBottom");
+
+
+    function openMeaning() {
+
+        meaningModal.classList.add("active");
+
+        meaningModal.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+        document.body.classList.add(
+            "modal-open"
+        );
+
+    }
+
+
+    function closeMeaningModal() {
+
+        meaningModal.classList.remove("active");
+
+        meaningModal.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+        document.body.classList.remove(
+            "modal-open"
+        );
+
+    }
+
+
+    meaningButton.addEventListener(
+        "click",
+        openMeaning
+    );
+
+
+    closeMeaning.addEventListener(
+        "click",
+        closeMeaningModal
+    );
+
+
+    closeMeaningBottom.addEventListener(
+        "click",
+        closeMeaningModal
+    );
+
+
+    meaningModal.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                event.target === meaningModal
+            ) {
+
+                closeMeaningModal();
+
+            }
+
+        }
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Escape" &&
+                meaningModal.classList.contains("active")
+            ) {
+
+                closeMeaningModal();
+
+            }
+
+        }
+    );
+
+</script>
 
 
 </body>

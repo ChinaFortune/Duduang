@@ -1,3 +1,7 @@
+/* =========================================================
+   RESET
+========================================================= */
+
 * {
     box-sizing: border-box;
 }
@@ -5,29 +9,22 @@
 
 html,
 body {
+
     width: 100%;
     height: 100%;
+
+    margin: 0;
+
+    overflow: hidden;
+
 }
 
 
 body {
 
-    margin: 0;
-
-    width: 100%;
-    height: 100vh;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    padding: 30px;
-
-    overflow: hidden;
-
     font-family: Arial, sans-serif;
+
+    color: #2f2419;
 
     background:
         linear-gradient(
@@ -36,55 +33,74 @@ body {
             #e8dcc8
         );
 
-    color: #2f2419;
-
 }
 
 
-/* =========================
-   Container
-========================= */
+/* =========================================================
+   PAGE
+========================================================= */
 
-.container {
+.page {
 
     width: 100%;
-
-    max-width: 760px;
-
-    max-height: calc(100vh - 60px);
+    height: 100vh;
 
     display: flex;
 
     justify-content: center;
+    align-items: center;
+
+    padding: 24px;
+
+    overflow: hidden;
 
 }
 
 
-/* =========================
-   Result Card
-========================= */
+/* =========================================================
+   RESULT CARD
+========================================================= */
 
 .result-card {
 
     width: 100%;
 
+    max-width: 1180px;
+
+    height: calc(100vh - 48px);
+
+    max-height: 760px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 34px 40px;
+
     background: #fffaf2;
 
-    border-radius: 24px;
-
-    padding: 40px 45px;
+    border-radius: 26px;
 
     box-shadow:
-        0 20px 50px rgba(60, 40, 20, 0.15);
+        0 20px 50px rgba(
+            60,
+            40,
+            20,
+            0.15
+        );
+
+    overflow: hidden;
 
 }
 
 
-/* =========================
-   Header
-========================= */
+/* =========================================================
+   HEADER
+========================================================= */
 
 .header {
+
+    flex-shrink: 0;
 
     text-align: center;
 
@@ -106,7 +122,7 @@ body {
 }
 
 
-h1 {
+.header h1 {
 
     margin: 8px 0;
 
@@ -123,67 +139,76 @@ h1 {
 
     color: #8a7967;
 
+    font-size: 14px;
+
     line-height: 1.4;
 
 }
 
 
-/* =========================
-   Result Section
-========================= */
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
 
-.result-section {
+.main-content {
 
-    display: flex;
+    flex: 1;
 
-    flex-direction: column;
+    min-height: 0;
 
-    gap: 12px;
+    display: grid;
 
-}
+    grid-template-columns:
+        40%
+        60%;
 
-
-.result-section + .result-section {
-
-    margin-top: 12px;
-
-}
-
-
-/* =========================
-   Result Item
-========================= */
-
-.result-item {
-
-    width: 100%;
-
-    height: 62px;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    gap: 30px;
-
-    padding: 15px 20px;
-
-    background: #f7f0e5;
-
-    border-radius: 12px;
+    gap: 24px;
 
 }
 
 
-/* =========================
-   Label
-========================= */
+/* =========================================================
+   SECTION HEADER
+========================================================= */
 
-.label {
+.section-header {
 
-    flex: 0 0 140px;
+    margin-bottom: 18px;
+
+}
+
+
+.section-kicker {
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    color: #a47c45;
+
+}
+
+
+.section-header h2 {
+
+    margin: 0;
+
+    color: #3b2b1c;
+
+    font-size: 23px;
+
+    line-height: 1.3;
+
+}
+
+
+.section-header p {
+
+    margin: 6px 0 0;
 
     color: #8a7967;
 
@@ -194,9 +219,97 @@ h1 {
 }
 
 
-/* =========================
-   Value
-========================= */
+/* =========================================================
+   INPUT SECTION
+========================================================= */
+
+.input-section {
+
+    min-width: 0;
+
+    height: 100%;
+
+    padding: 30px;
+
+    background: #f8f1e7;
+
+    border: 1px solid #eadfce;
+
+    border-radius: 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+}
+
+
+/* =========================================================
+   INPUT LIST
+========================================================= */
+
+.input-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+}
+
+
+/* =========================================================
+   INPUT ITEM
+========================================================= */
+
+.result-item {
+
+    width: 100%;
+
+    min-height: 64px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 14px 18px;
+
+    background: #fffaf2;
+
+    border: 1px solid #eadfce;
+
+    border-radius: 13px;
+
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.label {
+
+    flex: 0 0 125px;
+
+    color: #8a7967;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+
+}
+
+
+/* =========================================================
+   VALUE
+========================================================= */
 
 .value {
 
@@ -204,159 +317,860 @@ h1 {
 
     min-width: 0;
 
+    color: #2f2419;
+
+    font-size: 15px;
+
     font-weight: 600;
+
+    line-height: 1.4;
 
     text-align: right;
 
-    line-height: 1.4;
-
     white-space: nowrap;
 
-    color: #2f2419;
+    overflow: hidden;
+
+    text-overflow: ellipsis;
 
 }
 
 
-/* =========================
-   Footer
-========================= */
+/* =========================================================
+   OUTPUT SECTION
+========================================================= */
 
-.footer {
+.output-section {
 
-    margin-top: 24px;
+    min-width: 0;
+
+    height: 100%;
+
+    padding: 30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f8f0e2,
+            #efe2cc
+        );
+
+    border: 1px solid #e0ccb0;
+
+    border-radius: 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+}
+
+
+/* =========================================================
+   OUTPUT HEADER
+========================================================= */
+
+.output-header {
 
     text-align: center;
 
-    color: #a08d77;
+    margin-bottom: 22px;
+
+}
+
+
+.output-header h2 {
+
+    font-size: 27px;
+
+}
+
+
+.output-header p {
+
+    font-size: 14px;
+
+}
+
+
+/* =========================================================
+   BAZI CONTAINER
+========================================================= */
+
+.bazi-container {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    border-radius: 16px;
+
+    border: 1px solid #d8c1a0;
+
+    background: #d8c1a0;
+
+    box-shadow:
+        0 8px 20px rgba(
+            80,
+            55,
+            25,
+            0.08
+        );
+
+}
+
+
+/* =========================================================
+   BAZI HEADER
+========================================================= */
+
+.bazi-header {
+
+    display: grid;
+
+    grid-template-columns:
+        95px
+        repeat(4, 1fr);
+
+    min-height: 62px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #eee0c9,
+            #e8d8bd
+        );
+
+}
+
+
+.bazi-column-title,
+.bazi-side-title {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+}
+
+
+.bazi-column-title {
+
+    color: #5f4023;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+}
+
+
+.bazi-side-title {
+
+    color: #806a50;
 
     font-size: 13px;
 
-    line-height: 1.4;
+    font-weight: 600;
 
 }
 
 
-/* =========================
-   หน้าจอสูงน้อย
-========================= */
+/* =========================================================
+   BAZI ROW
+========================================================= */
+
+.bazi-row {
+
+    display: grid;
+
+    grid-template-columns:
+        95px
+        repeat(4, 1fr);
+
+    min-height: 155px;
+
+    background: #fffaf2;
+
+}
+
+
+/* =========================================================
+   BAZI CELL
+========================================================= */
+
+.bazi-cell {
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    padding: 16px 8px;
+
+    background: #fffaf2;
+
+    border-left: 1px solid #eadfce;
+
+}
+
+
+/* =========================================================
+   BAZI CHARACTER
+========================================================= */
+
+.bazi-zh {
+
+    color: #54371c;
+
+    font-size: 42px;
+
+    font-weight: 700;
+
+    line-height: 1.1;
+
+}
+
+
+.bazi-th {
+
+    margin-top: 8px;
+
+    color: #765a3c;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    line-height: 1.3;
+
+}
+
+
+.bazi-symbol {
+
+    margin-top: 6px;
+
+    color: #a47c45;
+
+    font-size: 28px;
+
+    line-height: 1;
+
+}
+
+
+/* =========================================================
+   MEANING BUTTON
+========================================================= */
+
+.footer {
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin-top: 18px;
+
+}
+
+
+.meaning-button {
+
+    position: relative;
+
+    min-width: 190px;
+
+    height: 52px;
+
+    padding: 0 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    border: 0;
+
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            135deg,
+            #9b703c,
+            #c09252
+        );
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.3px;
+
+    box-shadow:
+        0 8px 18px rgba(
+            120,
+            80,
+            35,
+            0.22
+        );
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+
+}
+
+
+.meaning-button:hover {
+
+    transform: translateY(-2px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #865e2e,
+            #b17e3d
+        );
+
+    box-shadow:
+        0 12px 24px rgba(
+            120,
+            80,
+            35,
+            0.28
+        );
+
+}
+
+
+.meaning-button:active {
+
+    transform: translateY(0);
+
+    box-shadow:
+        0 5px 12px rgba(
+            120,
+            80,
+            35,
+            0.2
+        );
+
+}
+
+
+.meaning-button:focus-visible {
+
+    outline: 3px solid rgba(
+        164,
+        124,
+        69,
+        0.35
+    );
+
+    outline-offset: 3px;
+
+}
+
+
+.meaning-icon {
+
+    width: 25px;
+
+    height: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(
+        255,
+        255,
+        255,
+        0.18
+    );
+
+    font-size: 15px;
+
+}
+
+
+.meaning-arrow {
+
+    font-size: 20px;
+
+    line-height: 1;
+
+    transition:
+        transform 0.2s ease;
+
+}
+
+
+.meaning-button:hover .meaning-arrow {
+
+    transform: translateX(4px);
+
+}
+
+
+/* =========================================================
+   MODAL OVERLAY
+========================================================= */
+
+.modal-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 30px;
+
+    background:
+        rgba(
+            43,
+            30,
+            18,
+            0.55
+        );
+
+    backdrop-filter: blur(5px);
+
+    -webkit-backdrop-filter: blur(5px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+
+}
+
+
+/* =========================================================
+   MODAL ACTIVE
+========================================================= */
+
+.modal-overlay.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.meaning-modal {
+
+    width: 100%;
+
+    max-width: 680px;
+
+    max-height: calc(100vh - 60px);
+
+    display: flex;
+
+    flex-direction: column;
+
+    background: #fffaf2;
+
+    border-radius: 22px;
+
+    border: 1px solid #e4d3b8;
+
+    box-shadow:
+        0 25px 70px rgba(
+            35,
+            22,
+            12,
+            0.3
+        );
+
+    overflow: hidden;
+
+    transform:
+        translateY(20px)
+        scale(0.97);
+
+    transition:
+        transform 0.25s ease;
+
+}
+
+
+.modal-overlay.active .meaning-modal {
+
+    transform:
+        translateY(0)
+        scale(1);
+
+}
+
+
+/* =========================================================
+   MODAL HEADER
+========================================================= */
+
+.modal-header {
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 20px;
+
+    padding: 25px 28px 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f8f0e2,
+            #efe2cc
+        );
+
+    border-bottom: 1px solid #e4d3b8;
+
+}
+
+
+.modal-kicker {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #a47c45;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.modal-header h2 {
+
+    margin: 0;
+
+    color: #3b2b1c;
+
+    font-size: 24px;
+
+    line-height: 1.3;
+
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.modal-close {
+
+    width: 38px;
+
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 1px solid #dbc7aa;
+
+    border-radius: 50%;
+
+    background: #fffaf2;
+
+    color: #765a3c;
+
+    font-family: inherit;
+
+    font-size: 25px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.modal-close:hover {
+
+    background: #a47c45;
+
+    color: #ffffff;
+
+    transform: rotate(90deg);
+
+}
+
+
+/* =========================================================
+   MODAL CONTENT
+========================================================= */
+
+.modal-content {
+
+    flex: 1;
+
+    min-height: 0;
+
+    overflow-y: auto;
+
+    padding: 25px 28px;
+
+}
+
+
+/* Scrollbar */
+
+.modal-content::-webkit-scrollbar {
+
+    width: 6px;
+
+}
+
+
+.modal-content::-webkit-scrollbar-track {
+
+    background: transparent;
+
+}
+
+
+.modal-content::-webkit-scrollbar-thumb {
+
+    background: #d4bea0;
+
+    border-radius: 10px;
+
+}
+
+
+/* =========================================================
+   MEANING BLOCK
+========================================================= */
+
+.meaning-block {
+
+    padding: 18px 20px;
+
+    margin-bottom: 14px;
+
+    background: #f8f1e7;
+
+    border: 1px solid #eadfce;
+
+    border-radius: 13px;
+
+}
+
+
+.meaning-block:last-child {
+
+    margin-bottom: 0;
+
+}
+
+
+.meaning-block h3 {
+
+    margin: 0 0 8px;
+
+    color: #5b3d20;
+
+    font-size: 17px;
+
+    line-height: 1.3;
+
+}
+
+
+.meaning-block p {
+
+    margin: 0;
+
+    color: #765f47;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+}
+
+
+/* =========================================================
+   MODAL FOOTER
+========================================================= */
+
+.modal-footer {
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    padding: 16px 28px;
+
+    border-top: 1px solid #eadfce;
+
+    background: #fffaf2;
+
+}
+
+
+.modal-done-button {
+
+    min-width: 90px;
+
+    height: 42px;
+
+    padding: 0 20px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    background: #5b3d20;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.modal-done-button:hover {
+
+    background: #76512d;
+
+    transform: translateY(-1px);
+
+}
+
+
+/* =========================================================
+   BODY WHEN MODAL OPEN
+========================================================= */
+
+body.modal-open {
+
+    overflow: hidden;
+
+}
+
+
+/* =========================================================
+   HEIGHT <= 750
+========================================================= */
 
 @media (max-height: 750px) {
 
-    body {
-        padding: 20px;
-    }
+    .page {
 
-
-    .container {
-
-        max-height: calc(100vh - 40px);
+        padding: 18px;
 
     }
 
 
     .result-card {
 
-        padding: 28px 35px;
+        height: calc(100vh - 36px);
+
+        max-height: none;
+
+        padding: 24px 30px;
 
     }
 
 
     .header {
 
-        margin-bottom: 20px;
+        margin-bottom: 18px;
 
     }
 
 
-    h1 {
+    .header h1 {
 
-        font-size: 28px;
-
-        margin: 6px 0;
-
-    }
-
-
-    .result-section {
-
-        gap: 8px;
-
-    }
-
-
-    .result-section + .result-section {
-
-        margin-top: 8px;
-
-    }
-
-
-    .result-item {
-
-        height: 54px;
-
-        padding: 12px 18px;
-
-    }
-
-
-    .footer {
-
-        margin-top: 18px;
-
-    }
-
-}
-
-
-/* =========================
-   Mobile
-========================= */
-
-@media (max-width: 600px) {
-
-    body {
-
-        padding: 15px;
-
-    }
-
-
-    .container {
-
-        max-height: calc(100vh - 30px);
-
-    }
-
-
-    .result-card {
-
-        padding: 25px 18px;
-
-        border-radius: 20px;
-
-    }
-
-
-    .header {
-
-        margin-bottom: 20px;
-
-    }
-
-
-    .kicker {
-
-        font-size: 10px;
-
-        letter-spacing: 2.5px;
-
-    }
-
-
-    h1 {
-
-        font-size: 25px;
+        font-size: 29px;
 
     }
 
@@ -368,36 +1182,137 @@ h1 {
     }
 
 
-    .result-section {
+    .input-section,
+    .output-section {
+
+        padding: 22px;
+
+    }
+
+
+    .input-list {
 
         gap: 8px;
 
     }
 
 
-    .result-section + .result-section {
+    .result-item {
 
-        margin-top: 8px;
+        min-height: 54px;
+
+        padding: 11px 14px;
 
     }
 
 
-    .result-item {
+    .bazi-header {
 
-        height: 52px;
+        min-height: 50px;
 
-        padding: 12px 15px;
+    }
 
-        gap: 10px;
+
+    .bazi-row {
+
+        min-height: 105px;
+
+    }
+
+
+    .bazi-zh {
+
+        font-size: 34px;
+
+    }
+
+
+    .bazi-th {
+
+        font-size: 13px;
+
+    }
+
+
+    .bazi-symbol {
+
+        font-size: 22px;
+
+    }
+
+
+    .footer {
+
+        margin-top: 12px;
+
+    }
+
+
+    .meaning-button {
+
+        height: 46px;
+
+        min-width: 170px;
+
+        font-size: 15px;
+
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .page {
+
+        padding: 16px;
+
+    }
+
+
+    .result-card {
+
+        height: calc(100vh - 32px);
+
+        padding: 22px;
+
+    }
+
+
+    .main-content {
+
+        grid-template-columns:
+            40%
+            60%;
+
+        gap: 16px;
+
+    }
+
+
+    .input-section {
+
+        padding: 19px;
+
+    }
+
+
+    .output-section {
+
+        padding: 19px;
 
     }
 
 
     .label {
 
-        flex: 0 0 90px;
+        flex-basis: 95px;
 
-        font-size: 12px;
+        font-size: 13px;
 
     }
 
@@ -409,51 +1324,610 @@ h1 {
     }
 
 
-    .footer {
+    .bazi-header {
 
-        margin-top: 18px;
+        grid-template-columns:
+            65px
+            repeat(4, 1fr);
+
+    }
+
+
+    .bazi-row {
+
+        grid-template-columns:
+            65px
+            repeat(4, 1fr);
+
+    }
+
+
+    .bazi-column-title {
+
+        font-size: 14px;
+
+    }
+
+
+    .bazi-side-title {
 
         font-size: 11px;
+
+    }
+
+
+    .bazi-zh {
+
+        font-size: 31px;
+
+    }
+
+
+    .bazi-th {
+
+        font-size: 11px;
+
+    }
+
+
+    .bazi-symbol {
+
+        font-size: 20px;
 
     }
 
 }
 
 
-/* =========================
-   จอเล็กมาก
-========================= */
+/* =========================================================
+   MOBILE
+========================================================= */
 
-@media (max-width: 400px) {
+@media (max-width: 600px) {
+
+    html,
+    body {
+
+        overflow: hidden;
+
+    }
+
+
+    .page {
+
+        height: 100vh;
+
+        padding: 9px;
+
+    }
+
 
     .result-card {
 
-        padding: 20px 14px;
+        height: calc(100vh - 18px);
+
+        max-height: none;
+
+        padding: 16px 12px;
+
+        border-radius: 18px;
 
     }
 
 
-    .result-item {
+    .header {
 
-        height: 48px;
-
-        padding: 10px 12px;
+        margin-bottom: 11px;
 
     }
 
 
-    .label {
+    .kicker {
 
-        flex: 0 0 80px;
+        font-size: 9px;
+
+        letter-spacing: 2px;
+
+    }
+
+
+    .header h1 {
+
+        margin: 5px 0;
+
+        font-size: 23px;
+
+    }
+
+
+    .header p {
 
         font-size: 11px;
 
     }
 
 
+    /* =====================
+       Main
+    ====================== */
+
+    .main-content {
+
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+        grid-template-rows:
+            auto
+            1fr;
+
+        gap: 9px;
+
+        min-height: 0;
+
+    }
+
+
+    /* =====================
+       INPUT
+    ====================== */
+
+    .input-section {
+
+        height: auto;
+
+        padding: 12px;
+
+        border-radius: 14px;
+
+    }
+
+
+    .section-header {
+
+        margin-bottom: 8px;
+
+    }
+
+
+    .section-kicker {
+
+        font-size: 8px;
+
+    }
+
+
+    .section-header h2 {
+
+        font-size: 18px;
+
+    }
+
+
+    .input-list {
+
+        display: grid;
+
+        grid-template-columns:
+            1fr
+            1fr;
+
+        gap: 6px;
+
+    }
+
+
+    .result-item {
+
+        min-height: 42px;
+
+        padding: 7px 9px;
+
+        gap: 5px;
+
+    }
+
+
+    .label {
+
+        flex: 0 0 auto;
+
+        font-size: 10px;
+
+    }
+
+
     .value {
 
+        font-size: 11px;
+
+    }
+
+
+    /* =====================
+       OUTPUT
+    ====================== */
+
+    .output-section {
+
+        height: auto;
+
+        min-height: 0;
+
+        margin-left: 0;
+
+        padding: 13px;
+
+        border-radius: 14px;
+
+    }
+
+
+    .output-header {
+
+        margin-bottom: 10px;
+
+    }
+
+
+    .output-header h2 {
+
+        font-size: 21px;
+
+    }
+
+
+    .output-header p {
+
+        font-size: 10px;
+
+    }
+
+
+    /* =====================
+       BAZI
+    ====================== */
+
+    .bazi-container {
+
+        flex: 1;
+
+        min-height: 0;
+
+        border-radius: 11px;
+
+    }
+
+
+    .bazi-header {
+
+        grid-template-columns:
+            50px
+            repeat(4, 1fr);
+
+        min-height: 42px;
+
+    }
+
+
+    .bazi-row {
+
+        grid-template-columns:
+            50px
+            repeat(4, 1fr);
+
+        min-height: 0;
+
+        flex: 1;
+
+    }
+
+
+    .bazi-column-title {
+
         font-size: 12px;
+
+    }
+
+
+    .bazi-side-title {
+
+        font-size: 9px;
+
+    }
+
+
+    .bazi-cell {
+
+        padding: 7px 3px;
+
+    }
+
+
+    .bazi-zh {
+
+        font-size: 27px;
+
+    }
+
+
+    .bazi-th {
+
+        margin-top: 4px;
+
+        font-size: 10px;
+
+    }
+
+
+    .bazi-symbol {
+
+        font-size: 18px;
+
+    }
+
+
+    /* =====================
+       BUTTON
+    ====================== */
+
+    .footer {
+
+        margin-top: 7px;
+
+    }
+
+
+    .meaning-button {
+
+        width: 100%;
+
+        max-width: 230px;
+
+        height: 45px;
+
+        min-width: 0;
+
+        font-size: 14px;
+
+        border-radius: 11px;
+
+    }
+
+
+    /* =====================
+       MODAL
+    ====================== */
+
+    .modal-overlay {
+
+        padding: 14px;
+
+    }
+
+
+    .meaning-modal {
+
+        max-height: calc(100vh - 28px);
+
+        border-radius: 17px;
+
+    }
+
+
+    .modal-header {
+
+        padding: 18px 18px 15px;
+
+    }
+
+
+    .modal-header h2 {
+
+        font-size: 20px;
+
+    }
+
+
+    .modal-kicker {
+
+        font-size: 8px;
+
+    }
+
+
+    .modal-close {
+
+        width: 34px;
+
+        height: 34px;
+
+        font-size: 22px;
+
+    }
+
+
+    .modal-content {
+
+        padding: 16px;
+
+    }
+
+
+    .meaning-block {
+
+        padding: 14px;
+
+        margin-bottom: 10px;
+
+    }
+
+
+    .meaning-block h3 {
+
+        font-size: 15px;
+
+    }
+
+
+    .meaning-block p {
+
+        font-size: 13px;
+
+        line-height: 1.6;
+
+    }
+
+
+    .modal-footer {
+
+        padding: 12px 16px;
+
+    }
+
+
+    .modal-done-button {
+
+        height: 39px;
+
+        font-size: 13px;
+
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .result-card {
+
+        padding: 12px 9px;
+
+    }
+
+
+    .header h1 {
+
+        font-size: 21px;
+
+    }
+
+
+    .header p {
+
+        font-size: 9px;
+
+    }
+
+
+    .main-content {
+
+        gap: 7px;
+
+    }
+
+
+    .input-section {
+
+        padding: 9px;
+
+    }
+
+
+    .output-section {
+
+        padding: 9px;
+
+    }
+
+
+    .result-item {
+
+        min-height: 37px;
+
+        padding: 6px 7px;
+
+    }
+
+
+    .label {
+
+        font-size: 9px;
+
+    }
+
+
+    .value {
+
+        font-size: 10px;
+
+    }
+
+
+    .bazi-header {
+
+        grid-template-columns:
+            43px
+            repeat(4, 1fr);
+
+        min-height: 36px;
+
+    }
+
+
+    .bazi-row {
+
+        grid-template-columns:
+            43px
+            repeat(4, 1fr);
+
+    }
+
+
+    .bazi-column-title {
+
+        font-size: 10px;
+
+    }
+
+
+    .bazi-side-title {
+
+        font-size: 8px;
+
+    }
+
+
+    .bazi-zh {
+
+        font-size: 24px;
+
+    }
+
+
+    .bazi-th {
+
+        font-size: 9px;
+
+    }
+
+
+    .bazi-symbol {
+
+        font-size: 16px;
+
+    }
+
+
+    .meaning-button {
+
+        height: 42px;
+
+        font-size: 13px;
 
     }
 
