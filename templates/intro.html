@@ -1,52 +1,357 @@
 {% load static %}
 
 <!DOCTYPE html>
-
 <html lang="th">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<title>ดูดวงศาสตร์จีน | เปิดประตูสู่ดวงชะตา</title>
+    <meta
+        name="theme-color"
+        content="#faf9f5"
+    >
 
-<link rel="stylesheet" href="{% static 'intro.css' %}">
+    <title>
+        ดูดวงศาสตร์จีน | อ.หนิง
+    </title>
 
+    <link
+        rel="stylesheet"
+        href="{% static 'css/intro.css' %}"
+    >
 
 </head>
+
 
 <body>
 
 
 <main class="intro-container">
 
-    <div class="decoration decoration-1">☯</div>
-    <div class="decoration decoration-2">✦</div>
+
+    <!-- =====================================================
+         BACKGROUND YIN YANG
+         สร้างด้วย HTML + CSS
+         อยู่หลังสุดและอยู่กลางหน้าจอ
+    ====================================================== -->
+
+    <div
+        class="background-yinyang"
+        aria-hidden="true"
+    >
+
+        <div class="yin-yang-symbol">
+
+            <div class="yin-yang-small yin"></div>
+
+            <div class="yin-yang-small yang"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         WINE CURVE
+    ====================================================== -->
+
+    <div class="wine-curve"></div>
+
+    <div class="wine-curve-inner"></div>
+
+
+    <!-- =====================================================
+         TREE DECORATION
+    ====================================================== -->
+
+    <div
+        class="tree-decoration"
+        aria-hidden="true"
+    >
+
+        <div class="tree-branch branch-main"></div>
+
+        <div class="tree-branch branch-1"></div>
+
+        <div class="tree-branch branch-2"></div>
+
+        <div class="tree-branch branch-3"></div>
+
+        <div class="tree-leaf leaf-1"></div>
+
+        <div class="tree-leaf leaf-2"></div>
+
+        <div class="tree-leaf leaf-3"></div>
+
+        <div class="tree-leaf leaf-4"></div>
+
+        <div class="tree-leaf leaf-5"></div>
+
+        <div class="tree-leaf leaf-6"></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MASTER IMAGE
+    ====================================================== -->
+
+    <div class="master-background">
+
+        <img
+            src="{% static 'images/master.png' %}"
+            alt="อ.หนิง"
+            class="master-background-image"
+        >
+
+    </div>
+
+
+    <!-- =====================================================
+         RIGHT CONTENT
+    ====================================================== -->
 
     <section class="hero">
 
-        <div class="symbol">☯</div>
 
-        <p class="subtitle">ศาสตร์แห่งดวงชะตาจีน</p>
+        <!-- =================================================
+             SMALL YIN YANG
+        ================================================== -->
+
+        <div
+            class="top-yinyang"
+            aria-hidden="true"
+        >
+            ☯
+        </div>
+
+
+        <!-- =================================================
+             BRAND
+        ================================================== -->
+
+        <div class="brand">
+
+            <div class="brand-line"></div>
+
+            <div class="brand-text">
+
+                <span class="brand-small">
+                    อ.หนิง
+                </span>
+
+                <strong>
+                    ศาสตร์จีน
+                </strong>
+
+            </div>
+
+            <div class="brand-line"></div>
+
+        </div>
+
+
+        <!-- =================================================
+             MAIN HEADING
+        ================================================== -->
 
         <h1>
-            เปิดประตูสู่<br>
-            <span>ดวงชะตาของคุณ</span>
+
+            <span class="heading-green">
+                เปิดประตูสู่
+            </span>
+
+            <span class="heading-wine">
+                ดวงชะตาของคุณ
+            </span>
+
         </h1>
 
-        <a href="/home/" class="home-button">
-            <span>เข้าสู่เว็บไซต์</span>
-            <span class="arrow">→</span>
+
+        <!-- =================================================
+             MASTER CARD
+        ================================================== -->
+
+        <div class="master-card">
+
+
+            <!-- HEADER -->
+
+            <div class="master-card-header">
+
+                <div
+                    class="mini-yinyang"
+                    aria-hidden="true"
+                >
+                    ☯
+                </div>
+
+
+                <div class="master-title">
+
+                    <span>
+                        อ.หนิง
+                    </span>
+
+                    <strong>
+                        ฮวงจุ้ย • ดวงจีน
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- DIVIDER -->
+
+            <div class="master-card-divider"></div>
+
+
+            <!-- DESCRIPTION -->
+
+            <p class="master-card-quote">
+                “รับปรึกษาฮวงจุ้ย”
+            </p>
+
+
+            <p class="master-card-description">
+                วิเคราะห์ดวงชะตาด้วยศาสตร์จีน
+            </p>
+
+
+            <!-- =================================================
+                 CONTACT
+            ================================================== -->
+
+            <div class="contact-list">
+
+
+                <!-- PHONE
+                     ไม่ใช้ <a>
+                     ไม่สามารถ hover/click เพื่อโทรได้
+                -->
+
+                <div
+                    class="contact-item phone-item"
+                    aria-hidden="true"
+                >
+
+                    <div class="contact-icon-box">
+
+                        <img
+                            src="{% static 'images/phone.webp' %}"
+                            alt=""
+                            class="contact-icon-image"
+                        >
+
+                    </div>
+
+
+                    <div class="contact-content">
+
+                        <span class="contact-label">
+                            โทร
+                        </span>
+
+                        <strong class="contact-main">
+                            0965654897
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONTACT DIVIDER -->
+
+                <div class="contact-divider"></div>
+
+
+                <!-- FACEBOOK -->
+
+                <div class="contact-item facebook-item">
+
+                    <div class="contact-icon-box">
+
+                        <img
+                            src="{% static 'images/facebook.webp' %}"
+                            alt="Facebook"
+                            class="contact-icon-image"
+                        >
+
+                    </div>
+
+
+                    <div class="contact-content">
+
+                        <span class="contact-label">
+                            FB : อ.หนิง
+                        </span>
+
+                        <strong class="contact-main">
+                            Ajarn Ning - Energy Flow
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             NEXT BUTTON
+        ================================================== -->
+
+        <a
+            href="/home/"
+            class="home-button"
+        >
+
+            <span>
+                เข้าสู่เว็บไซต์
+            </span>
+
+            <span class="arrow">
+                →
+            </span>
+
         </a>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
 
         <p class="footer-text">
             ✦ ค้นพบตัวคุณ ผ่านศาสตร์แห่งดวงชะตา ✦
         </p>
 
+
     </section>
 
+
 </main>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================== -->
+
+<script
+    src="{% static 'js/intro.js' %}"
+    defer
+></script>
 
 
 </body>

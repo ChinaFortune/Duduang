@@ -16,7 +16,7 @@
 
     <link
         rel="stylesheet"
-        href="{% static 'result.css' %}"
+        href="{% static 'css/result.css' %}"
     >
 
 </head>
@@ -619,104 +619,7 @@
      JAVASCRIPT
 ===================================================== -->
 
-<script>
-
-    const meaningButton =
-        document.getElementById("meaningButton");
-
-    const meaningModal =
-        document.getElementById("meaningModal");
-
-    const closeMeaning =
-        document.getElementById("closeMeaning");
-
-    const closeMeaningBottom =
-        document.getElementById("closeMeaningBottom");
-
-
-    function openMeaning() {
-
-        meaningModal.classList.add("active");
-
-        meaningModal.setAttribute(
-            "aria-hidden",
-            "false"
-        );
-
-        document.body.classList.add(
-            "modal-open"
-        );
-
-    }
-
-
-    function closeMeaningModal() {
-
-        meaningModal.classList.remove("active");
-
-        meaningModal.setAttribute(
-            "aria-hidden",
-            "true"
-        );
-
-        document.body.classList.remove(
-            "modal-open"
-        );
-
-    }
-
-
-    meaningButton.addEventListener(
-        "click",
-        openMeaning
-    );
-
-
-    closeMeaning.addEventListener(
-        "click",
-        closeMeaningModal
-    );
-
-
-    closeMeaningBottom.addEventListener(
-        "click",
-        closeMeaningModal
-    );
-
-
-    meaningModal.addEventListener(
-        "click",
-        function (event) {
-
-            if (
-                event.target === meaningModal
-            ) {
-
-                closeMeaningModal();
-
-            }
-
-        }
-    );
-
-
-    document.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (
-                event.key === "Escape" &&
-                meaningModal.classList.contains("active")
-            ) {
-
-                closeMeaningModal();
-
-            }
-
-        }
-    );
-
-</script>
+<script src="{% static 'js/result.js' %}"></script>
 
 
 </body>
