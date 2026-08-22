@@ -212,11 +212,11 @@
                     </span>
 
                     <h2>
-                        ดวง 8 ตัว
+                        ดวง 8 ตัว (ยังไม่ถูก 100%)
                     </h2>
 
                     <p>
-                        ราศีบนและราศีล่างของแต่ละเสา
+                        ยังไม่ได้กำหนด วันและเวลาที่แน่นอน ให้กับการเปลี่ยน index
                     </p>
 
                 </div>
@@ -285,31 +285,31 @@
 
                         <div class="bazi-cell">
 
-                            {% if birth_result.rasi_up %}
+                            {% if birth_result.day_up %}
 
 
-                                {% if birth_result.rasi_up.zh %}
+                                {% if birth_result.day_up.zh %}
 
                                     <span class="bazi-zh">
-                                        {{ birth_result.rasi_up.zh }}
+                                        {{ birth_result.day_up.zh }}
                                     </span>
 
                                 {% endif %}
 
 
-                                {% if birth_result.rasi_up.th %}
+                                {% if birth_result.day_up.th %}
 
                                     <span class="bazi-th">
-                                        {{ birth_result.rasi_up.th }}
+                                        {{ birth_result.day_up.th }}
                                     </span>
 
                                 {% endif %}
 
 
-                                {% if birth_result.rasi_up.symbol %}
+                                {% if birth_result.day_up.symbol %}
 
                                     <span class="bazi-symbol">
-                                        {{ birth_result.rasi_up.symbol }}
+                                        {{ birth_result.day_up.symbol }}
                                     </span>
 
                                 {% endif %}
@@ -330,6 +330,38 @@
                         <!-- ปี -->
 
                         <div class="bazi-cell">
+
+                            {% if birth_result.year_up %}
+
+
+                                {% if birth_result.year_up.zh %}
+
+                                    <span class="bazi-zh">
+                                        {{ birth_result.year_up.zh }}
+                                    </span>
+
+                                {% endif %}
+
+
+                                {% if birth_result.year_up.th %}
+
+                                    <span class="bazi-th">
+                                        {{ birth_result.year_up.th }}
+                                    </span>
+
+                                {% endif %}
+
+
+                                {% if birth_result.year_up.symbol %}
+
+                                    <span class="bazi-symbol">
+                                        {{ birth_result.year_up.symbol }}
+                                    </span>
+
+                                {% endif %}
+
+
+                            {% endif %}
 
                         </div>
 
@@ -360,22 +392,22 @@
 
                         <div class="bazi-cell">
 
-                            {% if birth_result.rasi_down %}
+                            {% if birth_result.day_down %}
 
 
-                                {% if birth_result.rasi_down.zh %}
+                                {% if birth_result.day_down.zh %}
 
                                     <span class="bazi-zh">
-                                        {{ birth_result.rasi_down.zh }}
+                                        {{ birth_result.day_down.zh }}
                                     </span>
 
                                 {% endif %}
 
 
-                                {% if birth_result.rasi_down.th %}
+                                {% if birth_result.day_down.th %}
 
                                     <span class="bazi-th">
-                                        {{ birth_result.rasi_down.th }}
+                                        {{ birth_result.day_down.th }}
                                     </span>
 
                                 {% endif %}
@@ -396,6 +428,29 @@
                         <!-- ปี -->
 
                         <div class="bazi-cell">
+
+                            {% if birth_result.year_down %}
+
+
+                                {% if birth_result.year_down.zh %}
+
+                                    <span class="bazi-zh">
+                                        {{ birth_result.year_down.zh }}
+                                    </span>
+
+                                {% endif %}
+
+
+                                {% if birth_result.year_down.th %}
+
+                                    <span class="bazi-th">
+                                        {{ birth_result.year_down.th }}
+                                    </span>
+
+                                {% endif %}
+
+
+                            {% endif %}
 
                         </div>
 

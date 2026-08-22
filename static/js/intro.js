@@ -95,7 +95,6 @@ document.addEventListener(
 
                     /*
                        จำกัดระยะการเคลื่อนที่
-                       เพื่อให้ยังคงอยู่ตรงกลาง
                     */
 
                     const moveX =
@@ -134,7 +133,7 @@ document.addEventListener(
            PAGE VISIBILITY
            
            ถ้า user เปลี่ยน tab
-           ลดการทำงานที่ไม่จำเป็น
+           หยุด animation เพื่อลดการใช้ CPU
         ================================================= */
 
         document.addEventListener(

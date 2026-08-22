@@ -52,19 +52,33 @@ def result(request, user_id):
     birth_result = calculate_birth_date(user_input)
 
     # =========================
-    # หาความหมายจากดิถีบน
+    # ราศีวัน
+    # =========================
+
+    day_up = birth_result.get("day_up")
+    day_down = birth_result.get("day_down")
+
+    # =========================
+    # ราศีปี
+    # =========================
+
+    year_up = birth_result.get("year_up")
+    year_down = birth_result.get("year_down")
+
+    # =========================
+    # หาความหมายจากราศีบนของวัน
     # =========================
 
     element_meaning = None
 
-    if birth_result.get("rasi_up"):
+    if day_up:
 
-        rasi_up_zh = birth_result["rasi_up"].get("zh")
+        rasi_up = day_up.get("zh")
 
-        if rasi_up_zh:
+        if rasi_up:
 
             element_meaning = data.element_meaning.get(
-                rasi_up_zh
+                rasi_up
             )
 
     # =========================
@@ -74,6 +88,16 @@ def result(request, user_id):
     context = {
         "user_input": user_input,
         "birth_result": birth_result,
+
+        # ราศีวัน
+        "day_up": day_up,
+        "day_down": day_down,
+
+        # ราศีปี
+        "year_up": year_up,
+        "year_down": year_down,
+
+        # ความหมายราศีบน
         "element_meaning": element_meaning,
     }
 
