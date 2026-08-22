@@ -422,6 +422,29 @@
 
                         <div class="bazi-cell">
 
+                            {% if birth_result.month_down %}
+
+
+                                {% if birth_result.month_down.zh %}
+
+                                    <span class="bazi-zh">
+                                        {{ birth_result.month_down.zh }}
+                                    </span>
+
+                                {% endif %}
+
+
+                                {% if birth_result.month_down.th %}
+
+                                    <span class="bazi-th">
+                                        {{ birth_result.month_down.th }}
+                                    </span>
+
+                                {% endif %}
+
+
+                            {% endif %}
+
                         </div>
 
 

@@ -59,6 +59,12 @@ def result(request, user_id):
     day_down = birth_result.get("day_down")
 
     # =========================
+    # ราศีเดือน
+    # =========================
+
+    month_down = birth_result.get("month_down")
+
+    # =========================
     # ราศีปี
     # =========================
 
@@ -89,15 +95,30 @@ def result(request, user_id):
         "user_input": user_input,
         "birth_result": birth_result,
 
+        # -------------------------
         # ราศีวัน
+        # -------------------------
+
         "day_up": day_up,
         "day_down": day_down,
 
+        # -------------------------
+        # ราศีเดือน
+        # -------------------------
+
+        "month_down": month_down,
+
+        # -------------------------
         # ราศีปี
+        # -------------------------
+
         "year_up": year_up,
         "year_down": year_down,
 
+        # -------------------------
         # ความหมายราศีบน
+        # -------------------------
+
         "element_meaning": element_meaning,
     }
 
