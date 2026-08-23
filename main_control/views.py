@@ -62,6 +62,7 @@ def result(request, user_id):
     # ราศีเดือน
     # =========================
 
+    month_up = birth_result.get("month_up")
     month_down = birth_result.get("month_down")
 
     # =========================
@@ -106,6 +107,7 @@ def result(request, user_id):
         # ราศีเดือน
         # -------------------------
 
+        "month_up": month_up,
         "month_down": month_down,
 
         # -------------------------
@@ -127,3 +129,4 @@ def result(request, user_id):
         "result.html",
         context
     )
+

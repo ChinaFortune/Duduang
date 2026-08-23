@@ -83,23 +83,40 @@ def calculate_birth_date(user_input):
     # Index เดือน
     # =========================
     #
-    # ตรวจสอบวันเดือนเกิดกับ
-    # data.table_rasi_month
+    # ขั้นตอน:
     #
-    # ตัวอย่าง:
-    #
-    # start = (12, 8)
-    # end   = (1, 5)
-    #
-    # หมายถึง:
-    # 8 ธันวาคม ถึง 5 มกราคม
+    # 1. แปลง ค.ศ. เป็น พ.ศ.
+    # 2. ดูเลขท้ายของ พ.ศ.
+    # 3. ใช้เลขท้ายเลือกหลักในตารางราศีเดือนบน
+    # 4. ใช้วันและเดือนหาแถวจาก table_rasi_month_down
+    # 5. ช่องบนของแถวนั้น = ราศีเดือนบน
+    # 6. ช่องล่างของแถวนั้น = ราศีเดือนล่าง
     #
     # =========================
+
+    month_up_index = None
+    month_up_result = None
 
     month_down_index = None
     month_down_result = None
 
-    for month_data in data.table_rasi_month:
+    # =========================
+    # แปลง ค.ศ. เป็น พ.ศ.
+    # =========================
+
+    buddhist_year = year + 543
+
+    # =========================
+    # เลขท้ายของปี พ.ศ.
+    # =========================
+
+    buddhist_year_last_digit = buddhist_year % 10
+
+    # =========================
+    # หาแถวจากวัน / เดือนเกิด
+    # =========================
+
+    for index, month_data in enumerate(data.table_rasi_month_down):
 
         start_month, start_day = month_data["start"]
         end_month, end_day = month_data["end"]
@@ -117,14 +134,34 @@ def calculate_birth_date(user_input):
 
             if start_point <= birth_point <= end_point:
 
+                # -------------------------
+                # ราศีเดือนล่าง
+                # -------------------------
+
                 month_down_zh = month_data["zh"]
 
-                for index, rasi in enumerate(data.rasi_down):
+                for rasi_index, rasi in enumerate(data.rasi_down):
 
                     if rasi["zh"] == month_down_zh:
 
-                        month_down_index = index
+                        month_down_index = rasi_index
                         month_down_result = rasi
+                        break
+
+                # -------------------------
+                # ราศีเดือนบน
+                # -------------------------
+
+                month_up_zh = data.table_rasi_month_up[index][
+                    buddhist_year_last_digit
+                ]
+
+                for rasi_index, rasi in enumerate(data.rasi_up):
+
+                    if rasi["zh"] == month_up_zh:
+
+                        month_up_index = rasi_index
+                        month_up_result = rasi
                         break
 
                 break
@@ -146,14 +183,34 @@ def calculate_birth_date(user_input):
                 (month < end_month)
             ):
 
+                # -------------------------
+                # ราศีเดือนล่าง
+                # -------------------------
+
                 month_down_zh = month_data["zh"]
 
-                for index, rasi in enumerate(data.rasi_down):
+                for rasi_index, rasi in enumerate(data.rasi_down):
 
                     if rasi["zh"] == month_down_zh:
 
-                        month_down_index = index
+                        month_down_index = rasi_index
                         month_down_result = rasi
+                        break
+
+                # -------------------------
+                # ราศีเดือนบน
+                # -------------------------
+
+                month_up_zh = data.table_rasi_month_up[index][
+                    buddhist_year_last_digit
+                ]
+
+                for rasi_index, rasi in enumerate(data.rasi_up):
+
+                    if rasi["zh"] == month_up_zh:
+
+                        month_up_index = rasi_index
+                        month_up_result = rasi
                         break
 
                 break
@@ -183,6 +240,9 @@ def calculate_birth_date(user_input):
         # -------------------------
         # Month
         # -------------------------
+
+        "month_up_index": month_up_index,
+        "month_up": month_up_result,
 
         "month_down_index": month_down_index,
         "month_down": month_down_result,
