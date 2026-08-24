@@ -26,7 +26,7 @@ document.addEventListener(
            MOUSE PARALLAX
            
            ทำให้หยินหยางด้านหลังขยับตามเมาส์
-           เล็กน้อย เพื่อให้ดูมี depth
+           พร้อมเอียงเล็กน้อยเพื่อเพิ่ม depth
         ================================================= */
 
         let targetX = 0;
@@ -95,14 +95,15 @@ document.addEventListener(
 
                     /*
                        จำกัดระยะการเคลื่อนที่
+                       ให้ดูเหมือนวัตถุอยู่ด้านหลัง
                     */
 
                     const moveX =
-                        currentX * 10;
+                        currentX * 18;
 
 
                     const moveY =
-                        currentY * 10;
+                        currentY * 18;
 
 
                     yinYang.style.setProperty(
@@ -114,6 +115,31 @@ document.addEventListener(
                     yinYang.style.setProperty(
                         "--parallax-y",
                         `${moveY}px`
+                    );
+
+
+                    /*
+                       เอียงตามเมาส์เล็กน้อย
+                       เพื่อเพิ่มความรู้สึก depth
+                    */
+
+                    const tiltX =
+                        currentY * -3.5;
+
+
+                    const tiltY =
+                        currentX * 3.5;
+
+
+                    yinYang.style.setProperty(
+                        "--tilt-x",
+                        `${tiltX}deg`
+                    );
+
+
+                    yinYang.style.setProperty(
+                        "--tilt-y",
+                        `${tiltY}deg`
                     );
 
 
@@ -144,13 +170,15 @@ document.addEventListener(
                     document.hidden
                 ) {
 
-                    yinYang.style.animationPlayState =
-                        "paused";
+                    yinYang.classList.add(
+                        "is-paused"
+                    );
 
                 } else {
 
-                    yinYang.style.animationPlayState =
-                        "running";
+                    yinYang.classList.remove(
+                        "is-paused"
+                    );
 
                 }
 

@@ -212,11 +212,11 @@
                     </span>
 
                     <h2>
-                        ดวง 8 ตัว (ยังไม่ถูก 100%)
+                        ดวง 8 ตัว
                     </h2>
 
                     <p>
-                        ยังไม่ได้กำหนด วันและเวลาที่แน่นอน ให้กับการเปลี่ยน index
+                        ยังไม่ได้กำหนดวันและเวลาที่แน่นอนให้กับการเปลี่ยน index
                     </p>
 
                 </div>
@@ -276,33 +276,36 @@
 
                         <!-- ยาม -->
 
-                        <div class="bazi-cell">
+                        <div
+                            class="bazi-cell"
+                            style="--rasi-color: {{ birth_result.hour.up.color }};"
+                        >
 
-                            {% if birth_result.hour_up %}
+                            {% if birth_result.hour.up.result %}
 
 
-                                {% if birth_result.hour_up.zh %}
+                                {% if birth_result.hour.up.result.zh %}
 
                                     <span class="bazi-zh">
-                                        {{ birth_result.hour_up.zh }}
+                                        {{ birth_result.hour.up.result.zh }}
                                     </span>
 
                                 {% endif %}
 
 
-                                {% if birth_result.hour_up.th %}
+                                {% if birth_result.hour.up.result.th %}
 
                                     <span class="bazi-th">
-                                        {{ birth_result.hour_up.th }}
+                                        {{ birth_result.hour.up.result.th }}
                                     </span>
 
                                 {% endif %}
 
 
-                                {% if birth_result.hour_up.symbol %}
+                                {% if birth_result.hour.up.result.symbol %}
 
                                     <span class="bazi-symbol">
-                                        {{ birth_result.hour_up.symbol }}
+                                        {{ birth_result.hour.up.result.symbol }}
                                     </span>
 
                                 {% endif %}
@@ -315,33 +318,36 @@
 
                         <!-- ดิถี -->
 
-                        <div class="bazi-cell">
+                        <div
+                            class="bazi-cell"
+                            style="--rasi-color: {{ birth_result.day.up.color }};"
+                        >
 
-                            {% if birth_result.day_up %}
+                            {% if birth_result.day.up.result %}
 
 
-                                {% if birth_result.day_up.zh %}
+                                {% if birth_result.day.up.result.zh %}
 
                                     <span class="bazi-zh">
-                                        {{ birth_result.day_up.zh }}
+                                        {{ birth_result.day.up.result.zh }}
                                     </span>
 
                                 {% endif %}
 
 
-                                {% if birth_result.day_up.th %}
+                                {% if birth_result.day.up.result.th %}
 
                                     <span class="bazi-th">
-                                        {{ birth_result.day_up.th }}
+                                        {{ birth_result.day.up.result.th }}
                                     </span>
 
                                 {% endif %}
 
 
-                                {% if birth_result.day_up.symbol %}
+                                {% if birth_result.day.up.result.symbol %}
 
                                     <span class="bazi-symbol">
-                                        {{ birth_result.day_up.symbol }}
+                                        {{ birth_result.day.up.result.symbol }}
                                     </span>
 
                                 {% endif %}
@@ -354,33 +360,36 @@
 
                         <!-- เดือน -->
 
-                        <div class="bazi-cell">
+                        <div
+                            class="bazi-cell"
+                            style="--rasi-color: {{ birth_result.month.up.color }};"
+                        >
 
-                            {% if birth_result.month_up %}
+                            {% if birth_result.month.up.result %}
 
 
-                                {% if birth_result.month_up.zh %}
+                                {% if birth_result.month.up.result.zh %}
 
                                     <span class="bazi-zh">
-                                        {{ birth_result.month_up.zh }}
+                                        {{ birth_result.month.up.result.zh }}
                                     </span>
 
                                 {% endif %}
 
 
-                                {% if birth_result.month_up.th %}
+                                {% if birth_result.month.up.result.th %}
 
                                     <span class="bazi-th">
-                                        {{ birth_result.month_up.th }}
+                                        {{ birth_result.month.up.result.th }}
                                     </span>
 
                                 {% endif %}
 
 
-                                {% if birth_result.month_up.symbol %}
+                                {% if birth_result.month.up.result.symbol %}
 
                                     <span class="bazi-symbol">
-                                        {{ birth_result.month_up.symbol }}
+                                        {{ birth_result.month.up.result.symbol }}
                                     </span>
 
                                 {% endif %}
@@ -393,33 +402,36 @@
 
                         <!-- ปี -->
 
-                        <div class="bazi-cell">
+                        <div
+                            class="bazi-cell"
+                            style="--rasi-color: {{ birth_result.year.up.color }};"
+                        >
 
-                            {% if birth_result.year_up %}
+                            {% if birth_result.year.up.result %}
 
 
-                                {% if birth_result.year_up.zh %}
+                                {% if birth_result.year.up.result.zh %}
 
                                     <span class="bazi-zh">
-                                        {{ birth_result.year_up.zh }}
+                                        {{ birth_result.year.up.result.zh }}
                                     </span>
 
                                 {% endif %}
 
 
-                                {% if birth_result.year_up.th %}
+                                {% if birth_result.year.up.result.th %}
 
                                     <span class="bazi-th">
-                                        {{ birth_result.year_up.th }}
+                                        {{ birth_result.year.up.result.th }}
                                     </span>
 
                                 {% endif %}
 
 
-                                {% if birth_result.year_up.symbol %}
+                                {% if birth_result.year.up.result.symbol %}
 
                                     <span class="bazi-symbol">
-                                        {{ birth_result.year_up.symbol }}
+                                        {{ birth_result.year.up.result.symbol }}
                                     </span>
 
                                 {% endif %}
@@ -449,22 +461,22 @@
 
                         <div class="bazi-cell">
 
-                            {% if birth_result.hour_down %}
+                            {% if birth_result.hour.down.result %}
 
 
-                                {% if birth_result.hour_down.zh %}
+                                {% if birth_result.hour.down.result.zh %}
 
                                     <span class="bazi-zh">
-                                        {{ birth_result.hour_down.zh }}
+                                        {{ birth_result.hour.down.result.zh }}
                                     </span>
 
                                 {% endif %}
 
 
-                                {% if birth_result.hour_down.th %}
+                                {% if birth_result.hour.down.result.th %}
 
                                     <span class="bazi-th">
-                                        {{ birth_result.hour_down.th }}
+                                        {{ birth_result.hour.down.result.th }}
                                     </span>
 
                                 {% endif %}
@@ -479,22 +491,22 @@
 
                         <div class="bazi-cell">
 
-                            {% if birth_result.day_down %}
+                            {% if birth_result.day.down.result %}
 
 
-                                {% if birth_result.day_down.zh %}
+                                {% if birth_result.day.down.result.zh %}
 
                                     <span class="bazi-zh">
-                                        {{ birth_result.day_down.zh }}
+                                        {{ birth_result.day.down.result.zh }}
                                     </span>
 
                                 {% endif %}
 
 
-                                {% if birth_result.day_down.th %}
+                                {% if birth_result.day.down.result.th %}
 
                                     <span class="bazi-th">
-                                        {{ birth_result.day_down.th }}
+                                        {{ birth_result.day.down.result.th }}
                                     </span>
 
                                 {% endif %}
@@ -509,22 +521,22 @@
 
                         <div class="bazi-cell">
 
-                            {% if birth_result.month_down %}
+                            {% if birth_result.month.down.result %}
 
 
-                                {% if birth_result.month_down.zh %}
+                                {% if birth_result.month.down.result.zh %}
 
                                     <span class="bazi-zh">
-                                        {{ birth_result.month_down.zh }}
+                                        {{ birth_result.month.down.result.zh }}
                                     </span>
 
                                 {% endif %}
 
 
-                                {% if birth_result.month_down.th %}
+                                {% if birth_result.month.down.result.th %}
 
                                     <span class="bazi-th">
-                                        {{ birth_result.month_down.th }}
+                                        {{ birth_result.month.down.result.th }}
                                     </span>
 
                                 {% endif %}
@@ -539,22 +551,22 @@
 
                         <div class="bazi-cell">
 
-                            {% if birth_result.year_down %}
+                            {% if birth_result.year.down.result %}
 
 
-                                {% if birth_result.year_down.zh %}
+                                {% if birth_result.year.down.result.zh %}
 
                                     <span class="bazi-zh">
-                                        {{ birth_result.year_down.zh }}
+                                        {{ birth_result.year.down.result.zh }}
                                     </span>
 
                                 {% endif %}
 
 
-                                {% if birth_result.year_down.th %}
+                                {% if birth_result.year.down.result.th %}
 
                                     <span class="bazi-th">
-                                        {{ birth_result.year_down.th }}
+                                        {{ birth_result.year.down.result.th }}
                                     </span>
 
                                 {% endif %}
@@ -643,9 +655,9 @@
 
                 <h2 id="meaningTitle">
 
-                    {% if element_meaning %}
+                    {% if birth_result.day.up.meaning %}
 
-                        ความหมายของ {{ element_meaning.title }}
+                        ความหมายของ {{ birth_result.day.up.meaning.title }}
 
                     {% else %}
 
@@ -670,63 +682,79 @@
         </div>
 
 
-        <!-- =================================================
-             Modal Content
-        ================================================== -->
+        <!-- Modal Content -->
 
         <div class="modal-content">
 
 
-            {% if element_meaning %}
+            {% if birth_result.day.up.meaning %}
 
 
-                <!-- =========================
-                     GOOD
-                ========================== -->
+                <!-- GOOD -->
 
                 <div class="meaning-block">
 
-                    <h3>
-                        ข้อดี
-                    </h3>
+                    <div class="meaning-block-icon">
+                        ✓
+                    </div>
 
-                    <p>
-                        {{ element_meaning.good }}
-                    </p>
+                    <div>
+
+                        <h3>
+                            ข้อดี
+                        </h3>
+
+                        <p>
+                            {{ birth_result.day.up.meaning.good }}
+                        </p>
+
+                    </div>
 
                 </div>
 
 
-                <!-- =========================
-                     BAD
-                ========================== -->
+                <!-- BAD -->
 
                 <div class="meaning-block">
 
-                    <h3>
-                        ข้อเสีย
-                    </h3>
+                    <div class="meaning-block-icon bad">
+                        !
+                    </div>
 
-                    <p>
-                        {{ element_meaning.bad }}
-                    </p>
+                    <div>
+
+                        <h3>
+                            ข้อเสีย
+                        </h3>
+
+                        <p>
+                            {{ birth_result.day.up.meaning.bad }}
+                        </p>
+
+                    </div>
 
                 </div>
 
 
-                <!-- =========================
-                     ADVICE
-                ========================== -->
+                <!-- ADVICE -->
 
                 <div class="meaning-block">
 
-                    <h3>
-                        คำแนะนำ
-                    </h3>
+                    <div class="meaning-block-icon advice">
+                        ✦
+                    </div>
 
-                    <p>
-                        {{ element_meaning.advice }}
-                    </p>
+                    <div>
+
+                        <h3>
+                            คำแนะนำ
+                        </h3>
+
+                        <p>
+                            {{ birth_result.day.up.meaning.advice }}
+                        </p>
+
+                    </div>
 
                 </div>
 
@@ -734,19 +762,25 @@
             {% else %}
 
 
-                <!-- =========================
-                     NO DATA
-                ========================== -->
+                <!-- NO DATA -->
 
                 <div class="meaning-block">
 
-                    <h3>
-                        ยังไม่มีข้อมูล
-                    </h3>
+                    <div class="meaning-block-icon advice">
+                        ✦
+                    </div>
 
-                    <p>
-                        ยังไม่พบข้อมูลความหมายของธาตุนี้
-                    </p>
+                    <div>
+
+                        <h3>
+                            ยังไม่มีข้อมูล
+                        </h3>
+
+                        <p>
+                            ยังไม่พบข้อมูลความหมายของธาตุนี้
+                        </p>
+
+                    </div>
 
                 </div>
 
@@ -757,9 +791,7 @@
         </div>
 
 
-        <!-- =================================================
-             Modal Footer
-        ================================================== -->
+        <!-- Modal Footer -->
 
         <div class="modal-footer">
 

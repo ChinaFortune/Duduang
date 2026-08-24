@@ -3,9 +3,16 @@
 ========================================================= */
 
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
+
+/* =========================================================
+   BODY / PAGE BACKGROUND
+   ใช้ background เดียวกับ home.css
+========================================================= */
 
 html,
 body {
@@ -13,25 +20,26 @@ body {
     width: 100%;
     height: 100%;
 
-    margin: 0;
-
-    overflow: hidden;
-
 }
 
 
 body {
 
-    font-family: Arial, sans-serif;
+    min-height: 100vh;
 
-    color: #2f2419;
+    overflow: hidden;
+
+    font-family:
+        "Noto Sans Thai",
+        "Segoe UI",
+        sans-serif;
+
+    color: #234333;
 
     background:
-        linear-gradient(
-            135deg,
-            #f5efe3,
-            #e8dcc8
-        );
+        url("../images/background_result.jpg")
+        center / cover
+        no-repeat fixed;
 
 }
 
@@ -66,30 +74,56 @@ body {
     position: relative;
 
     width: 100%;
-
     max-width: 1180px;
 
     height: calc(100vh - 48px);
-
     max-height: 760px;
 
     display: flex;
-
     flex-direction: column;
 
     padding: 34px 40px;
 
-    background: #fffaf2;
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.88
+        );
 
-    border-radius: 26px;
+    border:
+        1px solid
+        rgba(
+            22,
+            163,
+            74,
+            0.18
+        );
+
+    border-radius: 30px;
 
     box-shadow:
-        0 20px 50px rgba(
-            60,
-            40,
-            20,
-            0.15
-        );
+        0 20px 60px
+        rgba(
+            21,
+            128,
+            61,
+            0.14
+        ),
+
+        0 4px 20px
+        rgba(
+            255,
+            255,
+            255,
+            0.85
+        )
+        inset;
+
+    backdrop-filter: blur(18px);
+
+    -webkit-backdrop-filter: blur(18px);
 
     overflow: hidden;
 
@@ -110,58 +144,66 @@ body {
     z-index: 10;
 
     min-width: 175px;
-
-    min-height: 48px;
+    min-height: 46px;
 
     display: inline-flex;
 
     align-items: center;
-
     justify-content: center;
 
-    gap: 10px;
+    gap: 9px;
 
-    padding: 0 20px 0 14px;
+    padding: 0 18px 0 12px;
 
-    border: 1px solid #d4b992;
+    border:
+        1px solid
+        rgba(
+            151,
+            176,
+            160,
+            0.45
+        );
 
     border-radius: 14px;
 
     background:
-        linear-gradient(
-            135deg,
-            #fffaf2,
-            #f3e6d3
+        rgba(
+            248,
+            252,
+            249,
+            0.88
         );
 
-    color: #684722;
+    color: #294536;
 
     text-decoration: none;
 
     font-family: inherit;
 
-    font-size: 15px;
-
-    font-weight: 700;
-
-    letter-spacing: 0.2px;
+    font-size: 14px;
+    font-weight: 600;
 
     line-height: 1;
 
     box-shadow:
-        0 6px 16px rgba(
-            80,
-            55,
-            25,
-            0.12
+        0 6px 18px
+        rgba(
+            22,
+            101,
+            52,
+            0.08
         );
 
+    backdrop-filter: blur(10px);
+
+    -webkit-backdrop-filter: blur(10px);
+
     transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        color 0.2s ease,
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+        transform 0.25s ease,
+        background 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
 
 }
 
@@ -173,19 +215,20 @@ body {
     background:
         linear-gradient(
             135deg,
-            #9b703c,
-            #c09252
+            #166534,
+            #15803d
         );
 
-    border-color: #9b703c;
+    border-color: #15803d;
 
-    color: #ffffff;
+    color: white;
 
     box-shadow:
-        0 10px 22px rgba(
-            120,
-            80,
-            35,
+        0 10px 24px
+        rgba(
+            22,
+            163,
+            74,
             0.22
         );
 
@@ -196,25 +239,19 @@ body {
 
     transform: translateY(0);
 
-    box-shadow:
-        0 5px 12px rgba(
-            120,
-            80,
-            35,
-            0.18
-        );
-
 }
 
 
 .back-home-button:focus-visible {
 
-    outline: 3px solid rgba(
-        164,
-        124,
-        69,
-        0.35
-    );
+    outline:
+        3px solid
+        rgba(
+            22,
+            163,
+            74,
+            0.20
+        );
 
     outline-offset: 3px;
 
@@ -227,34 +264,37 @@ body {
 
 .back-home-icon {
 
-    width: 30px;
-
-    height: 30px;
+    width: 29px;
+    height: 29px;
 
     flex-shrink: 0;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     border-radius: 50%;
 
-    background: #ead9bf;
+    background:
+        rgba(
+            22,
+            163,
+            74,
+            0.10
+        );
 
-    color: #805a31;
+    color: #15803d;
 
-    font-size: 20px;
-
-    font-weight: 700;
+    font-size: 19px;
+    font-weight: 600;
 
     line-height: 1;
 
     transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
 
 }
 
@@ -266,10 +306,10 @@ body {
             255,
             255,
             255,
-            0.2
+            0.18
         );
 
-    color: #ffffff;
+    color: white;
 
     transform: translateX(-3px);
 
@@ -286,7 +326,7 @@ body {
 
     text-align: center;
 
-    margin-bottom: 28px;
+    margin-bottom: 25px;
 
 }
 
@@ -295,35 +335,45 @@ body {
 
     display: block;
 
-    font-size: 12px;
+    margin-bottom: 7px;
+
+    color: #15803d;
+
+    font-size: 11px;
+
+    font-weight: 600;
 
     letter-spacing: 3px;
-
-    color: #a47c45;
 
 }
 
 
 .header h1 {
 
-    margin: 8px 0;
+    margin: 0;
 
-    font-size: 32px;
+    color: #123524;
 
-    line-height: 1.2;
+    font-size: 31px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.5px;
+
+    line-height: 1.3;
 
 }
 
 
 .header p {
 
-    margin: 0;
+    margin-top: 7px;
 
-    color: #8a7967;
+    color: #708276;
 
-    font-size: 14px;
+    font-size: 13px;
 
-    line-height: 1.4;
+    line-height: 1.6;
 
 }
 
@@ -344,7 +394,7 @@ body {
         40%
         60%;
 
-    gap: 24px;
+    gap: 20px;
 
 }
 
@@ -355,7 +405,7 @@ body {
 
 .section-header {
 
-    margin-bottom: 18px;
+    margin-bottom: 17px;
 
 }
 
@@ -366,11 +416,13 @@ body {
 
     margin-bottom: 6px;
 
+    color: #16a34a;
+
     font-size: 10px;
 
-    letter-spacing: 2px;
+    font-weight: 600;
 
-    color: #a47c45;
+    letter-spacing: 2.5px;
 
 }
 
@@ -379,9 +431,11 @@ body {
 
     margin: 0;
 
-    color: #3b2b1c;
+    color: #123524;
 
     font-size: 23px;
+
+    font-weight: 600;
 
     line-height: 1.3;
 
@@ -392,11 +446,11 @@ body {
 
     margin: 6px 0 0;
 
-    color: #8a7967;
+    color: #708276;
 
-    font-size: 14px;
+    font-size: 12px;
 
-    line-height: 1.4;
+    line-height: 1.6;
 
 }
 
@@ -408,22 +462,47 @@ body {
 .input-section {
 
     min-width: 0;
-
     height: 100%;
 
-    padding: 30px;
-
-    background: #f8f1e7;
-
-    border: 1px solid #eadfce;
-
-    border-radius: 20px;
+    padding: 25px;
 
     display: flex;
 
     flex-direction: column;
 
     justify-content: center;
+
+    background:
+        rgba(
+            248,
+            252,
+            249,
+            0.76
+        );
+
+    border:
+        1px solid
+        rgba(
+            151,
+            176,
+            160,
+            0.35
+        );
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(
+            22,
+            101,
+            52,
+            0.05
+        );
+
+    backdrop-filter: blur(12px);
+
+    -webkit-backdrop-filter: blur(12px);
 
 }
 
@@ -438,36 +517,86 @@ body {
 
     flex-direction: column;
 
-    gap: 12px;
+    gap: 11px;
 
 }
 
 
 /* =========================================================
-   INPUT ITEM
+   RESULT ITEM
 ========================================================= */
 
 .result-item {
 
     width: 100%;
 
-    min-height: 64px;
+    min-height: 62px;
 
     display: flex;
 
     align-items: center;
-
     justify-content: space-between;
 
-    gap: 20px;
+    gap: 18px;
 
-    padding: 14px 18px;
+    padding: 13px 16px;
 
-    background: #fffaf2;
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.88
+        );
 
-    border: 1px solid #eadfce;
+    border:
+        1px solid
+        rgba(
+            151,
+            176,
+            160,
+            0.38
+        );
 
     border-radius: 13px;
+
+    box-shadow:
+        0 4px 14px
+        rgba(
+            22,
+            101,
+            52,
+            0.035
+        );
+
+    transition:
+        border-color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+
+
+.result-item:hover {
+
+    transform: translateY(-1px);
+
+    border-color:
+        rgba(
+            22,
+            163,
+            74,
+            0.40
+        );
+
+    box-shadow:
+        0 7px 18px
+        rgba(
+            22,
+            163,
+            74,
+            0.07
+        );
 
 }
 
@@ -478,11 +607,11 @@ body {
 
 .label {
 
-    flex: 0 0 125px;
+    flex: 0 0 120px;
 
-    color: #8a7967;
+    color: #708276;
 
-    font-size: 14px;
+    font-size: 13px;
 
     line-height: 1.4;
 
@@ -499,9 +628,9 @@ body {
 
     min-width: 0;
 
-    color: #2f2419;
+    color: #234333;
 
-    font-size: 15px;
+    font-size: 14px;
 
     font-weight: 600;
 
@@ -525,27 +654,56 @@ body {
 .output-section {
 
     min-width: 0;
-
     height: 100%;
 
-    padding: 30px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #f8f0e2,
-            #efe2cc
-        );
-
-    border: 1px solid #e0ccb0;
-
-    border-radius: 20px;
+    padding: 25px;
 
     display: flex;
 
     flex-direction: column;
 
     justify-content: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(
+                240,
+                253,
+                244,
+                0.90
+            ),
+            rgba(
+                220,
+                252,
+                231,
+                0.72
+            )
+        );
+
+    border:
+        1px solid
+        rgba(
+            22,
+            163,
+            74,
+            0.20
+        );
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(
+            22,
+            101,
+            52,
+            0.06
+        );
+
+    backdrop-filter: blur(12px);
+
+    -webkit-backdrop-filter: blur(12px);
 
 }
 
@@ -558,21 +716,25 @@ body {
 
     text-align: center;
 
-    margin-bottom: 22px;
+    margin-bottom: 20px;
 
 }
 
 
 .output-header h2 {
 
-    font-size: 27px;
+    color: #123524;
+
+    font-size: 26px;
 
 }
 
 
 .output-header p {
 
-    font-size: 14px;
+    color: #708276;
+
+    font-size: 12px;
 
 }
 
@@ -591,18 +753,32 @@ body {
 
     overflow: hidden;
 
+    border:
+        1px solid
+        rgba(
+            134,
+            169,
+            145,
+            0.42
+        );
+
     border-radius: 16px;
 
-    border: 1px solid #d8c1a0;
-
-    background: #d8c1a0;
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.88
+        );
 
     box-shadow:
-        0 8px 20px rgba(
-            80,
-            55,
-            25,
-            0.08
+        0 8px 22px
+        rgba(
+            22,
+            101,
+            52,
+            0.07
         );
 
 }
@@ -620,13 +796,22 @@ body {
         95px
         repeat(4, 1fr);
 
-    min-height: 62px;
+    min-height: 58px;
 
     background:
         linear-gradient(
-            180deg,
-            #eee0c9,
-            #e8d8bd
+            135deg,
+            #e9f8ed,
+            #dff5e5
+        );
+
+    border-bottom:
+        1px solid
+        rgba(
+            134,
+            169,
+            145,
+            0.35
         );
 
 }
@@ -638,7 +823,6 @@ body {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     text-align: center;
@@ -648,20 +832,20 @@ body {
 
 .bazi-column-title {
 
-    color: #5f4023;
+    color: #166534;
 
-    font-size: 17px;
+    font-size: 16px;
 
-    font-weight: 700;
+    font-weight: 600;
 
 }
 
 
 .bazi-side-title {
 
-    color: #806a50;
+    color: #708276;
 
-    font-size: 13px;
+    font-size: 12px;
 
     font-weight: 600;
 
@@ -680,9 +864,29 @@ body {
         95px
         repeat(4, 1fr);
 
-    min-height: 155px;
+    min-height: 145px;
 
-    background: #fffaf2;
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.92
+        );
+
+}
+
+
+.bazi-row + .bazi-row {
+
+    border-top:
+        1px solid
+        rgba(
+            151,
+            176,
+            160,
+            0.30
+        );
 
 }
 
@@ -700,46 +904,71 @@ body {
     flex-direction: column;
 
     justify-content: center;
-
     align-items: center;
 
     text-align: center;
 
-    padding: 16px 8px;
+    padding: 14px 8px;
 
-    background: #fffaf2;
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.72
+        );
 
-    border-left: 1px solid #eadfce;
+    border-left:
+        1px solid
+        rgba(
+            151,
+            176,
+            160,
+            0.30
+        );
 
 }
 
 
 /* =========================================================
-   BAZI CHARACTER
+   BAZI CHARACTER - ราศีบน
+   ใช้สีที่ส่งมาจาก result.html
+
+   ตัวอย่าง:
+   style="--rasi-color: #22c55e;"
 ========================================================= */
 
 .bazi-zh {
 
-    color: #54371c;
+    color: var(--rasi-color, #166534);
 
     font-size: 42px;
 
-    font-weight: 700;
+    font-weight: 600;
 
     line-height: 1.1;
+
+    text-shadow:
+        0 2px 8px
+        rgba(
+            22,
+            101,
+            52,
+            0.08
+        );
 
 }
 
 
 .bazi-th {
 
-    margin-top: 8px;
+    margin-top: 7px;
 
-    color: #765a3c;
+    color: var(--rasi-color, #52705d);
 
-    font-size: 15px;
+    font-size: 14px;
 
-    font-weight: 600;
+    font-weight: 500;
 
     line-height: 1.3;
 
@@ -750,9 +979,9 @@ body {
 
     margin-top: 6px;
 
-    color: #a47c45;
+    color: var(--rasi-color, #16a34a);
 
-    font-size: 28px;
+    font-size: 27px;
 
     line-height: 1;
 
@@ -770,67 +999,68 @@ body {
     display: flex;
 
     justify-content: center;
-
     align-items: center;
 
-    margin-top: 18px;
+    margin-top: 16px;
 
 }
 
 
 .meaning-button {
 
-    position: relative;
-
-    min-width: 190px;
-
+    width: 190px;
     height: 52px;
-
-    padding: 0 22px;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     gap: 10px;
 
-    border: 0;
+    border: none;
 
-    border-radius: 14px;
-
-    cursor: pointer;
+    border-radius: 15px;
 
     background:
         linear-gradient(
             135deg,
-            #9b703c,
-            #c09252
+            #166534 0%,
+            #15803d 45%,
+            #22c55e 100%
         );
 
-    color: #ffffff;
+    color: white;
 
     font-family: inherit;
 
     font-size: 16px;
 
-    font-weight: 700;
+    font-weight: 500;
 
-    letter-spacing: 0.3px;
+    cursor: pointer;
 
     box-shadow:
-        0 8px 18px rgba(
-            120,
-            80,
-            35,
-            0.22
+        0 8px 22px
+        rgba(
+            22,
+            163,
+            74,
+            0.25
+        ),
+
+        inset 0 1px 0
+        rgba(
+            255,
+            255,
+            255,
+            0.25
         );
 
     transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
 
 }
 
@@ -839,20 +1069,24 @@ body {
 
     transform: translateY(-2px);
 
-    background:
-        linear-gradient(
-            135deg,
-            #865e2e,
-            #b17e3d
+    box-shadow:
+        0 12px 28px
+        rgba(
+            22,
+            163,
+            74,
+            0.32
+        ),
+
+        inset 0 1px 0
+        rgba(
+            255,
+            255,
+            255,
+            0.25
         );
 
-    box-shadow:
-        0 12px 24px rgba(
-            120,
-            80,
-            35,
-            0.28
-        );
+    filter: brightness(1.03);
 
 }
 
@@ -862,11 +1096,12 @@ body {
     transform: translateY(0);
 
     box-shadow:
-        0 5px 12px rgba(
-            120,
-            80,
-            35,
-            0.2
+        0 5px 15px
+        rgba(
+            22,
+            163,
+            74,
+            0.18
         );
 
 }
@@ -874,43 +1109,52 @@ body {
 
 .meaning-button:focus-visible {
 
-    outline: 3px solid rgba(
-        164,
-        124,
-        69,
-        0.35
-    );
+    outline:
+        3px solid
+        rgba(
+            22,
+            163,
+            74,
+            0.18
+        );
 
     outline-offset: 3px;
 
 }
 
 
+/* =========================================================
+   MEANING ICON
+========================================================= */
+
 .meaning-icon {
 
     width: 25px;
-
     height: 25px;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     border-radius: 50%;
 
-    background: rgba(
-        255,
-        255,
-        255,
-        0.18
-    );
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.16
+        );
 
-    font-size: 15px;
+    font-size: 14px;
 
 }
 
+
+/* =========================================================
+   MEANING ARROW
+========================================================= */
 
 .meaning-arrow {
 
@@ -919,7 +1163,7 @@ body {
     line-height: 1;
 
     transition:
-        transform 0.2s ease;
+        transform 0.25s ease;
 
 }
 
@@ -946,22 +1190,21 @@ body {
     display: flex;
 
     justify-content: center;
-
     align-items: center;
 
     padding: 30px;
 
     background:
         rgba(
-            43,
-            30,
-            18,
+            12,
+            35,
+            22,
             0.55
         );
 
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(6px);
 
-    -webkit-backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(6px);
 
     opacity: 0;
 
@@ -1001,25 +1244,46 @@ body {
 
     max-width: 680px;
 
-    max-height: calc(100vh - 60px);
+    max-height:
+        calc(
+            100vh - 60px
+        );
 
     display: flex;
 
     flex-direction: column;
 
-    background: #fffaf2;
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.96
+        );
 
-    border-radius: 22px;
+    border:
+        1px solid
+        rgba(
+            22,
+            163,
+            74,
+            0.18
+        );
 
-    border: 1px solid #e4d3b8;
+    border-radius: 24px;
 
     box-shadow:
-        0 25px 70px rgba(
+        0 25px 70px
+        rgba(
+            12,
             35,
             22,
-            12,
-            0.3
+            0.28
         );
+
+    backdrop-filter: blur(18px);
+
+    -webkit-backdrop-filter: blur(18px);
 
     overflow: hidden;
 
@@ -1053,7 +1317,6 @@ body {
     display: flex;
 
     justify-content: space-between;
-
     align-items: flex-start;
 
     gap: 20px;
@@ -1063,14 +1326,35 @@ body {
     background:
         linear-gradient(
             145deg,
-            #f8f0e2,
-            #efe2cc
+            rgba(
+                240,
+                253,
+                244,
+                0.96
+            ),
+            rgba(
+                220,
+                252,
+                231,
+                0.90
+            )
         );
 
-    border-bottom: 1px solid #e4d3b8;
+    border-bottom:
+        1px solid
+        rgba(
+            22,
+            163,
+            74,
+            0.14
+        );
 
 }
 
+
+/* =========================================================
+   MODAL KICKER
+========================================================= */
 
 .modal-kicker {
 
@@ -1078,9 +1362,11 @@ body {
 
     margin-bottom: 5px;
 
-    color: #a47c45;
+    color: #15803d;
 
     font-size: 10px;
+
+    font-weight: 600;
 
     letter-spacing: 2px;
 
@@ -1091,9 +1377,11 @@ body {
 
     margin: 0;
 
-    color: #3b2b1c;
+    color: #123524;
 
     font-size: 24px;
+
+    font-weight: 600;
 
     line-height: 1.3;
 
@@ -1107,7 +1395,6 @@ body {
 .modal-close {
 
     width: 38px;
-
     height: 38px;
 
     flex-shrink: 0;
@@ -1115,16 +1402,28 @@ body {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
-    border: 1px solid #dbc7aa;
+    border:
+        1px solid
+        rgba(
+            151,
+            176,
+            160,
+            0.45
+        );
 
     border-radius: 50%;
 
-    background: #fffaf2;
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.78
+        );
 
-    color: #765a3c;
+    color: #52705d;
 
     font-family: inherit;
 
@@ -1137,16 +1436,19 @@ body {
     transition:
         background 0.2s ease,
         color 0.2s ease,
-        transform 0.2s ease;
+        transform 0.2s ease,
+        border-color 0.2s ease;
 
 }
 
 
 .modal-close:hover {
 
-    background: #a47c45;
+    background: #16a34a;
 
-    color: #ffffff;
+    border-color: #16a34a;
+
+    color: white;
 
     transform: rotate(90deg);
 
@@ -1186,7 +1488,13 @@ body {
 
 .modal-content::-webkit-scrollbar-thumb {
 
-    background: #d4bea0;
+    background:
+        rgba(
+            22,
+            163,
+            74,
+            0.25
+        );
 
     border-radius: 10px;
 
@@ -1199,15 +1507,34 @@ body {
 
 .meaning-block {
 
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 14px;
+
     padding: 18px 20px;
 
     margin-bottom: 14px;
 
-    background: #f8f1e7;
+    background:
+        rgba(
+            248,
+            252,
+            249,
+            0.90
+        );
 
-    border: 1px solid #eadfce;
+    border:
+        1px solid
+        rgba(
+            151,
+            176,
+            160,
+            0.35
+        );
 
-    border-radius: 13px;
+    border-radius: 14px;
 
 }
 
@@ -1219,24 +1546,99 @@ body {
 }
 
 
+/* =========================================================
+   MEANING BLOCK ICON
+========================================================= */
+
+.meaning-block-icon {
+
+    width: 32px;
+    height: 32px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(
+            22,
+            163,
+            74,
+            0.11
+        );
+
+    color: #16a34a;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+}
+
+
+.meaning-block-icon.bad {
+
+    background:
+        rgba(
+            234,
+            88,
+            12,
+            0.10
+        );
+
+    color: #ea580c;
+
+}
+
+
+.meaning-block-icon.advice {
+
+    background:
+        rgba(
+            22,
+            163,
+            74,
+            0.11
+        );
+
+    color: #15803d;
+
+}
+
+
+/* =========================================================
+   MEANING BLOCK TITLE
+========================================================= */
+
 .meaning-block h3 {
 
-    margin: 0 0 8px;
+    margin: 0 0 7px;
 
-    color: #5b3d20;
+    color: #166534;
 
     font-size: 17px;
+
+    font-weight: 600;
 
     line-height: 1.3;
 
 }
 
 
+/* =========================================================
+   MEANING BLOCK TEXT
+========================================================= */
+
 .meaning-block p {
 
     margin: 0;
 
-    color: #765f47;
+    color: #627568;
 
     font-size: 14px;
 
@@ -1259,12 +1661,29 @@ body {
 
     padding: 16px 28px;
 
-    border-top: 1px solid #eadfce;
+    border-top:
+        1px solid
+        rgba(
+            151,
+            176,
+            160,
+            0.30
+        );
 
-    background: #fffaf2;
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.90
+        );
 
 }
 
+
+/* =========================================================
+   MODAL DONE BUTTON
+========================================================= */
 
 .modal-done-button {
 
@@ -1276,11 +1695,16 @@ body {
 
     border: 0;
 
-    border-radius: 10px;
+    border-radius: 11px;
 
-    background: #5b3d20;
+    background:
+        linear-gradient(
+            135deg,
+            #166534,
+            #15803d
+        );
 
-    color: #ffffff;
+    color: white;
 
     font-family: inherit;
 
@@ -1290,18 +1714,42 @@ body {
 
     cursor: pointer;
 
+    box-shadow:
+        0 6px 15px
+        rgba(
+            22,
+            163,
+            74,
+            0.16
+        );
+
     transition:
         background 0.2s ease,
-        transform 0.2s ease;
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 
 }
 
 
 .modal-done-button:hover {
 
-    background: #76512d;
+    background:
+        linear-gradient(
+            135deg,
+            #14532d,
+            #166534
+        );
 
     transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 18px
+        rgba(
+            22,
+            163,
+            74,
+            0.22
+        );
 
 }
 
@@ -1341,8 +1789,6 @@ body.modal-open {
     }
 
 
-    /* BACK HOME */
-
     .back-home-button {
 
         top: 18px;
@@ -1353,9 +1799,7 @@ body.modal-open {
 
         min-height: 44px;
 
-        padding: 0 17px 0 12px;
-
-        font-size: 14px;
+        font-size: 13px;
 
     }
 
@@ -1363,7 +1807,6 @@ body.modal-open {
     .back-home-icon {
 
         width: 27px;
-
         height: 27px;
 
         font-size: 18px;
@@ -1373,21 +1816,21 @@ body.modal-open {
 
     .header {
 
-        margin-bottom: 18px;
+        margin-bottom: 17px;
 
     }
 
 
     .header h1 {
 
-        font-size: 29px;
+        font-size: 28px;
 
     }
 
 
     .header p {
 
-        font-size: 13px;
+        font-size: 12px;
 
     }
 
@@ -1395,7 +1838,7 @@ body.modal-open {
     .input-section,
     .output-section {
 
-        padding: 22px;
+        padding: 20px;
 
     }
 
@@ -1409,16 +1852,16 @@ body.modal-open {
 
     .result-item {
 
-        min-height: 54px;
+        min-height: 53px;
 
-        padding: 11px 14px;
+        padding: 10px 13px;
 
     }
 
 
     .bazi-header {
 
-        min-height: 50px;
+        min-height: 49px;
 
     }
 
@@ -1439,7 +1882,7 @@ body.modal-open {
 
     .bazi-th {
 
-        font-size: 13px;
+        font-size: 12px;
 
     }
 
@@ -1453,7 +1896,7 @@ body.modal-open {
 
     .footer {
 
-        margin-top: 12px;
+        margin-top: 11px;
 
     }
 
@@ -1461,8 +1904,6 @@ body.modal-open {
     .meaning-button {
 
         height: 46px;
-
-        min-width: 170px;
 
         font-size: 15px;
 
@@ -1493,8 +1934,6 @@ body.modal-open {
     }
 
 
-    /* BACK HOME */
-
     .back-home-button {
 
         top: 16px;
@@ -1505,18 +1944,7 @@ body.modal-open {
 
         min-height: 44px;
 
-        font-size: 14px;
-
-    }
-
-
-    .back-home-icon {
-
-        width: 27px;
-
-        height: 27px;
-
-        font-size: 18px;
+        font-size: 13px;
 
     }
 
@@ -1527,37 +1955,31 @@ body.modal-open {
             40%
             60%;
 
-        gap: 16px;
+        gap: 14px;
 
     }
 
 
-    .input-section {
-
-        padding: 19px;
-
-    }
-
-
+    .input-section,
     .output-section {
 
-        padding: 19px;
+        padding: 18px;
 
     }
 
 
     .label {
 
-        flex-basis: 95px;
+        flex-basis: 92px;
 
-        font-size: 13px;
+        font-size: 12px;
 
     }
 
 
     .value {
 
-        font-size: 13px;
+        font-size: 12px;
 
     }
 
@@ -1582,35 +2004,35 @@ body.modal-open {
 
     .bazi-column-title {
 
-        font-size: 14px;
+        font-size: 13px;
 
     }
 
 
     .bazi-side-title {
 
-        font-size: 11px;
+        font-size: 10px;
 
     }
 
 
     .bazi-zh {
 
-        font-size: 31px;
+        font-size: 30px;
 
     }
 
 
     .bazi-th {
 
-        font-size: 11px;
+        font-size: 10px;
 
     }
 
 
     .bazi-symbol {
 
-        font-size: 20px;
+        font-size: 19px;
 
     }
 
@@ -1648,7 +2070,7 @@ body.modal-open {
 
         padding: 16px 12px;
 
-        border-radius: 18px;
+        border-radius: 20px;
 
     }
 
@@ -1667,13 +2089,13 @@ body.modal-open {
 
         min-height: 42px;
 
-        padding: 0 15px 0 10px;
+        padding: 0 14px 0 9px;
 
         gap: 8px;
 
         border-radius: 11px;
 
-        font-size: 13px;
+        font-size: 12px;
 
     }
 
@@ -1681,7 +2103,6 @@ body.modal-open {
     .back-home-icon {
 
         width: 26px;
-
         height: 26px;
 
         font-size: 17px;
@@ -1689,9 +2110,13 @@ body.modal-open {
     }
 
 
+    /* =====================
+       HEADER
+    ====================== */
+
     .header {
 
-        margin-bottom: 11px;
+        margin-bottom: 10px;
 
         padding-top: 35px;
 
@@ -1700,7 +2125,7 @@ body.modal-open {
 
     .kicker {
 
-        font-size: 9px;
+        font-size: 8px;
 
         letter-spacing: 2px;
 
@@ -1711,14 +2136,14 @@ body.modal-open {
 
         margin: 5px 0;
 
-        font-size: 23px;
+        font-size: 22px;
 
     }
 
 
     .header p {
 
-        font-size: 11px;
+        font-size: 10px;
 
     }
 
@@ -1737,7 +2162,7 @@ body.modal-open {
             auto
             1fr;
 
-        gap: 9px;
+        gap: 8px;
 
         min-height: 0;
 
@@ -1775,7 +2200,7 @@ body.modal-open {
 
     .section-header h2 {
 
-        font-size: 18px;
+        font-size: 17px;
 
     }
 
@@ -1799,7 +2224,7 @@ body.modal-open {
 
         padding: 7px 9px;
 
-        gap: 5px;
+        gap: 4px;
 
     }
 
@@ -1808,14 +2233,14 @@ body.modal-open {
 
         flex: 0 0 auto;
 
-        font-size: 10px;
+        font-size: 9px;
 
     }
 
 
     .value {
 
-        font-size: 11px;
+        font-size: 10px;
 
     }
 
@@ -1832,7 +2257,7 @@ body.modal-open {
 
         margin-left: 0;
 
-        padding: 13px;
+        padding: 12px;
 
         border-radius: 14px;
 
@@ -1841,21 +2266,21 @@ body.modal-open {
 
     .output-header {
 
-        margin-bottom: 10px;
+        margin-bottom: 9px;
 
     }
 
 
     .output-header h2 {
 
-        font-size: 21px;
+        font-size: 20px;
 
     }
 
 
     .output-header p {
 
-        font-size: 10px;
+        font-size: 9px;
 
     }
 
@@ -1901,14 +2326,14 @@ body.modal-open {
 
     .bazi-column-title {
 
-        font-size: 12px;
+        font-size: 11px;
 
     }
 
 
     .bazi-side-title {
 
-        font-size: 9px;
+        font-size: 8px;
 
     }
 
@@ -1922,7 +2347,7 @@ body.modal-open {
 
     .bazi-zh {
 
-        font-size: 27px;
+        font-size: 26px;
 
     }
 
@@ -1931,14 +2356,14 @@ body.modal-open {
 
         margin-top: 4px;
 
-        font-size: 10px;
+        font-size: 9px;
 
     }
 
 
     .bazi-symbol {
 
-        font-size: 18px;
+        font-size: 17px;
 
     }
 
@@ -1960,11 +2385,9 @@ body.modal-open {
 
         max-width: 230px;
 
-        height: 45px;
+        height: 44px;
 
-        min-width: 0;
-
-        font-size: 14px;
+        font-size: 13px;
 
         border-radius: 11px;
 
@@ -1984,9 +2407,12 @@ body.modal-open {
 
     .meaning-modal {
 
-        max-height: calc(100vh - 28px);
+        max-height:
+            calc(
+                100vh - 28px
+            );
 
-        border-radius: 17px;
+        border-radius: 18px;
 
     }
 
@@ -2000,7 +2426,7 @@ body.modal-open {
 
     .modal-header h2 {
 
-        font-size: 20px;
+        font-size: 19px;
 
     }
 
@@ -2015,7 +2441,6 @@ body.modal-open {
     .modal-close {
 
         width: 34px;
-
         height: 34px;
 
         font-size: 22px;
@@ -2036,19 +2461,31 @@ body.modal-open {
 
         margin-bottom: 10px;
 
+        gap: 11px;
+
+    }
+
+
+    .meaning-block-icon {
+
+        width: 28px;
+        height: 28px;
+
+        font-size: 13px;
+
     }
 
 
     .meaning-block h3 {
 
-        font-size: 15px;
+        font-size: 14px;
 
     }
 
 
     .meaning-block p {
 
-        font-size: 13px;
+        font-size: 12px;
 
         line-height: 1.6;
 
@@ -2086,8 +2523,6 @@ body.modal-open {
     }
 
 
-    /* BACK HOME */
-
     .back-home-button {
 
         top: 8px;
@@ -2098,11 +2533,11 @@ body.modal-open {
 
         min-height: 40px;
 
-        padding: 0 12px 0 8px;
+        padding: 0 11px 0 8px;
 
         gap: 7px;
 
-        font-size: 12px;
+        font-size: 11px;
 
     }
 
@@ -2110,7 +2545,6 @@ body.modal-open {
     .back-home-icon {
 
         width: 24px;
-
         height: 24px;
 
         font-size: 16px;
@@ -2127,7 +2561,7 @@ body.modal-open {
 
     .header h1 {
 
-        font-size: 21px;
+        font-size: 20px;
 
     }
 
@@ -2171,14 +2605,14 @@ body.modal-open {
 
     .label {
 
-        font-size: 9px;
+        font-size: 8px;
 
     }
 
 
     .value {
 
-        font-size: 10px;
+        font-size: 9px;
 
     }
 
@@ -2205,44 +2639,44 @@ body.modal-open {
 
     .bazi-column-title {
 
-        font-size: 10px;
+        font-size: 9px;
 
     }
 
 
     .bazi-side-title {
 
-        font-size: 8px;
+        font-size: 7px;
 
     }
 
 
     .bazi-zh {
 
-        font-size: 24px;
+        font-size: 23px;
 
     }
 
 
     .bazi-th {
 
-        font-size: 9px;
+        font-size: 8px;
 
     }
 
 
     .bazi-symbol {
 
-        font-size: 16px;
+        font-size: 15px;
 
     }
 
 
     .meaning-button {
 
-        height: 42px;
+        height: 41px;
 
-        font-size: 13px;
+        font-size: 12px;
 
     }
 
