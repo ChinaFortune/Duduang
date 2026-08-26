@@ -22,6 +22,22 @@
     </title>
 
     <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Noto+Serif+Thai:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
         rel="stylesheet"
         href="{% static 'css/home.css' %}"
     >
@@ -32,337 +48,685 @@
 <body>
 
 
-<div class="container">
+<div class="page">
 
 
-    <!-- ========================================
-         LEFT SECTION
-    ========================================= -->
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
-    <div class="left-section">
+    <header class="site-header">
+
+        <div class="header-inner">
 
 
-        <!-- BRAND -->
+            <!-- BRAND -->
 
-        <div class="logo">
+            <div class="brand">
 
-            <div class="logo-circle">
-                ☯
+                <div class="brand-mark">
+
+                    <span class="brand-mark-dot brand-mark-dot-light"></span>
+
+                    <span class="brand-mark-dot brand-mark-dot-dark"></span>
+
+                    <span class="brand-mark-center"></span>
+
+                </div>
+
+
+                <div class="brand-content">
+
+                    <div class="brand-name">
+                        Energy Flow
+                    </div>
+
+                    <div class="brand-subtitle">
+                        FENG SHUI
+                        &nbsp;•&nbsp;
+                        BAZI
+                        &nbsp;•&nbsp;
+                        ENERGY STRATEGY
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="logo-text">
 
-                <h1>
-                    Energy Flow
+
+            <!-- NAV -->
+
+            <nav
+                class="main-nav"
+                aria-label="Main navigation"
+            >
+
+                <button
+                    type="button"
+                    class="nav-item active"
+                >
+                    หน้าแรก
+                </button>
+
+                <button
+                    type="button"
+                    class="nav-item"
+                >
+                    บริการ
+                </button>
+
+                <button
+                    type="button"
+                    class="nav-item"
+                >
+                    บทความ
+                </button>
+
+                <button
+                    type="button"
+                    class="nav-item"
+                >
+                    เกี่ยวกับ
+                </button>
+
+            </nav>
+
+
+
+            <!-- HEADER CTA -->
+
+            <button
+                type="button"
+                class="header-cta"
+            >
+                จองปรึกษา
+            </button>
+
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section class="hero-section">
+
+
+            <!-- =============================================
+                 HERO LEFT
+            ============================================== -->
+
+            <div class="hero-content">
+
+
+                <div class="hero-eyebrow">
+
+                    <span>FENG SHUI</span>
+
+                    <i>•</i>
+
+                    <span>BAZI</span>
+
+                    <i>•</i>
+
+                    <span>ENERGY STRATEGY</span>
+
+                </div>
+
+
+                <h1 class="hero-title">
+
+                    <span>
+                        อ่านพลังงานให้เป็น
+                    </span>
+
+                    <strong>
+                        เห็นทางตัดสินใจที่ชัดขึ้น
+                    </strong>
+
                 </h1>
 
-                <p>
-                    ดูดวง • เข้าใจชีวิต • เปลี่ยนอนาคต
+
+                <p class="hero-description">
+
+                    วิเคราะห์ดวงจีนและพลังงานรอบตัว
+                    เพื่อวางจังหวะชีวิต การเงิน
+                    และธุรกิจอย่างมีหลักการ
+
                 </p>
+
+
+                <!-- ACTIONS -->
+
+                <div class="hero-actions">
+
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                    >
+                        จองปรึกษาส่วนตัว
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                    >
+                        ดูบริการทั้งหมด
+                    </button>
+
+                </div>
+
+
+                <!-- FEATURES -->
+
+                <div class="hero-features">
+
+                    <div class="hero-feature">
+
+                        <span class="feature-dot"></span>
+
+                        <span>
+                            วิเคราะห์เป็นระบบ
+                        </span>
+
+                    </div>
+
+
+                    <div class="hero-feature">
+
+                        <span class="feature-dot"></span>
+
+                        <span>
+                            ไม่ใช้สูตรมงคล
+                        </span>
+
+                    </div>
+
+
+                    <div class="hero-feature">
+
+                        <span class="feature-dot"></span>
+
+                        <span>
+                            อธิบายเข้าใจง่าย
+                        </span>
+
+                    </div>
+
+                </div>
+
 
             </div>
 
-        </div>
 
 
-        <!-- CHINESE QUOTE -->
+            <!-- =============================================
+                 CALCULATOR
+            ============================================== -->
 
-        <div class="quote-chinese">
+            <div class="calculator-area">
 
-            <span>
-                知<br>
-                命<br>
-                不<br>
-                惑
-            </span>
-
-            <span>
-                日<br>
-                日<br>
-                是<br>
-                好<br>
-                日
-            </span>
-
-        </div>
+                <div class="calculator-card">
 
 
-        <!-- DESCRIPTION -->
+                    <div class="calculator-header">
 
-        <p class="description">
+                        <span class="calculator-kicker">
+                            DESTINY ANALYSIS
+                        </span>
 
-            When Yin and Yang are in harmony,
-            destiny flows in your favor.
+                        <h2>
+                            คำนวณดวงจีนของคุณ
+                        </h2>
 
-        </p>
+                        <p>
+                            กรอกข้อมูลเพื่อสร้างแผนพลังงานเฉพาะบุคคล
+                        </p>
 
-
-    </div>
-
-
-    <!-- ========================================
-         RIGHT SECTION
-    ========================================= -->
-
-    <div class="right-section">
+                    </div>
 
 
-        <div class="card">
+
+                    <!-- FORM -->
+
+                    <form
+                        class="destiny-form"
+                        method="POST"
+                        action="{% url 'home' %}"
+                    >
+
+                        {% csrf_token %}
 
 
-            <!-- FORM HEADER -->
+                        <!-- NAME / GENDER -->
 
-            <div class="form-header">
+                        <div class="form-row form-row-name-gender">
 
-                <span class="form-kicker">
-                    DESTINY JOURNEY
+
+                            <div class="form-field">
+
+                                <label for="fullName">
+                                    ชื่อ-นามสกุล
+                                </label>
+
+                                <div class="input-box">
+
+                                    <input
+                                        type="text"
+                                        id="fullName"
+                                        name="fullName"
+                                        placeholder="ระบุชื่อ-นามสกุล"
+                                        autocomplete="name"
+                                        required
+                                    >
+
+                                    <span class="input-icon">
+
+                                        <svg
+                                            viewBox="0 0 24 24"
+                                            aria-hidden="true"
+                                        >
+
+                                            <circle
+                                                cx="12"
+                                                cy="8"
+                                                r="3.5"
+                                            ></circle>
+
+                                            <path
+                                                d="M5 20c0-3.5 3.1-5.5 7-5.5s7 2 7 5.5"
+                                            ></path>
+
+                                        </svg>
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="form-field gender-field">
+
+                                <label>
+                                    เพศ
+                                </label>
+
+                                <div class="gender-toggle">
+
+
+                                    <label class="gender-option">
+
+                                        <input
+                                            type="radio"
+                                            name="gender"
+                                            value="female"
+                                            required
+                                        >
+
+                                        <span>
+                                            หญิง
+                                        </span>
+
+                                    </label>
+
+
+                                    <label class="gender-option">
+
+                                        <input
+                                            type="radio"
+                                            name="gender"
+                                            value="male"
+                                        >
+
+                                        <span>
+                                            ชาย
+                                        </span>
+
+                                    </label>
+
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- DATE / TIME -->
+
+                        <div class="form-row form-row-birth">
+
+
+                            <div class="form-field">
+
+                                <label for="birthDate">
+                                    วันเดือนปีเกิด
+                                </label>
+
+                                <div class="input-box">
+
+                                    <input
+                                        type="date"
+                                        id="birthDate"
+                                        name="birthDate"
+                                        required
+                                    >
+
+                                    <span class="input-icon">
+
+                                        <svg
+                                            viewBox="0 0 24 24"
+                                            aria-hidden="true"
+                                        >
+
+                                            <rect
+                                                x="3"
+                                                y="5"
+                                                width="18"
+                                                height="16"
+                                                rx="2"
+                                            ></rect>
+
+                                            <path d="M8 3v4"></path>
+
+                                            <path d="M16 3v4"></path>
+
+                                            <path d="M3 10h18"></path>
+
+                                        </svg>
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="form-field">
+
+                                <label for="birthTime">
+                                    เวลาเกิด
+                                </label>
+
+                                <div class="input-box">
+
+                                    <input
+                                        type="time"
+                                        id="birthTime"
+                                        name="birthTime"
+                                    >
+
+                                    <span class="input-icon">
+
+                                        <svg
+                                            viewBox="0 0 24 24"
+                                            aria-hidden="true"
+                                        >
+
+                                            <circle
+                                                cx="12"
+                                                cy="12"
+                                                r="9"
+                                            ></circle>
+
+                                            <path d="M12 7v5l3 2"></path>
+
+                                        </svg>
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <label class="unknown-time">
+
+                                <input
+                                    type="checkbox"
+                                    name="birthTimeUnknown"
+                                    value="true"
+                                >
+
+                                <span class="checkmark"></span>
+
+                                <span>
+                                    ไม่ทราบเวลาเกิด
+                                </span>
+
+                            </label>
+
+
+                        </div>
+
+
+
+                        <!-- LOCATION -->
+
+                        <div class="form-field location-field">
+
+                            <label for="birthPlace">
+                                สถานที่เกิด
+                            </label>
+
+                            <div class="input-box">
+
+                                <input
+                                    type="text"
+                                    id="birthPlace"
+                                    name="birthPlace"
+                                    placeholder="จังหวัด / ประเทศ"
+                                >
+
+                                <span class="input-icon">
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        aria-hidden="true"
+                                    >
+
+                                        <path
+                                            d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"
+                                        ></path>
+
+                                        <circle
+                                            cx="12"
+                                            cy="10"
+                                            r="2.5"
+                                        ></circle>
+
+                                    </svg>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- SUBMIT -->
+
+                        <button
+                            type="submit"
+                            class="calculate-btn"
+                        >
+
+                            <span>
+                                คำนวณดวงของฉัน
+                            </span>
+
+                            <span class="calculate-arrow">
+                                →
+                            </span>
+
+                        </button>
+
+
+
+                        <!-- PRIVACY -->
+
+                        <div class="privacy-note">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+
+                                <rect
+                                    x="5"
+                                    y="10"
+                                    width="14"
+                                    height="11"
+                                    rx="2"
+                                ></rect>
+
+                                <path
+                                    d="M8 10V7a4 4 0 0 1 8 0v3"
+                                ></path>
+
+                            </svg>
+
+                            <span>
+                                ข้อมูลของคุณจะถูกเก็บเป็นความลับ
+                            </span>
+
+                        </div>
+
+
+                    </form>
+
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             SERVICES
+        ================================================== -->
+
+        <section class="services-section">
+
+
+            <!-- INTRO -->
+
+            <div class="services-intro">
+
+                <span class="services-kicker">
+                    SERVICES
                 </span>
 
                 <h2>
-                    ข้อมูลของคุณ
+                    เปลี่ยนเรื่องซับซ้อน
+                    <br>
+                    ให้เป็นทางเลือกที่ชัดเจน
                 </h2>
 
                 <p>
-                    กรอกข้อมูลเพื่อเริ่มต้นเส้นทางแห่งโชคชะตา
+                    SAGE-LED CONSULTING
                 </p>
 
             </div>
 
 
-            <form method="POST" action="{% url 'home' %}">
 
-                {% csrf_token %}
+            <!-- CARDS -->
 
-
-                <!-- =================================
-                     NAME
-                ================================== -->
-
-                <div class="form-group name-group">
+            <div class="service-list">
 
 
-                    <label>
+                <article class="service-card">
 
-                        <span class="label-icon">
-                            ✦
-                        </span>
-
-                        ชื่อ - นามสกุล
-
-                    </label>
-
-
-                    <div class="name-inputs">
-
-
-                        <!-- FIRST NAME -->
-
-                        <div class="input-wrapper">
-
-                            <input
-                                type="text"
-                                id="firstName"
-                                name="firstName"
-                                placeholder="ชื่อจริง"
-                                autocomplete="given-name"
-                                required
-                            >
-
-                        </div>
-
-
-                        <!-- LAST NAME -->
-
-                        <div class="input-wrapper">
-
-                            <input
-                                type="text"
-                                id="lastName"
-                                name="lastName"
-                                placeholder="นามสกุล"
-                                autocomplete="family-name"
-                                required
-                            >
-
-                        </div>
-
-
+                    <div class="service-number">
+                        01
                     </div>
 
+                    <h3>
+                        วิเคราะห์ดวงจีน
+                    </h3>
 
-                </div>
+                    <p>
+                        เห็นศักยภาพ จังหวะงาน เงิน
+                        และความสัมพันธ์
+                    </p>
 
+                    <div class="service-line"></div>
 
-                <!-- =================================
-                     GENDER
-                ================================== -->
-
-                <div class="form-group">
-
-
-                    <label>
-
-                        <span class="label-icon">
-                            ✦
-                        </span>
-
-                        เพศ
-
-                    </label>
+                </article>
 
 
-                    <div class="gender-options">
 
+                <article class="service-card">
 
-                        <!-- MALE -->
-
-                        <label class="gender-option">
-
-                            <input
-                                type="radio"
-                                name="gender"
-                                value="male"
-                                required
-                            >
-
-                            <span class="gender-card">
-
-                                <span class="radio-custom"></span>
-
-                                <span>
-                                    ชาย
-                                </span>
-
-                            </span>
-
-                        </label>
-
-
-                        <!-- FEMALE -->
-
-                        <label class="gender-option">
-
-                            <input
-                                type="radio"
-                                name="gender"
-                                value="female"
-                            >
-
-                            <span class="gender-card">
-
-                                <span class="radio-custom"></span>
-
-                                <span>
-                                    หญิง
-                                </span>
-
-                            </span>
-
-                        </label>
-
-
+                    <div class="service-number">
+                        02
                     </div>
 
+                    <h3>
+                        กลยุทธ์พื้นที่
+                    </h3>
 
-                </div>
+                    <p>
+                        จัดบ้าน ร้านค้า และธุรกิจ
+                        ให้สอดคล้องกับเป้าหมาย
+                    </p>
 
+                    <div class="service-line"></div>
 
-                <!-- =================================
-                     BIRTH DATE
-                ================================== -->
-
-                <div class="form-group">
-
-
-                    <label for="birthDate">
-
-                        <span class="label-icon">
-                            ✦
-                        </span>
-
-                        วันเดือนปีเกิด
-
-                    </label>
+                </article>
 
 
-                    <div class="input-wrapper">
 
-                        <input
-                            type="date"
-                            id="birthDate"
-                            name="birthDate"
-                            required
-                        >
+                <article class="service-card">
 
+                    <div class="service-number">
+                        03
                     </div>
 
+                    <h3>
+                        จังหวะและการตัดสินใจ
+                    </h3>
 
-                </div>
+                    <p>
+                        เลือกจังหวะสำคัญ
+                        ด้วยข้อมูลที่ชัดเจน
+                    </p>
 
+                    <div class="service-line"></div>
 
-                <!-- =================================
-                     BIRTH TIME
-                ================================== -->
-
-                <div class="form-group">
-
-
-                    <label for="birthTime">
-
-                        <span class="label-icon">
-                            ✦
-                        </span>
-
-                        เวลาเกิด
-
-                        <span class="optional">
-                            Optional
-                        </span>
-
-                    </label>
+                </article>
 
 
-                    <div class="input-wrapper">
-
-                        <input
-                            type="time"
-                            id="birthTime"
-                            name="birthTime"
-                        >
-
-                    </div>
+            </div>
 
 
-                </div>
+        </section>
 
 
-                <!-- =================================
-                     NEXT BUTTON
-                ================================== -->
-
-                <button
-                    class="next-btn"
-                    type="submit"
-                >
-
-                    <span>
-                        Next
-                    </span>
-
-                    <span class="arrow">
-                        →
-                    </span>
-
-                </button>
-
-
-            </form>
-
-
-        </div>
-
-
-    </div>
+    </main>
 
 
 </div>

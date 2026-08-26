@@ -1,25 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Noto+Serif+Thai:wght@400;500;600;700&display=swap');
 
 
 /* =========================================================
    ENERGY FLOW
-   COLOR SYSTEM
+   RESPONSIVE FIXED VIEWPORT SYSTEM
 
-   PRIMARY
-   Pine  : #102B1F
+   Pine       #102B1F
+   Wine       #4D0011
+   Rose       #BD7880
+   Pink       #FFD9D9
+   Ivory      #FFF9F5
+   Charcoal   #1E1E1E
 
-   CTA
-   Wine  : #4D0011
-
-   SUPPORT
-   Rose  : #BD7880
-   Pink  : #FFD9D9
-
-   BACKGROUND
-   Ivory : #FFF9F5
-
-   TEXT
-   Charcoal : #1E1E1E
+   IMPORTANT
+   ---------------------------------------------------------
+   Layout is based on viewport ratio rather than fixed
+   page height. The entire desktop composition fits inside
+   the visible browser viewport.
 ========================================================= */
 
 
@@ -30,1308 +27,1996 @@
 * {
     margin: 0;
     padding: 0;
-
     box-sizing: border-box;
 }
 
 
-/* =========================================================
-   HTML / BODY
-========================================================= */
-
-html,
-body {
-
+html {
     width: 100%;
     height: 100%;
 
     overflow: hidden;
+
+    scroll-behavior: auto;
 }
 
 
 body {
+    width: 100%;
+    height: 100%;
+
+    min-width: 320px;
+
+    overflow: hidden;
 
     font-family:
         'Noto Sans Thai',
         sans-serif;
 
-    color:
-        #1E1E1E;
+    color: #1E1E1E;
 
-    background:
-        #FFF9F5;
+    background: #FFF9F5;
+
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+
+button,
+input {
+    font-family: inherit;
+}
+
+
+button {
+    border: none;
+    outline: none;
+}
+
+
+button:focus-visible,
+input:focus-visible {
+    outline:
+        clamp(2px, 0.2dvh, 3px)
+        solid
+        rgba(189, 120, 128, 0.35);
+
+    outline-offset:
+        clamp(1px, 0.25dvh, 3px);
 }
 
 
 /* =========================================================
-   MAIN LAYOUT
+   PAGE
 ========================================================= */
 
-.container {
-
+.page {
     width: 100%;
-    height: 100vh;
     height: 100dvh;
+
+    min-height: 0;
+
+    display: grid;
+
+    /*
+       Browser viewport is divided proportionally:
+
+       Header   ≈ 9.8%
+       Hero     ≈ 60%
+       Services ≈ 30.2%
+    */
+
+    grid-template-rows:
+        9.9%
+        59.5%
+        30.6%;
+
+    overflow: hidden;
+
+    background: #FFF9F5;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.site-header {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+    z-index: 20;
+
+    background:
+        rgba(255, 249, 245, 0.97);
+
+    border-bottom:
+        1px solid
+        rgba(16, 43, 31, 0.035);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+
+.header-inner {
+    width:
+        min(
+            93.75vw,
+            1440px
+        );
+
+    height: 100%;
+
+    margin: 0 auto;
 
     display: flex;
 
+    align-items: center;
+    justify-content: space-between;
+
+    gap:
+        clamp(18px, 2.8vw, 40px);
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand {
+    display: flex;
+
+    align-items: center;
+
+    gap:
+        clamp(9px, 1.05vw, 15px);
+
+    flex-shrink: 0;
+}
+
+
+.brand-mark {
+    width:
+        clamp(35px, 3.2vw, 46px);
+
+    aspect-ratio: 1;
+
     position: relative;
 
     overflow: hidden;
-
-    background:
-        #FFF9F5;
-}
-
-
-/* =========================================================
-   LEFT SECTION
-========================================================= */
-
-.left-section {
-
-    width: 50%;
-
-    position: relative;
-
-    padding-left: 70px;
-
-    overflow: hidden;
-
-    background:
-
-        radial-gradient(
-            circle at 25% 38%,
-            rgba(189, 120, 128, 0.10),
-            transparent 38%
-        ),
-
-        linear-gradient(
-            135deg,
-            #FFF9F5 0%,
-            #FFF9F5 58%,
-            #FFEDED 100%
-        );
-}
-
-
-/* =========================================================
-   LEFT DECORATIVE CIRCLE
-========================================================= */
-
-.left-section::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 540px;
-    height: 540px;
-
-    left: -210px;
-    bottom: -230px;
-
-    border-radius: 50%;
-
-    border:
-        70px solid
-        rgba(77, 0, 17, 0.96);
-
-    pointer-events: none;
-
-    opacity: 0.96;
-}
-
-
-/* =========================================================
-   LEFT INNER DECORATIVE RING
-========================================================= */
-
-.left-section::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 400px;
-    height: 400px;
-
-    left: -140px;
-    bottom: -160px;
-
-    border-radius: 50%;
 
     border:
         1px solid
         rgba(189, 120, 128, 0.65);
 
-    pointer-events: none;
-}
-
-
-/* =========================================================
-   BRAND / LOGO
-========================================================= */
-
-.logo {
-
-    position: absolute;
-
-    top: 50px;
-    left: 70px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 20px;
-
-    z-index: 3;
-}
-
-
-/* =========================================================
-   LOGO CIRCLE
-========================================================= */
-
-.logo-circle {
-
-    width: 65px;
-    height: 65px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border:
-        1px solid
-        rgba(189, 120, 128, 0.70);
-
     border-radius: 50%;
 
-    color:
-        #4D0011;
-
-    font-size: 35px;
-
-    background:
-        rgba(255, 249, 245, 0.90);
+    background: #102B1F;
 
     box-shadow:
-
-        0 10px 28px
-        rgba(16, 43, 31, 0.10),
-
-        inset
-        0 0 18px
-        rgba(189, 120, 128, 0.06);
-
-    backdrop-filter:
-        blur(8px);
+        0 5px 16px
+        rgba(16, 43, 31, 0.10);
 }
 
 
-/* =========================================================
-   LOGO TEXT
-========================================================= */
-
-.logo-text {
-
-    display: flex;
-
-    flex-direction: column;
-}
-
-
-.logo h1 {
-
-    font-size: 28px;
-
-    color:
-        #102B1F;
-
-    letter-spacing:
-        2px;
-
-    font-weight:
-        700;
-}
-
-
-/* =========================================================
-   LOGO SUBTITLE
-========================================================= */
-
-.logo p {
-
-    margin-top: 5px;
-
-    color:
-        #BD7880;
-
-    font-size: 14px;
-
-    font-weight:
-        500;
-}
-
-
-/* =========================================================
-   CHINESE QUOTE
-========================================================= */
-
-.quote-chinese {
-
-    position: absolute;
-
-    top: 310px;
-    left: 65px;
-
-    display: flex;
-
-    gap: 35px;
-
-    font-family:
-        "Songti SC",
-        "Noto Serif Thai",
-        serif;
-
-    font-size: 38px;
-
-    line-height: 1.35;
-
-    color:
-        #102B1F;
-
-    opacity:
-        0.92;
-
-    z-index: 3;
-}
-
-
-/* =========================================================
-   CHINESE QUOTE ACCENT
-========================================================= */
-
-.quote-chinese::before {
-
+.brand-mark::before {
     content: "";
 
     position: absolute;
 
-    width: 2px;
-    height: 120px;
+    width: 50%;
+    height: 100%;
 
-    left: -18px;
-    top: 20px;
+    left: 0;
+    top: 0;
 
-    background:
-        #BD7880;
+    background: #BD7880;
 
-    opacity:
-        0.65;
+    border-radius:
+        100% 0 0 100%;
 }
 
 
-/* =========================================================
-   VERTICAL CHINESE TEXT
-========================================================= */
-
-.quote-chinese span {
-
-    writing-mode:
-        vertical-rl;
-}
-
-
-/* =========================================================
-   DESCRIPTION
-========================================================= */
-
-.description {
+.brand-mark::after {
+    content: "";
 
     position: absolute;
 
-    bottom: 90px;
-    left: 80px;
+    width: 33%;
+    height: 33%;
 
-    max-width: 390px;
+    left: 33%;
+    top: 33%;
 
-    font-size: 17px;
+    border-radius: 50%;
 
-    line-height: 1.8;
+    background: #FFF9F5;
 
-    color:
-        #1E1E1E;
-
-    opacity:
-        0.78;
-
-    z-index: 3;
-}
-
-
-/* =========================================================
-   RIGHT SECTION
-========================================================= */
-
-.right-section {
-
-    width: 50%;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    position: relative;
-
-    background:
-
-        radial-gradient(
-            circle at 50% 42%,
-            rgba(255, 217, 217, 0.24),
-            transparent 48%
-        ),
-
+    box-shadow:
+        0 -100% 0 -33%
         #FFF9F5;
 }
 
 
+.brand-mark-dot {
+    position: absolute;
+
+    width:
+        clamp(5px, 0.42vw, 6px);
+
+    aspect-ratio: 1;
+
+    z-index: 3;
+
+    border-radius: 50%;
+}
+
+
+.brand-mark-dot-light {
+    left: 28%;
+    top: 20%;
+
+    background: #102B1F;
+}
+
+
+.brand-mark-dot-dark {
+    left: 61%;
+    bottom: 20%;
+
+    background: #BD7880;
+}
+
+
+.brand-mark-center {
+    position: absolute;
+
+    width: 100%;
+    height: 1px;
+
+    left: 0;
+    top: 50%;
+
+    z-index: 4;
+
+    background:
+        rgba(255, 249, 245, 0.35);
+
+    transform: rotate(-90deg);
+}
+
+
 /* =========================================================
-   RIGHT SECTION DECORATIVE ACCENT
+   BRAND TEXT
 ========================================================= */
 
-.right-section::before {
+.brand-content {
+    display: flex;
 
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+
+.brand-name {
+    color: #102B1F;
+
+    font-size:
+        clamp(17px, 1.74vw, 25px);
+
+    line-height: 1.1;
+
+    font-weight: 800;
+
+    letter-spacing:
+        clamp(0.1px, 0.02vw, 0.3px);
+}
+
+
+.brand-subtitle {
+    margin-top:
+        clamp(2px, 0.35dvh, 5px);
+
+    color: #BD7880;
+
+    font-size:
+        clamp(6.5px, 0.63vw, 9px);
+
+    line-height: 1;
+
+    font-weight: 700;
+
+    letter-spacing:
+        clamp(0.6px, 0.09vw, 1.3px);
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.main-nav {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap:
+        clamp(25px, 4vw, 58px);
+
+    margin-left: auto;
+
+    margin-right:
+        clamp(15px, 3.1vw, 45px);
+
+    height: 100%;
+}
+
+
+.nav-item {
+    position: relative;
+
+    height: 100%;
+
+    padding:
+        0
+        clamp(3px, 0.2vw, 5px);
+
+    display: flex;
+
+    align-items: center;
+
+    color: #1E1E1E;
+
+    background: transparent;
+
+    font-size:
+        clamp(11px, 0.97vw, 14px);
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease;
+}
+
+
+.nav-item::after {
     content: "";
 
     position: absolute;
 
-    width: 280px;
-    height: 280px;
+    left: 50%;
 
-    right: -150px;
-    top: -150px;
+    bottom:
+        24%;
+
+    width: 0;
+
+    height:
+        clamp(1px, 0.22dvh, 2px);
+
+    background: #BD7880;
+
+    border-radius: 10px;
+
+    transform: translateX(-50%);
+
+    transition:
+        width 0.25s ease;
+}
+
+
+.nav-item:hover {
+    color: #4D0011;
+}
+
+
+.nav-item:hover::after {
+    width:
+        clamp(30px, 2.8vw, 40px);
+}
+
+
+.nav-item.active {
+    color: #102B1F;
+}
+
+
+.nav-item.active::after {
+    width:
+        clamp(34px, 3.05vw, 44px);
+}
+
+
+/* =========================================================
+   HEADER CTA
+========================================================= */
+
+.header-cta {
+    min-width:
+        clamp(130px, 13.2vw, 190px);
+
+    height:
+        clamp(37px, 5.1dvh, 46px);
+
+    padding:
+        0
+        clamp(17px, 1.95vw, 28px);
+
+    border-radius: 999px;
+
+    background: #4D0011;
+
+    color: #FFFFFF;
+
+    font-size:
+        clamp(11px, 1.04vw, 15px);
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px
+        rgba(77, 0, 17, 0.16);
+
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.header-cta:hover {
+    background: #620018;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 26px
+        rgba(77, 0, 17, 0.22);
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main-content {
+    width: 100%;
+    height: 100%;
+
+    min-height: 0;
+
+    display: contents;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero-section {
+    width: 100%;
+    height: 100%;
+
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.08fr)
+        minmax(0, 0.92fr);
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: #FFF9F5;
+}
+
+
+/* =========================================================
+   HERO DECORATION
+========================================================= */
+
+.hero-section::before {
+    content: "";
+
+    position: absolute;
+
+    width:
+        min(40vw, 580px);
+
+    aspect-ratio: 1;
+
+    left:
+        -29vw;
+
+    bottom:
+        -46%;
+
+    border:
+        1px solid
+        rgba(189, 120, 128, 0.25);
 
     border-radius: 50%;
 
-    background:
-        rgba(255, 217, 217, 0.45);
+    pointer-events: none;
+}
+
+
+.hero-section::after {
+    content: "";
+
+    position: absolute;
+
+    width:
+        min(24.3vw, 350px);
+
+    aspect-ratio: 1;
+
+    left:
+        -21vw;
+
+    bottom:
+        -32%;
+
+    border:
+        clamp(25px, 3.35vw, 48px)
+        solid
+        rgba(77, 0, 17, 0.96);
+
+    border-radius: 50%;
 
     pointer-events: none;
 }
 
 
 /* =========================================================
-   FORM CARD
+   HERO CONTENT
 ========================================================= */
 
-.card {
+.hero-content {
+    width: 100%;
+    height: 100%;
 
-    width: 470px;
-
-    min-height: 480px;
-
-    padding:
-        38px 44px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    align-items: center;
+    min-width: 0;
+    min-height: 0;
 
     position: relative;
 
     z-index: 2;
 
-    background:
+    padding:
+        clamp(28px, 6.8dvh, 94px)
+        clamp(25px, 3.82vw, 55px)
+        clamp(20px, 3.5dvh, 48px)
+        max(
+            3vw,
+            calc((100vw - 1440px) / 2 + 3.82vw)
+        );
 
-        rgba(255, 249, 245, 0.96);
+    display: flex;
 
-    border:
-        1px solid
-        rgba(189, 120, 128, 0.38);
+    flex-direction: column;
 
-    border-radius:
-        24px;
-
-    box-shadow:
-
-        0 25px 65px
-        rgba(16, 43, 31, 0.11),
-
-        0 8px 24px
-        rgba(77, 0, 17, 0.05),
-
-        inset
-        0 1px 0
-        rgba(255, 255, 255, 0.95);
-
-    backdrop-filter:
-        blur(18px);
-
-    -webkit-backdrop-filter:
-        blur(18px);
+    justify-content: center;
 }
 
 
 /* =========================================================
-   CARD TOP ACCENT
+   HERO EYEBROW
 ========================================================= */
 
-.card::before {
+.hero-eyebrow {
+    display: flex;
 
+    align-items: center;
+
+    gap:
+        clamp(6px, 0.7vw, 10px);
+
+    margin-bottom:
+        clamp(12px, 2.2dvh, 24px);
+
+    color: #BD7880;
+
+    font-size:
+        clamp(9px, 0.97vw, 14px);
+
+    font-weight: 800;
+
+    letter-spacing:
+        clamp(0.5px, 0.07vw, 1px);
+}
+
+
+.hero-eyebrow i {
+    font-style: normal;
+
+    color: #BD7880;
+
+    opacity: 0.8;
+}
+
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
+.hero-title {
+    max-width:
+        min(700px, 100%);
+
+    color: #102B1F;
+
+    font-family:
+        'Noto Sans Thai',
+        sans-serif;
+
+    font-size:
+        clamp(
+            34px,
+            4.3vw,
+            68px
+        );
+
+    font-weight: 700;
+
+    line-height: 1.22;
+
+    letter-spacing:
+        clamp(-1.8px, -0.12vw, -0.5px);
+}
+
+
+.hero-title span,
+.hero-title strong {
+    display: block;
+}
+
+
+.hero-title strong {
+    color: #4D0011;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   HERO DESCRIPTION
+========================================================= */
+
+.hero-description {
+    max-width:
+        min(570px, 100%);
+
+    margin-top:
+        clamp(10px, 2.2dvh, 20px);
+
+    color: #1E1E1E;
+
+    font-size:
+        clamp(12px, 1.25vw, 18px);
+
+    line-height: 1.75;
+
+    font-weight: 400;
+
+    opacity: 0.9;
+}
+
+
+/* =========================================================
+   HERO ACTIONS
+========================================================= */
+
+.hero-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap:
+        clamp(9px, 1.25vw, 18px);
+
+    margin-top:
+        clamp(14px, 3dvh, 27px);
+}
+
+
+.btn {
+    min-width:
+        clamp(165px, 15.3vw, 220px);
+
+    height:
+        clamp(42px, 6.2dvh, 56px);
+
+    padding:
+        0
+        clamp(17px, 1.95vw, 28px);
+
+    border-radius: 999px;
+
+    font-size:
+        clamp(12px, 1.11vw, 16px);
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.25s ease;
+}
+
+
+.btn-primary {
+    background: #4D0011;
+
+    color: #FFFFFF;
+
+    box-shadow:
+        0 9px 22px
+        rgba(77, 0, 17, 0.17);
+}
+
+
+.btn-primary:hover {
+    background: #620018;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 13px 28px
+        rgba(77, 0, 17, 0.23);
+}
+
+
+.btn-secondary {
+    background: transparent;
+
+    color: #102B1F;
+
+    border:
+        clamp(1px, 0.1vw, 1.5px)
+        solid
+        #102B1F;
+}
+
+
+.btn-secondary:hover {
+    background:
+        rgba(16, 43, 31, 0.04);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px
+        rgba(16, 43, 31, 0.08);
+}
+
+
+/* =========================================================
+   HERO FEATURES
+========================================================= */
+
+.hero-features {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap:
+        clamp(18px, 2.65vw, 38px);
+
+    margin-top:
+        clamp(14px, 3.1dvh, 28px);
+}
+
+
+.hero-feature {
+    display: flex;
+
+    align-items: center;
+
+    gap:
+        clamp(7px, 0.7vw, 10px);
+
+    color: #102B1F;
+
+    font-size:
+        clamp(11px, 0.97vw, 14px);
+
+    font-weight: 600;
+}
+
+
+.feature-dot {
+    width:
+        clamp(9px, 0.83vw, 12px);
+
+    height:
+        clamp(9px, 0.83vw, 12px);
+
+    flex: 0 0 auto;
+
+    border-radius: 50%;
+
+    background: #BD7880;
+
+    box-shadow:
+        0 0 0
+        clamp(2px, 0.28vw, 4px)
+        rgba(189, 120, 128, 0.10);
+}
+
+
+/* =========================================================
+   CALCULATOR AREA
+========================================================= */
+
+.calculator-area {
+    width: 100%;
+    height: 100%;
+
+    min-width: 0;
+    min-height: 0;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding:
+        clamp(15px, 3.8dvh, 35px)
+        clamp(18px, 3.82vw, 55px);
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #FFD9D9 0%,
+            #FFE5E5 48%,
+            #FFD2D2 100%
+        );
+}
+
+
+.calculator-area::before {
     content: "";
 
     position: absolute;
 
-    top: 0;
-    left: 50%;
+    width:
+        min(25.7vw, 370px);
 
-    width: 80px;
-    height: 3px;
+    aspect-ratio: 1;
 
-    transform:
-        translateX(-50%);
+    right:
+        -15.3vw;
+
+    top:
+        -28%;
+
+    border-radius: 50%;
 
     background:
-        #4D0011;
+        rgba(189, 120, 128, 0.13);
+
+    pointer-events: none;
+}
+
+
+.calculator-area::after {
+    content: "";
+
+    position: absolute;
+
+    width:
+        min(34.7vw, 500px);
+
+    aspect-ratio: 1;
+
+    left:
+        -30.5vw;
+
+    bottom:
+        -55%;
+
+    border:
+        1px solid
+        rgba(77, 0, 17, 0.10);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   CALCULATOR CARD
+
+   The card is sized proportionally to the available hero
+   height so the bottom never escapes the card.
+========================================================= */
+
+.calculator-card {
+    width:
+        min(100%, 610px);
+
+    max-height: 94%;
+
+    position: relative;
+
+    z-index: 2;
+
+    padding:
+        clamp(17px, 3.1dvh, 29px)
+        clamp(25px, 3.34vw, 48px)
+        clamp(13px, 2.35dvh, 22px);
+
+    border:
+        1px solid
+        rgba(189, 120, 128, 0.25);
 
     border-radius:
-        0 0 4px 4px;
+        clamp(16px, 1.6vw, 23px);
+
+    background:
+        rgba(255, 249, 245, 0.96);
+
+    box-shadow:
+        0 24px 55px
+        rgba(77, 0, 17, 0.12),
+
+        0 7px 18px
+        rgba(16, 43, 31, 0.05),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.95);
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+
+.calculator-card::before {
+    content: "";
+
+    position: absolute;
+
+    width:
+        clamp(55px, 5.2vw, 75px);
+
+    height:
+        clamp(2px, 0.35dvh, 3px);
+
+    top: 0;
+
+    left: 50%;
+
+    border-radius:
+        0 0 5px 5px;
+
+    background: #4D0011;
+
+    transform: translateX(-50%);
 }
 
 
 /* =========================================================
-   FORM HEADER
+   CALCULATOR HEADER
 ========================================================= */
 
-.form-header {
-
+.calculator-header {
     width: 100%;
 
     margin-bottom:
-        25px;
-
-    text-align:
-        center;
+        clamp(9px, 1.8dvh, 17px);
 }
 
 
-/* =========================================================
-   FORM KICKER
-========================================================= */
-
-.form-kicker {
-
-    display: inline-block;
+.calculator-kicker {
+    display: block;
 
     margin-bottom:
-        7px;
+        clamp(2px, 0.45dvh, 4px);
 
-    color:
-        #BD7880;
+    color: #BD7880;
 
     font-size:
-        11px;
+        clamp(8px, 0.7vw, 10px);
 
-    font-weight:
-        700;
+    font-weight: 800;
 
     letter-spacing:
-        3px;
+        clamp(1.3px, 0.14vw, 2px);
+}
+
+
+.calculator-header h2 {
+    color: #102B1F;
+
+    font-size:
+        clamp(20px, 1.74vw, 25px);
+
+    font-weight: 800;
+
+    line-height: 1.35;
+}
+
+
+.calculator-header p {
+    margin-top:
+        clamp(1px, 0.25dvh, 2px);
+
+    color: #1E1E1E;
+
+    font-size:
+        clamp(9px, 0.83vw, 12px);
+
+    line-height: 1.5;
+
+    opacity: 0.7;
 }
 
 
 /* =========================================================
-   FORM TITLE
+   FORM
 ========================================================= */
 
-.form-header h2 {
-
-    color:
-        #102B1F;
-
-    font-size:
-        30px;
-
-    font-weight:
-        700;
-
-    letter-spacing:
-        0.5px;
-
-    line-height:
-        1.3;
+.destiny-form {
+    width: 100%;
 }
 
 
-/* =========================================================
-   FORM DESCRIPTION
-========================================================= */
+.form-row {
+    width: 100%;
 
-.form-header p {
+    display: grid;
+
+    align-items: end;
+}
+
+
+.form-row-name-gender {
+    grid-template-columns:
+        minmax(0, 1fr)
+        clamp(150px, 13.2vw, 190px);
+
+    gap:
+        clamp(13px, 1.53vw, 22px);
+}
+
+
+.form-row-birth {
+    grid-template-columns:
+        minmax(0, 1.15fr)
+        minmax(0, 0.85fr)
+        auto;
+
+    gap:
+        clamp(11px, 1.18vw, 17px);
 
     margin-top:
-        7px;
-
-    color:
-        #1E1E1E;
-
-    opacity:
-        0.62;
-
-    font-size:
-        13px;
-
-    font-weight:
-        400;
-
-    line-height:
-        1.6;
+        clamp(9px, 1.65dvh, 15px);
 }
 
 
 /* =========================================================
-   FORM GROUP
+   FORM FIELD
 ========================================================= */
 
-.form-group {
+.form-field {
+    min-width: 0;
+}
 
-    width: 100%;
+
+.form-field label {
+    display: block;
 
     margin-bottom:
-        17px;
+        clamp(3px, 0.55dvh, 5px);
+
+    color: #102B1F;
+
+    font-size:
+        clamp(10px, 0.83vw, 12px);
+
+    font-weight: 700;
 }
 
 
 /* =========================================================
-   LABEL
+   INPUT BOX
 ========================================================= */
 
-.form-group > label {
+.input-box {
+    width: 100%;
+
+    height:
+        clamp(38px, 5.1dvh, 46px);
+
+    position: relative;
+}
+
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+
+    padding:
+        0
+        clamp(34px, 2.98vw, 43px)
+        0
+        clamp(11px, 0.97vw, 14px);
+
+    border:
+        1px solid
+        rgba(16, 43, 31, 0.20);
+
+    border-radius:
+        clamp(7px, 0.63vw, 9px);
+
+    background:
+        rgba(255, 255, 255, 0.56);
+
+    color: #1E1E1E;
+
+    font-size:
+        clamp(11px, 0.9vw, 13px);
+
+    font-weight: 400;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.input-box input::placeholder {
+    color: #8F8B88;
+
+    opacity: 0.85;
+}
+
+
+.input-box input:hover {
+    border-color:
+        rgba(189, 120, 128, 0.6);
+}
+
+
+.input-box input:focus {
+    background: #FFFFFF;
+
+    border-color: #BD7880;
+
+    box-shadow:
+        0 0 0
+        clamp(2px, 0.2vw, 3px)
+        rgba(189, 120, 128, 0.11);
+}
+
+
+/* =========================================================
+   INPUT ICON
+========================================================= */
+
+.input-icon {
+    width:
+        clamp(15px, 1.32vw, 19px);
+
+    height:
+        clamp(15px, 1.32vw, 19px);
+
+    position: absolute;
+
+    right:
+        clamp(9px, 0.9vw, 13px);
+
+    top: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #1E1E1E;
+
+    transform: translateY(-50%);
+
+    pointer-events: none;
+
+    opacity: 0.85;
+}
+
+
+.input-icon svg {
+    width: 100%;
+    height: 100%;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.6;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+/* =========================================================
+   DATE / TIME
+========================================================= */
+
+.input-box input[type="date"],
+.input-box input[type="time"] {
+    padding-right:
+        clamp(32px, 2.8vw, 40px);
+
+    cursor: pointer;
+}
+
+
+.input-box input[type="date"]::-webkit-calendar-picker-indicator,
+.input-box input[type="time"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+
+    right:
+        clamp(8px, 0.76vw, 11px);
+
+    width:
+        clamp(16px, 1.4vw, 20px);
+
+    height:
+        clamp(16px, 1.4vw, 20px);
+
+    opacity: 0;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   GENDER
+========================================================= */
+
+.gender-toggle {
+    width: 100%;
+
+    height:
+        clamp(38px, 5.1dvh, 46px);
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(16, 43, 31, 0.20);
+
+    border-radius:
+        clamp(7px, 0.63vw, 9px);
+
+    background:
+        rgba(255, 255, 255, 0.56);
+}
+
+
+.gender-option {
+    position: relative;
+
+    cursor: pointer;
+}
+
+
+.gender-option input {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    opacity: 0;
+}
+
+
+.gender-option span {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #1E1E1E;
+
+    font-size:
+        clamp(11px, 0.9vw, 13px);
+
+    font-weight: 600;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.gender-option + .gender-option span {
+    border-left:
+        1px solid
+        rgba(16, 43, 31, 0.15);
+}
+
+
+.gender-option input:checked + span {
+    color: #FFFFFF;
+
+    background: #4D0011;
+}
+
+
+.gender-option:hover span {
+    background:
+        rgba(189, 120, 128, 0.10);
+}
+
+
+.gender-option input:checked:hover + span {
+    background: #620018;
+}
+
+
+/* =========================================================
+   UNKNOWN TIME
+========================================================= */
+
+.unknown-time {
+    height:
+        clamp(38px, 5.1dvh, 46px);
 
     display: flex;
 
     align-items: center;
 
-    margin-bottom:
-        7px;
+    gap:
+        clamp(5px, 0.48vw, 7px);
 
-    color:
-        #102B1F;
+    padding-bottom: 1px;
+
+    color: #1E1E1E;
 
     font-size:
-        14px;
+        clamp(9px, 0.76vw, 11px);
 
-    font-weight:
-        600;
+    white-space: nowrap;
 
-    line-height:
-        1.4;
+    cursor: pointer;
+}
+
+
+.unknown-time input {
+    position: absolute;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+.checkmark {
+    width:
+        clamp(14px, 1.18vw, 17px);
+
+    height:
+        clamp(14px, 1.18vw, 17px);
+
+    flex: 0 0 auto;
+
+    position: relative;
+
+    border:
+        1.5px solid
+        rgba(16, 43, 31, 0.45);
+
+    border-radius:
+        clamp(3px, 0.28vw, 4px);
+
+    background: #FFFFFF;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.unknown-time input:checked + .checkmark {
+    background: #4D0011;
+
+    border-color: #4D0011;
+}
+
+
+.unknown-time input:checked + .checkmark::after {
+    content: "";
+
+    position: absolute;
+
+    width:
+        clamp(6px, 0.55vw, 8px);
+
+    height:
+        clamp(3px, 0.28vw, 4px);
+
+    left:
+        clamp(3px, 0.28vw, 4px);
+
+    top:
+        clamp(3px, 0.28vw, 4px);
+
+    border-left:
+        2px solid #FFFFFF;
+
+    border-bottom:
+        2px solid #FFFFFF;
+
+    transform: rotate(-45deg);
 }
 
 
 /* =========================================================
-   LABEL ICON
+   LOCATION
 ========================================================= */
 
-.label-icon {
+.location-field {
+    margin-top:
+        clamp(8px, 1.55dvh, 14px);
+}
 
-    display: inline-flex;
+
+.location-field .input-box {
+    height:
+        clamp(38px, 5.1dvh, 46px);
+}
+
+
+/* =========================================================
+   CALCULATE BUTTON
+========================================================= */
+
+.calculate-btn {
+    width: 100%;
+
+    height:
+        clamp(38px, 5dvh, 45px);
+
+    display: flex;
 
     align-items: center;
     justify-content: center;
 
-    margin-right:
-        7px;
+    gap:
+        clamp(8px, 0.83vw, 12px);
 
-    color:
-        #BD7880;
-
-    font-size:
-        10px;
-}
-
-
-/* =========================================================
-   OPTIONAL
-========================================================= */
-
-.optional {
-
-    margin-left:
-        7px;
-
-    color:
-        #BD7880;
-
-    opacity:
-        0.85;
-
-    font-size:
-        11px;
-
-    font-weight:
-        400;
-}
-
-
-/* =========================================================
-   INPUT WRAPPER
-========================================================= */
-
-.input-wrapper {
-
-    position: relative;
-
-    width: 100%;
-}
-
-
-/* =========================================================
-   TEXT / DATE / TIME INPUT
-========================================================= */
-
-.input-wrapper input {
-
-    width: 100%;
-
-    height: 48px;
-
-    padding:
-        0 15px;
-
-    border:
-        1px solid
-        rgba(16, 43, 31, 0.16);
+    margin-top:
+        clamp(9px, 1.65dvh, 15px);
 
     border-radius:
-        12px;
+        clamp(6px, 0.56vw, 8px);
 
-    background:
-        rgba(255, 249, 245, 0.92);
+    background: #4D0011;
 
-    color:
-        #1E1E1E;
-
-    font-family:
-        inherit;
+    color: #FFFFFF;
 
     font-size:
-        14px;
+        clamp(12px, 1.11vw, 16px);
 
-    outline:
-        none;
+    font-weight: 800;
 
-    transition:
-
-        border-color
-        0.25s ease,
-
-        box-shadow
-        0.25s ease,
-
-        background
-        0.25s ease,
-
-        transform
-        0.25s ease;
-}
-
-
-/* =========================================================
-   PLACEHOLDER
-========================================================= */
-
-.input-wrapper input::placeholder {
-
-    color:
-        #9B9996;
-}
-
-
-/* =========================================================
-   INPUT HOVER
-========================================================= */
-
-.input-wrapper input:hover {
-
-    border-color:
-        rgba(189, 120, 128, 0.65);
-}
-
-
-/* =========================================================
-   INPUT FOCUS
-========================================================= */
-
-.input-wrapper input:focus {
-
-    background:
-        #FFFFFF;
-
-    border-color:
-        #BD7880;
+    cursor: pointer;
 
     box-shadow:
-
-        0 0 0 4px
-        rgba(189, 120, 128, 0.10),
-
-        0 6px 20px
-        rgba(16, 43, 31, 0.06);
-}
-
-
-/* =========================================================
-   DATE / TIME INPUT
-========================================================= */
-
-.input-wrapper input[type="date"],
-.input-wrapper input[type="time"] {
-
-    color:
-        #1E1E1E;
-
-    cursor:
-        pointer;
-}
-
-
-/* =========================================================
-   CALENDAR / TIME ICON
-========================================================= */
-
-.input-wrapper input::-webkit-calendar-picker-indicator {
-
-    opacity:
-        0.55;
-
-    cursor:
-        pointer;
-
-    filter:
-        sepia(0.20);
+        0 8px 20px
+        rgba(77, 0, 17, 0.18);
 
     transition:
-        opacity
-        0.2s ease;
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 
-.input-wrapper input::-webkit-calendar-picker-indicator:hover {
+.calculate-btn:hover {
+    background: #620018;
 
-    opacity:
-        0.90;
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px
+        rgba(77, 0, 17, 0.25);
+}
+
+
+.calculate-btn:active {
+    transform: translateY(0);
+}
+
+
+.calculate-arrow {
+    font-size:
+        clamp(16px, 1.39vw, 20px);
+
+    line-height: 1;
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.calculate-btn:hover .calculate-arrow {
+    transform: translateX(4px);
 }
 
 
 /* =========================================================
-   NAME INPUTS
+   PRIVACY
 ========================================================= */
 
-.name-inputs {
+.privacy-note {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap:
+        clamp(5px, 0.48vw, 7px);
+
+    margin-top:
+        clamp(5px, 0.9dvh, 8px);
+
+    color: #1E1E1E;
+
+    font-size:
+        clamp(8px, 0.7vw, 10px);
+
+    opacity: 0.58;
+}
+
+
+.privacy-note svg {
+    width:
+        clamp(11px, 0.97vw, 14px);
+
+    height:
+        clamp(11px, 0.97vw, 14px);
+
+    flex-shrink: 0;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
+.services-section {
+    width: 100%;
+    height: 100%;
+
+    min-height: 0;
 
     display: grid;
 
     grid-template-columns:
-        1fr 1fr;
+        clamp(230px, 20.8vw, 300px)
+        minmax(0, 1fr);
 
     gap:
-        12px;
-
-    width:
-        100%;
-}
-
-
-/* =========================================================
-   GENDER OPTIONS
-========================================================= */
-
-.gender-options {
-
-    width:
-        100%;
-
-    display:
-        grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:
-        12px;
-}
-
-
-/* =========================================================
-   GENDER OPTION
-========================================================= */
-
-.gender-option {
-
-    position:
-        relative;
-
-    margin:
-        0 !important;
-
-    cursor:
-        pointer;
-}
-
-
-/* =========================================================
-   HIDDEN RADIO
-========================================================= */
-
-.gender-option input {
-
-    position:
-        absolute;
-
-    width:
-        1px;
-
-    height:
-        1px;
-
-    opacity:
-        0;
-}
-
-
-/* =========================================================
-   GENDER CARD
-========================================================= */
-
-.gender-card {
-
-    width:
-        100%;
-
-    height:
-        48px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
+        clamp(25px, 3.82vw, 55px);
 
     padding:
-        0 17px;
+        clamp(17px, 3.45dvh, 31px)
+        max(
+            3vw,
+            calc((100vw - 1440px) / 2 + 3.82vw)
+        );
+
+    background: #102B1F;
+
+    color: #FFFFFF;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   SERVICES INTRO
+========================================================= */
+
+.services-intro {
+    min-width: 0;
+
+    padding-top:
+        clamp(1px, 0.35dvh, 3px);
+}
+
+
+.services-kicker {
+    display: block;
+
+    margin-bottom:
+        clamp(4px, 0.8dvh, 7px);
+
+    color: #BD7880;
+
+    font-size:
+        clamp(9px, 0.76vw, 11px);
+
+    font-weight: 800;
+
+    letter-spacing:
+        clamp(1px, 0.125vw, 1.8px);
+}
+
+
+.services-intro h2 {
+    color: #FFF9F5;
+
+    font-size:
+        clamp(17px, 1.6vw, 23px);
+
+    line-height: 1.55;
+
+    font-weight: 700;
+}
+
+
+.services-intro p {
+    margin-top:
+        clamp(10px, 2dvh, 18px);
+
+    color: #BD7880;
+
+    font-size:
+        clamp(9px, 0.76vw, 11px);
+
+    font-weight: 800;
+
+    letter-spacing:
+        clamp(0.9px, 0.105vw, 1.5px);
+}
+
+
+/* =========================================================
+   SERVICE LIST
+========================================================= */
+
+.service-list {
+    min-width: 0;
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap:
+        clamp(11px, 1.53vw, 22px);
+}
+
+
+/* =========================================================
+   SERVICE CARD
+========================================================= */
+
+.service-card {
+    min-width: 0;
+    min-height: 0;
+
+    height: 100%;
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding:
+        clamp(16px, 2.65dvh, 24px)
+        clamp(17px, 1.67vw, 24px)
+        clamp(15px, 2.2dvh, 20px);
+
+    overflow: hidden;
 
     border:
         1px solid
-        rgba(16, 43, 31, 0.16);
+        rgba(189, 120, 128, 0.15);
 
     border-radius:
-        12px;
+        clamp(15px, 1.53vw, 22px);
 
-    background:
-        rgba(255, 249, 245, 0.92);
+    background: #FFF9F5;
 
-    color:
-        #1E1E1E;
+    color: #1E1E1E;
+
+    box-shadow:
+        0 8px 20px
+        rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.service-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 14px 30px
+        rgba(0, 0, 0, 0.13);
+}
+
+
+/* =========================================================
+   SERVICE NUMBER
+========================================================= */
+
+.service-number {
+    width:
+        clamp(33px, 2.85vw, 41px);
+
+    height:
+        clamp(33px, 2.85vw, 41px);
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom:
+        clamp(6px, 1.1dvh, 10px);
+
+    border-radius: 50%;
+
+    background: #FFD9D9;
+
+    color: #4D0011;
 
     font-size:
-        14px;
+        clamp(11px, 0.9vw, 13px);
 
-    transition:
-        all
-        0.25s ease;
+    font-weight: 800;
 }
 
 
-/* =========================================================
-   CUSTOM RADIO
-========================================================= */
-
-.radio-custom {
-
-    position:
-        relative;
-
-    width:
-        17px;
-
-    height:
-        17px;
-
-    margin-right:
-        10px;
-
-    border:
-        1.5px solid
-        #BD7880;
-
-    border-radius:
-        50%;
-
-    transition:
-        all
-        0.25s ease;
-}
-
-
-/* =========================================================
-   GENDER SELECTED
-========================================================= */
-
-.gender-option input:checked + .gender-card {
-
+.service-card:nth-child(2) .service-number {
     background:
+        rgba(189, 120, 128, 0.28);
+}
 
-        linear-gradient(
-            135deg,
-            rgba(255, 249, 245, 0.98),
-            rgba(255, 217, 217, 0.55)
-        );
 
-    border-color:
-        #BD7880;
-
-    color:
-        #4D0011;
-
-    box-shadow:
-
-        0 5px 18px
-        rgba(77, 0, 17, 0.07);
+.service-card:nth-child(3) .service-number {
+    background: #FFD9D9;
 }
 
 
 /* =========================================================
-   SELECTED RADIO
+   SERVICE TITLE
 ========================================================= */
 
-.gender-option input:checked + .gender-card .radio-custom {
-
-    border-color:
-        #4D0011;
-
-    background:
-        #4D0011;
-
-    box-shadow:
-
-        0 0 0 3px
-        rgba(77, 0, 17, 0.08);
-}
-
-
-/* =========================================================
-   RADIO INNER DOT
-========================================================= */
-
-.gender-option input:checked + .gender-card .radio-custom::after {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    width:
-        5px;
-
-    height:
-        5px;
-
-    top:
-        50%;
-
-    left:
-        50%;
-
-    transform:
-        translate(-50%, -50%);
-
-    background:
-        #FFFFFF;
-
-    border-radius:
-        50%;
-}
-
-
-/* =========================================================
-   GENDER HOVER
-========================================================= */
-
-.gender-option:hover .gender-card {
-
-    border-color:
-        rgba(189, 120, 128, 0.65);
-
-    transform:
-        translateY(-1px);
-}
-
-
-/* =========================================================
-   NEXT BUTTON
-   CTA = WINE
-========================================================= */
-
-.card .next-btn {
-
-    width:
-        100%;
-
-    height:
-        56px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    gap:
-        12px;
-
-    margin-top:
-        8px;
-
-    border:
-        none;
-
-    border-radius:
-        13px;
-
-    background:
-        #4D0011;
-
-    color:
-        #FFFFFF;
+.service-card h3 {
+    color: #102B1F;
 
     font-family:
-        inherit;
+        'Noto Serif Thai',
+        serif;
 
     font-size:
-        18px;
+        clamp(15px, 1.25vw, 18px);
 
-    font-weight:
-        700;
+    font-weight: 700;
 
-    cursor:
-        pointer;
-
-    box-shadow:
-
-        0 8px 22px
-        rgba(77, 0, 17, 0.22);
-
-    transition:
-
-        transform
-        0.25s ease,
-
-        background-color
-        0.25s ease,
-
-        box-shadow
-        0.25s ease,
-
-        filter
-        0.25s ease;
+    line-height: 1.4;
 }
 
 
 /* =========================================================
-   BUTTON ARROW
+   SERVICE DESCRIPTION
 ========================================================= */
 
-.next-btn .arrow {
+.service-card p {
+    max-width: 230px;
+
+    margin-top:
+        clamp(6px, 1.1dvh, 10px);
+
+    color: #1E1E1E;
 
     font-size:
-        20px;
+        clamp(11px, 0.9vw, 13px);
 
-    transition:
-        transform
-        0.25s ease;
+    line-height: 1.7;
+
+    opacity: 0.86;
 }
 
 
 /* =========================================================
-   BUTTON HOVER
+   SERVICE LINE
 ========================================================= */
 
-.card .next-btn:hover {
+.service-line {
+    width:
+        calc(100% - clamp(34px, 3.34vw, 48px));
 
-    transform:
-        translateY(-2px);
+    height:
+        clamp(1px, 0.22dvh, 2px);
 
-    background:
-        #620018;
+    position: absolute;
 
-    box-shadow:
+    left:
+        clamp(17px, 1.67vw, 24px);
 
-        0 12px 28px
-        rgba(77, 0, 17, 0.30);
+    bottom:
+        clamp(15px, 2.55dvh, 23px);
 
-    filter:
-        brightness(1.03);
+    background: #FFD9D9;
+
+    border-radius: 999px;
+}
+
+
+.service-card:nth-child(2) .service-line {
+    background: #BD7880;
+}
+
+
+.service-card:nth-child(3) .service-line {
+    background: #FFD9D9;
 }
 
 
 /* =========================================================
-   BUTTON ARROW HOVER
-========================================================= */
-
-.card .next-btn:hover .arrow {
-
-    transform:
-        translateX(4px);
-}
-
-
-/* =========================================================
-   BUTTON ACTIVE
-========================================================= */
-
-.card .next-btn:active {
-
-    transform:
-        translateY(0);
-
-    box-shadow:
-
-        0 5px 15px
-        rgba(77, 0, 17, 0.18);
-}
-
-
-/* =========================================================
-   RESPONSIVE — 1100px
+   MEDIUM DESKTOP
 ========================================================= */
 
 @media (max-width: 1100px) {
 
-    .logo {
+    .main-nav {
+        gap: 22px;
 
-        left:
-            40px;
+        margin-right: 10px;
     }
 
 
-    .quote-chinese {
-
-        left:
-            50px;
+    .header-cta {
+        min-width: 140px;
     }
 
 
-    .description {
-
-        left:
-            60px;
+    .hero-section {
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(420px, 0.9fr);
     }
 
 
-    .card {
+    .services-section {
+        grid-template-columns:
+            250px
+            minmax(0, 1fr);
 
-        width:
-            440px;
+        gap: 28px;
     }
 }
 
 
 /* =========================================================
-   RESPONSIVE — 900px
+   TABLET / NARROW DESKTOP
 ========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 850px) {
 
-    .left-section {
+    /*
+       Keep page fixed but change composition to a vertical
+       layout so content remains visible without scrolling.
+    */
 
-        padding-left:
-            40px;
+    .page {
+        grid-template-rows:
+            10%
+            62%
+            28%;
     }
 
 
-    .logo {
-
-        left:
-            40px;
-
-        top:
-            35px;
+    .main-nav {
+        display: none;
     }
 
 
-    .logo h1 {
-
-        font-size:
-            24px;
+    .hero-section {
+        grid-template-columns:
+            1fr
+            1fr;
     }
 
 
-    .logo-circle {
-
-        width:
-            58px;
-
-        height:
-            58px;
-
-        font-size:
-            31px;
+    .hero-content {
+        padding-left: 5vw;
     }
 
 
-    .quote-chinese {
-
-        top:
-            270px;
-
-        left:
-            40px;
-
-        font-size:
-            32px;
-
-        gap:
-            25px;
+    .hero-actions {
+        flex-wrap: wrap;
     }
 
 
-    .description {
-
-        left:
-            45px;
-
-        bottom:
-            55px;
-
-        max-width:
-            300px;
-
-        font-size:
-            14px;
+    .btn {
+        min-width: 0;
     }
 
 
-    .card {
+    .form-row-name-gender {
+        grid-template-columns:
+            1fr;
+    }
 
-        width:
-            400px;
 
-        padding:
-            32px 34px;
+    .form-row-birth {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+
+    .unknown-time {
+        grid-column: 1 / -1;
+        height: auto;
+
+        margin-top: 1dvh;
+    }
+
+
+    .services-section {
+        grid-template-columns:
+            220px
+            minmax(0, 1fr);
+
+        gap: 20px;
+
+        padding-left: 4vw;
+        padding-right: 4vw;
     }
 }
 
@@ -1340,577 +2025,186 @@ body {
    MOBILE
 ========================================================= */
 
-@media (max-width: 700px) {
+@media (max-width: 650px) {
 
-    html,
-    body {
-
-        overflow:
-            auto;
+    .page {
+        grid-template-rows:
+            9%
+            67%
+            24%;
     }
 
 
-    .container {
-
-        min-height:
-            100dvh;
-
-        height:
-            auto;
-
-        display:
-            block;
-
-        overflow:
-            hidden;
-
-        background:
-            #FFF9F5;
+    .header-inner {
+        width: calc(100% - 28px);
     }
 
 
-    /* =====================================================
-       LEFT SECTION
-    ===================================================== */
-
-    .left-section {
-
-        width:
-            100%;
-
-        height:
-            235px;
-
-        min-height:
-            235px;
+    .header-cta {
+        min-width: auto;
 
         padding:
-            0;
-
-        overflow:
-            hidden;
-
-        background:
-
-            linear-gradient(
-                135deg,
-                #FFF9F5,
-                #FFEDED
-            );
-    }
-
-
-    .left-section::before {
-
-        width:
-            430px;
-
-        height:
-            430px;
-
-        left:
-            -190px;
-
-        bottom:
-            -315px;
-
-        border-width:
-            55px;
-    }
-
-
-    .left-section::after {
-
-        width:
-            315px;
-
-        height:
-            315px;
-
-        left:
-            -130px;
-
-        bottom:
-            -230px;
-    }
-
-
-    /* =====================================================
-       MOBILE LOGO
-    ===================================================== */
-
-    .logo {
-
-        top:
-            28px;
-
-        left:
-            28px;
-
-        gap:
-            12px;
-    }
-
-
-    .logo-circle {
-
-        width:
-            48px;
-
-        height:
-            48px;
-
-        font-size:
-            25px;
-
-        border-width:
-            1px;
-    }
-
-
-    .logo h1 {
-
-        font-size:
-            20px;
-
-        letter-spacing:
-            1.5px;
-    }
-
-
-    .logo p {
-
-        margin-top:
-            3px;
-
-        font-size:
-            10px;
-    }
-
-
-    /* =====================================================
-       MOBILE CHINESE QUOTE
-    ===================================================== */
-
-    .quote-chinese {
-
-        top:
-            94px;
-
-        left:
-            auto;
-
-        right:
-            34px;
-
-        font-size:
-            23px;
-
-        gap:
-            17px;
-
-        color:
-            #102B1F;
-    }
-
-
-    .quote-chinese::before {
-
-        display:
-            none;
-    }
-
-
-    /* =====================================================
-       MOBILE DESCRIPTION
-    ===================================================== */
-
-    .description {
-
-        left:
-            28px;
-
-        bottom:
-            24px;
-
-        max-width:
-            260px;
-
-        font-size:
-            10px;
-
-        line-height:
-            1.6;
-
-        color:
-            #1E1E1E;
-    }
-
-
-    /* =====================================================
-       RIGHT SECTION
-    ===================================================== */
-
-    .right-section {
-
-        width:
-            100%;
-
-        min-height:
-            calc(100dvh - 235px);
-
-        padding:
-            25px 15px 35px;
-
-        align-items:
-            flex-start;
-
-        background:
-            #FFF9F5;
-    }
-
-
-    .right-section::before {
-
-        width:
-            180px;
-
-        height:
-            180px;
-
-        right:
-            -100px;
-
-        top:
-            -80px;
-    }
-
-
-    /* =====================================================
-       MOBILE CARD
-    ===================================================== */
-
-    .card {
-
-        width:
-            100%;
-
-        max-width:
-            430px;
-
-        min-height:
-            auto;
-
-        padding:
-            28px 22px 24px;
-
-        border-radius:
-            20px;
-    }
-
-
-    .form-header {
-
-        margin-bottom:
-            20px;
-    }
-
-
-    .form-kicker {
-
-        font-size:
-            9px;
-
-        letter-spacing:
-            2.5px;
-    }
-
-
-    .form-header h2 {
-
-        font-size:
-            24px;
-    }
-
-
-    .form-header p {
-
-        font-size:
-            11px;
-
-        line-height:
-            1.5;
-    }
-
-
-    /* =====================================================
-       MOBILE FORM
-    ===================================================== */
-
-    .form-group {
-
-        margin-bottom:
-            14px;
-    }
-
-
-    .form-group > label {
-
-        font-size:
-            13px;
-    }
-
-
-    .input-wrapper input {
-
-        height:
-            45px;
-
-        padding:
-            0 13px;
-
-        border-radius:
-            11px;
-
-        font-size:
-            13px;
-    }
-
-
-    .name-inputs {
-
-        gap:
-            8px;
-    }
-
-
-    .gender-options {
-
-        gap:
-            8px;
-    }
-
-
-    .gender-card {
-
-        height:
-            45px;
-
-        padding:
-            0 12px;
-
-        border-radius:
-            11px;
-
-        font-size:
-            13px;
-    }
-
-
-    .radio-custom {
-
-        width:
-            15px;
-
-        height:
-            15px;
-
-        margin-right:
-            8px;
-    }
-
-
-    .card .next-btn {
-
-        height:
-            51px;
-
-        margin-top:
-            5px;
-
-        border-radius:
-            12px;
-
-        font-size:
+            0
             16px;
     }
 
 
-    .next-btn .arrow {
+    .brand-subtitle {
+        display: none;
+    }
 
+
+    .hero-section {
+        grid-template-columns: 1fr;
+
+        overflow-y: hidden;
+    }
+
+
+    .hero-content {
+        height: 52%;
+
+        min-height: 0;
+
+        padding:
+            4dvh
+            5vw
+            2dvh;
+    }
+
+
+    .calculator-area {
+        height: 48%;
+
+        min-height: 0;
+
+        padding:
+            2dvh
+            4vw;
+    }
+
+
+    .calculator-card {
+        width: 100%;
+        max-height: 100%;
+
+        padding:
+            2dvh
+            4vw
+            1.5dvh;
+    }
+
+
+    .hero-title {
         font-size:
-            19px;
+            clamp(30px, 8vw, 48px);
+    }
+
+
+    .hero-description {
+        font-size:
+            clamp(11px, 3.2vw, 15px);
+    }
+
+
+    .hero-actions {
+        width: 100%;
+
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+
+    .btn {
+        width: 100%;
+
+        height: 44px;
+    }
+
+
+    .hero-features {
+        gap: 10px 18px;
+    }
+
+
+    .services-section {
+        grid-template-columns: 1fr;
+
+        overflow: hidden;
+
+        padding:
+            2dvh
+            4vw;
+    }
+
+
+    .services-intro {
+        display: none;
+    }
+
+
+    .service-list {
+        height: 100%;
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap: 10px;
+    }
+
+
+    .service-card {
+        padding:
+            13px;
+    }
+
+
+    .service-card p {
+        font-size: 10px;
+    }
+
+
+    .service-line {
+        left: 13px;
+
+        width:
+            calc(100% - 26px);
+
+        bottom: 13px;
     }
 }
 
 
 /* =========================================================
-   SMALL MOBILE
+   VERY SMALL MOBILE
 ========================================================= */
 
-@media (max-width: 420px) {
+@media (max-width: 480px) {
 
-    .left-section {
-
-        height:
-            215px;
-
-        min-height:
-            215px;
+    .service-list {
+        grid-template-columns: 1fr;
     }
 
 
-    .logo {
-
-        top:
-            23px;
-
-        left:
-            20px;
+    .service-card:nth-child(n + 2) {
+        display: none;
     }
 
 
-    .logo-circle {
-
-        width:
-            43px;
-
-        height:
-            43px;
-
-        font-size:
-            22px;
+    .calculator-card {
+        padding-left: 4vw;
+        padding-right: 4vw;
     }
 
 
-    .logo h1 {
-
-        font-size:
-            18px;
+    .form-row-birth {
+        grid-template-columns: 1fr;
     }
 
 
-    .logo p {
-
-        font-size:
-            9px;
-    }
-
-
-    .quote-chinese {
-
-        top:
-            86px;
-
-        right:
-            25px;
-
-        font-size:
-            20px;
-
-        gap:
-            14px;
-    }
-
-
-    .description {
-
-        left:
-            20px;
-
-        bottom:
-            20px;
-
-        max-width:
-            235px;
-
-        font-size:
-            9px;
-    }
-
-
-    .right-section {
-
-        min-height:
-            calc(100dvh - 215px);
-
-        padding:
-            20px 12px 28px;
-    }
-
-
-    .card {
-
-        padding:
-            24px 17px 20px;
-
-        border-radius:
-            18px;
-    }
-
-
-    .form-header {
-
-        margin-bottom:
-            17px;
-    }
-
-
-    .form-header h2 {
-
-        font-size:
-            22px;
-    }
-
-
-    .form-header p {
-
-        font-size:
-            10px;
-    }
-
-
-    .form-group > label {
-
-        font-size:
-            12px;
-    }
-
-
-    .input-wrapper input {
-
-        height:
-            43px;
-
-        font-size:
-            12px;
-    }
-
-
-    .gender-card {
-
-        height:
-            43px;
-
-        font-size:
-            12px;
-    }
-
-
-    .optional {
-
-        font-size:
-            9px;
-    }
-
-
-    .card .next-btn {
-
-        height:
-            48px;
-
-        font-size:
-            15px;
+    .unknown-time {
+        grid-column: auto;
     }
 }
 
@@ -1924,8 +2218,10 @@ body {
     *,
     *::before,
     *::after {
+        transition-duration: 0.01ms !important;
 
-        transition-duration:
-            0.01ms !important;
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
     }
 }
