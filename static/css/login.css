@@ -1,0 +1,166 @@
+/* Login / Register Page Styles (Matching Form Box Dimensions) */
+
+.auth-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 120px);
+    padding: 30px 20px 80px;
+    position: relative;
+    z-index: 10;
+}
+
+.auth-unified-box {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-card);
+    border-radius: 20px;
+    padding: 36px 40px;
+    box-shadow: var(--shadow-card);
+    width: 100%;
+    max-width: 640px; /* Matching form box dimensions */
+    position: relative;
+}
+
+.auth-unified-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 40px;
+    right: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-red) 0%, var(--accent-green) 100%);
+    border-radius: 2px;
+}
+
+/* Nav Tabs between Login and Register */
+.auth-tabs-row {
+    display: flex;
+    gap: 8px;
+    background: var(--bg-surface-elevated);
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 28px;
+}
+
+.auth-tab-btn {
+    flex: 1;
+    height: 40px;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+}
+
+.auth-tab-btn.active {
+    background: var(--bg-surface);
+    color: var(--accent-red);
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.auth-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.auth-header p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+/* Google Button */
+.btn-social-signin {
+    width: 100%;
+    height: 44px;
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+}
+
+.btn-social-signin:hover {
+    border-color: var(--border-card);
+    background: var(--border-subtle);
+}
+
+.btn-social-signin svg {
+    width: 18px;
+    height: 18px;
+}
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    gap: 12px;
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border-subtle);
+}
+
+.auth-submit-btn {
+    width: 100%;
+    height: 46px;
+    background: var(--accent-red);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    margin-top: 24px;
+    box-shadow: 0 4px 14px rgba(197, 48, 48, 0.3);
+    transition: all 0.2s;
+}
+
+.auth-submit-btn:hover {
+    background: var(--accent-red-hover);
+    transform: translateY(-1px);
+}
+
+.auth-footer-help {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+    font-size: 12.5px;
+}
+
+.auth-link {
+    color: var(--accent-red);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-link:hover {
+    text-decoration: underline;
+}

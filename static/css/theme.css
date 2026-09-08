@@ -1,0 +1,445 @@
+/* =========================================================
+   BAZI MINIMAL CLEAN DESIGN SYSTEM
+   Palette: Red (Primary), Green (Secondary), Black & White
+   No background images. Pure CSS elements, Mist, & Slow-Spinning Yin-Yang.
+   Light & Dark Mode Support.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap');
+
+/* Base Dark Theme (Default) */
+:root, [data-theme="dark"] {
+    --bg-page: #0d0f12;
+    --bg-surface: #15181e;
+    --bg-surface-elevated: #1e222a;
+    --bg-input: #121419;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-card: rgba(255, 255, 255, 0.1);
+    
+    /* Primary Red / Secondary Green */
+    --accent-red: #c53030;
+    --accent-red-hover: #9b2c2c;
+    --accent-red-light: rgba(197, 48, 48, 0.18);
+    --accent-green: #2f855a;
+    --accent-green-hover: #276749;
+    --accent-green-light: rgba(47, 133, 90, 0.18);
+
+    --text-primary: #f7fafc;
+    --text-secondary: #a0aec0;
+    --text-muted: #718096;
+    
+    --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.4);
+    --mist-opacity: 0.35;
+    
+    --yin-bg: #0d0f12;
+    --yang-bg: #e2e8f0;
+    --card-glow: rgba(197, 48, 48, 0.08);
+}
+
+/* Light Theme */
+[data-theme="light"] {
+    --bg-page: #f8f9fa;
+    --bg-surface: #ffffff;
+    --bg-surface-elevated: #f1f3f7;
+    --bg-input: #ffffff;
+    --border-subtle: rgba(0, 0, 0, 0.08);
+    --border-card: rgba(0, 0, 0, 0.1);
+
+    --accent-red: #c53030;
+    --accent-red-hover: #9b2c2c;
+    --accent-red-light: rgba(197, 48, 48, 0.1);
+    --accent-green: #2f855a;
+    --accent-green-hover: #276749;
+    --accent-green-light: rgba(47, 133, 90, 0.1);
+
+    --text-primary: #1a202c;
+    --text-secondary: #4a5568;
+    --text-muted: #a0aec0;
+
+    --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.06);
+    --mist-opacity: 0.12;
+
+    --yin-bg: #1a202c;
+    --yang-bg: #f8f9fa;
+    --card-glow: rgba(197, 48, 48, 0.03);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Prompt', 'Inter', -apple-system, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Pure CSS Floating Mist Layers (No Images) */
+.ambient-mist-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+    opacity: var(--mist-opacity);
+}
+
+.mist-cloud {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+}
+
+.mist-cloud-1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(197, 48, 48, 0.25) 0%, rgba(47, 133, 90, 0.08) 50%, transparent 70%);
+    top: -100px;
+    left: -100px;
+    animation: driftMist 28s infinite alternate ease-in-out;
+}
+
+.mist-cloud-2 {
+    width: 750px;
+    height: 750px;
+    background: radial-gradient(circle, rgba(47, 133, 90, 0.2) 0%, rgba(197, 48, 48, 0.06) 60%, transparent 75%);
+    bottom: -150px;
+    right: -100px;
+    animation: driftMistReverse 34s infinite alternate ease-in-out;
+}
+
+.mist-cloud-3 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+    top: 40%;
+    left: 30%;
+    animation: driftMist 40s infinite alternate ease-in-out;
+}
+
+@keyframes driftMist {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(60px, -40px) scale(1.08); }
+    100% { transform: translate(-30px, 50px) scale(0.95); }
+}
+
+@keyframes driftMistReverse {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-70px, 30px) scale(1.05); }
+    100% { transform: translate(40px, -60px) scale(0.92); }
+}
+
+/* Slow-Spinning Pure CSS/SVG Yin-Yang */
+.spinning-yinyang-element {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.yinyang-orb {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background: linear-gradient(to bottom, var(--yin-bg) 50%, var(--yang-bg) 50%);
+    position: relative;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2), 0 0 0 2px var(--border-card);
+    animation: spinYinYang 42s linear infinite;
+}
+
+.yinyang-orb::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 85px;
+    height: 85px;
+    background: var(--yin-bg);
+    border-radius: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 0 0 12px var(--yin-bg) inset, 0 0 0 16px var(--yang-bg) inset;
+}
+
+.yinyang-orb::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 85px;
+    height: 85px;
+    background: var(--yang-bg);
+    border-radius: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 0 0 12px var(--yang-bg) inset, 0 0 0 16px var(--yin-bg) inset;
+}
+
+.yinyang-orbital-ring {
+    position: absolute;
+    width: 210px;
+    height: 210px;
+    border-radius: 50%;
+    border: 1.5px dashed var(--accent-red);
+    opacity: 0.45;
+    animation: spinYinYangReverse 60s linear infinite;
+}
+
+.yinyang-green-orbit {
+    position: absolute;
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    border: 1px dotted var(--accent-green);
+    opacity: 0.35;
+    animation: spinYinYang 80s linear infinite;
+}
+
+@keyframes spinYinYang {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes spinYinYangReverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+}
+
+/* =========================================================
+   COMMON TOP NAVBAR (Used on all public pages)
+   ========================================================= */
+.app-navbar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 68px;
+    background: rgba(21, 24, 30, 0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    z-index: 1000;
+    transition: background 0.3s ease;
+}
+
+[data-theme="light"] .app-navbar {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.nav-logo-symbol {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--accent-red-light);
+    border: 1.5px solid var(--accent-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    color: var(--accent-red);
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+}
+
+.nav-brand-title {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: var(--text-primary);
+}
+
+.nav-links-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.nav-item {
+    font-size: 13.5px;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--text-secondary);
+    padding: 8px 14px;
+    border-radius: 8px;
+    transition: all 0.2s;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav-item:hover {
+    color: var(--text-primary);
+    background: var(--bg-surface-elevated);
+}
+
+.nav-item.active {
+    color: var(--accent-red);
+    font-weight: 600;
+}
+
+/* Disabled History Link with Tooltip for Guest */
+.nav-item-disabled-wrap {
+    position: relative;
+    display: inline-flex;
+}
+
+.nav-item.disabled {
+    color: var(--text-muted);
+    opacity: 0.55;
+    cursor: not-allowed;
+    background: transparent;
+}
+
+.nav-item-disabled-wrap:hover .nav-tooltip {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nav-tooltip {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: #1f242d;
+    color: #e2e8f0;
+    font-size: 11.5px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: all 0.2s ease;
+    transform: translateY(-4px);
+    pointer-events: none;
+    z-index: 1001;
+}
+
+[data-theme="light"] .nav-tooltip {
+    background: #2d3748;
+    color: #ffffff;
+}
+
+.nav-btn-login {
+    background: var(--accent-red);
+    color: #ffffff !important;
+    font-weight: 600;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(197, 48, 48, 0.3);
+}
+
+.nav-btn-login:hover {
+    background: var(--accent-red-hover);
+    transform: translateY(-1px);
+}
+
+/* =========================================================
+   BOTTOM-LEFT FLOATING CONTROLS (Theme & Language)
+   ========================================================= */
+.bottom-left-controls {
+    position: fixed;
+    bottom: 22px;
+    left: 22px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 9999;
+}
+
+.control-btn {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-card);
+    color: var(--text-primary);
+    padding: 8px 14px;
+    border-radius: 24px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: var(--shadow-card);
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.control-btn:hover {
+    border-color: var(--accent-red);
+    transform: translateY(-2px);
+}
+
+.control-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Demo screen previewer */
+.screen-switcher-right {
+    position: fixed;
+    bottom: 22px;
+    right: 22px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-card);
+    border-radius: 30px;
+    padding: 4px 8px;
+    z-index: 9999;
+    box-shadow: var(--shadow-card);
+}
+
+.screen-switcher-right a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 11.5px;
+    font-weight: 500;
+    padding: 5px 11px;
+    border-radius: 20px;
+    transition: all 0.2s;
+}
+
+.screen-switcher-right a:hover {
+    color: var(--text-primary);
+}
+
+.screen-switcher-right a.active {
+    background: var(--accent-red);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .app-navbar {
+        padding: 0 16px;
+    }
+    .screen-switcher-right {
+        display: none;
+    }
+}

@@ -1,0 +1,65 @@
+<!-- Common Top Navbar (Used on public pages) -->
+<nav class="app-navbar">
+    <a href="{% url 'bazi:form' %}" class="nav-brand">
+        <div class="nav-logo-symbol">
+            <span>丙</span>
+        </div>
+        <div class="nav-brand-title" data-th="ดูดวงศาสตร์จีน" data-en="Chinese Bazi Fortune">
+            ดูดวงศาสตร์จีน
+        </div>
+    </a>
+
+    <div class="nav-links-right">
+        <!-- 1. Analyze / Input form link -->
+        <a href="{% url 'bazi:form' %}" class="nav-item {% if request.resolver_match.url_name == 'form' %}active{% endif %}" data-th="วิเคราะห์ข้อมูล" data-en="Analyze">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 6v6l4 2"></path>
+            </svg>
+            <span data-th="วิเคราะห์ข้อมูล" data-en="Analyze">วิเคราะห์ข้อมูล</span>
+        </a>
+
+        <!-- 2. History link (Disabled for guest with tooltip) -->
+        <div class="nav-item-disabled-wrap">
+            <span class="nav-item disabled" style="cursor: not-allowed;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span data-th="ประวัติการดูดวง" data-en="History">ประวัติการดูดวง</span>
+            </span>
+            <div class="nav-tooltip" data-th="กรุณาเข้าสู่ระบบก่อนเพื่อดูประวัติ" data-en="Please sign in to view history">
+                กรุณาเข้าสู่ระบบก่อนเพื่อดูประวัติ
+            </div>
+        </div>
+
+        <!-- 3. Sign In link -->
+        <a href="{% url 'bazi:login' %}" class="nav-item nav-btn-login {% if request.resolver_match.url_name == 'login' %}active{% endif %}" data-th="เข้าสู่ระบบ" data-en="Sign In">
+            <span data-th="เข้าสู่ระบบ" data-en="Sign In">เข้าสู่ระบบ</span>
+        </a>
+    </div>
+</nav>
+
+<!-- Ambient Pure CSS Mist Layers -->
+<div class="ambient-mist-layer">
+    <div class="mist-cloud mist-cloud-1"></div>
+    <div class="mist-cloud mist-cloud-2"></div>
+    <div class="mist-cloud mist-cloud-3"></div>
+</div>
+
+<!-- Bottom-Left Floating Utility Controls (Language & Theme) -->
+<div class="bottom-left-controls">
+    <!-- Language Toggle Button -->
+    <button type="button" id="btn-lang-toggle" class="control-btn" title="Switch Language">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        <span id="current-lang-label">TH</span>
+    </button>
+
+    <!-- Theme Toggle Button (Light/Dark) -->
+    <button type="button" id="btn-theme-toggle" class="control-btn" title="Toggle Light/Dark Theme">
+        <span id="theme-icon">🌙</span>
+    </button>
+</div>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ดูดวงศาสตร์จีน - กรอกข้อมูลเพื่อวิเคราะห์ดวง</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+</head>
+<body>
+
+    <!-- Shared Top Navbar -->
+    {% include 'navbar.html' %}
+
+    <!-- 30% Left / 70% Right Split Layout -->
+    <main class="form-split-layout">
+        
+        <!-- LEFT 30%: Slow-Spinning Yin-Yang & Atmosphere -->
+        <aside class="form-left-col">
+            <div class="spinning-yinyang-element">
+                <div class="yinyang-green-orbit"></div>
+                <div class="yinyang-orbital-ring"></div>
+                <div class="yinyang-orb"></div>
+            </div>
+
+            <div class="left-calligraphy-wrap">
+                <div class="left-calligraphy-text">日日是好日</div>
+                <div class="left-calligraphy-text">知命不惧</div>
+                <div class="left-calligraphy-seal">吉</div>
+            </div>
+
+            <p class="left-quote-text" data-th="ผสานพลังหยินหยาง ค้นพบจังหวะชีวิตและศักยภาพที่ซ่อนเร้นในรหัสฟ้าดิน" data-en="Harmonizing Yin and Yang to unveil your destiny and hidden potential.">
+                ผสานพลังหยินหยาง ค้นพบจังหวะชีวิตและศักยภาพที่ซ่อนเร้นในรหัสฟ้าดิน
+            </p>
+        </aside>
+
+        <!-- RIGHT 70%: Minimal Clean Form Box -->
+        <section class="form-right-col">
+            <div class="minimal-form-box">
+                <div class="box-title-row">
+                    <h2 data-th="กรอกข้อมูลเพื่อดูดวง" data-en="Enter Your Birth Details">กรอกข้อมูลเพื่อดูดวง</h2>
+                    <p data-th="ระบุวันเดือนปีและเวลาเกิดเพื่อคำนวณรหัสสี่เสาโป๊ยหยี่" data-en="Provide solar birth date & time to calculate Four Pillars of Destiny">
+                        ระบุวันเดือนปีและเวลาเกิดเพื่อคำนวณรหัสสี่เสาโป๊ยหยี่
+                    </p>
+                </div>
+
+                <form action="{% url 'bazi:result' %}" method="POST">
+                    {% csrf_token %}
+
+                    <!-- Row 1: First Name & Last Name -->
+                    <div class="input-row two-col">
+                        <div class="field-group">
+                            <label class="field-label" for="first_name" data-th="ชื่อ" data-en="First Name">ชื่อ</label>
+                            <input type="text" id="first_name" name="first_name" class="field-input" placeholder="กรุณากรอกชื่อ" data-th="กรุณากรอกชื่อ" data-en="Enter first name" value="กฤษณะ" required>
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label" for="last_name" data-th="นามสกุล" data-en="Last Name">นามสกุล</label>
+                            <input type="text" id="last_name" name="last_name" class="field-input" placeholder="กรุณากรอกนามสกุล" data-th="กรุณากรอกนามสกุล" data-en="Enter last name" value="แสงทอง" required>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Gender Selector -->
+                    <div class="input-row" style="margin-bottom: 16px;">
+                        <div class="field-group">
+                            <label class="field-label" data-th="เพศสภาพ" data-en="Gender">เพศสภาพ</label>
+                            <div class="gender-selector">
+                                <label class="gender-radio-item">
+                                    <input type="radio" name="gender" value="male" checked>
+                                    <span class="radio-circle"></span>
+                                    <span data-th="ชาย" data-en="Male">ชาย</span>
+                                </label>
+                                <label class="gender-radio-item">
+                                    <input type="radio" name="gender" value="female">
+                                    <span class="radio-circle"></span>
+                                    <span data-th="หญิง" data-en="Female">หญิง</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Birth Date (Calendar Picker + Dropdown & Searchable Input) -->
+                    <div class="input-row date-cal-row">
+                        <!-- Day Input with datalist -->
+                        <div class="field-group">
+                            <label class="field-label" for="birth_day" data-th="วันเกิด" data-en="Day">วันเกิด</label>
+                            <input list="days-list" id="birth_day" name="birth_day" class="field-input" value="14" required>
+                            <datalist id="days-list">
+                                {% for d in days_range %}
+                                <option value="{{ d }}">{{ d }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </div>
+
+                        <!-- Month Select with searchable options -->
+                        <div class="field-group">
+                            <label class="field-label" for="birth_month" data-th="เดือนเกิด" data-en="Month">เดือนเกิด</label>
+                            <select id="birth_month" name="birth_month" class="field-select">
+                                <option value="1" data-th="มกราคม" data-en="January">มกราคม</option>
+                                <option value="2" selected data-th="กุมภาพันธ์" data-en="February">กุมภาพันธ์</option>
+                                <option value="3" data-th="มีนาคม" data-en="March">มีนาคม</option>
+                                <option value="4" data-th="เมษายน" data-en="April">เมษายน</option>
+                                <option value="5" data-th="พฤษภาคม" data-en="May">พฤษภาคม</option>
+                                <option value="6" data-th="มิถุนายน" data-en="June">มิถุนายน</option>
+                                <option value="7" data-th="กรกฎาคม" data-en="July">กรกฎาคม</option>
+                                <option value="8" data-th="สิงหาคม" data-en="August">สิงหาคม</option>
+                                <option value="9" data-th="กันยายน" data-en="September">กันยายน</option>
+                                <option value="10" data-th="ตุลาคม" data-en="October">ตุลาคม</option>
+                                <option value="11" data-th="พฤศจิกายน" data-en="November">พฤศจิกายน</option>
+                                <option value="12" data-th="ธันวาคม" data-en="December">ธันวาคม</option>
+                            </select>
+                        </div>
+
+                        <!-- Year Input with datalist -->
+                        <div class="field-group">
+                            <label class="field-label" for="birth_year" data-th="ปีเกิด (ค.ศ. / พ.ศ.)" data-en="Year">ปีเกิด (ค.ศ. / พ.ศ.)</label>
+                            <input list="years-list" id="birth_year" name="birth_year" class="field-input" value="1995" required>
+                            <datalist id="years-list">
+                                {% for y in years_range %}
+                                <option value="{{ y }}">{{ y }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </div>
+
+                        <!-- Calendar Picker Modal / Native Trigger Button -->
+                        <div class="field-group">
+                            <button type="button" id="btn-calendar-trigger" class="btn-calendar-trigger" title="คลิกเพื่อเลือกวันเดือนปีจากปฏิทิน">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                            </button>
+                            <!-- Hidden HTML5 native date input triggered by button -->
+                            <input type="date" id="hidden-date-picker" style="position: absolute; opacity: 0; pointer-events: none; width: 0; height: 0;">
+                        </div>
+                    </div>
+
+                    <!-- Row 4: Separated Time (Hour & Minute) & Location -->
+                    <div class="input-row time-location-row">
+                        <!-- Separated Hour & Minute Input Template -->
+                        <div class="field-group">
+                            <label class="field-label" data-th="เวลาเกิด (ชั่วโมง : นาที)" data-en="Birth Time (HH : MM)">เวลาเกิด (ชั่วโมง : นาที)</label>
+                            <div class="time-split-wrap">
+                                <select id="birth_hour" class="field-select">
+                                    {% for h in hours_range %}
+                                    <option value="{{ h }}" {% if h == 9 %}selected{% endif %}>{{ h|stringformat:"02d" }}</option>
+                                    {% endfor %}
+                                </select>
+                                <span class="time-split-divider">:</span>
+                                <select id="birth_minute" class="field-select">
+                                    {% for m in minutes_range %}
+                                    <option value="{{ m }}" {% if m == 30 %}selected{% endif %}>{{ m|stringformat:"02d" }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <input type="hidden" id="birth_time" name="birth_time" value="09:30">
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label" for="province" data-th="จังหวัด" data-en="Province">จังหวัด</label>
+                            <select id="province" name="province" class="field-select">
+                                <option value="กรุงเทพมหานคร" data-th="กรุงเทพมหานคร" data-en="Bangkok">กรุงเทพมหานคร</option>
+                                <option value="เชียงใหม่" data-th="เชียงใหม่" data-en="Chiang Mai">เชียงใหม่</option>
+                                <option value="นนทบุรี" data-th="นนทบุรี" data-en="Nonthaburi">นนทบุรี</option>
+                                <option value="ภูเก็ต" data-th="ภูเก็ต" data-en="Phuket">ภูเก็ต</option>
+                                <option value="ชลบุรี" data-th="ชลบุรี" data-en="Chonburi">ชลบุรี</option>
+                                <option value="อื่นๆ" data-th="อื่นๆ" data-en="Other">อื่นๆ</option>
+                            </select>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label" for="country" data-th="ประเทศ" data-en="Country">ประเทศ</label>
+                            <select id="country" name="country" class="field-select">
+                                <option value="ประเทศไทย" data-th="ประเทศไทย" data-en="Thailand">ประเทศไทย</option>
+                                <option value="สิงคโปร์" data-th="สิงคโปร์" data-en="Singapore">สิงคโปร์</option>
+                                <option value="จีน" data-th="จีน" data-en="China">จีน</option>
+                                <option value="อื่นๆ" data-th="อื่นๆ" data-en="Other">อื่นๆ</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-submit-row">
+                        <button type="submit" class="btn-submit-action" data-th="เริ่มวิเคราะห์ดวง" data-en="Calculate Destiny">
+                            เริ่มวิเคราะห์ดวง
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Floating Navigation Switcher for easy testing -->
+    <div class="screen-switcher-right">
+        <a href="{% url 'bazi:form' %}" class="active" data-th="กรอกข้อมูล" data-en="Form">กรอกข้อมูล</a>
+        <a href="{% url 'bazi:login' %}" data-th="เข้าสู่ระบบ" data-en="Login">เข้าสู่ระบบ</a>
+        <a href="{% url 'bazi:result' %}" data-th="ผลวิเคราะห์" data-en="Result">ผลวิเคราะห์</a>
+        <a href="{% url 'bazi:admin_dashboard' %}" data-th="แอดมิน" data-en="Admin">แอดมิน</a>
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

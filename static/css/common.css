@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Palette */
+    --gold-primary: #d4af37;
+    --gold-light: #f3df95;
+    --gold-dark: #a9801b;
+    --gold-gradient: linear-gradient(135deg, #d4a737 0%, #f0cd6d 50%, #ab801a 100%);
+    --gold-btn-gradient: linear-gradient(180deg, #d3a43e 0%, #b88628 100%);
+    --gold-btn-hover: linear-gradient(180deg, #dfb14b 0%, #c49130 100%);
+    
+    /* Dark Theme */
+    --bg-dark: #0f1013;
+    --bg-dark-card: #181b21;
+    --bg-dark-card-inner: #21252d;
+    --border-dark: rgba(255, 255, 255, 0.08);
+    --border-gold-dark: rgba(212, 175, 55, 0.25);
+    --text-dark-primary: #f0f1f3;
+    --text-dark-secondary: #9aa1ad;
+    --text-gold: #e2ba59;
+
+    /* Light Theme */
+    --bg-light: #f7f6f2;
+    --bg-light-card: #ffffff;
+    --border-light: #e5e5ea;
+    --border-light-input: #e2e4e9;
+    --text-light-primary: #1f2328;
+    --text-light-secondary: #636a75;
+    --text-light-muted: #8c939e;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Prompt', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: var(--text-light-primary);
+    background-color: var(--bg-light);
+    min-height: 100vh;
+}
+
+/* Common Header Styles */
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 48px;
+    width: 100%;
+    z-index: 50;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #f8eed1 0%, #dfb752 60%, #b8860b 100%);
+    box-shadow: 0 2px 8px rgba(184, 134, 11, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ecd393;
+    overflow: hidden;
+}
+
+.logo-circle svg {
+    width: 26px;
+    height: 26px;
+    fill: #5a3e0b;
+}
+
+.brand-info h1 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    line-height: 1.2;
+}
+
+.brand-info p {
+    font-size: 11px;
+    color: var(--text-light-secondary);
+    margin-top: 2px;
+}
+
+/* User Profile Badge */
+.user-profile-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.avatar-icon-wrap {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #e2e5ea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+}
+
+.user-profile-badge.dark .avatar-icon-wrap {
+    background: #2a2e36;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.avatar-icon-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-icon-wrap svg {
+    width: 20px;
+    height: 20px;
+    fill: #687280;
+}
+
+.user-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.user-role {
+    font-size: 11px;
+    color: #b8860b;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Top demo navigation pill */
+.screen-switcher {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(20, 24, 30, 0.92);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    backdrop-filter: blur(8px);
+    border-radius: 40px;
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 9999;
+}
+
+.screen-switcher a {
+    color: #cfd5e0;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 20px;
+    transition: all 0.2s;
+}
+
+.screen-switcher a:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.screen-switcher a.active {
+    background: var(--gold-btn-gradient);
+    color: #ffffff;
+    font-weight: 600;
+}

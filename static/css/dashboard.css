@@ -1,0 +1,447 @@
+/* Admin Dashboard CSS (Matching Image 4) */
+.admin-page-body {
+    background-color: #0d0f12;
+    color: #f0f2f5;
+    min-height: 100vh;
+    padding-bottom: 60px;
+}
+
+/* Admin Top Navbar */
+.admin-navbar {
+    background: #15181e;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 12px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.admin-nav-left {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.admin-menu-tabs {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    list-style: none;
+}
+
+.admin-menu-tabs a {
+    color: #9aa1ad;
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 500;
+    padding: 6px 4px;
+    position: relative;
+    transition: color 0.2s;
+}
+
+.admin-menu-tabs a:hover {
+    color: #ffffff;
+}
+
+.admin-menu-tabs a.active {
+    color: #dfb743;
+    font-weight: 600;
+}
+
+.admin-menu-tabs a.active::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #dfb743;
+    border-radius: 2px;
+}
+
+.admin-nav-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.nav-search-wrap {
+    position: relative;
+    width: 220px;
+}
+
+.nav-search-input {
+    width: 100%;
+    height: 38px;
+    background: #1f232b;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 19px;
+    padding: 0 36px 0 16px;
+    color: #ffffff;
+    font-size: 13px;
+    outline: none;
+}
+
+.nav-search-wrap svg {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #687280;
+    width: 16px;
+    height: 16px;
+}
+
+.nav-bell-btn {
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #9aa1ad;
+    display: flex;
+    align-items: center;
+}
+
+.nav-bell-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: #ef4444;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-profile-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.admin-profile-pill .avatar-img {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #252a33;
+}
+
+.admin-profile-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Dashboard Container */
+.admin-container {
+    max-width: 1260px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+/* Stat Cards Row */
+.admin-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.stat-metric-card {
+    background: #161920;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 18px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.stat-icon-wrap {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(223, 183, 67, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-icon-wrap.green {
+    background: rgba(46, 160, 67, 0.15);
+}
+
+.stat-icon-wrap svg {
+    width: 26px;
+    height: 26px;
+    fill: #dfb743;
+}
+
+.stat-icon-wrap.green svg {
+    fill: #4ade80;
+}
+
+.stat-info-wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    font-size: 12.5px;
+    color: #8c95a3;
+    font-weight: 500;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    margin: 2px 0;
+}
+
+.stat-subtext {
+    font-size: 11px;
+    color: #687280;
+}
+
+/* Users Table Card */
+.admin-table-card {
+    background: #161920;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 20px;
+    padding: 24px;
+}
+
+.table-card-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.table-card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.table-search-input {
+    height: 38px;
+    background: #1f232b;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 0 14px;
+    color: #ffffff;
+    font-size: 13px;
+    outline: none;
+    width: 200px;
+}
+
+.btn-filter,
+.btn-export {
+    height: 38px;
+    background: #1f232b;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 0 16px;
+    color: #d1d7e0;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-add-user {
+    height: 38px;
+    background: var(--gold-btn-gradient);
+    border: none;
+    border-radius: 10px;
+    padding: 0 20px;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Table Style */
+.users-table-wrap {
+    overflow-x: auto;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.users-table th {
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: #8c95a3;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.users-table td {
+    padding: 14px 16px;
+    font-size: 13px;
+    color: #d1d7e0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.user-col-data {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.table-user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #252a33;
+}
+
+.user-name-text {
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.status-pill {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 12px;
+    font-size: 11.5px;
+    font-weight: 500;
+}
+
+.status-pill.active {
+    background: rgba(46, 160, 67, 0.18);
+    color: #4ade80;
+}
+
+.status-pill.inactive {
+    background: rgba(248, 81, 73, 0.18);
+    color: #f87171;
+}
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-icon-action {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    background: #1f232b;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8c95a3;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-icon-action:hover {
+    color: #ffffff;
+    background: #272c36;
+}
+
+.btn-icon-action.delete:hover {
+    color: #f87171;
+}
+
+/* Pagination */
+.table-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 24px;
+}
+
+.page-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: transparent;
+    border: none;
+    color: #8c95a3;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.page-btn:hover {
+    color: #ffffff;
+    background: #1f232b;
+}
+
+.page-btn.active {
+    background: var(--gold-btn-gradient);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.page-ellipsis {
+    color: #687280;
+    font-size: 13px;
+    padding: 0 4px;
+}
+
+@media (max-width: 992px) {
+    .admin-stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-stats-grid {
+        grid-template-columns: 1fr;
+    }
+    .admin-navbar {
+        padding: 12px 18px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .admin-menu-tabs {
+        overflow-x: auto;
+        width: 100%;
+        padding-bottom: 8px;
+    }
+}
