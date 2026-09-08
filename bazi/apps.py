@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class MainControlConfig(AppConfig):
+class BaziConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'main_control'
+    name = 'bazi'
