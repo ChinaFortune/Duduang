@@ -1094,12 +1094,14 @@ input:focus-visible {
 
 .form-row-name-gender {
     grid-template-columns:
-        minmax(0, 1fr)
+        minmax(0, 1.2fr)
+        minmax(0, 1.2fr)
         clamp(150px, 13.2vw, 190px);
 
     gap:
         clamp(13px, 1.53vw, 22px);
 }
+
 
 
 .form-row-birth {
@@ -2225,3 +2227,46 @@ input:focus-visible {
         animation-iteration-count: 1 !important;
     }
 }
+
+/* =========================================================
+   DISABLED BUTTON
+========================================================= */
+
+.btn-disabled {
+    background: #E9E5E3 !important;
+
+    color: #A8A2A0 !important;
+
+    border-color: #DDD7D4 !important;
+
+    cursor: not-allowed !important;
+
+    box-shadow: none !important;
+
+    transform: none !important;
+
+    pointer-events: none;
+
+    opacity: 0.7;
+}
+
+
+/* =========================================================
+   DISABLED NAV ITEM
+========================================================= */
+
+.nav-item.btn-disabled {
+    background: transparent !important;
+
+    color: #AAA4A1 !important;
+
+    border-color: transparent !important;
+
+    opacity: 0.65;
+}
+
+
+.nav-item.btn-disabled::after {
+    display: none;
+}
+
