@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&family=Cinzel:wght@600;700&display=swap');
 
 :root {
     /* Palette */
@@ -36,7 +36,9 @@
 }
 
 body {
-    font-family: 'Prompt', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Inter', 'Noto Sans Thai', 'Prompt', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     color: var(--text-light-primary);
     background-color: var(--bg-light);

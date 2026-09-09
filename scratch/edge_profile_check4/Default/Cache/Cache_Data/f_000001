@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ดูดวงศาสตร์จีน โป๊ยหยี่ - กรอกข้อมูลเพื่อวิเคราะห์ดวง</title>
+    
+    <!-- Google Fonts for High-End Calligraphy & Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@500;700;900&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/theme.css?v=2.2">
+    <link rel="stylesheet" href="/static/css/form.css?v=2.2">
+</head>
+<body>
+
+    <!-- Shared Top Navbar (Includes Mist, Controls & Universal Yin-Yang) -->
+    <!-- Common Top Navbar & Universal Background -->
+<nav class="app-navbar">
+    <a href="/" class="nav-brand">
+        <!-- Animated Spinning Yin-Yang Logo from Hero Area -->
+        <div class="nav-logo-yinyang-mini" title="Energy Flow • 陰陽">
+            <div class="nav-yinyang-ring-green"></div>
+            <div class="nav-yinyang-ring-red"></div>
+            <div class="nav-yinyang-orb"></div>
+        </div>
+        <div class="nav-brand-text-wrap">
+            <div class="nav-brand-title" data-th="ดูดวงศาสตร์จีน โป๊ยหยี่" data-en="BaZi Destiny Analysis">
+                ดูดวงศาสตร์จีน โป๊ยหยี่
+            </div>
+            <div class="nav-brand-sub" data-th="風水 • 命理 • 運勢 (พลังฟ้าดิน)" data-en="Feng Shui • BaZi • Energy">
+                風水 • 命理 • 運勢
+            </div>
+        </div>
+    </a>
+
+    <div class="nav-links-right">
+        <!-- 1. หน้าหลัก (Home) -->
+        <a href="/" class="nav-item active" data-th="หน้าหลัก" data-en="Home">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span data-th="หน้าหลัก" data-en="Home">หน้าหลัก</span>
+        </a>
+
+        <!-- 2. จองปรึกษา -->
+        <a href="/booking/" class="nav-item " data-th="จองปรึกษา" data-en="Booking">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span data-th="จองปรึกษา" data-en="Booking">จองปรึกษา</span>
+        </a>
+
+        <!-- 3. ประวัติ -->
+        <a href="/history/" class="nav-item " data-th="ประวัติ" data-en="History">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span data-th="ประวัติ" data-en="History">ประวัติ</span>
+        </a>
+
+        <!-- 4. Login หรือ แสดงชื่อผู้ใช้ถ้าล็อกอินแล้ว -->
+        
+        <a href="/login/" class="nav-item nav-btn-login " data-th="เข้าสู่ระบบ" data-en="Sign In">
+            <span data-th="เข้าสู่ระบบ" data-en="Sign In">เข้าสู่ระบบ</span>
+        </a>
+        
+    </div>
+</nav>
+
+<!-- Universal Fixed Background Yin-Yang Animation (Active on every page) -->
+<div class="background-yinyang-fixed" aria-hidden="true">
+    <div class="yin-yang-symbol">
+        <div class="yin-yang-small yin"></div>
+        <div class="yin-yang-small yang"></div>
+    </div>
+</div>
+
+<!-- Ambient Pure CSS Mist Layers -->
+<div class="ambient-mist-layer">
+    <div class="mist-cloud mist-cloud-1"></div>
+    <div class="mist-cloud mist-cloud-2"></div>
+    <div class="mist-cloud mist-cloud-3"></div>
+</div>
+
+<!-- Bottom-Left Floating Utility Controls (Language & Theme) -->
+<div class="bottom-left-controls">
+    <button type="button" id="btn-lang-toggle" class="control-btn" title="Switch Language">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        <span id="current-lang-label">TH</span>
+    </button>
+
+    <button type="button" id="btn-theme-toggle" class="control-btn" title="Toggle Light/Dark Theme">
+        <span id="theme-icon">🌙</span>
+    </button>
+</div>
+
+
+    <!-- Split Layout: Left BaZi Showcase + Right Clean Form -->
+    <main class="form-split-layout" id="form-section">
+        
+        <!-- LEFT HERO: BaZi Philosophy & Value Showcase (No Woman Photo, Chinese Ornaments & Benefit Boxes) -->
+        <aside class="form-left-col bazi-showcase-panel">
+            
+            <!-- Large Watermark Calligraphy Background -->
+            <div class="calligraphy-watermark-bg" aria-hidden="true">
+                <span>八</span>
+                <span>字</span>
+            </div>
+
+            <!-- Top Header & Brand Philosophy -->
+            <div class="showcase-header">
+                <div class="showcase-badge-row">
+                    <span class="showcase-tag-pill">BAZI METAPHYSICS • 四柱八字</span>
+                    <div class="chinese-seal-square" title="吉 (มงคลและโชคลาภ)">吉</div>
+                </div>
+
+                <h1 class="showcase-title">
+                    ถอดรหัสชะตาชีวิต<br>
+                    <span class="highlight-gold">ด้วยศาสตร์โป๊ยหยี่สี่เถียว</span>
+                </h1>
+
+                <p class="showcase-lead-desc">
+                    ศาสตร์ดาราศาสตร์จีนโบราณอิงตาม 24 สารทสุริยคติ คำนวณสมดุลเบญจธาตุเฉพาะบุคคล เพื่อค้นหาจุดแข็ง จังหวะเวลา และทิศทางแห่งความสำเร็จ
+                </p>
+            </div>
+
+            <!-- 4 Minimalist Benefit & Value Boxes (ดูดวงได้อะไร ดียังไง) -->
+            <div class="bazi-benefit-grid">
+                
+                <!-- Box 1: Core Element & Identity -->
+                <div class="benefit-card">
+                    <div class="benefit-card-header">
+                        <div class="benefit-chinese-char" title="命 (ชะตา / ตัวตน)">命</div>
+                        <div>
+                            <h3 class="benefit-title">ค้นพบ "ธาตุดิถี" (Day Master)</h3>
+                            <span class="benefit-subtitle">รู้จักแก่นแท้และศักยภาพแฝง</span>
+                        </div>
+                    </div>
+                    <p class="benefit-desc">
+                        รู้ว่าตนเองคือธาตุอะไร (ดิน ทอง น้ำ ไม้ ไฟ) พลังแข็งหรืออ่อน จุดเด่นนิสัยเฉพาะตัว และจุดบอดที่ต้องระวังในการดำเนินชีวิต
+                    </p>
+                </div>
+
+                <!-- Box 2: Life Cycles & Wealth -->
+                <div class="benefit-card">
+                    <div class="benefit-card-header">
+                        <div class="benefit-chinese-char" title="運 (วาสนา / จังหวะ)">運</div>
+                        <div>
+                            <h3 class="benefit-title">อ่านจังหวะชีวิตและการเงิน</h3>
+                            <span class="benefit-subtitle">รู้เท่าทันเวลาแห่งโอกาส</span>
+                        </div>
+                    </div>
+                    <p class="benefit-desc">
+                        เข้าใจรอบพลังงานชีวิต รู้ช่วงเวลาจังหวะขาขึ้นเพื่อมุ่งรุกสู่ความมั่งคั่ง และช่วงเวลาชะลอตัวเพื่อวางแผนรับมือกับความเสี่ยง
+                    </p>
+                </div>
+
+                <!-- Box 3: Five Elements Harmony -->
+                <div class="benefit-card">
+                    <div class="benefit-card-header">
+                        <div class="benefit-chinese-char" title="和 (ความสมดุล / ฮวงจุ้ย)">和</div>
+                        <div>
+                            <h3 class="benefit-title">ธาตุให้คุณ & ปรับสมดุล</h3>
+                            <span class="benefit-subtitle">ฮวงจุ้ยและพลังงานหนุนดวง</span>
+                        </div>
+                    </div>
+                    <p class="benefit-desc">
+                        ระบุธาตุที่เสริมโชคลาภ (ธาตุที่ชอบ) และธาตุที่ควรหลีกเลี่ยง สามารถนำไปปรับใช้กับสีมงคล ทิศทางทำเล และคู่ครองหุ้นส่วน
+                    </p>
+                </div>
+
+                <!-- Box 4: Strategic Direction -->
+                <div class="benefit-card">
+                    <div class="benefit-card-header">
+                        <div class="benefit-chinese-char" title="智 (ปัญญา / กลยุทธ์)">智</div>
+                        <div>
+                            <h3 class="benefit-title">เข็มทิศวางแผนและการตัดสินใจ</h3>
+                            <span class="benefit-subtitle">Energy Blueprint เพื่อความมั่นใจ</span>
+                        </div>
+                    </div>
+                    <p class="benefit-desc">
+                        ใช้เป็นข้อมูลเชิงกลยุทธ์ประกอบการตัดสินใจเรื่องธุรกิจ การเปลี่ยนงาน และการลงทุนอย่างมีหลักการและแม่นยำ
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Bottom Quote & Consultation Link -->
+            <div class="showcase-bottom-bar">
+                <div class="chinese-maxim">
+                    <span class="maxim-cn">“命理由天，運由己造”</span>
+                    <span class="maxim-th">โชคชะตาฟ้ากำหนด แต่วิถีและโอกาสเราสร้างเอง</span>
+                </div>
+                <a href="/booking/" class="btn-showcase-consult">
+                    ปรึกษาซินแส &rarr;
+            </div>
+        </aside>
+
+        <!-- RIGHT: Minimal Clean Form Box -->
+        <section class="form-right-col">
+            <div class="minimal-form-box">
+
+                <div class="box-title-row">
+                    <span style="display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.2px; color: var(--accent-red); margin-bottom: 6px; text-transform: uppercase;">
+                        DESTINY JOURNEY • 四柱八字
+                    </span>
+                    <h2 data-th="คำนวณดวงจีนของคุณ" data-en="Calculate Your Destiny">คำนวณดวงจีนของคุณ</h2>
+                    <p data-th="กรอกข้อมูลวันเดือนปีและเวลาเกิดเพื่อสร้างแผนผังพลังงานเฉพาะบุคคล" data-en="Provide solar birth date & time to calculate your Four Pillars of Destiny">
+                        กรอกข้อมูลวันเดือนปีและเวลาเกิดเพื่อสร้างแผนผังพลังงานเฉพาะบุคคล
+                    </p>
+                </div>
+
+                <form action="/result/" method="POST">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="uZNPrIzPDbKBL1u268JhVNcrcSCxTe7F3A5UQ10KMldFpAYz1WqrMAVOOYsY2Q2B">
+
+                    <!-- Row 1: First Name & Last Name -->
+                    <div class="input-row two-col">
+                        <div class="field-group">
+                            <label class="field-label" for="first_name" data-th="ชื่อจริง" data-en="First Name">ชื่อจริง</label>
+                            <input type="text" id="first_name" name="first_name" class="field-input" placeholder="ระบุชื่อจริง" data-th="ระบุชื่อจริง" data-en="Enter first name" value="กฤษณะ" required>
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label" for="last_name" data-th="นามสกุล" data-en="Last Name">นามสกุล</label>
+                            <input type="text" id="last_name" name="last_name" class="field-input" placeholder="ระบุนามสกุล" data-th="ระบุนามสกุล" data-en="Enter last name" value="แสงทอง" required>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Gender Selector -->
+                    <div class="input-row" style="margin-bottom: 16px;">
+                        <div class="field-group">
+                            <label class="field-label" data-th="เพศสภาพ" data-en="Gender">เพศสภาพ</label>
+                            <div class="gender-selector">
+                                <label class="gender-radio-item">
+                                    <input type="radio" name="gender" value="female">
+                                    <span data-th="หญิง" data-en="Female">หญิง</span>
+                                </label>
+                                <label class="gender-radio-item">
+                                    <input type="radio" name="gender" value="male" checked>
+                                    <span data-th="ชาย" data-en="Male">ชาย</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Birth Date (Day, Month, Year + Calendar Picker) -->
+                    <div class="input-row date-cal-row">
+                        <!-- Day Input with datalist -->
+                        <div class="field-group">
+                            <label class="field-label" for="birth_day" data-th="วันเกิด" data-en="Day">วันเกิด</label>
+                            <input list="days-list" id="birth_day" name="birth_day" class="field-input" value="14" required>
+                            <datalist id="days-list">
+                                
+                                <option value="1">1</option>
+                                
+                                <option value="2">2</option>
+                                
+                                <option value="3">3</option>
+                                
+                                <option value="4">4</option>
+                                
+                                <option value="5">5</option>
+                                
+                                <option value="6">6</option>
+                                
+                                <option value="7">7</option>
+                                
+                                <option value="8">8</option>
+                                
+                                <option value="9">9</option>
+                                
+                                <option value="10">10</option>
+                                
+                                <option value="11">11</option>
+                                
+                                <option value="12">12</option>
+                                
+                                <option value="13">13</option>
+                                
+                                <option value="14">14</option>
+                                
+                                <option value="15">15</option>
+                                
+                                <option value="16">16</option>
+                                
+                                <option value="17">17</option>
+                                
+                                <option value="18">18</option>
+                                
+                                <option value="19">19</option>
+                                
+                                <option value="20">20</option>
+                                
+                                <option value="21">21</option>
+                                
+                                <option value="22">22</option>
+                                
+                                <option value="23">23</option>
+                                
+                                <option value="24">24</option>
+                                
+                                <option value="25">25</option>
+                                
+                                <option value="26">26</option>
+                                
+                                <option value="27">27</option>
+                                
+                                <option value="28">28</option>
+                                
+                                <option value="29">29</option>
+                                
+                                <option value="30">30</option>
+                                
+                                <option value="31">31</option>
+                                
+                            </datalist>
+                        </div>
+
+                        <!-- Month Select -->
+                        <div class="field-group">
+                            <label class="field-label" for="birth_month" data-th="เดือนเกิด" data-en="Month">เดือนเกิด</label>
+                            <select id="birth_month" name="birth_month" class="field-select">
+                                <option value="1" data-th="มกราคม" data-en="January">มกราคม</option>
+                                <option value="2" selected data-th="กุมภาพันธ์" data-en="February">กุมภาพันธ์</option>
+                                <option value="3" data-th="มีนาคม" data-en="March">มีนาคม</option>
+                                <option value="4" data-th="เมษายน" data-en="April">เมษายน</option>
+                                <option value="5" data-th="พฤษภาคม" data-en="May">พฤษภาคม</option>
+                                <option value="6" data-th="มิถุนายน" data-en="June">มิถุนายน</option>
+                                <option value="7" data-th="กรกฎาคม" data-en="July">กรกฎาคม</option>
+                                <option value="8" data-th="สิงหาคม" data-en="August">สิงหาคม</option>
+                                <option value="9" data-th="กันยายน" data-en="September">กันยายน</option>
+                                <option value="10" data-th="ตุลาคม" data-en="October">ตุลาคม</option>
+                                <option value="11" data-th="พฤศจิกายน" data-en="November">พฤศจิกายน</option>
+                                <option value="12" data-th="ธันวาคม" data-en="December">ธันวาคม</option>
+                            </select>
+                        </div>
+
+                        <!-- Year Input -->
+                        <div class="field-group">
+                            <label class="field-label" for="birth_year" data-th="ปีเกิด (พ.ศ./ค.ศ.)" data-en="Year">ปีเกิด (พ.ศ./ค.ศ.)</label>
+                            <input list="years-list" id="birth_year" name="birth_year" class="field-input" value="1995" required>
+                            <datalist id="years-list">
+                                
+                                <option value="2026">2026</option>
+                                
+                                <option value="2025">2025</option>
+                                
+                                <option value="2024">2024</option>
+                                
+                                <option value="2023">2023</option>
+                                
+                                <option value="2022">2022</option>
+                                
+                                <option value="2021">2021</option>
+                                
+                                <option value="2020">2020</option>
+                                
+                                <option value="2019">2019</option>
+                                
+                                <option value="2018">2018</option>
+                                
+                                <option value="2017">2017</option>
+                                
+                                <option value="2016">2016</option>
+                                
+                                <option value="2015">2015</option>
+                                
+                                <option value="2014">2014</option>
+                                
+                                <option value="2013">2013</option>
+                                
+                                <option value="2012">2012</option>
+                                
+                                <option value="2011">2011</option>
+                                
+                                <option value="2010">2010</option>
+                                
+                                <option value="2009">2009</option>
+                                
+                                <option value="2008">2008</option>
+                                
+                                <option value="2007">2007</option>
+                                
+                                <option value="2006">2006</option>
+                                
+                                <option value="2005">2005</option>
+                                
+                                <option value="2004">2004</option>
+                                
+                                <option value="2003">2003</option>
+                                
+                                <option value="2002">2002</option>
+                                
+                                <option value="2001">2001</option>
+                                
+                                <option value="2000">2000</option>
+                                
+                                <option value="1999">1999</option>
+                                
+                                <option value="1998">1998</option>
+                                
+                                <option value="1997">1997</option>
+                                
+                                <option value="1996">1996</option>
+                                
+                                <option value="1995">1995</option>
+                                
+                                <option value="1994">1994</option>
+                                
+                                <option value="1993">1993</option>
+                                
+                                <option value="1992">1992</option>
+                                
+                                <option value="1991">1991</option>
+                                
+                                <option value="1990">1990</option>
+                                
+                                <option value="1989">1989</option>
+                                
+                                <option value="1988">1988</option>
+                                
+                                <option value="1987">1987</option>
+                                
+                                <option value="1986">1986</option>
+                                
+                                <option value="1985">1985</option>
+                                
+                                <option value="1984">1984</option>
+                                
+                                <option value="1983">1983</option>
+                                
+                                <option value="1982">1982</option>
+                                
+                                <option value="1981">1981</option>
+                                
+                                <option value="1980">1980</option>
+                                
+                                <option value="1979">1979</option>
+                                
+                                <option value="1978">1978</option>
+                                
+                                <option value="1977">1977</option>
+                                
+                                <option value="1976">1976</option>
+                                
+                                <option value="1975">1975</option>
+                                
+                                <option value="1974">1974</option>
+                                
+                                <option value="1973">1973</option>
+                                
+                                <option value="1972">1972</option>
+                                
+                                <option value="1971">1971</option>
+                                
+                                <option value="1970">1970</option>
+                                
+                                <option value="1969">1969</option>
+                                
+                                <option value="1968">1968</option>
+                                
+                                <option value="1967">1967</option>
+                                
+                                <option value="1966">1966</option>
+                                
+                                <option value="1965">1965</option>
+                                
+                                <option value="1964">1964</option>
+                                
+                                <option value="1963">1963</option>
+                                
+                                <option value="1962">1962</option>
+                                
+                                <option value="1961">1961</option>
+                                
+                                <option value="1960">1960</option>
+                                
+                                <option value="1959">1959</option>
+                                
+                                <option value="1958">1958</option>
+                                
+                                <option value="1957">1957</option>
+                                
+                                <option value="1956">1956</option>
+                                
+                                <option value="1955">1955</option>
+                                
+                                <option value="1954">1954</option>
+                                
+                                <option value="1953">1953</option>
+                                
+                                <option value="1952">1952</option>
+                                
+                                <option value="1951">1951</option>
+                                
+                                <option value="1950">1950</option>
+                                
+                                <option value="1949">1949</option>
+                                
+                                <option value="1948">1948</option>
+                                
+                                <option value="1947">1947</option>
+                                
+                                <option value="1946">1946</option>
+                                
+                                <option value="1945">1945</option>
+                                
+                                <option value="1944">1944</option>
+                                
+                                <option value="1943">1943</option>
+                                
+                                <option value="1942">1942</option>
+                                
+                                <option value="1941">1941</option>
+                                
+                                <option value="1940">1940</option>
+                                
+                            </datalist>
+                        </div>
+
+                        <!-- Calendar Picker Button -->
+                        <div class="field-group">
+                            <button type="button" id="btn-calendar-trigger" class="btn-calendar-trigger" title="คลิกเพื่อเลือกวันเดือนปีจากปฏิทิน">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                            </button>
+                            <input type="date" id="hidden-date-picker" style="position: absolute; opacity: 0; pointer-events: none; width: 0; height: 0;">
+                        </div>
+                    </div>
+
+                    <!-- Row 4: Birth Time & Checkbox Unknown Time -->
+                    <div class="input-row time-location-row">
+                        
+                        <div class="field-group" id="time-picker-group">
+                            <label class="field-label" data-th="เวลาเกิด (ชั่วโมง : นาที)" data-en="Birth Time (HH : MM)">เวลาเกิด (ชั่วโมง : นาที)</label>
+                            <div class="time-split-wrap">
+                                <select id="birth_hour" class="field-select">
+                                    
+                                    <option value="0" >00</option>
+                                    
+                                    <option value="1" >01</option>
+                                    
+                                    <option value="2" >02</option>
+                                    
+                                    <option value="3" >03</option>
+                                    
+                                    <option value="4" >04</option>
+                                    
+                                    <option value="5" >05</option>
+                                    
+                                    <option value="6" >06</option>
+                                    
+                                    <option value="7" >07</option>
+                                    
+                                    <option value="8" >08</option>
+                                    
+                                    <option value="9" selected>09</option>
+                                    
+                                    <option value="10" >10</option>
+                                    
+                                    <option value="11" >11</option>
+                                    
+                                    <option value="12" >12</option>
+                                    
+                                    <option value="13" >13</option>
+                                    
+                                    <option value="14" >14</option>
+                                    
+                                    <option value="15" >15</option>
+                                    
+                                    <option value="16" >16</option>
+                                    
+                                    <option value="17" >17</option>
+                                    
+                                    <option value="18" >18</option>
+                                    
+                                    <option value="19" >19</option>
+                                    
+                                    <option value="20" >20</option>
+                                    
+                                    <option value="21" >21</option>
+                                    
+                                    <option value="22" >22</option>
+                                    
+                                    <option value="23" >23</option>
+                                    
+                                </select>
+                                <span class="time-split-divider">:</span>
+                                <select id="birth_minute" class="field-select">
+                                    
+                                    <option value="0" >00</option>
+                                    
+                                    <option value="1" >01</option>
+                                    
+                                    <option value="2" >02</option>
+                                    
+                                    <option value="3" >03</option>
+                                    
+                                    <option value="4" >04</option>
+                                    
+                                    <option value="5" >05</option>
+                                    
+                                    <option value="6" >06</option>
+                                    
+                                    <option value="7" >07</option>
+                                    
+                                    <option value="8" >08</option>
+                                    
+                                    <option value="9" >09</option>
+                                    
+                                    <option value="10" >10</option>
+                                    
+                                    <option value="11" >11</option>
+                                    
+                                    <option value="12" >12</option>
+                                    
+                                    <option value="13" >13</option>
+                                    
+                                    <option value="14" >14</option>
+                                    
+                                    <option value="15" >15</option>
+                                    
+                                    <option value="16" >16</option>
+                                    
+                                    <option value="17" >17</option>
+                                    
+                                    <option value="18" >18</option>
+                                    
+                                    <option value="19" >19</option>
+                                    
+                                    <option value="20" >20</option>
+                                    
+                                    <option value="21" >21</option>
+                                    
+                                    <option value="22" >22</option>
+                                    
+                                    <option value="23" >23</option>
+                                    
+                                    <option value="24" >24</option>
+                                    
+                                    <option value="25" >25</option>
+                                    
+                                    <option value="26" >26</option>
+                                    
+                                    <option value="27" >27</option>
+                                    
+                                    <option value="28" >28</option>
+                                    
+                                    <option value="29" >29</option>
+                                    
+                                    <option value="30" selected>30</option>
+                                    
+                                    <option value="31" >31</option>
+                                    
+                                    <option value="32" >32</option>
+                                    
+                                    <option value="33" >33</option>
+                                    
+                                    <option value="34" >34</option>
+                                    
+                                    <option value="35" >35</option>
+                                    
+                                    <option value="36" >36</option>
+                                    
+                                    <option value="37" >37</option>
+                                    
+                                    <option value="38" >38</option>
+                                    
+                                    <option value="39" >39</option>
+                                    
+                                    <option value="40" >40</option>
+                                    
+                                    <option value="41" >41</option>
+                                    
+                                    <option value="42" >42</option>
+                                    
+                                    <option value="43" >43</option>
+                                    
+                                    <option value="44" >44</option>
+                                    
+                                    <option value="45" >45</option>
+                                    
+                                    <option value="46" >46</option>
+                                    
+                                    <option value="47" >47</option>
+                                    
+                                    <option value="48" >48</option>
+                                    
+                                    <option value="49" >49</option>
+                                    
+                                    <option value="50" >50</option>
+                                    
+                                    <option value="51" >51</option>
+                                    
+                                    <option value="52" >52</option>
+                                    
+                                    <option value="53" >53</option>
+                                    
+                                    <option value="54" >54</option>
+                                    
+                                    <option value="55" >55</option>
+                                    
+                                    <option value="56" >56</option>
+                                    
+                                    <option value="57" >57</option>
+                                    
+                                    <option value="58" >58</option>
+                                    
+                                    <option value="59" >59</option>
+                                    
+                                </select>
+                            </div>
+                            <input type="hidden" id="birth_time" name="birth_time" value="09:30">
+                            
+                            <!-- Checkbox ไม่ทราบเวลาเกิด -->
+                            <label class="unknown-time-wrap">
+                                <input type="checkbox" id="birth_time_unknown" name="birth_time_unknown" value="1">
+                                <span data-th="ไม่ทราบเวลาเกิด (Unknown birth time)" data-en="Unknown birth time">ไม่ทราบเวลาเกิด</span>
+                            </label>
+                        </div>
+
+                        <!-- Location / Province & Place -->
+                        <div class="field-group">
+                            <label class="field-label" for="birth_place" data-th="สถานที่เกิด / จังหวัด" data-en="Birth Place / Province">สถานที่เกิด / จังหวัด</label>
+                            <input type="text" id="birth_place" name="birth_place" class="field-input" placeholder="ระบุจังหวัด หรือสถานที่เกิด" value="กรุงเทพมหานคร" data-th="ระบุจังหวัด หรือสถานที่เกิด" data-en="Enter birth province">
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label" for="country" data-th="ประเทศ" data-en="Country">ประเทศ</label>
+                            <select id="country" name="country" class="field-select">
+                                <option value="ประเทศไทย" data-th="ประเทศไทย" data-en="Thailand">ประเทศไทย</option>
+                                <option value="สิงคโปร์" data-th="สิงคโปร์" data-en="Singapore">สิงคโปร์</option>
+                                <option value="จีน" data-th="จีน" data-en="China">จีน</option>
+                                <option value="อื่นๆ" data-th="อื่นๆ" data-en="Other">อื่นๆ</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-submit-row">
+                        <button type="submit" class="btn-submit-action" data-th="เริ่มวิเคราะห์ดวงจีน (Calculate)" data-en="Calculate Destiny">
+                            เริ่มคำนวณดวงของฉัน →
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Floating Navigation Switcher for testing -->
+    <div class="screen-switcher-right">
+        <a href="/" class="active" data-th="กรอกข้อมูล" data-en="Form">กรอกข้อมูล</a>
+        <a href="/booking/" data-th="จองปรึกษา" data-en="Booking">จองปรึกษา</a>
+        <a href="/history/" data-th="ประวัติ" data-en="History">ประวัติ</a>
+        <a href="/login/" data-th="เข้าสู่ระบบ" data-en="Login">เข้าสู่ระบบ</a>
+        <a href="/admin/" data-th="แอดมิน" data-en="Admin">แอดมิน</a>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+    <script>
+        // Toggle disable time picker when "Unknown birth time" is checked
+        const unknownCheck = document.getElementById('birth_time_unknown');
+        const hourSel = document.getElementById('birth_hour');
+        const minSel = document.getElementById('birth_minute');
+        const timeInput = document.getElementById('birth_time');
+
+        if (unknownCheck) {
+            unknownCheck.addEventListener('change', function() {
+                if (this.checked) {
+                    hourSel.disabled = true;
+                    minSel.disabled = true;
+                    timeInput.value = '';
+                } else {
+                    hourSel.disabled = false;
+                    minSel.disabled = false;
+                    const h = String(hourSel.value).padStart(2, '0');
+                    const m = String(minSel.value).padStart(2, '0');
+                    timeInput.value = `${h}:${m}`;
+                }
+            });
+        }
+    </script>
+</body>
+</html>

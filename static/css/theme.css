@@ -1,11 +1,13 @@
 /* =========================================================
-   BAZI MINIMAL CLEAN DESIGN SYSTEM
+   BAZI FLAT DESIGN SYSTEM
    Palette: Red (Primary), Green (Secondary), Black & White
-   No background images. Pure CSS elements, Mist, & Slow-Spinning Yin-Yang.
+   Flat Design Principles: Zero artificial depth, no drop shadows,
+   geometric purity (6px-10px radii), solid color blocks,
+   and snappy scale transitions.
    Light & Dark Mode Support.
    ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&family=Cinzel:wght@600;700;800&family=Ma+Shan+Zheng&display=swap');
 
 /* Base Dark Theme (Default) */
 :root, [data-theme="dark"] {
@@ -14,7 +16,7 @@
     --bg-surface-elevated: #1e222a;
     --bg-input: #121419;
     --border-subtle: rgba(255, 255, 255, 0.08);
-    --border-card: rgba(255, 255, 255, 0.1);
+    --border-card: rgba(255, 255, 255, 0.12);
     
     /* Primary Red / Secondary Green */
     --accent-red: #c53030;
@@ -28,12 +30,18 @@
     --text-secondary: #a0aec0;
     --text-muted: #718096;
     
-    --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.4);
-    --mist-opacity: 0.35;
+    /* Flat Design Tokens: Zero Artificial Depth */
+    --shadow-card: none !important;
+    --card-glow: transparent;
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 10px;
+    --border-flat: 1.5px solid;
+    
+    --mist-opacity: 0.15;
     
     --yin-bg: #0d0f12;
     --yang-bg: #e2e8f0;
-    --card-glow: rgba(197, 48, 48, 0.08);
 }
 
 /* Light Theme */
@@ -42,8 +50,8 @@
     --bg-surface: #ffffff;
     --bg-surface-elevated: #f1f3f7;
     --bg-input: #ffffff;
-    --border-subtle: rgba(0, 0, 0, 0.08);
-    --border-card: rgba(0, 0, 0, 0.1);
+    --border-subtle: #edf2f7;
+    --border-card: #e2e8f0;
 
     --accent-red: #c53030;
     --accent-red-hover: #9b2c2c;
@@ -52,16 +60,22 @@
     --accent-green-hover: #276749;
     --accent-green-light: rgba(47, 133, 90, 0.1);
 
-    --text-primary: #1a202c;
-    --text-secondary: #4a5568;
-    --text-muted: #a0aec0;
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --text-muted: #9ca3af;
 
-    --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.06);
-    --mist-opacity: 0.12;
+    /* Flat Design Tokens: Zero Artificial Depth */
+    --shadow-card: none !important;
+    --card-glow: transparent;
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 10px;
+    --border-flat: 1.5px solid;
+    
+    --mist-opacity: 0.08;
 
-    --yin-bg: #1a202c;
+    --yin-bg: #111827;
     --yang-bg: #f8f9fa;
-    --card-glow: rgba(197, 48, 48, 0.03);
 }
 
 * {
@@ -71,7 +85,9 @@
 }
 
 body {
-    font-family: 'Prompt', 'Inter', -apple-system, sans-serif;
+    font-family: 'Inter', 'Noto Sans Thai', 'Prompt', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
     background-color: var(--bg-page);
     color: var(--text-primary);
     min-height: 100vh;
@@ -79,10 +95,10 @@ body {
     flex-direction: column;
     position: relative;
     overflow-x: hidden;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Pure CSS Floating Mist Layers (No Images) */
+/* Pure CSS Floating Mist Layers (Poster Style Flat Geometric Shapes, No Blur) */
 .ambient-mist-layer {
     position: fixed;
     top: 0;
@@ -98,31 +114,34 @@ body {
 .mist-cloud {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
+    /* Zero blur: flat geometric poster circles */
 }
 
 .mist-cloud-1 {
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(197, 48, 48, 0.25) 0%, rgba(47, 133, 90, 0.08) 50%, transparent 70%);
-    top: -100px;
-    left: -100px;
+    width: 540px;
+    height: 540px;
+    background: rgba(197, 48, 48, 0.08);
+    border: 1px solid rgba(197, 48, 48, 0.15);
+    top: -80px;
+    left: -80px;
     animation: driftMist 28s infinite alternate ease-in-out;
 }
 
 .mist-cloud-2 {
-    width: 750px;
-    height: 750px;
-    background: radial-gradient(circle, rgba(47, 133, 90, 0.2) 0%, rgba(197, 48, 48, 0.06) 60%, transparent 75%);
-    bottom: -150px;
-    right: -100px;
+    width: 680px;
+    height: 680px;
+    background: rgba(47, 133, 90, 0.07);
+    border: 1px solid rgba(47, 133, 90, 0.15);
+    bottom: -120px;
+    right: -80px;
     animation: driftMistReverse 34s infinite alternate ease-in-out;
 }
 
 .mist-cloud-3 {
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+    width: 440px;
+    height: 440px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     top: 40%;
     left: 30%;
     animation: driftMist 40s infinite alternate ease-in-out;
@@ -130,17 +149,17 @@ body {
 
 @keyframes driftMist {
     0% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(60px, -40px) scale(1.08); }
-    100% { transform: translate(-30px, 50px) scale(0.95); }
+    50% { transform: translate(40px, -30px) scale(1.04); }
+    100% { transform: translate(-20px, 35px) scale(0.96); }
 }
 
 @keyframes driftMistReverse {
     0% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(-70px, 30px) scale(1.05); }
-    100% { transform: translate(40px, -60px) scale(0.92); }
+    50% { transform: translate(-50px, 20px) scale(1.03); }
+    100% { transform: translate(30px, -45px) scale(0.95); }
 }
 
-/* Slow-Spinning Pure CSS/SVG Yin-Yang */
+/* Slow-Spinning Pure CSS Yin-Yang (Flat Aesthetic, Crisp Borders) */
 .spinning-yinyang-element {
     position: relative;
     width: 220px;
@@ -156,7 +175,8 @@ body {
     border-radius: 50%;
     background: linear-gradient(to bottom, var(--yin-bg) 50%, var(--yang-bg) 50%);
     position: relative;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2), 0 0 0 2px var(--border-card);
+    box-shadow: none;
+    border: 2px solid var(--border-card);
     animation: spinYinYang 42s linear infinite;
 }
 
@@ -170,7 +190,9 @@ body {
     background: var(--yin-bg);
     border-radius: 50%;
     transform: translateY(-50%);
-    box-shadow: 0 0 0 12px var(--yin-bg) inset, 0 0 0 16px var(--yang-bg) inset;
+    box-shadow: none;
+    border: 14px solid var(--yin-bg);
+    outline: 2px solid var(--yang-bg);
 }
 
 .yinyang-orb::after {
@@ -183,7 +205,9 @@ body {
     background: var(--yang-bg);
     border-radius: 50%;
     transform: translateY(-50%);
-    box-shadow: 0 0 0 12px var(--yang-bg) inset, 0 0 0 16px var(--yin-bg) inset;
+    box-shadow: none;
+    border: 14px solid var(--yang-bg);
+    outline: 2px solid var(--yin-bg);
 }
 
 .yinyang-orbital-ring {
@@ -201,7 +225,7 @@ body {
     width: 230px;
     height: 230px;
     border-radius: 50%;
-    border: 1px dotted var(--accent-green);
+    border: 1.5px dotted var(--accent-green);
     opacity: 0.35;
     animation: spinYinYang 80s linear infinite;
 }
@@ -216,8 +240,78 @@ body {
     to { transform: rotate(0deg); }
 }
 
+/* Navbar Yin-Yang Spinning Logo (Flat Crisp) */
+.nav-logo-yinyang-mini {
+    position: relative;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.nav-yinyang-orb {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: linear-gradient(to bottom, #11151c 50%, #f7fafc 50%);
+    position: relative;
+    box-shadow: none;
+    border: 1.5px solid var(--accent-red);
+    animation: spinYinYang 18s linear infinite;
+}
+
+.nav-yinyang-orb::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 13px;
+    height: 13px;
+    background: #11151c;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    border: 2px solid #11151c;
+    outline: 1.5px solid #f7fafc;
+}
+
+.nav-yinyang-orb::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 13px;
+    height: 13px;
+    background: #f7fafc;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    border: 2px solid #f7fafc;
+    outline: 1.5px solid #11151c;
+}
+
+.nav-yinyang-ring-red {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1.5px dashed var(--accent-red);
+    opacity: 0.75;
+    animation: spinYinYangReverse 24s linear infinite;
+}
+
+.nav-yinyang-ring-green {
+    position: absolute;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px dotted var(--accent-green);
+    opacity: 0.65;
+    animation: spinYinYang 30s linear infinite;
+}
+
 /* =========================================================
-   COMMON TOP NAVBAR (Used on all public pages)
+   COMMON TOP NAVBAR (Flat Design: Solid, Zero Blur, Crisp Border)
    ========================================================= */
 .app-navbar {
     position: sticky;
@@ -225,19 +319,20 @@ body {
     left: 0;
     width: 100%;
     height: 68px;
-    background: rgba(21, 24, 30, 0.85);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+    backdrop-filter: none;
+    border-bottom: 1.5px solid var(--border-card);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 40px;
     z-index: 1000;
-    transition: background 0.3s ease;
+    transition: background-color 0.2s ease;
 }
 
 [data-theme="light"] .app-navbar {
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--bg-surface);
+    border-bottom-color: var(--border-card);
 }
 
 .nav-brand {
@@ -249,41 +344,41 @@ body {
 }
 
 .nav-logo-symbol {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
     background: var(--accent-red-light);
     border: 1.5px solid var(--accent-red);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 17px;
+    font-size: 16px;
     color: var(--accent-red);
     font-family: 'Cinzel', serif;
     font-weight: 700;
 }
 
 .nav-brand-title {
-    font-size: 17px;
+    font-size: 18.5px;
     font-weight: 700;
-    letter-spacing: 0.3px;
+    letter-spacing: -0.02em;
     color: var(--text-primary);
 }
 
 .nav-links-right {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 12px;
 }
 
 .nav-item {
-    font-size: 13.5px;
-    font-weight: 500;
+    font-size: 15px;
+    font-weight: 600;
     text-decoration: none;
     color: var(--text-secondary);
-    padding: 8px 14px;
-    border-radius: 8px;
-    transition: all 0.2s;
+    padding: 8px 15px;
+    border-radius: var(--radius-sm);
+    transition: background-color 0.2s, color 0.2s, transform 0.2s;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
@@ -293,11 +388,13 @@ body {
 .nav-item:hover {
     color: var(--text-primary);
     background: var(--bg-surface-elevated);
+    transform: scale(1.03);
 }
 
 .nav-item.active {
     color: var(--accent-red);
-    font-weight: 600;
+    background: var(--accent-red-light);
+    font-weight: 700;
 }
 
 /* Disabled History Link with Tooltip for Guest */
@@ -308,9 +405,10 @@ body {
 
 .nav-item.disabled {
     color: var(--text-muted);
-    opacity: 0.55;
+    opacity: 0.5;
     cursor: not-allowed;
     background: transparent;
+    transform: none;
 }
 
 .nav-item-disabled-wrap:hover .nav-tooltip {
@@ -325,42 +423,80 @@ body {
     position: absolute;
     top: calc(100% + 8px);
     right: 0;
-    background: #1f242d;
-    color: #e2e8f0;
+    background: var(--bg-surface-elevated);
+    color: var(--text-primary);
     font-size: 11.5px;
     padding: 6px 12px;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     white-space: nowrap;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    border: 1px solid rgba(255,255,255,0.08);
-    transition: all 0.2s ease;
+    box-shadow: none;
+    border: 1.5px solid var(--border-card);
+    transition: opacity 0.2s ease, transform 0.2s ease;
     transform: translateY(-4px);
     pointer-events: none;
     z-index: 1001;
 }
 
-[data-theme="light"] .nav-tooltip {
-    background: #2d3748;
-    color: #ffffff;
-}
-
 .nav-btn-login {
     background: var(--accent-red);
     color: #ffffff !important;
-    font-weight: 600;
+    font-weight: 700;
     border: none;
     padding: 8px 18px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(197, 48, 48, 0.3);
+    border-radius: var(--radius-sm);
+    box-shadow: none;
+    transition: background-color 0.2s, transform 0.2s;
 }
 
 .nav-btn-login:hover {
     background: var(--accent-red-hover);
-    transform: translateY(-1px);
+    transform: scale(1.05);
+}
+
+.nav-brand-text-wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-brand-sub {
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.nav-user-logged {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-greeting {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.nav-btn-logout {
+    font-size: 12px;
+    padding: 5px 12px;
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.nav-btn-logout:hover {
+    background: var(--accent-red);
+    border-color: var(--accent-red);
+    color: #fff;
+    transform: scale(1.04);
 }
 
 /* =========================================================
-   BOTTOM-LEFT FLOATING CONTROLS (Theme & Language)
+   BOTTOM-LEFT FLOATING CONTROLS (Theme & Language - Flat Solid)
    ========================================================= */
 .bottom-left-controls {
     position: fixed;
@@ -374,24 +510,25 @@ body {
 
 .control-btn {
     background: var(--bg-surface);
-    border: 1px solid var(--border-card);
+    border: 1.5px solid var(--border-card);
     color: var(--text-primary);
     padding: 8px 14px;
-    border-radius: 24px;
+    border-radius: var(--radius-md);
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    box-shadow: var(--shadow-card);
-    transition: all 0.2s ease;
+    box-shadow: none;
+    transition: border-color 0.2s, background-color 0.2s, transform 0.2s;
     font-family: inherit;
 }
 
 .control-btn:hover {
     border-color: var(--accent-red);
-    transform: translateY(-2px);
+    background: var(--bg-surface-elevated);
+    transform: scale(1.05);
 }
 
 .control-btn svg {
@@ -408,31 +545,33 @@ body {
     align-items: center;
     gap: 6px;
     background: var(--bg-surface);
-    border: 1px solid var(--border-card);
-    border-radius: 30px;
-    padding: 4px 8px;
+    border: 1.5px solid var(--border-card);
+    border-radius: var(--radius-md);
+    padding: 5px 8px;
     z-index: 9999;
-    box-shadow: var(--shadow-card);
+    box-shadow: none;
 }
 
 .screen-switcher-right a {
     color: var(--text-secondary);
     text-decoration: none;
     font-size: 11.5px;
-    font-weight: 500;
+    font-weight: 600;
     padding: 5px 11px;
-    border-radius: 20px;
-    transition: all 0.2s;
+    border-radius: var(--radius-sm);
+    transition: background-color 0.2s, color 0.2s, transform 0.2s;
 }
 
 .screen-switcher-right a:hover {
     color: var(--text-primary);
+    background: var(--bg-surface-elevated);
+    transform: scale(1.04);
 }
 
 .screen-switcher-right a.active {
     background: var(--accent-red);
     color: #ffffff;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 @media (max-width: 768px) {
@@ -443,3 +582,118 @@ body {
         display: none;
     }
 }
+
+/* =========================================================
+   FIXED BACKGROUND YIN-YANG (Flat Poster Aesthetic, No Blur/Depth)
+   ========================================================= */
+.background-yinyang-fixed {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: min(920px, 85vw);
+    height: min(920px, 85vw);
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -20;
+    pointer-events: none;
+    opacity: 0.22;
+    animation: backgroundYinYangFloat 16s ease-in-out infinite;
+}
+
+[data-theme="light"] .background-yinyang-fixed {
+    opacity: 0.16;
+}
+
+.background-yinyang-fixed::before {
+    /* Flat Design: No blurred halo */
+    display: none;
+}
+
+.background-yinyang-fixed::after {
+    content: "";
+    position: absolute;
+    inset: 3%;
+    border-radius: 50%;
+    border: 1.5px solid rgba(197, 48, 48, 0.2);
+    box-shadow: none;
+}
+
+.yin-yang-symbol {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(
+        90deg,
+        rgba(197, 48, 48, 0.85) 0%,
+        rgba(197, 48, 48, 0.85) 50%,
+        rgba(247, 250, 252, 0.92) 50%,
+        rgba(247, 250, 252, 0.92) 100%
+    );
+    border: 2px solid rgba(197, 48, 48, 0.25);
+    box-shadow: none;
+    animation: yinYangRotate 22s linear infinite;
+    transform-origin: center center;
+}
+
+.yin-yang-symbol::before {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    left: 25%;
+    top: 0;
+    border-radius: 50%;
+    background: rgba(247, 250, 252, 0.92);
+    pointer-events: none;
+}
+
+.yin-yang-symbol::after {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    left: 25%;
+    bottom: 0;
+    border-radius: 50%;
+    background: rgba(197, 48, 48, 0.85);
+    pointer-events: none;
+}
+
+.yin-yang-small {
+    position: absolute;
+    width: 16%;
+    height: 16%;
+    left: 42%;
+    border-radius: 50%;
+    z-index: 5;
+}
+
+.yin-yang-small.yin {
+    top: 17%;
+    background: rgba(197, 48, 48, 0.85);
+}
+
+.yin-yang-small.yang {
+    bottom: 17%;
+    background: rgba(247, 250, 252, 0.92);
+}
+
+@keyframes yinYangRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes backgroundYinYangFloat {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(0.97);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.03);
+    }
+}
+

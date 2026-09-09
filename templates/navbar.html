@@ -1,43 +1,76 @@
-<!-- Common Top Navbar (Used on public pages) -->
+<!-- Common Top Navbar & Universal Background -->
 <nav class="app-navbar">
     <a href="{% url 'bazi:form' %}" class="nav-brand">
-        <div class="nav-logo-symbol">
-            <span>丙</span>
+        <!-- Animated Spinning Yin-Yang Logo from Hero Area -->
+        <div class="nav-logo-yinyang-mini" title="Energy Flow • 陰陽">
+            <div class="nav-yinyang-ring-green"></div>
+            <div class="nav-yinyang-ring-red"></div>
+            <div class="nav-yinyang-orb"></div>
         </div>
-        <div class="nav-brand-title" data-th="ดูดวงศาสตร์จีน" data-en="Chinese Bazi Fortune">
-            ดูดวงศาสตร์จีน
+        <div class="nav-brand-text-wrap">
+            <div class="nav-brand-title" data-th="ดูดวงศาสตร์จีน โป๊ยหยี่" data-en="BaZi Destiny Analysis">
+                ดูดวงศาสตร์จีน โป๊ยหยี่
+            </div>
+            <div class="nav-brand-sub" data-th="風水 • 命理 • 運勢 (พลังฟ้าดิน)" data-en="Feng Shui • BaZi • Energy">
+                風水 • 命理 • 運勢
+            </div>
         </div>
     </a>
 
     <div class="nav-links-right">
-        <!-- 1. Analyze / Input form link -->
-        <a href="{% url 'bazi:form' %}" class="nav-item {% if request.resolver_match.url_name == 'form' %}active{% endif %}" data-th="วิเคราะห์ข้อมูล" data-en="Analyze">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <path d="M12 6v6l4 2"></path>
+        <!-- 1. หน้าหลัก (Home) -->
+        <a href="{% url 'bazi:form' %}" class="nav-item {% if request.resolver_match.url_name == 'form' %}active{% endif %}" data-th="หน้าหลัก" data-en="Home">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
             </svg>
-            <span data-th="วิเคราะห์ข้อมูล" data-en="Analyze">วิเคราะห์ข้อมูล</span>
+            <span data-th="หน้าหลัก" data-en="Home">หน้าหลัก</span>
         </a>
 
-        <!-- 2. History link (Disabled for guest with tooltip) -->
-        <div class="nav-item-disabled-wrap">
-            <span class="nav-item disabled" style="cursor: not-allowed;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-                <span data-th="ประวัติการดูดวง" data-en="History">ประวัติการดูดวง</span>
-            </span>
-            <div class="nav-tooltip" data-th="กรุณาเข้าสู่ระบบก่อนเพื่อดูประวัติ" data-en="Please sign in to view history">
-                กรุณาเข้าสู่ระบบก่อนเพื่อดูประวัติ
-            </div>
-        </div>
+        <!-- 2. จองปรึกษา -->
+        <a href="{% url 'bazi:booking' %}" class="nav-item {% if request.resolver_match.url_name == 'booking' %}active{% endif %}" data-th="จองปรึกษา" data-en="Booking">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span data-th="จองปรึกษา" data-en="Booking">จองปรึกษา</span>
+        </a>
 
-        <!-- 3. Sign In link -->
+        <!-- 3. ประวัติ -->
+        <a href="{% url 'bazi:history' %}" class="nav-item {% if request.resolver_match.url_name == 'history' %}active{% endif %}" data-th="ประวัติ" data-en="History">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span data-th="ประวัติ" data-en="History">ประวัติ</span>
+        </a>
+
+        <!-- 4. Login หรือ แสดงชื่อผู้ใช้ถ้าล็อกอินแล้ว -->
+        {% if request.session.user_email %}
+        <div class="nav-user-logged">
+            <span class="user-greeting" title="{{ request.session.user_email }}">
+                👤 {{ request.session.user_name|default:request.session.user_email }}
+            </span>
+            <a href="{% url 'bazi:login' %}?logout=1" class="nav-item nav-btn-logout" data-th="ออกจากระบบ" data-en="Logout">
+                <span data-th="ออกจากระบบ" data-en="Logout">ออกจากระบบ</span>
+            </a>
+        </div>
+        {% else %}
         <a href="{% url 'bazi:login' %}" class="nav-item nav-btn-login {% if request.resolver_match.url_name == 'login' %}active{% endif %}" data-th="เข้าสู่ระบบ" data-en="Sign In">
             <span data-th="เข้าสู่ระบบ" data-en="Sign In">เข้าสู่ระบบ</span>
         </a>
+        {% endif %}
     </div>
 </nav>
+
+<!-- Universal Fixed Background Yin-Yang Animation (Active on every page) -->
+<div class="background-yinyang-fixed" aria-hidden="true">
+    <div class="yin-yang-symbol">
+        <div class="yin-yang-small yin"></div>
+        <div class="yin-yang-small yang"></div>
+    </div>
+</div>
 
 <!-- Ambient Pure CSS Mist Layers -->
 <div class="ambient-mist-layer">
@@ -48,7 +81,6 @@
 
 <!-- Bottom-Left Floating Utility Controls (Language & Theme) -->
 <div class="bottom-left-controls">
-    <!-- Language Toggle Button -->
     <button type="button" id="btn-lang-toggle" class="control-btn" title="Switch Language">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="10"></circle>
@@ -58,7 +90,6 @@
         <span id="current-lang-label">TH</span>
     </button>
 
-    <!-- Theme Toggle Button (Light/Dark) -->
     <button type="button" id="btn-theme-toggle" class="control-btn" title="Toggle Light/Dark Theme">
         <span id="theme-icon">🌙</span>
     </button>

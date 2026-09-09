@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>จองปรึกษาส่วนตัว - ซินแสพลังงานศาสตร์จีน (Energy Flow)</title>
+    {% load static %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Ma+Shan+Zheng&family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Noto+Serif+SC:wght@500;700;900&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}?v=2.3">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}?v=2.3">
+    <link rel="stylesheet" href="{% static 'css/common.css' %}?v=2.3">
+    <style>
+        .booking-page-wrap {
+            max-width: 1100px;
+            margin: 40px auto 80px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .booking-hero-grid {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 36px;
+            align-items: start;
+            background: var(--bg-surface);
+            border: 1.5px solid var(--border-card);
+            border-radius: var(--radius-lg, 10px);
+            padding: 36px;
+            box-shadow: none;
+        }
+
+        .booking-master-card {
+            text-align: center;
+            background: var(--bg-surface-elevated);
+            border: 1.5px solid var(--border-subtle);
+            border-radius: var(--radius-md, 8px);
+            padding: 24px;
+        }
+
+        .master-avatar-wrap {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 16px;
+            border-radius: var(--radius-md, 8px);
+            overflow: hidden;
+            border: 2px solid var(--accent-red);
+            box-shadow: none;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .master-avatar-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .master-name {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .master-title {
+            font-size: 13px;
+            color: var(--accent-red);
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .master-quote {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .contact-quick-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .quick-contact-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px;
+            border-radius: var(--radius-sm, 6px);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .btn-call {
+            background: var(--accent-green);
+            color: #fff;
+        }
+
+        .btn-call:hover {
+            background: var(--accent-green-hover);
+            transform: scale(1.03);
+        }
+
+        .btn-line {
+            background: #06c755;
+            color: #fff;
+        }
+
+        .btn-line:hover {
+            opacity: 0.95;
+            transform: scale(1.03);
+        }
+
+        .services-section-title {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .services-section-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .package-card {
+            background: var(--bg-surface-elevated);
+            border: 1.5px solid var(--border-subtle);
+            border-radius: var(--radius-md, 8px);
+            padding: 20px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            position: relative;
+            box-shadow: none;
+        }
+
+        .package-card:hover {
+            border-color: var(--accent-red);
+            transform: scale(1.02);
+        }
+
+        .package-badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: var(--radius-sm, 6px);
+            background: var(--accent-red-light);
+            color: var(--accent-red);
+            margin-bottom: 10px;
+        }
+
+        .package-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .package-desc {
+            font-size: 12.5px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        .booking-form-wrap {
+            background: var(--bg-surface-elevated);
+            border: 1.5px solid var(--border-subtle);
+            border-radius: var(--radius-md, 8px);
+            padding: 24px;
+            box-shadow: none;
+        }
+
+        .form-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .b-field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .b-field input, .b-field select, .b-field textarea {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1.5px solid var(--border-card);
+            border-radius: var(--radius-sm, 6px);
+            padding: 10px 12px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 13.5px;
+            transition: border-color 0.2s;
+        }
+
+        .b-field input:focus, .b-field select:focus, .b-field textarea:focus {
+            outline: none;
+            border-color: var(--accent-red);
+            box-shadow: none;
+        }
+
+        .btn-submit-booking {
+            background: var(--accent-red);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-sm, 6px);
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: none;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-submit-booking:hover {
+            background: var(--accent-red-hover);
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 860px) {
+            .booking-hero-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <!-- 3-LAYER FULLSCREEN SPLIT 50/50 LAYOUT (Same Template as Home) -->
+    <main class="fullscreen-split-layout" id="booking-section">
+        
+        <!-- LAYER 1: 2 BACKGROUND BOXES (Yin on Left, Yang on Right) -->
+        <div class="split-layer-bg" aria-hidden="true">
+            <div class="split-box-bg split-box-yin"></div>
+            <div class="split-box-bg split-box-yang"></div>
+        </div>
+
+        <!-- LAYER 2: YIN-YANG SYMBOL CENTERED ON THE SPLIT SEAM -->
+        <div class="split-layer-yinyang" aria-hidden="true">
+            <div class="split-yinyang-orb">
+                <div class="yin-yang-symbol">
+                    <div class="yin-yang-small yin"></div>
+                    <div class="yin-yang-small yang"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LAYER 3: FOREGROUND CONTENT -->
+        <div class="split-layer-content">
+            
+            <!-- LEFT BOX CONTENT: Woman/Master Info + 2 Action Buttons -->
+            <aside class="split-content-panel split-left-hero" style="justify-content: center; align-items: center;">
+                <div class="booking-master-card" style="max-width: 440px; width: 100%;">
+                    <div class="master-avatar-wrap">
+                        <img src="{% static 'images/master.png' %}" alt="อาจารย์หนิง ซินแสพลังงาน">
+                    </div>
+                    <div class="master-name" data-th="อ.หนิง" data-en="Master Ning">อ.หนิง</div>
+                    <div class="master-title" data-th="ซินแสศาสตร์จีน & พลังงานฮวงจุ้ย" data-en="Chinese Metaphysics & Feng Shui Master">
+                        ซินแสศาสตร์จีน & พลังงานฮวงจุ้ย
+                    </div>
+                    <div style="color: var(--accent-red); font-size: 17px; margin-bottom: 12px; font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 2px;">
+                        天機 • 命理 • 八字
+                    </div>
+                    <p class="master-quote" data-th="&ldquo;อ่านพลังงานให้เป็น เพื่อเห็นทางเลือกในการตัดสินใจชีวิต ธุรกิจ และการเงินที่ชัดเจนที่สุด&rdquo;" data-en="&ldquo;Read your energy clearly to see decisive paths for life, business, and wealth.&rdquo;">
+                        &ldquo;อ่านพลังงานให้เป็น เพื่อเห็นทางเลือกในการตัดสินใจชีวิต ธุรกิจ และการเงินที่ชัดเจนที่สุด&rdquo;
+                    </p>
+
+                    <div class="contact-quick-links">
+                        <a href="tel:0812345678" class="quick-contact-btn btn-call">
+                            <span>📞</span>
+                            <span data-th="โทรติดต่อซินแสทันที" data-en="Call Master Directly">โทรติดต่อซินแสทันที</span>
+                        </a>
+                        <a href="https://line.me" target="_blank" class="quick-contact-btn btn-line">
+                            <span>💬</span>
+                            <span data-th="แชทผ่าน LINE Official" data-en="Chat via LINE Official">แชทผ่าน LINE Official</span>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- RIGHT BOX CONTENT: Services List & Consultation Form -->
+            <section class="split-content-panel split-right-form" style="overflow-y: auto; max-height: calc(100vh - 68px);">
+                <div class="booking-services-wrap" style="max-width: 640px; width: 100%; padding: 20px 0;">
+                    
+                    <div style="margin-bottom: 20px;">
+                        <span style="display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.2px; color: var(--accent-red); margin-bottom: 4px; text-transform: uppercase;">
+                            CONSULTATION & SERVICES • 服务项目
+                        </span>
+                        <h1 class="services-section-title" data-th="บริการและจองคิวปรึกษาส่วนตัว" data-en="Book a Private Consultation">
+                            บริการและจองคิวปรึกษาส่วนตัว
+                        </h1>
+                        <p class="services-section-subtitle" data-th="เลือกบริการที่เหมาะกับความต้องการของคุณ ซินแสจะติดต่อกลับเพื่อยืนยันคิวภายใน 24 ชม." data-en="Select the service that fits your needs. Master will reach out within 24 hours.">
+                            เลือกบริการที่เหมาะกับความต้องการของคุณ ซินแสจะติดต่อกลับเพื่อยืนยันคิวภายใน 24 ชม.
+                        </p>
+                    </div>
+
+                    {% if booking_success %}
+                    <div style="background: rgba(47, 133, 90, 0.2); border: 1.5px solid var(--accent-green); padding: 16px; border-radius: 8px; margin-bottom: 20px; color: #48bb78; font-weight: 600;">
+                        ✓ ส่งคำขอจองปรึกษาเรียบร้อยแล้ว! เจ้าหน้าที่จะติดต่อกลับทางเบอร์โทรหรืออีเมลที่ระบุไว้ครับ
+                    </div>
+                    {% endif %}
+
+                    <!-- Services Offered (บริการอะไรบ้าง) -->
+                    <div class="packages-grid">
+                        <div class="package-card">
+                            <span class="package-badge">ยอดนิยม</span>
+                            <div class="package-title" data-th="วิเคราะห์ดวงจีนโป๊ยหยี่" data-en="BaZi Destiny Analysis">วิเคราะห์ดวงจีนโป๊ยหยี่</div>
+                            <div class="package-desc" data-th="เจาะลึก 4 เสา 8 ช่อง ธาตุปรับดวง จังหวะการงาน การเงิน ความรัก และสุขภาพ 1-on-1" data-en="In-depth Four Pillars analysis, favorable elements, career, and wealth rhythm.">
+                                เจาะลึก 4 เสา 8 ช่อง ธาตุปรับดวง จังหวะการงาน การเงิน ความรัก และสุขภาพ 1-on-1
+                            </div>
+                        </div>
+
+                        <div class="package-card">
+                            <span class="package-badge">ธุรกิจ & การลงทุน</span>
+                            <div class="package-title" data-th="วางฤกษ์มงคล & หุ้นส่วน" data-en="Auspicious Timing & Partners">วางฤกษ์มงคล & หุ้นส่วน</div>
+                            <div class="package-desc" data-th="วิเคราะห์ความเข้ากันของดวงหุ้นส่วน ฤกษ์เปิดกิจการ ฤกษ์เซ็นสัญญา และจังหวะลงทุน" data-en="Partner synergy evaluation, business opening dates, and investment cycles.">
+                                วิเคราะห์ความเข้ากันของดวงหุ้นส่วน ฤกษ์เปิดกิจการ ฤกษ์เซ็นสัญญา และจังหวะลงทุน
+                            </div>
+                        </div>
+
+                        <div class="package-card">
+                            <span class="package-badge">ฮวงจุ้ยเชิงกลยุทธ์</span>
+                            <div class="package-title" data-th="ตรวจฮวงจุ้ยบ้าน/อาคาร" data-en="Feng Shui Audit">ตรวจฮวงจุ้ยบ้าน/อาคาร</div>
+                            <div class="package-desc" data-th="จัดวางตำแหน่งโต๊ะทำงาน ทิศทางหัวเตียง ประตูรับทรัพย์ และกระแสชี่ในที่อยู่อาศัย" data-en="Desk orientation, wealth flow, and energy layout for home or office.">
+                                จัดวางตำแหน่งโต๊ะทำงาน ทิศทางหัวเตียง ประตูรับทรัพย์ และกระแสชี่ในที่อยู่อาศัย
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Booking Form -->
+                    <div class="booking-form-wrap">
+                        <form method="POST" action="{% url 'bazi:booking' %}">
+                            {% csrf_token %}
+                            <div class="form-grid-2">
+                                <div class="b-field">
+                                    <label for="b_name" data-th="ชื่อ - นามสกุล" data-en="Full Name">ชื่อ - นามสกุล</label>
+                                    <input type="text" id="b_name" name="name" required placeholder="ระบุชื่อของคุณ" value="{{ request.session.user_name|default:'' }}">
+                                </div>
+                                <div class="b-field">
+                                    <label for="b_phone" data-th="เบอร์โทรศัพท์ติดต่อ" data-en="Phone Number">เบอร์โทรศัพท์ติดต่อ</label>
+                                    <input type="tel" id="b_phone" name="phone" required placeholder="08x-xxx-xxxx">
+                                </div>
+                            </div>
+
+                            <div class="form-grid-2">
+                                <div class="b-field">
+                                    <label for="b_service" data-th="หัวข้อที่ต้องการปรึกษา" data-en="Consultation Topic">หัวข้อที่ต้องการปรึกษา</label>
+                                    <select id="b_service" name="service">
+                                        <option value="bazi">วิเคราะห์ดวงจีนโป๊ยหยี่ส่วนตัว (BaZi Reading)</option>
+                                        <option value="business">วางฤกษ์มงคล และวิเคราะห์ดวงธุรกิจ (Business)</option>
+                                        <option value="fengshui">ปรึกษาจัดฮวงจุ้ยที่อยู่อาศัย (Feng Shui)</option>
+                                        <option value="other">ปรึกษาหัวข้ออื่นๆ</option>
+                                    </select>
+                                </div>
+                                <div class="b-field">
+                                    <label for="b_date" data-th="วันที่สะดวกรับคำปรึกษา" data-en="Preferred Date">วันที่สะดวกรับคำปรึกษา</label>
+                                    <input type="date" id="b_date" name="date" required>
+                                </div>
+                            </div>
+
+                            <div class="b-field" style="margin-bottom: 20px;">
+                                <label for="b_note" data-th="รายละเอียดเพิ่มเติม หรือคำถามที่ต้องการถามซินแส" data-en="Notes / Questions">รายละเอียดเพิ่มเติม หรือคำถามที่ต้องการถามซินแส</label>
+                                <textarea id="b_note" name="note" rows="3" placeholder="ระบุเรื่องที่กังวลใจ หรือเป้าหมายที่ต้องการวางแผน..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-submit-booking" data-th="ยืนยันการนัดหมายปรึกษา" data-en="Submit Booking Request">
+                                ยืนยันการนัดหมายปรึกษา →
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

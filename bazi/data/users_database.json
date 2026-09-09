@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": "usr_admin_01",
+      "email": "consultant@duduang.com",
+      "password_hash": "8cd0d74a99b98f3f3cc142b5799608e91f0bf74d2761679216cb6a3bac4f65f7",
+      "full_name": "อาจารย์หนิง ซินแสพลังงาน",
+      "role": "consultant",
+      "created_at": "2026-01-01T08:00:00Z",
+      "last_login": "2026-09-10T00:00:00Z"
+    },
+    {
+      "id": "usr_demo_02",
+      "email": "user@example.com",
+      "password_hash": "562770fad9f696b3f98b53227bf3a5f1ab6ac1bf7643859929f603d2d8f0ba33",
+      "full_name": "กฤษณะ แสงทอง",
+      "role": "member",
+      "created_at": "2026-02-14T09:30:00Z",
+      "last_login": "2026-09-10T01:32:00.197117"
+    }
+  ]
+}

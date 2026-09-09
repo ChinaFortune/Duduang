@@ -207,7 +207,7 @@
     font-size: 24px;
     font-weight: 700;
     color: #ffffff;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Mali', 'Inter', sans-serif;
     margin: 2px 0;
 }
 
@@ -404,7 +404,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Inter', sans-serif;
+    font-family: inherit;
 }
 
 .page-btn:hover {

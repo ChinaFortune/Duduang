@@ -3,18 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ดูดวงศาสตร์จีน - ระบบจัดการผู้ดูแลระบบ (Admin Dashboard)</title>
+    <title>ระบบผู้ดูแลระบบและตำราดูดวงจีน - Duduang Admin</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/theme.css' %}">
-    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}?v=2.2">
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}?v=2.4">
 </head>
 <body class="admin-body">
 
+    <!-- Universal Fixed Background Yin-Yang Animation -->
+    <div class="background-yinyang-fixed" aria-hidden="true">
+        <div class="yin-yang-symbol">
+            <div class="yin-yang-small yin"></div>
+            <div class="yin-yang-small yang"></div>
+        </div>
+    </div>
+
     {% if not is_authenticated %}
-    <!-- 1. PIN GATE SECURITY MODAL / OVERLAY -->
+    <!-- 1. PIN GATE SECURITY MODAL -->
     <div class="pin-gate-overlay">
         <div class="pin-gate-box">
-            <div class="pin-icon-wrap">
+            <div class="pin-icon-wrap" title="ผู้ดูแลระบบ">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                     <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
@@ -25,8 +36,8 @@
             <p>กรุณากรอกรหัส PIN เพื่อเข้าสู่ระบบจัดการผู้ใช้และข้อมูลดวงชะตา</p>
 
             {% if pin_error %}
-            <div style="background: rgba(197, 48, 48, 0.15); border: 1px solid var(--accent-red); color: var(--accent-red); padding: 8px 12px; border-radius: 8px; font-size: 13px; margin-bottom: 16px;">
-                {{ pin_error }}
+            <div style="background: rgba(197, 48, 48, 0.15); border: 1px solid var(--accent-red); color: #feb2b2; padding: 10px 14px; border-radius: 10px; font-size: 13px; margin-bottom: 18px; font-weight: 500;">
+                ⚠️ {{ pin_error }}
             </div>
             {% endif %}
 
@@ -35,350 +46,678 @@
                 <input type="hidden" name="action" value="pin_auth">
                 <input type="password" name="pin" class="pin-input" placeholder="••••" maxlength="8" autofocus required>
                 
-                <p style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 16px;">
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 20px;">
                     * รหัส PIN เริ่มต้น: <strong>8888</strong> (หรือตั้งค่าผ่าน ADMIN_PIN ใน env)
                 </p>
 
-                <button type="submit" class="pin-submit-btn">เข้าสู่แดชบอร์ด</button>
+                <button type="submit" class="pin-submit-btn">เข้าสู่ระบบแอดมิน →</button>
             </form>
 
-            <div style="margin-top: 20px;">
+            <div style="margin-top: 22px;">
                 <a href="{% url 'bazi:form' %}" style="color: var(--text-secondary); font-size: 13px; text-decoration: none;">
-                    &larr; กลับหน้าหลัก
+                    &larr; กลับหน้าหลักเว็บไซต์
                 </a>
             </div>
         </div>
     </div>
 
     {% else %}
-    <!-- 2. ADMIN DASHBOARD CONTENT (When Authenticated) -->
+    <!-- 2. AUTHENTICATED ADMIN CONTENT -->
     
-    <!-- Admin Top Navbar -->
+    <!-- Top Bar -->
     <header class="admin-navbar-custom">
-        <div style="display: flex; align-items: center; gap: 16px;">
-            <a href="{% url 'bazi:form' %}" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
-                <div style="width: 32px; height: 32px; border-radius: 8px; background: var(--accent-red); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-family: serif;">
-                    丙
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div class="nav-logo-yinyang-mini" title="Energy Flow • 陰陽">
+                <div class="nav-yinyang-ring-green"></div>
+                <div class="nav-yinyang-ring-red"></div>
+                <div class="nav-yinyang-orb"></div>
+            </div>
+
+            <div>
+                <span style="font-weight: 800; color: var(--text-primary); font-size: 17px; letter-spacing: 0.5px;">
+                    DUDUANG ADMIN • ผู้ดูแลระบบ
+                </span>
+                <div style="font-size: 11px; color: #e2c07b; font-family: 'Cinzel', serif;">
+                    天機 • 命理 • 八字管理系統
                 </div>
-                <span style="font-weight: 700; color: var(--text-primary); font-size: 16px;">ระบบแอดมิน - ดูดวงศาสตร์จีน</span>
-            </a>
+            </div>
         </div>
 
-        <!-- Search Bar at Top (Filters users & records) -->
         <form action="{% url 'bazi:admin_dashboard' %}" method="GET" class="admin-search-top-wrap">
-            <input type="text" name="q" class="admin-search-top-input" placeholder="ค้นหาชื่อ, นามสกุล, จังหวัด..." value="{{ search_query }}">
+            <input type="hidden" name="tab" value="history">
+            <input type="text" name="q" class="admin-search-top-input" placeholder="🔍 ค้นหาประวัติดวง หรือสถานที่..." value="{{ search_query }}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
         </form>
 
-        <!-- Right action pills -->
         <div style="display: flex; align-items: center; gap: 14px;">
-            <span style="font-size: 12.5px; color: var(--accent-green); background: rgba(47, 133, 90, 0.15); padding: 4px 10px; border-radius: 12px; border: 1px solid var(--accent-green);">
+            <a href="{% url 'bazi:form' %}" target="_blank" style="color: var(--text-secondary); font-size: 13.5px; text-decoration: none; font-weight: 600;">
+                ↗ หน้าเว็บหลัก
+            </a>
+            <span style="font-size: 12px; color: var(--accent-green); background: rgba(47, 133, 90, 0.15); padding: 4px 10px; border-radius: 12px; border: 1px solid var(--accent-green);">
                 ● PIN Verified
             </span>
-            <a href="{% url 'bazi:admin_dashboard' %}?logout=1" style="color: var(--accent-red); font-size: 13px; text-decoration: none; font-weight: 500;">
-                ออกจากระบบ (Logout)
+            <a href="{% url 'bazi:admin_dashboard' %}?logout=1" class="admin-logout-btn">
+                ออกจากระบบ
             </a>
         </div>
     </header>
 
-    <main class="admin-content-wrap">
+    <main class="admin-main-container">
         
-        <!-- Stats summary row -->
-        <div class="admin-stats-summary">
-            <div class="admin-stat-card">
-                <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(197, 48, 48, 0.15); color: var(--accent-red); display: flex; align-items: center; justify-content: center;">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="9" cy="7" r="4"></circle>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                    </svg>
-                </div>
-                <div>
-                    <div class="admin-stat-num">{{ total_records }}</div>
-                    <div class="admin-stat-txt">ผู้ใช้ทั้งหมดในระบบ (Total Users)</div>
-                </div>
-            </div>
+        <!-- Tab Navigation Buttons -->
+        <div class="admin-nav-tabs">
+            <button type="button" class="admin-tab-btn {% if active_tab == 'overview' %}active{% endif %}" onclick="switchAdminTab('tab-overview', event)">
+                <span>📊</span>
+                <span>แดชบอร์ด</span>
+            </button>
+            <button type="button" class="admin-tab-btn {% if active_tab == 'users' %}active{% endif %}" onclick="switchAdminTab('tab-users', event)">
+                <span>👥</span>
+                <span>ข้อมูลผู้ใช้งาน</span>
+                <span class="tab-badge">{{ users_count }}</span>
+            </button>
+            <button type="button" class="admin-tab-btn {% if active_tab == 'history' %}active{% endif %}" onclick="switchAdminTab('tab-history', event)">
+                <span>📜</span>
+                <span>ประวัติดวงผู้ใช้</span>
+                <span class="tab-badge">{{ total_records }}</span>
+            </button>
+            <button type="button" class="admin-tab-btn {% if active_tab == 'wisdom' %}active{% endif %}" onclick="switchAdminTab('tab-wisdom', event)">
+                <span>📖</span>
+                <span>ตำราดูดวง</span>
+            </button>
+        </div>
 
-            <div class="admin-stat-card">
-                <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(47, 133, 90, 0.15); color: var(--accent-green); display: flex; align-items: center; justify-content: center;">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <polyline points="12 6 12 12 16 14"></polyline>
-                    </svg>
+        <!-- =========================================================
+             TAB 1: DASHBOARD (ONLY ACTIVE USERS COUNT & CALCULATIONS COUNT)
+             ========================================================= -->
+        <div id="tab-overview" class="tab-content-panel {% if active_tab == 'overview' %}active{% endif %}">
+            <div class="metrics-grid-row" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+                <!-- Metric 1: Current Active Users -->
+                <div class="metric-card">
+                    <div class="metric-icon-box" style="color: #63b3ed; background: rgba(66, 153, 225, 0.15); border: 1.5px solid rgba(66, 153, 225, 0.35);">
+                        👥
+                    </div>
+                    <div class="metric-content">
+                        <div class="metric-num">{{ users_count }}</div>
+                        <div class="metric-title">จำนวนผู้ใช้ที่มีปัจจุบัน (Active Users)</div>
+                    </div>
                 </div>
-                <div>
-                    <div class="admin-stat-num">{{ today_records }}</div>
-                    <div class="admin-stat-txt">วิเคราะห์ดวงวันนี้ (Today's Calculations)</div>
-                </div>
-            </div>
 
-            <div class="admin-stat-card">
-                <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(214, 158, 46, 0.15); color: #d69e2e; display: flex; align-items: center; justify-content: center;">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                    </svg>
-                </div>
-                <div>
-                    <div class="admin-stat-num">PIN Protected</div>
-                    <div class="admin-stat-txt">ระบบปลอดภัยด้วยรหัสผ่าน PIN</div>
+                <!-- Metric 2: Total Calculations Done -->
+                <div class="metric-card">
+                    <div class="metric-icon-box" style="color: var(--accent-red); background: var(--accent-red-light); border: 1.5px solid rgba(197, 48, 48, 0.35);">
+                        📜
+                    </div>
+                    <div class="metric-content">
+                        <div class="metric-num">{{ total_records }}</div>
+                        <div class="metric-title">จำนวนที่คำนวณดวงไป (Total Calculations)</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Users and Calculations Record Table -->
-        <div class="admin-table-container">
-            <div class="admin-table-title-row">
-                <div>
-                    <h3>รายการข้อมูลผู้ใช้และผลการวิเคราะห์</h3>
-                    <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">
-                        แสดงข้อมูลที่กรอก วันเวลาเกิด ผลลัพธ์ดวงจีน และวันเวลาที่วิเคราะห์ล่าสุด
-                    </p>
+        <!-- =========================================================
+             TAB 2: USER ACCOUNTS (VIEW, ADD, EDIT, DELETE)
+             ========================================================= -->
+        <div id="tab-users" class="tab-content-panel {% if active_tab == 'users' %}active{% endif %}">
+            <div class="admin-table-panel">
+                <div class="panel-top-title-row">
+                    <div>
+                        <h3>ข้อมูลผู้ใช้งานในระบบ (User Accounts)</h3>
+                        <span style="font-size: 13px; color: var(--text-secondary);">
+                            จัดการบัญชีผู้ใช้งาน เพิ่ม แก้ไข หรือลบข้อมูล (เชื่อมต่อ JSON User Store)
+                        </span>
+                    </div>
+                    <button type="button" class="btn-add-primary" onclick="openAddUserModal()">
+                        <span>+</span>
+                        <span>เพิ่มผู้ใช้งานใหม่</span>
+                    </button>
                 </div>
-                {% if search_query %}
-                <a href="{% url 'bazi:admin_dashboard' %}" style="font-size: 13px; color: var(--accent-red); text-decoration: none;">
-                    ล้างการค้นหา (Clear)
-                </a>
-                {% endif %}
+
+                <div style="overflow-x: auto;">
+                    <table class="admin-data-table">
+                        <thead>
+                            <tr>
+                                <th>รหัสผู้ใช้</th>
+                                <th>ชื่อ - นามสกุล</th>
+                                <th>อีเมล (Email)</th>
+                                <th>สิทธิ์การใช้งาน (Role)</th>
+                                <th>วันที่ลงทะเบียน</th>
+                                <th>เข้าสู่ระบบล่าสุด</th>
+                                <th style="text-align: right;">การจัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for u in users_list %}
+                            <tr>
+                                <td><code style="color: #e2c07b; font-weight: 700;">{{ u.id }}</code></td>
+                                <td><strong style="color: var(--text-primary);">{{ u.full_name }}</strong></td>
+                                <td>{{ u.email }}</td>
+                                <td>
+                                    {% if u.role == "consultant" %}
+                                        <span style="background: rgba(197, 48, 48, 0.15); color: var(--accent-red); padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 700;">ซินแส (Consultant)</span>
+                                    {% else %}
+                                        <span style="background: rgba(66, 153, 225, 0.15); color: #63b3ed; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 700;">สมาชิก (Member)</span>
+                                    {% endif %}
+                                </td>
+                                <td style="font-size: 12.5px; color: var(--text-muted);">{{ u.created_at }}</td>
+                                <td style="font-size: 12.5px; color: var(--text-muted);">{{ u.last_login }}</td>
+                                <td>
+                                    <div class="table-actions-cell">
+                                        <button type="button" class="btn-action-sm btn-edit" 
+                                                onclick="openEditUserModal('{{ u.id }}', '{{ u.full_name|escapejs }}', '{{ u.email|escapejs }}', '{{ u.role }}')">
+                                            ✏️ แก้ไข
+                                        </button>
+
+                                        <form action="{% url 'bazi:admin_dashboard' %}" method="POST" style="display: inline;" 
+                                              onsubmit="return confirm('ยืนยันการลบผู้ใช้ {{ u.full_name|escapejs }} ({{ u.email|escapejs }}) ออกจากระบบ?');">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="action" value="delete_user">
+                                            <input type="hidden" name="user_id" value="{{ u.id }}">
+                                            <button type="submit" class="btn-action-sm btn-delete">
+                                                🗑️ ลบ
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="7" style="text-align: center; padding: 32px; color: var(--text-muted);">
+                                    ไม่พบข้อมูลผู้ใช้งานในระบบ
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================
+             TAB 3: FORTUNE ANALYSIS HISTORY (VIEW RECORDS)
+             ========================================================= -->
+        <div id="tab-history" class="tab-content-panel {% if active_tab == 'history' %}active{% endif %}">
+            <div class="admin-table-panel">
+                <div class="panel-top-title-row">
+                    <div>
+                        <h3>ประวัติดวงผู้ใช้ (Fortune Calculation Records)</h3>
+                        <span style="font-size: 13px; color: var(--text-secondary);">
+                            บันทึกผลการผูกดวงจีนโป๊ยหยี่สี่เถียวทั้งหมด (แสดงล่าสุด 100 รายการ)
+                        </span>
+                    </div>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table class="admin-data-table">
+                        <thead>
+                            <tr>
+                                <th>ชื่อ - นามสกุล</th>
+                                <th>เพศ</th>
+                                <th>วันเดือนปีเกิด</th>
+                                <th>เวลาเกิด</th>
+                                <th>สถานที่</th>
+                                <th>คำนวณเมื่อ</th>
+                                <th style="text-align: right;">การจัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for r in records %}
+                            <tr>
+                                <td>
+                                    <strong style="color: var(--text-primary);">
+                                        {{ r.first_name }} {{ r.last_name }}
+                                    </strong>
+                                </td>
+                                <td>
+                                    {% if r.gender == "female" %}
+                                        <span style="color: #ed64a6; font-weight: 600;">หญิง</span>
+                                    {% else %}
+                                        <span style="color: #4299e1; font-weight: 600;">ชาย</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ r.birth_day }}/{{ r.birth_month }}/{{ r.birth_year }}</td>
+                                <td>
+                                    {% if r.birth_hour == 0 and r.birth_minute == 0 %}
+                                        <span style="color: var(--text-muted);">ไม่ระบุ</span>
+                                    {% else %}
+                                        {{ r.birth_hour|stringformat:"02d" }}:{{ r.birth_minute|stringformat:"02d" }} น.
+                                    {% endif %}
+                                </td>
+                                <td>{{ r.province }}</td>
+                                <td style="color: var(--text-muted); font-size: 12.5px;">{{ r.last_analyzed_at|date:"d/m/Y H:i" }}</td>
+                                <td style="text-align: right;">
+                                    <button type="button" class="btn-inspect-chart" onclick="openRecordModal('{{ r.id }}')">
+                                        ดูผังดวง 8 ช่อง
+                                    </button>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="7" style="text-align: center; padding: 36px; color: var(--text-muted);">
+                                    ไม่พบประวัติการวิเคราะห์ดวง
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================
+             TAB 4: BAZI WISDOM BOOK (EDIT & DELETE WISDOM ENTRIES)
+             ========================================================= -->
+        <div id="tab-wisdom" class="tab-content-panel {% if active_tab == 'wisdom' %}active{% endif %}">
+            <div class="admin-table-panel" style="margin-bottom: 28px;">
+                <div class="panel-top-title-row">
+                    <div>
+                        <h3 style="font-size: 18px; margin-bottom: 4px;">
+                            📖 ตำราดูดวงศาสตร์จีน (10 ราศีบน / 十天干)
+                        </h3>
+                        <p style="font-size: 13px; color: var(--text-secondary); margin: 0;">
+                            คำทำนาย จุดเด่น จุดควรระวัง และกลยุทธ์ สามารถแก้ไขหรือลบข้อมูลได้ทันที (บันทึกลง <code>bazi_database.json</code>)
+                        </p>
+                    </div>
+                    <span style="font-family: 'Cinzel', serif; font-size: 13px; color: var(--accent-red); font-weight: 700;">
+                        天干 • 五行 • 陰陽
+                    </span>
+                </div>
+
+                <!-- 10 Stems Cards Grid with Edit / Delete -->
+                <div class="grimoire-grid">
+                    {% for stem in wisdom_stems %}
+                    <div class="stem-book-card">
+                        <div class="stem-card-header">
+                            <div class="stem-zh-badge" style="background: {{ stem.color }};">
+                                {{ stem.chinese }}
+                            </div>
+                            <div class="stem-title-info">
+                                <h4>{{ stem.title }} ({{ stem.chinese }})</h4>
+                                <span>{{ stem.th_name }}</span>
+                            </div>
+                            
+                            <div class="stem-card-actions">
+                                <button type="button" class="btn-action-sm btn-edit" 
+                                        onclick="openEditWisdomModal('{{ stem.chinese|escapejs }}', '{{ stem.title|escapejs }}', '{{ stem.good|escapejs }}', '{{ stem.bad|escapejs }}', '{{ stem.advice|escapejs }}')">
+                                    ✏️ แก้ไข
+                                </button>
+                                <form action="{% url 'bazi:admin_dashboard' %}" method="POST" style="display: inline;" 
+                                      onsubmit="return confirm('ยืนยันการลบตำราของราศี {{ stem.title|escapejs }} ({{ stem.chinese }})?');">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="action" value="delete_wisdom">
+                                    <input type="hidden" name="chinese" value="{{ stem.chinese }}">
+                                    <button type="submit" class="btn-action-sm btn-delete">
+                                        🗑️ ลบ
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="stem-section-block">
+                            <div class="stem-sec-title sec-good">
+                                <span>✦</span> จุดเด่น (Good Traits)
+                            </div>
+                            <div class="stem-sec-desc">
+                                {{ stem.good }}
+                            </div>
+                        </div>
+
+                        <div class="stem-section-block">
+                            <div class="stem-sec-title sec-bad">
+                                <span>⚠</span> จุดที่ต้องระวัง (Cautions)
+                            </div>
+                            <div class="stem-sec-desc">
+                                {{ stem.bad }}
+                            </div>
+                        </div>
+
+                        <div class="stem-section-block" style="margin-bottom: 0;">
+                            <div class="stem-sec-title sec-advice">
+                                <span>💡</span> คำแนะนำกลยุทธ์ (Advice)
+                            </div>
+                            <div class="stem-sec-desc" style="color: var(--text-primary); font-weight: 500;">
+                                {{ stem.advice }}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
 
-            <div style="overflow-x: auto;">
-                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 13.5px;">
-                    <thead>
-                        <tr style="border-bottom: 1px solid var(--border-subtle); color: var(--text-secondary); font-size: 12.5px;">
-                            <th style="padding: 12px 14px;">ชื่อ - นามสกุล</th>
-                            <th style="padding: 12px 14px;">วันเดือนปีเกิด</th>
-                            <th style="padding: 12px 14px;">เวลาเกิด</th>
-                            <th style="padding: 12px 14px;">เพศ</th>
-                            <th style="padding: 12px 14px;">จังหวัด/ประเทศ</th>
-                            <th style="padding: 12px 14px;">ดิถีธาตุ (Day Master)</th>
-                            <th style="padding: 12px 14px;">ระดับพลัง</th>
-                            <th style="padding: 12px 14px;">วิเคราะห์ล่าสุด</th>
-                            <th style="padding: 12px 14px; text-align: center;">จัดการ</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for record in records %}
-                        <tr style="border-bottom: 1px solid var(--border-subtle); transition: background 0.15s;" onmouseover="this.style.background='var(--bg-surface-elevated)'" onmouseout="this.style.background='transparent'">
-                            <td style="padding: 12px 14px; font-weight: 600; color: var(--text-primary);">
-                                {{ record.first_name }} {{ record.last_name }}
-                            </td>
-                            <td style="padding: 12px 14px; color: var(--text-secondary);">
-                                {{ record.birth_day }}/{{ record.birth_month }}/{{ record.birth_year }}
-                            </td>
-                            <td style="padding: 12px 14px; color: var(--text-secondary);">
-                                {{ record.birth_hour|stringformat:"02d" }}:{{ record.birth_minute|stringformat:"02d" }} น.
-                            </td>
-                            <td style="padding: 12px 14px; color: var(--text-secondary);">
-                                {% if record.gender == 'male' %}ชาย{% else %}หญิง{% endif %}
-                            </td>
-                            <td style="padding: 12px 14px; color: var(--text-secondary);">
-                                {{ record.province }}
-                            </td>
-                            <td style="padding: 12px 14px;">
-                                {% if record.chart_data and record.chart_data.day_master %}
-                                <span style="color: var(--accent-red); font-weight: 600;">
-                                    {{ record.chart_data.day_master.element_th }} ({{ record.chart_data.day_master.stem.thaiName }})
-                                </span>
-                                {% else %}
-                                -
-                                {% endif %}
-                            </td>
-                            <td style="padding: 12px 14px;">
-                                {% if record.chart_data and record.chart_data.strength_th %}
-                                <span class="strength-badge {{ record.chart_data.strength_badge_class }}" style="padding: 2px 8px; font-size: 11px;">
-                                    {{ record.chart_data.strength_th }}
-                                </span>
-                                {% else %}
-                                -
-                                {% endif %}
-                            </td>
-                            <td style="padding: 12px 14px; color: var(--text-muted); font-size: 12.5px;">
-                                {{ record.last_analyzed_at|date:"d/m/Y H:i" }}
-                            </td>
-                            <td style="padding: 12px 14px; text-align: center;">
-                                <button type="button" class="btn-view-user-details" data-id="{{ record.id }}" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); color: var(--accent-red); padding: 4px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; font-weight: 500;">
-                                    ดูข้อมูลดวง
-                                </button>
-                            </td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="9" style="text-align: center; padding: 36px; color: var(--text-muted);">
-                                ไม่พบข้อมูลผู้ใช้ตามคำค้นหา
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+            <!-- Reference Tables -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                <div class="admin-table-panel">
+                    <h4 style="font-size: 16px; margin-bottom: 14px; color: var(--text-primary);">
+                        🐾 12 ราศีล่าง (Earthly Branches / 十二地支)
+                    </h4>
+                    <table class="admin-data-table">
+                        <thead>
+                            <tr>
+                                <th>อักษร</th>
+                                <th>นักษัตร</th>
+                                <th>ชื่อไทย</th>
+                                <th>ยามมาตรฐาน</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for b in wisdom_branches %}
+                            <tr>
+                                <td><strong style="font-size: 16px; color: #e2c07b;">{{ b.chinese }}</strong></td>
+                                <td>{{ b.animal }}</td>
+                                <td>{{ b.thaiName }}</td>
+                                <td style="font-size: 12.5px; color: var(--text-muted);">{{ b.standardHour }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="admin-table-panel">
+                    <h4 style="font-size: 16px; margin-bottom: 14px; color: var(--text-primary);">
+                        ☀️ ตารางสารทฤดูกาลหาราศีเดือน (Solar Terms)
+                    </h4>
+                    <table class="admin-data-table">
+                        <thead>
+                            <tr>
+                                <th>ช่วงวันเกิด (สุริยคติ)</th>
+                                <th>ราศีล่าง</th>
+                                <th>ชื่อไทย</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for sm in solar_months %}
+                            <tr>
+                                <td>{{ sm.start.1 }}/{{ sm.start.0 }} - {{ sm.end.1 }}/{{ sm.end.0 }}</td>
+                                <td><strong style="font-size: 16px; color: var(--accent-red);">{{ sm.zh }}</strong></td>
+                                <td>{{ sm.th }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
         </div>
 
     </main>
 
-    <!-- User Detail Modal (Interactive Viewer) -->
-    <div id="user-detail-modal" class="user-detail-modal-overlay" style="display: none;">
-        <div class="user-detail-modal-card">
-            <button type="button" id="btn-close-detail-modal" class="modal-close-btn">&times;</button>
-            
-            <h3 id="modal-user-name" style="font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px;">
-                ข้อมูลผู้ใช้
-            </h3>
-            <p id="modal-last-analyzed" style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">
-                วิเคราะห์ล่าสุด: -
-            </p>
-
-            <!-- 1. Inputted Information -->
-            <div class="modal-section-title">1. ข้อมูลที่ผู้ใช้กรอก (Inputted Details)</div>
-            <div class="detail-key-val-grid">
-                <div class="detail-item">
-                    <label>ชื่อ - สกุล</label>
-                    <span id="detail-name">-</span>
-                </div>
-                <div class="detail-item">
-                    <label>เพศ</label>
-                    <span id="detail-gender">-</span>
-                </div>
-                <div class="detail-item">
-                    <label>วันเดือนปีเกิด</label>
-                    <span id="detail-birth-date">-</span>
-                </div>
-                <div class="detail-item">
-                    <label>เวลาเกิด</label>
-                    <span id="detail-birth-time">-</span>
-                </div>
-                <div class="detail-item" style="grid-column: 1 / -1;">
-                    <label>สถานที่เกิด</label>
-                    <span id="detail-location">-</span>
-                </div>
+    <!-- =========================================================
+         MODAL 1: ADD USER
+         ========================================================= -->
+    <div id="modal-add-user" class="pin-gate-overlay" style="display: none; z-index: 100000;">
+        <div class="pin-gate-box" style="max-width: 500px; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1.5px solid var(--border-subtle); padding-bottom: 12px;">
+                <h3 style="font-size: 18px; color: var(--text-primary); margin: 0;">➕ เพิ่มผู้ใช้งานใหม่</h3>
+                <button type="button" onclick="closeAddUserModal()" style="background: none; border: none; font-size: 24px; color: var(--text-muted); cursor: pointer;">&times;</button>
             </div>
 
-            <!-- 2. Calculation Results -->
-            <div class="modal-section-title">2. ผลการคำนวณรหัสสี่เสาโป๊ยหยี่ (Calculated Bazi Chart)</div>
-            <div class="detail-key-val-grid">
-                <div class="detail-item">
-                    <label>ดิถีธาตุ (Day Master)</label>
-                    <span id="detail-dm" style="color: var(--accent-red);">-</span>
-                </div>
-                <div class="detail-item">
-                    <label>ระดับพลังสะสม</label>
-                    <span id="detail-strength">-</span>
-                </div>
-                <div class="detail-item">
-                    <label>ธาตุที่ให้คุณ (ชอบ)</label>
-                    <span id="detail-fav-elems" style="color: var(--accent-green);">-</span>
-                </div>
-                <div class="detail-item">
-                    <label>ธาตุที่ให้โทษ (ไม่ชอบ)</label>
-                    <span id="detail-unfav-elems" style="color: var(--accent-red);">-</span>
-                </div>
-            </div>
+            <form action="{% url 'bazi:admin_dashboard' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="add_user">
 
-            <!-- Four Pillars Preview -->
-            <div style="margin-top: 16px; background: var(--bg-surface-elevated); border-radius: 10px; padding: 12px;">
-                <label style="font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 6px;">
-                    เสาทั้ง 4 (ยาม / วัน / เดือน / ปี)
-                </label>
-                <div id="detail-pillars-text" style="font-size: 13.5px; font-weight: 600; color: var(--text-primary); font-family: monospace;">
-                    -
+                <div class="admin-form-group">
+                    <label class="admin-modal-label">ชื่อ - นามสกุล *</label>
+                    <input type="text" name="full_name" class="admin-modal-input" placeholder="เช่น อาจารย์สมชาย ดวงดี" required>
                 </div>
-            </div>
 
-            <!-- Personality note -->
-            <div style="margin-top: 14px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; background: rgba(197, 48, 48, 0.05); border-left: 3px solid var(--accent-red); padding: 8px 12px; border-radius: 4px;">
-                <strong>บุคลิกภาพ: </strong>
-                <span id="detail-personality">-</span>
-            </div>
+                <div class="admin-form-group">
+                    <label class="admin-modal-label">อีเมล (Email) *</label>
+                    <input type="email" name="email" class="admin-modal-input" placeholder="name@example.com" required>
+                </div>
+
+                <div class="admin-form-group">
+                    <label class="admin-modal-label">รหัสผ่าน (Password) *</label>
+                    <input type="password" name="password" class="admin-modal-input" placeholder="รหัสผ่านอย่างน้อย 6 ตัวอักษร" required>
+                </div>
+
+                <div class="admin-form-group">
+                    <label class="admin-modal-label">สิทธิ์การใช้งาน (Role)</label>
+                    <select name="role" class="admin-modal-select">
+                        <option value="member">สมาชิกทั่วไป (Member)</option>
+                        <option value="consultant">ซินแส / ผู้เชี่ยวชาญ (Consultant)</option>
+                    </select>
+                </div>
+
+                <div class="modal-btns-row">
+                    <button type="button" onclick="closeAddUserModal()" class="btn-cancel">ยกเลิก</button>
+                    <button type="submit" class="btn-add-primary" style="padding: 10px 20px;">บันทึกผู้ใช้ใหม่</button>
+                </div>
+            </form>
         </div>
     </div>
 
-    <!-- Modal script -->
+    <!-- =========================================================
+         MODAL 2: EDIT USER
+         ========================================================= -->
+    <div id="modal-edit-user" class="pin-gate-overlay" style="display: none; z-index: 100000;">
+        <div class="pin-gate-box" style="max-width: 500px; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1.5px solid var(--border-subtle); padding-bottom: 12px;">
+                <h3 style="font-size: 18px; color: var(--text-primary); margin: 0;">✏️ แก้ไขข้อมูลผู้ใช้งาน</h3>
+                <button type="button" onclick="closeEditUserModal()" style="background: none; border: none; font-size: 24px; color: var(--text-muted); cursor: pointer;">&times;</button>
+            </div>
+
+            <form action="{% url 'bazi:admin_dashboard' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="edit_user">
+                <input type="hidden" name="user_id" id="edit-user-id">
+
+                <div class="admin-form-group">
+                    <label class="admin-modal-label">ชื่อ - นามสกุล *</label>
+                    <input type="text" name="full_name" id="edit-user-name" class="admin-modal-input" required>
+                </div>
+
+                <div class="admin-form-group">
+                    <label class="admin-modal-label">อีเมล (Email) *</label>
+                    <input type="email" name="email" id="edit-user-email" class="admin-modal-input" required>
+                </div>
+
+                <div class="admin-form-group">
+                    <label class="admin-modal-label">รหัสผ่านใหม่ (เว้นว่างไว้หากไม่ต้องการเปลี่ยน)</label>
+                    <input type="password" name="password" class="admin-modal-input" placeholder="กรอกรหัสผ่านใหม่หากต้องการเปลี่ยน">
+                </div>
+
+                <div class="admin-form-group">
+                    <label class="admin-modal-label">สิทธิ์การใช้งาน (Role)</label>
+                    <select name="role" id="edit-user-role" class="admin-modal-select">
+                        <option value="member">สมาชิกทั่วไป (Member)</option>
+                        <option value="consultant">ซินแส / ผู้เชี่ยวชาญ (Consultant)</option>
+                    </select>
+                </div>
+
+                <div class="modal-btns-row">
+                    <button type="button" onclick="closeEditUserModal()" class="btn-cancel">ยกเลิก</button>
+                    <button type="submit" class="btn-add-primary" style="padding: 10px 20px;">บันทึกการแก้ไข</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         MODAL 3: EDIT WISDOM ENTRY
+         ========================================================= -->
+    <div id="modal-edit-wisdom" class="pin-gate-overlay" style="display: none; z-index: 100000;">
+        <div class="pin-gate-box" style="max-width: 620px; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1.5px solid var(--border-subtle); padding-bottom: 12px;">
+                <h3 style="font-size: 18px; color: var(--text-primary); margin: 0;">
+                    ✏️ แก้ไขตำรา: <span id="edit-wisdom-header-zh" style="color: var(--accent-red); font-family: 'Cinzel', serif;"></span>
+                </h3>
+                <button type="button" onclick="closeEditWisdomModal()" style="background: none; border: none; font-size: 24px; color: var(--text-muted); cursor: pointer;">&times;</button>
+            </div>
+
+            <form action="{% url 'bazi:admin_dashboard' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="edit_wisdom">
+                <input type="hidden" name="chinese" id="edit-wisdom-chinese">
+
+                <div class="admin-form-group">
+                    <label class="admin-modal-label">ชื่อราศี / คำนิยาม (Title) *</label>
+                    <input type="text" name="title" id="edit-wisdom-title" class="admin-modal-input" required>
+                </div>
+
+                <div class="admin-form-group">
+                    <label class="admin-modal-label">จุดเด่นและพลังด้านบวก (Good Traits) *</label>
+                    <textarea name="good" id="edit-wisdom-good" class="admin-modal-textarea" required></textarea>
+                </div>
+
+                <div class="admin-form-group">
+                    <label class="admin-modal-label">จุดที่ต้องระมัดระวัง (Cautions) *</label>
+                    <textarea name="bad" id="edit-wisdom-bad" class="admin-modal-textarea" required></textarea>
+                </div>
+
+                <div class="admin-form-group">
+                    <label class="admin-modal-label">คำแนะนำเชิงกลยุทธ์ (Strategic Advice) *</label>
+                    <textarea name="advice" id="edit-wisdom-advice" class="admin-modal-textarea" required></textarea>
+                </div>
+
+                <div class="modal-btns-row">
+                    <button type="button" onclick="closeEditWisdomModal()" class="btn-cancel">ยกเลิก</button>
+                    <button type="submit" class="btn-add-primary" style="padding: 10px 20px;">บันทึกตำรา</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         MODAL 4: 8-CELL CHART PREVIEW
+         ========================================================= -->
+    <div id="chart-inspect-modal" class="pin-gate-overlay" style="display: none; z-index: 100000;">
+        <div class="pin-gate-box" style="max-width: 620px; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1.5px solid var(--border-subtle); padding-bottom: 12px;">
+                <h3 id="modal-client-name" style="font-size: 18px; color: var(--text-primary); margin: 0;">ผังดวง 8 ช่อง</h3>
+                <button type="button" onclick="closeRecordModal()" style="background: none; border: none; font-size: 24px; color: var(--text-muted); cursor: pointer;">&times;</button>
+            </div>
+            
+            <div id="modal-client-meta" style="font-size: 13.5px; color: var(--text-secondary); margin-bottom: 18px;"></div>
+
+            <div id="modal-chart-content" style="background: var(--bg-surface-elevated); padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1.5px solid var(--border-subtle);">
+                กำลังโหลดข้อมูล...
+            </div>
+
+            <button type="button" onclick="closeRecordModal()" class="pin-submit-btn" style="padding: 10px;">ปิดหน้าต่าง</button>
+        </div>
+    </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const modal = document.getElementById('user-detail-modal');
-            const closeBtn = document.getElementById('btn-close-detail-modal');
-
-            if (closeBtn && modal) {
-                closeBtn.addEventListener('click', () => {
-                    modal.style.display = 'none';
-                });
-
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) modal.style.display = 'none';
-                });
+        function switchAdminTab(tabId, evt) {
+            document.querySelectorAll('.admin-tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content-panel').forEach(panel => panel.classList.remove('active'));
+            
+            const curTarget = (evt && evt.currentTarget) ? evt.currentTarget : (window.event ? window.event.currentTarget : null);
+            if (curTarget) {
+                curTarget.classList.add('active');
             }
+            const targetPanel = document.getElementById(tabId);
+            if (targetPanel) {
+                targetPanel.classList.add('active');
+            }
+        }
 
-            const detailBtns = document.querySelectorAll('.btn-view-user-details');
-            detailBtns.forEach(btn => {
-                btn.addEventListener('click', async () => {
-                    const recordId = btn.getAttribute('data-id');
-                    try {
-                        const res = await fetch(`?record_id=${recordId}`, {
-                            headers: { 'X-Requested-With': 'XMLHttpRequest' }
-                        });
-                        if (!res.ok) return;
-                        const data = await res.json();
+        // Add User Modal
+        function openAddUserModal() {
+            document.getElementById('modal-add-user').style.display = 'flex';
+        }
+        function closeAddUserModal() {
+            document.getElementById('modal-add-user').style.display = 'none';
+        }
 
-                        document.getElementById('modal-user-name').textContent = data.name;
-                        document.getElementById('modal-last-analyzed').textContent = `วิเคราะห์ล่าสุด: ${data.last_analyzed}`;
-                        
-                        document.getElementById('detail-name').textContent = data.name;
-                        document.getElementById('detail-gender').textContent = data.gender === 'male' ? 'ชาย (Male)' : 'หญิง (Female)';
-                        document.getElementById('detail-birth-date').textContent = data.birth_date;
-                        document.getElementById('detail-birth-time').textContent = data.birth_time + ' น.';
-                        document.getElementById('detail-location').textContent = data.location;
+        // Edit User Modal
+        function openEditUserModal(id, name, email, role) {
+            document.getElementById('edit-user-id').value = id;
+            document.getElementById('edit-user-name').value = name;
+            document.getElementById('edit-user-email').value = email;
+            document.getElementById('edit-user-role').value = role;
+            document.getElementById('modal-edit-user').style.display = 'flex';
+        }
+        function closeEditUserModal() {
+            document.getElementById('modal-edit-user').style.display = 'none';
+        }
 
-                        if (data.chart_data) {
-                            const c = data.chart_data;
-                            if (c.day_master) {
-                                document.getElementById('detail-dm').textContent = `${c.day_master.element_th} (${c.day_master.stem.thaiName} / ${c.day_master.stem.chinese})`;
-                                document.getElementById('detail-personality').textContent = c.day_master.personality_th || '-';
-                            }
-                            document.getElementById('detail-strength').textContent = `${c.strength_th || '-'} (${c.total_score || '-'} / 8.5)`;
-                            
-                            if (c.favorable_elements) {
-                                document.getElementById('detail-fav-elems').textContent = c.favorable_elements.map(e => e.th).join(', ');
-                            }
-                            if (c.unfavorable_elements) {
-                                document.getElementById('detail-unfav-elems').textContent = c.unfavorable_elements.map(e => e.th).join(', ');
-                            }
+        // Edit Wisdom Modal
+        function openEditWisdomModal(zh, title, good, bad, advice) {
+            document.getElementById('edit-wisdom-header-zh').textContent = zh;
+            document.getElementById('edit-wisdom-chinese').value = zh;
+            document.getElementById('edit-wisdom-title').value = title;
+            document.getElementById('edit-wisdom-good').value = good;
+            document.getElementById('edit-wisdom-bad').value = bad;
+            document.getElementById('edit-wisdom-advice').value = advice;
+            document.getElementById('modal-edit-wisdom').style.display = 'flex';
+        }
+        function closeEditWisdomModal() {
+            document.getElementById('modal-edit-wisdom').style.display = 'none';
+        }
 
-                            if (c.stem_objs && c.branch_objs) {
-                                const stems = c.stem_objs.map(s => s.chinese).join(' ');
-                                const branches = c.branch_objs.map(b => b.chinese).join(' ');
-                                document.getElementById('detail-pillars-text').textContent = `ราศีบน: [${stems}]  |  ราศีล่าง: [${branches}]`;
-                            }
-                        }
+        // Record Inspection Modal
+        function openRecordModal(recId) {
+            const modal = document.getElementById('chart-inspect-modal');
+            const nameEl = document.getElementById('modal-client-name');
+            const metaEl = document.getElementById('modal-client-meta');
+            const chartEl = document.getElementById('modal-chart-content');
 
-                        modal.style.display = 'flex';
-                    } catch (err) {
-                        console.error('Failed to load user details', err);
+            modal.style.display = 'flex';
+            chartEl.innerHTML = 'กำลังโหลดข้อมูลผังดวง...';
+
+            fetch(`{% url 'bazi:admin_dashboard' %}?record_id=${recId}`)
+                .then(r => r.json())
+                .then(data => {
+                    if (data.error) {
+                        chartEl.innerHTML = `<span style="color:red;">${data.error}</span>`;
+                        return;
                     }
+                    nameEl.textContent = `ผังดวง 8 ช่อง: ${data.name}`;
+                    metaEl.textContent = `เกิด: ${data.birth_date} เวลา: ${data.birth_time} • ${data.location}`;
+                    
+                    if (data.chart_data && data.chart_data.stem_objs && data.chart_data.branch_objs) {
+                        const s = data.chart_data.stem_objs;
+                        const b = data.chart_data.branch_objs;
+                        chartEl.innerHTML = `
+                            <table style="width: 100%; text-align: center; border-collapse: collapse; font-size: 14px;">
+                                <thead>
+                                    <tr style="color: var(--text-secondary); border-bottom: 1.5px solid var(--border-subtle);">
+                                        <th style="padding: 8px;">ประเภท</th>
+                                        <th style="padding: 8px;">ยาม (Hour)</th>
+                                        <th style="padding: 8px; color: var(--accent-red);">วัน/ดิถี (Day)</th>
+                                        <th style="padding: 8px;">เดือน (Month)</th>
+                                        <th style="padding: 8px;">ปี (Year)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="font-size: 24px; font-weight: 700;">
+                                        <td style="font-size: 13px; color: var(--text-muted);">ราศีบน</td>
+                                        <td style="padding: 10px;">${s[0].chinese}</td>
+                                        <td style="padding: 10px; color: var(--accent-red);">${s[1].chinese}</td>
+                                        <td style="padding: 10px;">${s[2].chinese}</td>
+                                        <td style="padding: 10px;">${s[3].chinese}</td>
+                                    </tr>
+                                    <tr style="font-size: 24px; font-weight: 700;">
+                                        <td style="font-size: 13px; color: var(--text-muted);">ราศีล่าง</td>
+                                        <td style="padding: 10px;">${b[0].chinese}</td>
+                                        <td style="padding: 10px;">${b[1].chinese}</td>
+                                        <td style="padding: 10px;">${b[2].chinese}</td>
+                                        <td style="padding: 10px;">${b[3].chinese}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div style="margin-top: 16px; font-size: 13.5px; color: var(--text-secondary); text-align: center; border-top: 1.5px solid var(--border-subtle); padding-top: 12px;">
+                                พลังดิถี: <strong style="color: var(--text-primary);">${data.chart_data.strength_th} (${data.chart_data.strength_code})</strong> • คะแนน: <strong style="color: var(--accent-red);">${data.chart_data.total_score}</strong>
+                            </div>
+                        `;
+                    } else {
+                        chartEl.innerHTML = 'ไม่มีข้อมูลผังดวงที่สมบูรณ์';
+                    }
+                })
+                .catch(err => {
+                    chartEl.innerHTML = 'ไม่สามารถดึงข้อมูลได้';
                 });
-            });
-        });
+        }
+
+        function closeRecordModal() {
+            document.getElementById('chart-inspect-modal').style.display = 'none';
+        }
     </script>
     {% endif %}
 
-    <!-- Bottom-Left Floating Utility Controls (Language & Theme) -->
-    <div class="bottom-left-controls">
-        <button type="button" id="btn-theme-toggle" class="control-btn" title="Toggle Light/Dark Theme">
-            <span id="theme-icon">🌙</span>
-        </button>
-    </div>
-
-    <!-- Floating Navigation Switcher for easy testing -->
-    <div class="screen-switcher-right">
-        <a href="{% url 'bazi:form' %}" data-th="กรอกข้อมูล" data-en="Form">กรอกข้อมูล</a>
-        <a href="{% url 'bazi:login' %}" data-th="เข้าสู่ระบบ" data-en="Login">เข้าสู่ระบบ</a>
-        <a href="{% url 'bazi:result' %}" data-th="ผลวิเคราะห์" data-en="Result">ผลวิเคราะห์</a>
-        <a href="{% url 'bazi:admin_dashboard' %}" class="active" data-th="แอดมิน" data-en="Admin">แอดมิน</a>
-    </div>
-
-    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

@@ -1,79 +1,225 @@
-/* Form Page Styles (30% Left decorative, 70% Right minimal clean form) */
+/* =========================================================
+   3-LAYER FULLSCREEN SPLIT 50/50 LAYOUT
+   Layer 1 (Bottom): 2 Split Background Boxes (Left Yin, Right Yang)
+   Layer 2 (Middle): Rotating Yin-Yang symbol centered on the split seam
+   Layer 3 (Top): Content (Left: Vertical Chinese + headline; Right: Form)
+   ========================================================= */
 
-.form-split-layout {
-    display: grid;
-    grid-template-columns: 0.35fr 0.65fr;
-    max-width: 1240px;
-    width: 100%;
-    margin: 20px auto 60px;
-    padding: 0 30px;
-    align-items: center;
-    gap: 40px;
+.fullscreen-split-layout {
     position: relative;
-    z-index: 10;
-}
-
-/* Left Decorative Atmosphere (approx 30-35%) */
-.form-left-col {
+    width: 100vw;
+    min-height: calc(100vh - 68px);
+    overflow: hidden;
     display: flex;
     flex-direction: column;
+}
+
+/* LAYER 1: 2 BACKGROUND BOXES (Yin & Yang Colors) */
+.split-layer-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.split-box-bg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Left Box: Yin Color (Deep Charcoal / Black) */
+.split-box-yin {
+    background-color: #090a0d;
+    border-right: 1.5px solid var(--border-card);
+}
+
+/* Right Box: Yang Color (Elevated Solid Slate) */
+.split-box-yang {
+    background-color: #141720;
+}
+
+[data-theme="light"] .split-box-yin {
+    background-color: #edf2f7;
+    border-right: 1.5px solid var(--border-card);
+}
+
+[data-theme="light"] .split-box-yang {
+    background-color: #ffffff;
+}
+
+/* LAYER 2: YIN-YANG CENTERED ON SEAM */
+.split-layer-yinyang {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    pointer-events: none;
+    display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    gap: 24px;
 }
 
-.left-calligraphy-wrap {
+.split-yinyang-orb {
+    width: min(520px, 46vw);
+    height: min(520px, 46vw);
+    opacity: 0.26;
+}
+
+[data-theme="light"] .split-yinyang-orb {
+    opacity: 0.16;
+}
+
+/* LAYER 3: FOREGROUND CONTENT */
+.split-layer-content {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    min-height: calc(100vh - 68px);
+    align-items: stretch;
+}
+
+.split-content-panel {
+    padding: 44px 52px;
     display: flex;
-    gap: 14px;
-    align-items: center;
+    flex-direction: column;
 }
 
-.left-calligraphy-text {
-    writing-mode: vertical-rl;
-    text-orientation: upright;
-    font-size: 20px;
-    letter-spacing: 7px;
-    font-family: "Songti SC", "SimSun", serif;
-    color: var(--text-primary);
-    opacity: 0.85;
+/* Left Hero Content */
+.split-left-hero {
+    position: relative;
+    justify-content: space-between;
+    padding: 50px 60px;
 }
 
-.left-calligraphy-seal {
-    width: 24px;
-    height: 24px;
-    border: 1.5px solid var(--accent-red);
-    color: var(--accent-red);
+/* Vertical Chinese Calligraphy Decorative Element */
+.vertical-chinese-decor {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 10px;
+    margin-bottom: 24px;
+    user-select: none;
+}
+
+.vertical-chinese-decor .chinese-seal-square {
+    width: 38px;
+    height: 38px;
+    font-size: 19px;
+    margin-bottom: 12px;
+    background: var(--accent-red);
+    color: #ffffff;
+    border: 1.5px solid #f6e05e;
+    border-radius: var(--radius-sm, 6px);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 11px;
-    border-radius: 3px;
+    font-family: 'Ma Shan Zheng', serif;
     font-weight: 700;
 }
 
-.left-quote-text {
-    font-size: 13px;
-    color: var(--text-secondary);
-    text-align: center;
-    line-height: 1.6;
-    max-width: 240px;
+.cn-char-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: 'Ma Shan Zheng', 'Noto Serif SC', serif;
+    font-size: 46px;
+    color: var(--accent-red);
+    line-height: 1.05;
+    letter-spacing: 2px;
 }
 
-/* Right Form Card (70%) */
-.form-right-col {
+.cn-sub-label {
+    font-family: 'Cinzel', 'Noto Serif SC', serif;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #d4af37;
+    letter-spacing: 3px;
+    margin-top: 8px;
+}
+
+/* Center-Bottom Headline */
+.hero-title-lower-box {
+    margin-top: auto;
+    padding-bottom: 30px;
+}
+
+.showcase-title-prominent {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    line-height: 1.25;
+    margin: 14px 0 18px;
+}
+
+.showcase-lead-desc-hero {
+    font-size: 17px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 540px;
+    margin-bottom: 26px;
+}
+
+.highlight-gold {
+    color: #d4af37;
+}
+
+.showcase-tag-pill {
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffe082;
+    background: var(--accent-red-light);
+    border: 1px solid rgba(226, 192, 123, 0.45);
+    padding: 5px 14px;
+    border-radius: var(--radius-sm, 6px);
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+.btn-hero-consult {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg-surface);
+    border: 1.5px solid var(--accent-red);
+    color: var(--accent-red);
+    padding: 12px 24px;
+    border-radius: var(--radius-sm, 6px);
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.btn-hero-consult:hover {
+    background: var(--accent-red);
+    color: #ffffff;
+    transform: scale(1.03);
+}
+
+/* Right Form Content */
+.split-right-form {
     display: flex;
+    align-items: center;
     justify-content: center;
+    padding: 40px 48px;
 }
 
 .minimal-form-box {
     background: var(--bg-surface);
-    border: 1px solid var(--border-card);
-    border-radius: 20px;
-    padding: 36px 40px;
-    box-shadow: var(--shadow-card);
+    border: 1.5px solid var(--border-card);
+    border-radius: var(--radius-lg, 10px);
+    padding: 36px 36px;
+    box-shadow: none;
     width: 100%;
-    max-width: 760px;
     position: relative;
 }
 
@@ -81,11 +227,10 @@
     content: "";
     position: absolute;
     top: 0;
-    left: 40px;
-    right: 40px;
+    left: 0;
+    right: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--accent-red) 0%, var(--accent-green) 100%);
-    border-radius: 2px;
+    background: var(--accent-red);
 }
 
 .box-title-row {
@@ -93,35 +238,37 @@
 }
 
 .box-title-row h2 {
-    font-size: 22px;
+    font-size: 23px;
     font-weight: 700;
+    letter-spacing: -0.02em;
     color: var(--text-primary);
+    margin-bottom: 4px;
 }
 
 .box-title-row p {
     font-size: 13px;
     color: var(--text-secondary);
-    margin-top: 4px;
 }
 
-/* Form Grid */
+/* Form Grid & Inputs */
 .input-row {
     display: grid;
     gap: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .input-row.two-col {
     grid-template-columns: 1fr 1fr;
 }
 
-.input-row.date-cal-row {
-    grid-template-columns: 1fr 1.3fr 1.1fr auto;
-    align-items: flex-end;
+.date-cal-row {
+    grid-template-columns: 1.1fr 1.6fr 1.3fr 46px;
+    align-items: end;
 }
 
-.input-row.time-location-row {
-    grid-template-columns: 1fr 1fr 1fr;
+.time-location-row {
+    grid-template-columns: 1.4fr 1.3fr 1.3fr;
+    align-items: end;
 }
 
 .field-group {
@@ -131,8 +278,8 @@
 }
 
 .field-label {
-    font-size: 12.5px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 600;
     color: var(--text-secondary);
 }
 
@@ -140,41 +287,107 @@
 .field-select {
     width: 100%;
     height: 44px;
-    padding: 0 14px;
     background: var(--bg-input);
-    border: 1px solid var(--border-subtle);
-    border-radius: 10px;
-    font-size: 13.5px;
+    border: 1.5px solid var(--border-card);
+    border-radius: var(--radius-sm, 6px);
+    padding: 0 14px;
     color: var(--text-primary);
+    font-size: 14px;
     font-family: inherit;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: border-color 0.2s, background-color 0.2s;
 }
 
 .field-input:focus,
 .field-select:focus {
+    outline: none;
     border-color: var(--accent-red);
-    box-shadow: 0 0 0 3px var(--accent-red-light);
+    background: var(--bg-surface);
+    box-shadow: none;
 }
 
-/* Calendar Button */
+/* Gender Selector Radio */
+.gender-selector {
+    display: flex;
+    gap: 12px;
+    height: 44px;
+    align-items: center;
+}
+
+.gender-radio-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-input);
+    border: 1.5px solid var(--border-card);
+    border-radius: var(--radius-sm, 6px);
+    padding: 0 16px;
+    height: 100%;
+    flex: 1;
+    cursor: pointer;
+    font-size: 13.5px;
+    font-weight: 600;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.gender-radio-item input {
+    accent-color: var(--accent-red);
+    cursor: pointer;
+}
+
+.gender-radio-item:has(input:checked) {
+    border-color: var(--accent-red);
+    background: var(--accent-red-light);
+    color: var(--accent-red);
+}
+
+/* Time Split */
+.time-split-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.time-split-divider {
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+/* Unknown Time Checkbox */
+.unknown-time-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.unknown-time-wrap input {
+    cursor: pointer;
+    accent-color: var(--accent-red);
+}
+
+/* Calendar Button Trigger */
 .btn-calendar-trigger {
     width: 44px;
     height: 44px;
-    border-radius: 10px;
+    border-radius: var(--radius-sm, 6px);
     background: var(--bg-surface-elevated);
-    border: 1px solid var(--border-subtle);
-    color: var(--accent-red);
+    border: 1.5px solid var(--border-card);
+    color: var(--text-primary);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.2s;
+    box-shadow: none;
+    transition: border-color 0.2s, color 0.2s, transform 0.2s;
 }
 
 .btn-calendar-trigger:hover {
-    background: var(--accent-red-light);
     border-color: var(--accent-red);
+    color: var(--accent-red);
+    transform: scale(1.05);
 }
 
 .btn-calendar-trigger svg {
@@ -182,115 +395,59 @@
     height: 20px;
 }
 
-/* Time inputs: separated Hour and Minute */
-.time-split-wrap {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.time-split-wrap .field-select {
-    padding: 0 8px;
-    text-align: center;
-}
-
-.time-split-divider {
-    font-size: 18px;
+/* Submit Action Button (Solid Color, Flat, Scale Feedback) */
+.btn-submit-action {
+    width: 100%;
+    height: 48px;
+    background: var(--accent-red);
+    color: #ffffff;
+    font-size: 15px;
     font-weight: 700;
-    color: var(--text-secondary);
-}
-
-/* Gender Radios */
-.gender-selector {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    height: 44px;
-}
-
-.gender-radio-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    border: none;
+    border-radius: var(--radius-md, 8px);
     cursor: pointer;
-    font-size: 13.5px;
-    color: var(--text-primary);
-    user-select: none;
-}
-
-.gender-radio-item input[type="radio"] {
-    display: none;
-}
-
-.radio-circle {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 2px solid var(--text-muted);
+    box-shadow: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: border-color 0.2s;
-}
-
-.radio-circle::after {
-    content: "";
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--accent-red);
-    opacity: 0;
-    transform: scale(0.4);
-    transition: all 0.2s;
-}
-
-.gender-radio-item input[type="radio"]:checked + .radio-circle {
-    border-color: var(--accent-red);
-}
-
-.gender-radio-item input[type="radio"]:checked + .radio-circle::after {
-    opacity: 1;
-    transform: scale(1);
-}
-
-/* Submit Action Button */
-.form-submit-row {
-    margin-top: 30px;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.btn-submit-action {
-    background: var(--accent-red);
-    color: #ffffff;
-    border: none;
-    border-radius: 10px;
-    padding: 13px 48px;
-    font-size: 15px;
-    font-weight: 600;
+    gap: 8px;
     font-family: inherit;
-    cursor: pointer;
-    box-shadow: 0 4px 14px rgba(197, 48, 48, 0.3);
-    transition: all 0.2s ease;
+    margin-top: 10px;
 }
 
 .btn-submit-action:hover {
     background: var(--accent-red-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 18px rgba(197, 48, 48, 0.4);
+    transform: scale(1.02);
 }
 
-@media (max-width: 900px) {
-    .form-split-layout {
+@media (max-width: 960px) {
+    .fullscreen-split-layout {
+        min-height: auto;
+    }
+    .split-layer-bg {
         grid-template-columns: 1fr;
     }
-    .form-left-col {
+    .split-box-yin {
+        border-right: none;
+        border-bottom: 1.5px solid var(--border-card);
+    }
+    .split-layer-content {
+        grid-template-columns: 1fr;
+    }
+    .split-layer-yinyang {
         display: none;
     }
-    .input-row.date-cal-row {
+    .split-left-hero {
+        padding: 36px 24px;
+    }
+    .split-right-form {
+        padding: 24px 20px 60px;
+    }
+    .date-cal-row {
         grid-template-columns: 1fr 1fr;
     }
-    .input-row.time-location-row {
+    .time-location-row {
         grid-template-columns: 1fr;
     }
 }

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ประวัติการวิเคราะห์ดวงจีน - Duduang</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <style>
+        .history-page-wrap {
+            max-width: 1000px;
+            margin: 40px auto 80px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .history-card {
+            background: var(--bg-surface);
+            border: 1.5px solid var(--border-card);
+            border-radius: var(--radius-lg, 10px);
+            padding: 32px;
+            box-shadow: none;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .history-title-wrap h1 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .history-title-wrap p {
+            font-size: 13.5px;
+            color: var(--text-secondary);
+        }
+
+        .history-search-input {
+            background: var(--bg-input);
+            border: 1.5px solid var(--border-card);
+            border-radius: var(--radius-sm, 6px);
+            padding: 8px 16px;
+            color: var(--text-primary);
+            font-size: 13px;
+            width: 260px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .history-search-input:focus {
+            border-color: var(--accent-red);
+            box-shadow: none;
+        }
+
+        .record-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+        }
+
+        .record-table th {
+            text-align: left;
+            padding: 12px 14px;
+            color: var(--text-secondary);
+            font-weight: 700;
+            border-bottom: 1.5px solid var(--border-subtle);
+        }
+
+        .record-table td {
+            padding: 14px;
+            border-bottom: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+        }
+
+        .record-table tr:hover td {
+            background: var(--bg-surface-elevated);
+        }
+
+        .btn-view-result {
+            display: inline-block;
+            background: var(--accent-red-light);
+            color: var(--accent-red);
+            border: 1.5px solid var(--accent-red);
+            padding: 5px 12px;
+            border-radius: var(--radius-sm, 6px);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .btn-view-result:hover {
+            background: var(--accent-red);
+            color: #fff;
+            transform: scale(1.04);
+        }
+
+        .empty-history-box {
+            text-align: center;
+            padding: 48px 20px;
+            color: var(--text-secondary);
+        }
+
+        .empty-history-box svg {
+            margin-bottom: 12px;
+            stroke: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <div class="history-page-wrap">
+        <div class="history-card">
+            
+            <div class="history-header">
+                <div class="history-title-wrap">
+                    <h1 data-th="ประวัติการวิเคราะห์ดวง" data-en="Fortune Reading History">
+                        ประวัติการวิเคราะห์ดวง
+                    </h1>
+                    <p data-th="บันทึกผลการคำนวณ 4 เสาโป๊ยหยี่สี่เถียวของคุณและคนใกล้ชิด" data-en="Records of calculated Four Pillars BaZi charts.">
+                        บันทึกผลการคำนวณ 4 เสาโป๊ยหยี่สี่เถียวของคุณและคนใกล้ชิด
+                    </p>
+                </div>
+
+                <form method="GET" action="{% url 'bazi:history' %}">
+                    <input type="text" name="q" value="{{ search_query|default:'' }}" class="history-search-input" placeholder="🔍 ค้นหาชื่อ หรือสถานที่..." data-th="🔍 ค้นหาชื่อ หรือสถานที่..." data-en="🔍 Search name, location...">
+                </form>
+            </div>
+
+            {% if records %}
+            <div style="overflow-x: auto;">
+                <table class="record-table">
+                    <thead>
+                        <tr>
+                            <th data-th="ลำดับ" data-en="No.">#</th>
+                            <th data-th="ชื่อ - นามสกุล" data-en="Name">ชื่อ - นามสกุล</th>
+                            <th data-th="เพศ" data-en="Gender">เพศ</th>
+                            <th data-th="วันเกิด (สุริยคติ)" data-en="Birth Date">วันเกิด</th>
+                            <th data-th="เวลาเกิด" data-en="Time">เวลาเกิด</th>
+                            <th data-th="สถานที่" data-en="Location">สถานที่</th>
+                            <th data-th="วันที่คำนวณ" data-en="Calculated At">วันที่คำนวณ</th>
+                            <th data-th="การจัดการ" data-en="Action">การจัดการ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for r in records %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td><strong>{{ r.first_name }} {{ r.last_name }}</strong></td>
+                            <td>
+                                {% if r.gender == "female" %}
+                                    <span style="color: #ed64a6;">หญิง</span>
+                                {% else %}
+                                    <span style="color: #4299e1;">ชาย</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ r.birth_day }}/{{ r.birth_month }}/{{ r.birth_year }}</td>
+                            <td>{{ r.birth_hour|stringformat:"02d" }}:{{ r.birth_minute|stringformat:"02d" }} น.</td>
+                            <td>{{ r.province }}</td>
+                            <td style="color: var(--text-muted); font-size: 12px;">{{ r.last_analyzed_at|date:"d/m/Y H:i" }}</td>
+                            <td>
+                                <form method="POST" action="{% url 'bazi:result' %}" style="display:inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="first_name" value="{{ r.first_name }}">
+                                    <input type="hidden" name="last_name" value="{{ r.last_name }}">
+                                    <input type="hidden" name="gender" value="{{ r.gender }}">
+                                    <input type="hidden" name="birth_day" value="{{ r.birth_day }}">
+                                    <input type="hidden" name="birth_month" value="{{ r.birth_month }}">
+                                    <input type="hidden" name="birth_year" value="{{ r.birth_year }}">
+                                    <input type="hidden" name="birth_hour" value="{{ r.birth_hour }}">
+                                    <input type="hidden" name="birth_minute" value="{{ r.birth_minute }}">
+                                    <input type="hidden" name="province" value="{{ r.province }}">
+                                    <input type="hidden" name="country" value="{{ r.country }}">
+                                    <button type="submit" class="btn-view-result" data-th="เปิดดูผังดวง" data-en="View Chart">
+                                        เปิดดูผังดวง
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="empty-history-box">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <div style="font-size: 16px; font-weight: 600; margin-bottom: 6px;" data-th="ไม่พบประวัติการวิเคราะห์ดวง" data-en="No History Records Found">
+                    ไม่พบประวัติการวิเคราะห์ดวง
+                </div>
+                <p style="font-size: 13px;" data-th="คุณสามารถเริ่มผูกดวงได้ทันทีที่หน้าวิเคราะห์ดวง" data-en="You can start calculating a chart right now on the analyze page.">
+                    คุณสามารถเริ่มผูกดวงได้ทันทีที่หน้าวิเคราะห์ดวง
+                </p>
+                <div style="margin-top: 20px;">
+                    <a href="{% url 'bazi:form' %}" class="btn-view-result" style="padding: 8px 20px; font-size: 13px;" data-th="ไปหน้าผูกดวง" data-en="Go to Form">
+                        ไปหน้าผูกดวง
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

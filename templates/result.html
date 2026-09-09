@@ -3,19 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ดูดวงศาสตร์จีน - ผลการวิเคราะห์ดวงจีน (Bazi Four Pillars Chart)</title>
+    <title>ดูดวงศาสตร์จีน - ผลการวิเคราะห์ดวงจีน โป๊ยหยี่สี่เถียว (BaZi Four Pillars Chart)</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/theme.css' %}">
-    <link rel="stylesheet" href="{% static 'css/result.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Ma+Shan+Zheng&family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Noto+Serif+SC:wght@500;700;900&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}?v=2.3">
+    <link rel="stylesheet" href="{% static 'css/result.css' %}?v=2.3">
+    <style>
+        .dm-meaning-panel {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-card);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 24px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .dm-meaning-title-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 12px;
+        }
+
+        .dm-meaning-title-row h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0;
+        }
+
+        .dm-trait-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .dm-trait-box {
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .dm-trait-header {
+            font-size: 13.5px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .trait-good { color: #48bb78; }
+        .trait-bad { color: #f56565; }
+        .trait-advice { color: #ecc94b; }
+
+        .dm-trait-content {
+            font-size: 13px;
+            line-height: 1.65;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .dm-trait-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Shared Top Navbar (Includes Mist & Bottom-Left Controls) -->
+    <!-- Shared Top Navbar (Includes Mist & Universal Fixed Yin-Yang) -->
     {% include 'navbar.html' %}
 
     <main class="result-main-container">
         
-        <!-- User Info Banner -->
+        <!-- User Info Banner (Full Width Grid Top Header) -->
         <div class="result-info-banner">
             <div class="banner-user-name">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -23,245 +94,321 @@
                     <circle cx="12" cy="7" r="4"></circle>
                 </svg>
                 <span>{{ user_full_name }}</span>
-                <span class="banner-dm-tag" data-th="{{ chart.day_master.badge_title_th }}" data-en="{{ chart.day_master.badge_title_en }}">
-                    {{ chart.day_master.badge_title_th }}
+                <span class="banner-dm-tag">
+                    ธาตุดิถี: {{ chart.day_master.elem_name_th }} ({{ chart.day_master.stem.chinese }})
                 </span>
             </div>
             <div class="banner-meta-text">
                 <span data-th="{{ birth_header_th }}" data-en="{{ birth_header_en }}">{{ birth_header_th }}</span>
                 &bull;
-                <span data-th="{{ province }}, {{ country }}" data-en="{{ province }}, {{ country }}">{{ province }}, {{ country }}</span>
+                <span>{{ province }}, {{ country }}</span>
+                &bull;
+                <a href="{% url 'bazi:form' %}" style="color: var(--accent-red); text-decoration: none; font-weight: 600;">(คำนวณใหม่)</a>
             </div>
         </div>
 
-        <!-- 1. CORE SECTION: 8-Cell Table + Strength Panel (Exact Image Layout) -->
-        <section class="bazi-dashboard-panel">
+        <!-- ROW 2: BOX 8 ELEMENTS (DEAN SOOD & YAI SOOD - 4 Stems Top, 4 Branches Bottom with +/- Polarity) -->
+        <section class="bazi-prominent-box bazi-eight-elements-panel">
             <div class="panel-header-row">
                 <div class="panel-title-wrap">
-                    <h2 data-th="ตารางรูปดวง 8 ช่อง (Four Pillars Chart)" data-en="Four Pillars Chart (8 Cells)">
-                        ตารางรูปดวง 8 ช่อง (Four Pillars Chart)
+                    <span class="badge-row-tag">BAZI CHART • 四柱八字</span>
+                    <h2 data-th="ผังดวง 8 ธาตุ (Four Pillars Chart)" data-en="Four Pillars Chart (8 Elements)">
+                        ผังดวง 8 ธาตุ (Four Pillars Chart)
                     </h2>
-                    <span class="banner-dm-tag" data-th="{{ chart.day_master.badge_title_th }}" data-en="{{ chart.day_master.badge_title_en }}">
-                        {{ chart.day_master.badge_title_th }}
-                    </span>
                 </div>
-                <div class="banner-meta-text" data-th="{{ birth_header_th }}" data-en="{{ birth_header_en }}">
-                    {{ birth_header_th }}
+                <div class="banner-dm-tag-prominent">
+                    <span class="dm-tag-label" data-th="ธาตุดิถีประจำตัว:" data-en="Day Master:">ธาตุดิถีประจำตัว:</span>
+                    <span class="dm-tag-elem">{{ chart.stem_objs.1.elem_polarity_th|default:chart.day_master.elem_name_th }}</span>
+                    <span class="dm-tag-zh">({{ chart.day_master.stem.chinese }})</span>
                 </div>
             </div>
 
-            <div class="core-chart-layout">
-                
-                <!-- 8-Cell Grid Table -->
-                <div class="chart-table-wrap">
-                    <table class="bazi-grid-table">
-                        <thead>
-                            <tr>
-                                <th data-th="ตำแหน่ง" data-en="Position">ตำแหน่ง</th>
-                                <th data-th="หลักยาม (Hour)" data-en="Hour Pillar">หลักยาม (Hour)</th>
-                                <th class="th-dm" data-th="หลักวัน (Day / ดิถี)" data-en="Day (Day Master)">หลักวัน (Day / ดิถี)</th>
-                                <th data-th="หลักเดือน (Month)" data-en="Month Pillar">หลักเดือน (Month)</th>
-                                <th data-th="หลักปี (Year)" data-en="Year Pillar">หลักปี (Year)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Row 1: Heavenly Stems (ราศีบน) -->
-                            <tr>
-                                <th>
-                                    <span data-th="ราศีบน (Stems)" data-en="Stems (Heavenly)">ราศีบน (Stems)</span>
-                                </th>
-                                
-                                <!-- Hour Stem -->
-                                <td>
-                                    <div class="cell-box">
-                                        <div class="cell-chinese {{ chart.stem_objs.0.elem_class }}">{{ chart.stem_objs.0.chinese }}</div>
-                                        <div class="cell-name-thai" data-th="{{ chart.stem_objs.0.line2_th }}" data-en="{{ chart.stem_objs.0.line2_en }}">{{ chart.stem_objs.0.line2_th }}</div>
-                                        <div class="cell-sub-detail" data-th="{{ chart.stem_objs.0.line3_th }}" data-en="{{ chart.stem_objs.0.line3_en }}">{{ chart.stem_objs.0.line3_th }}</div>
+            <div class="chart-table-wrap">
+                <table class="bazi-grid-table-large">
+                    <thead>
+                        <tr>
+                            <th class="th-corner" data-th="มิติเสาพลัง" data-en="Pillars">มิติเสาพลัง</th>
+                            <th data-th="หลักยาม (Hour)" data-en="Hour Pillar">
+                                <div class="th-pillar-title">หลักยาม (Hour)</div>
+                                <div class="th-pillar-sub">บริวาร • ผลลัพธ์</div>
+                            </th>
+                            <th class="th-dm" data-th="หลักวัน (Day / ดิถี)" data-en="Day (Day Master)">
+                                <div class="th-pillar-title">หลักวัน (Day / ดิถี) ★</div>
+                                <div class="th-pillar-sub">ตัวตน • จิตวิญญาณ</div>
+                            </th>
+                            <th data-th="หลักเดือน (Month)" data-en="Month Pillar">
+                                <div class="th-pillar-title">หลักเดือน (Month)</div>
+                                <div class="th-pillar-sub">การงาน • บิดามารดา</div>
+                            </th>
+                            <th data-th="หลักปี (Year)" data-en="Year Pillar">
+                                <div class="th-pillar-title">หลักปี (Year)</div>
+                                <div class="th-pillar-sub">บรรพบุรุษ • สังคม</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sub-Row 1: 4 Heavenly Stems (4 ธาตุบน) -->
+                        <tr>
+                            <th class="th-level-row">
+                                <div class="level-name-th">4 ธาตุบน</div>
+                                <div class="level-name-sub">ราศีบน (Stems)</div>
+                            </th>
+                            
+                            <!-- Hour Stem -->
+                            <td>
+                                <div class="cell-box-large">
+                                    <div class="cell-chinese-huge {{ chart.stem_objs.0.elem_class }}">{{ chart.stem_objs.0.chinese }}</div>
+                                    <div class="cell-name-thai-bold">{{ chart.stem_objs.0.thaiName }}</div>
+                                    <div class="cell-polarity-pill {{ chart.stem_objs.0.elem_class }}">
+                                        {{ chart.stem_objs.0.elem_polarity_th }}
                                     </div>
-                                </td>
+                                </div>
+                            </td>
 
-                                <!-- Day Stem (Day Master - Highlighted) -->
-                                <td>
-                                    <div class="cell-box dm-highlight">
-                                        <div class="cell-chinese {{ chart.stem_objs.1.elem_class }}">{{ chart.stem_objs.1.chinese }}</div>
-                                        <div class="cell-name-thai" data-th="{{ chart.stem_objs.1.line2_th }}" data-en="{{ chart.stem_objs.1.line2_en }}">{{ chart.stem_objs.1.line2_th }}</div>
-                                        <div class="cell-sub-detail" data-th="{{ chart.stem_objs.1.line3_th }}" data-en="{{ chart.stem_objs.1.line3_en }}">{{ chart.stem_objs.1.line3_th }}</div>
+                            <!-- Day Stem (Day Master - Most Highlighted) -->
+                            <td>
+                                <div class="cell-box-large dm-highlight-large">
+                                    <div class="dm-star-badge">★ ธาตุดิถี (ตัวตน)</div>
+                                    <div class="cell-chinese-huge {{ chart.stem_objs.1.elem_class }}">{{ chart.stem_objs.1.chinese }}</div>
+                                    <div class="cell-name-thai-bold">{{ chart.stem_objs.1.thaiName }} (ดิถี)</div>
+                                    <div class="cell-polarity-pill {{ chart.stem_objs.1.elem_class }} is-dm-pill">
+                                        {{ chart.stem_objs.1.elem_polarity_th }}
                                     </div>
-                                </td>
+                                </div>
+                            </td>
 
-                                <!-- Month Stem -->
-                                <td>
-                                    <div class="cell-box">
-                                        <div class="cell-chinese {{ chart.stem_objs.2.elem_class }}">{{ chart.stem_objs.2.chinese }}</div>
-                                        <div class="cell-name-thai" data-th="{{ chart.stem_objs.2.line2_th }}" data-en="{{ chart.stem_objs.2.line2_en }}">{{ chart.stem_objs.2.line2_th }}</div>
-                                        <div class="cell-sub-detail" data-th="{{ chart.stem_objs.2.line3_th }}" data-en="{{ chart.stem_objs.2.line3_en }}">{{ chart.stem_objs.2.line3_th }}</div>
+                            <!-- Month Stem -->
+                            <td>
+                                <div class="cell-box-large">
+                                    <div class="cell-chinese-huge {{ chart.stem_objs.2.elem_class }}">{{ chart.stem_objs.2.chinese }}</div>
+                                    <div class="cell-name-thai-bold">{{ chart.stem_objs.2.thaiName }}</div>
+                                    <div class="cell-polarity-pill {{ chart.stem_objs.2.elem_class }}">
+                                        {{ chart.stem_objs.2.elem_polarity_th }}
                                     </div>
-                                </td>
+                                </div>
+                            </td>
 
-                                <!-- Year Stem -->
-                                <td>
-                                    <div class="cell-box">
-                                        <div class="cell-chinese {{ chart.stem_objs.3.elem_class }}">{{ chart.stem_objs.3.chinese }}</div>
-                                        <div class="cell-name-thai" data-th="{{ chart.stem_objs.3.line2_th }}" data-en="{{ chart.stem_objs.3.line2_en }}">{{ chart.stem_objs.3.line2_th }}</div>
-                                        <div class="cell-sub-detail" data-th="{{ chart.stem_objs.3.line3_th }}" data-en="{{ chart.stem_objs.3.line3_en }}">{{ chart.stem_objs.3.line3_th }}</div>
+                            <!-- Year Stem -->
+                            <td>
+                                <div class="cell-box-large">
+                                    <div class="cell-chinese-huge {{ chart.stem_objs.3.elem_class }}">{{ chart.stem_objs.3.chinese }}</div>
+                                    <div class="cell-name-thai-bold">{{ chart.stem_objs.3.thaiName }}</div>
+                                    <div class="cell-polarity-pill {{ chart.stem_objs.3.elem_class }}">
+                                        {{ chart.stem_objs.3.elem_polarity_th }}
                                     </div>
-                                </td>
-                            </tr>
+                                </div>
+                            </td>
+                        </tr>
 
-                            <!-- Row 2: Earthly Branches (ราศีล่าง) -->
-                            <tr>
-                                <th>
-                                    <span data-th="ราศีล่าง (Branches)" data-en="Branches (Earthly)">ราศีล่าง (Branches)</span>
-                                </th>
-                                
-                                <!-- Hour Branch -->
-                                <td>
-                                    <div class="cell-box">
-                                        <div class="cell-chinese {{ chart.branch_objs.0.elem_class }}">{{ chart.branch_objs.0.chinese }}</div>
-                                        <div class="cell-name-thai" data-th="{{ chart.branch_objs.0.line2_th }}" data-en="{{ chart.branch_objs.0.line2_en }}">{{ chart.branch_objs.0.line2_th }}</div>
-                                        <div class="cell-sub-detail" data-th="{{ chart.branch_objs.0.line3_th }}" data-en="{{ chart.branch_objs.0.line3_en }}">{{ chart.branch_objs.0.line3_th }}</div>
+                        <!-- Sub-Row 2: 4 Earthly Branches (4 ธาตุล่าง) -->
+                        <tr>
+                            <th class="th-level-row">
+                                <div class="level-name-th">4 ธาตุล่าง</div>
+                                <div class="level-name-sub">ราศีล่าง (Branches)</div>
+                            </th>
+                            
+                            <!-- Hour Branch -->
+                            <td>
+                                <div class="cell-box-large">
+                                    <div class="cell-chinese-huge {{ chart.branch_objs.0.elem_class }}">{{ chart.branch_objs.0.chinese }}</div>
+                                    <div class="cell-name-thai-bold">{{ chart.branch_objs.0.thaiName }} ({{ chart.branch_objs.0.animal }})</div>
+                                    <div class="cell-polarity-pill {{ chart.branch_objs.0.elem_class }}">
+                                        {{ chart.branch_objs.0.elem_polarity_th }}
                                     </div>
-                                </td>
+                                </div>
+                            </td>
 
-                                <!-- Day Branch -->
-                                <td>
-                                    <div class="cell-box">
-                                        <div class="cell-chinese {{ chart.branch_objs.1.elem_class }}">{{ chart.branch_objs.1.chinese }}</div>
-                                        <div class="cell-name-thai" data-th="{{ chart.branch_objs.1.line2_th }}" data-en="{{ chart.branch_objs.1.line2_en }}">{{ chart.branch_objs.1.line2_th }}</div>
-                                        <div class="cell-sub-detail" data-th="{{ chart.branch_objs.1.line3_th }}" data-en="{{ chart.branch_objs.1.line3_en }}">{{ chart.branch_objs.1.line3_th }}</div>
+                            <!-- Day Branch -->
+                            <td>
+                                <div class="cell-box-large">
+                                    <div class="cell-chinese-huge {{ chart.branch_objs.1.elem_class }}">{{ chart.branch_objs.1.chinese }}</div>
+                                    <div class="cell-name-thai-bold">{{ chart.branch_objs.1.thaiName }} ({{ chart.branch_objs.1.animal }})</div>
+                                    <div class="cell-polarity-pill {{ chart.branch_objs.1.elem_class }}">
+                                        {{ chart.branch_objs.1.elem_polarity_th }}
                                     </div>
-                                </td>
+                                </div>
+                            </td>
 
-                                <!-- Month Branch -->
-                                <td>
-                                    <div class="cell-box">
-                                        <div class="cell-chinese {{ chart.branch_objs.2.elem_class }}">{{ chart.branch_objs.2.chinese }}</div>
-                                        <div class="cell-name-thai" data-th="{{ chart.branch_objs.2.line2_th }}" data-en="{{ chart.branch_objs.2.line2_en }}">{{ chart.branch_objs.2.line2_th }}</div>
-                                        <div class="cell-sub-detail" data-th="{{ chart.branch_objs.2.line3_th }}" data-en="{{ chart.branch_objs.2.line3_en }}">{{ chart.branch_objs.2.line3_th }}</div>
+                            <!-- Month Branch -->
+                            <td>
+                                <div class="cell-box-large">
+                                    <div class="cell-chinese-huge {{ chart.branch_objs.2.elem_class }}">{{ chart.branch_objs.2.chinese }}</div>
+                                    <div class="cell-name-thai-bold">{{ chart.branch_objs.2.thaiName }} ({{ chart.branch_objs.2.animal }})</div>
+                                    <div class="cell-polarity-pill {{ chart.branch_objs.2.elem_class }}">
+                                        {{ chart.branch_objs.2.elem_polarity_th }}
                                     </div>
-                                </td>
+                                </div>
+                            </td>
 
-                                <!-- Year Branch -->
-                                <td>
-                                    <div class="cell-box">
-                                        <div class="cell-chinese {{ chart.branch_objs.3.elem_class }}">{{ chart.branch_objs.3.chinese }}</div>
-                                        <div class="cell-name-thai" data-th="{{ chart.branch_objs.3.line2_th }}" data-en="{{ chart.branch_objs.3.line2_en }}">{{ chart.branch_objs.3.line2_th }}</div>
-                                        <div class="cell-sub-detail" data-th="{{ chart.branch_objs.3.line3_th }}" data-en="{{ chart.branch_objs.3.line3_en }}">{{ chart.branch_objs.3.line3_th }}</div>
+                            <!-- Year Branch -->
+                            <td>
+                                <div class="cell-box-large">
+                                    <div class="cell-chinese-huge {{ chart.branch_objs.3.elem_class }}">{{ chart.branch_objs.3.chinese }}</div>
+                                    <div class="cell-name-thai-bold">{{ chart.branch_objs.3.thaiName }} ({{ chart.branch_objs.3.animal }})</div>
+                                    <div class="cell-polarity-pill {{ chart.branch_objs.3.elem_class }}">
+                                        {{ chart.branch_objs.3.elem_polarity_th }}
                                     </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Right Side: Strength, Scoring & Favorable Elements Panel -->
-                <div class="strength-side-panel">
-                    
-                    <!-- Strength level row -->
-                    <div class="strength-badge-row">
-                        <span class="strength-label" data-th="ระดับพลังดิถี (Strength):" data-en="Day Master Strength:">
-                            ระดับพลังดิถี (Strength):
-                        </span>
-                        <span class="strength-badge {{ chart.strength_badge_class }}" data-th="{{ chart.strength_th }} ({{ chart.strength_code }})" data-en="{{ chart.strength_en }} ({{ chart.strength_code }})">
-                            {{ chart.strength_th }} ({{ chart.strength_code }})
-                        </span>
-                    </div>
-
-                    <!-- Score progress -->
-                    <div class="score-progress-wrap">
-                        <div class="score-text-row">
-                            <span data-th="คะแนนพลังสะสม:" data-en="Accumulated Score:">คะแนนพลังสะสม:</span>
-                            <span style="font-weight: 600; color: var(--text-primary);" data-th="{{ chart.total_score }} / 8.5 คะแนน" data-en="{{ chart.total_score }} / 8.5 pts">
-                                {{ chart.total_score }} / 8.5 คะแนน
-                            </span>
-                        </div>
-                        <div class="score-bar-bg">
-                            <div class="score-bar-fill" style="width: {{ chart.score_percent }}%;"></div>
-                        </div>
-                    </div>
-
-                    <!-- Favorable and Unfavorable Elements side-by-side -->
-                    <div class="fav-unfav-grid">
-                        
-                        <!-- Favorable Box -->
-                        <div class="fav-item-box fav">
-                            <div class="fav-box-label" data-th="ธาตุที่คุณ (ชอบ):" data-en="Favorable (Likes):">
-                                ธาตุที่คุณ (ชอบ):
-                            </div>
-                            <div class="fav-box-values">
-                                {% for elem in chart.favorable_elements %}
-                                    <span class="{{ elem.class }}" data-th="{{ elem.th }}" data-en="{{ elem.en }}">{{ elem.th }}</span>{% if not forloop.last %}, {% endif %}
-                                {% endfor %}
-                            </div>
-                            <div class="fav-box-sub" data-th="โชคลาภ, ถ่ายเท, พิฆาต" data-en="Wealth, Output, Power">
-                                โชคลาภ, ถ่ายเท, พิฆาต
-                            </div>
-                        </div>
-
-                        <!-- Unfavorable Box -->
-                        <div class="fav-item-box unfav">
-                            <div class="fav-box-label" data-th="ธาตุที่ให้โทษ (ไม่ชอบ):" data-en="Unfavorable (Dislikes):">
-                                ธาตุที่ให้โทษ (ไม่ชอบ):
-                            </div>
-                            <div class="fav-box-values">
-                                {% for elem in chart.unfavorable_elements %}
-                                    <span class="{{ elem.class }}" data-th="{{ elem.th }}" data-en="{{ elem.en }}">{{ elem.th }}</span>{% if not forloop.last %}, {% endif %}
-                                {% endfor %}
-                            </div>
-                            <div class="fav-box-sub" data-th="คู่ธาตุ, ก่อเกิด" data-en="Peer, Resource">
-                                คู่ธาตุ, ก่อเกิด
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Core Personality & Nature -->
-                    <div class="dm-core-personality">
-                        <strong data-th="บุคลิกภาพหลัก: " data-en="Core Personality: ">บุคลิกภาพหลัก: </strong>
-                        <span data-th="{{ chart.day_master.personality_th }}" data-en="{{ chart.day_master.personality_en }}">
-                            {{ chart.day_master.personality_th }}
-                        </span>
-                    </div>
-
-                </div>
-
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </section>
 
-        <!-- 2. FIVE ELEMENT ROLES SECTION (DOCUMENT.md Section 3.1) -->
-        <section class="roles-section">
-            <div class="section-subheading-wrap">
-                <h3 data-th="ความหมายของธาตุทั้ง 5 ตามบทบาท (Five Element Roles)" data-en="Five Element Roles Interpretation">
-                    ความหมายของธาตุทั้ง 5 ตามบทบาท (Five Element Roles)
-                </h3>
+        <!-- ROW 3: BOX STRENGTH, FAVORABLE, UNFAVORABLE & BALANCE ELEMENTS -->
+        <section class="bazi-dashboard-panel bazi-strength-balance-panel" style="margin-top: 24px;">
+            <div class="panel-header-row">
+                <div class="panel-title-wrap">
+                    <span class="badge-row-tag">ELEMENTAL BALANCE • 五行生剋</span>
+                    <h3 data-th="ธาตุดิถี ระดับพลัง และธาตุให้คุณ-ให้โทษ" data-en="Day Master Strength & Elemental Balance">
+                        ธาตุดิถี ระดับพลัง และธาตุให้คุณ-ให้โทษ
+                    </h3>
+                </div>
+                <div class="strength-badge-wrap">
+                    <span class="strength-badge {{ chart.strength_badge_class }}" data-th="{{ chart.strength_th }} ({{ chart.strength_code }})" data-en="{{ chart.strength_en }} ({{ chart.strength_code }})">
+                        สถานะพลังดิถี: {{ chart.strength_th }} ({{ chart.strength_code }})
+                    </span>
+                </div>
             </div>
 
-            <div class="element-roles-grid">
-                {% for role in chart.element_roles %}
-                <div class="role-card">
-                    <div class="role-card-top">
-                        <span class="role-name-badge" data-th="{{ role.title_th }}" data-en="{{ role.title_en }}">
-                            {{ role.title_th }}
-                        </span>
-                        {% if role.is_favorable %}
-                        <span class="role-status-indicator fav" data-th="ให้คุณ (ชอบ)" data-en="Favorable">ให้คุณ (ชอบ)</span>
+            <div class="strength-balance-grid-row">
+                <!-- Strength Score & Bar -->
+                <div class="strength-score-card">
+                    <div class="score-card-header">
+                        <span data-th="คะแนนพลังสะสมดิถี:" data-en="Day Master Power Score:">คะแนนพลังสะสมดิถี:</span>
+                        <strong>{{ chart.total_score }} คะแนน ({{ chart.score_percent }}%)</strong>
+                    </div>
+                    <div class="score-bar-bg-large">
+                        <div class="score-bar-fill-large" style="width: {{ chart.score_percent }}%;"></div>
+                    </div>
+                    <p class="strength-guide-text">
+                        {% if chart.strength_code == "WEAK" %}
+                            พลังดิถีอ่อน: ต้องการธาตุส่งเสริม (ธาตุก่อเกิดและธาตุคู่ดิถี) เพื่อเพิ่มความมั่นคง กำลังใจ และความหนักแน่น
+                        {% elif chart.strength_code == "STRONG" %}
+                            พลังดิถีแข็งแรง: มีพลังศักยภาพสูง สามารถรับมือกับธาตุโชคลาภ ธาตุถ่ายเท และธาตุอำนาจได้อย่างมีประสิทธิภาพ
                         {% else %}
-                        <span class="role-status-indicator unfav" data-th="ให้โทษ" data-en="Unfavorable">ให้โทษ</span>
+                            พลังดิถีสมดุล: ธาตุในตัวมีความกลมกลืน สามารถดึงศักยภาพทุกด้านมาปรับใช้ได้อย่างยืดหยุ่นและมั่นคง
                         {% endif %}
+                    </p>
+                </div>
+
+                <!-- Favorable & Unfavorable Cards -->
+                <div class="fav-unfav-cards-grid">
+                    <div class="fav-card-box fav-box">
+                        <div class="fav-card-title">
+                            <span data-th="✦ ธาตุที่ให้คุณ (ธาตุชอบ)" data-en="✦ Favorable Elements (Likes)">✦ ธาตุที่ให้คุณ (ธาตุชอบ)</span>
+                        </div>
+                        <div class="fav-card-tags">
+                            {% for elem in chart.favorable_elements %}
+                                <span class="elem-pill {{ elem.class }}">{{ elem.name_th }} ({{ elem.name_en }})</span>
+                            {% endfor %}
+                        </div>
+                        <p class="fav-card-desc" data-th="เสริมความก้าวหน้า โชคลาภ และความสำเร็จในชีวิต" data-en="Enhances prosperity, fortune and balance">
+                            เสริมความก้าวหน้า โชคลาภ และความสำเร็จในชีวิต
+                        </p>
                     </div>
 
-                    <div class="role-desc-wrap" id="desc-role-{{ forloop.counter }}">
-                        <!-- Short view by default -->
-                        <div class="view-short" data-th="{{ role.short_th }}" data-en="{{ role.short_en }}">
-                            {{ role.short_th }}
+                    <div class="fav-card-box unfav-box">
+                        <div class="fav-card-title">
+                            <span data-th="⚠ ธาตุที่ให้โทษ (ธาตุระวัง)" data-en="⚠ Unfavorable Elements (Dislikes)">⚠ ธาตุที่ให้โทษ (ธาตุระวัง)</span>
                         </div>
-                        <!-- Full detailed view toggled on demand -->
-                        <div class="view-full" style="display: none;" data-th="{{ role.full_th|default:role.short_th }}" data-en="{{ role.full_en|default:role.short_en }}">
-                            {{ role.full_th|default:role.short_th }}
+                        <div class="fav-card-tags">
+                            {% for elem in chart.unfavorable_elements %}
+                                <span class="elem-pill {{ elem.class }}">{{ elem.name_th }} ({{ elem.name_en }})</span>
+                            {% endfor %}
+                        </div>
+                        <p class="fav-card-desc" data-th="ควรหลีกเลี่ยงสิ่งกระตุ้น และปรับสมดุลสภาพแวดล้อม" data-en="Avoid over-stimulation and balance environments">
+                            ควรหลีกเลี่ยงสิ่งกระตุ้น และปรับสมดุลสภาพแวดล้อม
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. DAY MASTER MEANING & DESTINY TRAITS (Row 4) -->
+        {% if chart.day_master.meaning %}
+        <section class="dm-meaning-panel">
+            <div class="dm-meaning-title-row">
+                <h3>
+                    <span>📖</span>
+                    <span>คำทำนายอุปนิสัยและทางเลือกตามธาตุดิถี: {{ chart.day_master.meaning.title }} ({{ chart.day_master.stem.chinese }})</span>
+                </h3>
+                <span style="font-family: 'Cinzel', serif; font-size: 13px; color: var(--accent-red);">
+                    陰陽五行 • 命理經
+                </span>
+            </div>
+
+            <div class="dm-trait-grid">
+                <div class="dm-trait-box">
+                    <div class="dm-trait-header trait-good">
+                        <span>✦</span>
+                        <span>จุดเด่นและพลังด้านบวก (Good Traits)</span>
+                    </div>
+                    <div class="dm-trait-content">
+                        {{ chart.day_master.meaning.good }}
+                    </div>
+                </div>
+
+                <div class="dm-trait-box">
+                    <div class="dm-trait-header trait-bad">
+                        <span>⚠</span>
+                        <span>จุดที่ต้องระมัดระวัง (Cautions & Blindspots)</span>
+                    </div>
+                    <div class="dm-trait-content">
+                        {{ chart.day_master.meaning.bad }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="dm-trait-box" style="border-left: 3px solid #ecc94b;">
+                <div class="dm-trait-header trait-advice">
+                    <span>💡</span>
+                    <span>คำแนะนำเชิงกลยุทธ์ในการดำเนินชีวิต (Strategic Advice)</span>
+                </div>
+                <div class="dm-trait-content" style="color: var(--text-primary); font-weight: 500;">
+                    {{ chart.day_master.meaning.advice }}
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- 3. FIVE ROLES LIST (Full Width Grid) -->
+        <section class="element-roles-panel" style="margin-top: 24px;">
+            <div class="panel-section-title-wrap">
+                <h3 data-th="วงจรบทบาทเบญจธาตุทั้ง 5 (Five Elemental Roles)" data-en="Five Elemental Roles">
+                    วงจรบทบาทเบญจธาตุทั้ง 5 (Five Elemental Roles)
+                </h3>
+                <p data-th="ความสัมพันธ์ของธาตุทั้ง 5 ต่อธาตุดิถีประจำตัวของคุณ" data-en="Relationships of the 5 elements relative to your Day Master.">
+                    ความสัมพันธ์ของธาตุทั้ง 5 ต่อธาตุดิถีประจำตัวของคุณ
+                </p>
+            </div>
+
+            <div class="roles-list-container">
+                {% for role in chart.element_roles %}
+                <div class="role-row-card {% if role.is_favorable %}is-fav{% endif %}">
+                    <div class="role-left-group">
+                        <div class="role-badge-cell">
+                            <span class="role-elem-indicator">{{ role.elem_name_th }}</span>
+                            {% if role.is_favorable %}
+                                <span class="role-tag-fav" data-th="ธาตุชอบ" data-en="Like">ธาตุชอบ</span>
+                            {% endif %}
+                        </div>
+                        <div class="role-text-cell">
+                            <div class="role-name-row">
+                                <span class="role-title-bold" data-th="{{ role.title_th }}" data-en="{{ role.title_en }}">{{ role.title_th }}</span>
+                            </div>
+                            <div class="role-desc-text" id="desc-container-{{ forloop.counter }}">
+                                <div class="view-short" data-th="{{ role.short_th }}" data-en="{{ role.short_en }}">
+                                    {{ role.short_th }}
+                                </div>
+                                <div class="view-full" style="display: none;" data-th="{{ role.full_th }}" data-en="{{ role.full_en }}">
+                                    {{ role.full_th }}
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <button type="button" class="btn-desc-toggle" data-target="desc-role-{{ forloop.counter }}" data-th="อ่านละเอียด" data-en="Show Detailed">
+                    <button type="button" class="btn-desc-toggle" data-target="desc-container-{{ forloop.counter }}" data-th="อ่านละเอียด" data-en="Details">
                         อ่านละเอียด
                     </button>
                 </div>
@@ -269,126 +416,14 @@
             </div>
         </section>
 
-        <!-- 3. FOUR PILLARS INTERPRETATIONS (Accordions) -->
-        <section class="pillars-section">
-            <div class="section-subheading-wrap">
-                <h3 data-th="ความหมายของแต่ละเสา (Four Pillars Interpretations)" data-en="Four Pillars Meanings">
-                    ความหมายของแต่ละเสา (Four Pillars Interpretations)
-                </h3>
-            </div>
-
-            <div class="pillars-accordions-wrap">
-                
-                <!-- Year Pillar -->
-                <div class="pillar-accordion-card">
-                    <div class="accordion-header">
-                        <span class="accordion-title" data-th="{{ chart.pillar_interpretations.year.title_th }}" data-en="{{ chart.pillar_interpretations.year.title_en }}">
-                            {{ chart.pillar_interpretations.year.title_th }}
-                        </span>
-                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </div>
-                    <div class="accordion-body">
-                        <div id="desc-pillar-year">
-                            <p class="accordion-body-text view-short" data-th="{{ chart.pillar_interpretations.year.desc_short_th }}" data-en="{{ chart.pillar_interpretations.year.desc_short_en }}">
-                                {{ chart.pillar_interpretations.year.desc_short_th }}
-                            </p>
-                            <p class="accordion-body-text view-full" style="display: none;" data-th="{{ chart.pillar_interpretations.year.desc_full_th }}" data-en="{{ chart.pillar_interpretations.year.desc_full_en }}">
-                                {{ chart.pillar_interpretations.year.desc_full_th }}
-                            </p>
-                        </div>
-                        <button type="button" class="btn-desc-toggle" data-target="desc-pillar-year" data-th="อ่านละเอียด" data-en="Show Detailed">
-                            อ่านละเอียด
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Month Pillar -->
-                <div class="pillar-accordion-card">
-                    <div class="accordion-header">
-                        <span class="accordion-title" data-th="{{ chart.pillar_interpretations.month.title_th }}" data-en="{{ chart.pillar_interpretations.month.title_en }}">
-                            {{ chart.pillar_interpretations.month.title_th }}
-                        </span>
-                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </div>
-                    <div class="accordion-body">
-                        <div id="desc-pillar-month">
-                            <p class="accordion-body-text view-short" data-th="{{ chart.pillar_interpretations.month.desc_short_th }}" data-en="{{ chart.pillar_interpretations.month.desc_short_en }}">
-                                {{ chart.pillar_interpretations.month.desc_short_th }}
-                            </p>
-                            <p class="accordion-body-text view-full" style="display: none;" data-th="{{ chart.pillar_interpretations.month.desc_full_th }}" data-en="{{ chart.pillar_interpretations.month.desc_full_en }}">
-                                {{ chart.pillar_interpretations.month.desc_full_th }}
-                            </p>
-                        </div>
-                        <button type="button" class="btn-desc-toggle" data-target="desc-pillar-month" data-th="อ่านละเอียด" data-en="Show Detailed">
-                            อ่านละเอียด
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Day Pillar -->
-                <div class="pillar-accordion-card">
-                    <div class="accordion-header">
-                        <span class="accordion-title" data-th="{{ chart.pillar_interpretations.day.title_th }}" data-en="{{ chart.pillar_interpretations.day.title_en }}">
-                            {{ chart.pillar_interpretations.day.title_th }}
-                        </span>
-                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </div>
-                    <div class="accordion-body">
-                        <div id="desc-pillar-day">
-                            <p class="accordion-body-text view-short" data-th="{{ chart.pillar_interpretations.day.desc_short_th }}" data-en="{{ chart.pillar_interpretations.day.desc_short_en }}">
-                                {{ chart.pillar_interpretations.day.desc_short_th }}
-                            </p>
-                            <p class="accordion-body-text view-full" style="display: none;" data-th="{{ chart.pillar_interpretations.day.desc_full_th }}" data-en="{{ chart.pillar_interpretations.day.desc_full_en }}">
-                                {{ chart.pillar_interpretations.day.desc_full_th }}
-                            </p>
-                        </div>
-                        <button type="button" class="btn-desc-toggle" data-target="desc-pillar-day" data-th="อ่านละเอียด" data-en="Show Detailed">
-                            อ่านละเอียด
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Hour Pillar -->
-                <div class="pillar-accordion-card">
-                    <div class="accordion-header">
-                        <span class="accordion-title" data-th="{{ chart.pillar_interpretations.hour.title_th }}" data-en="{{ chart.pillar_interpretations.hour.title_en }}">
-                            {{ chart.pillar_interpretations.hour.title_th }}
-                        </span>
-                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </div>
-                    <div class="accordion-body">
-                        <div id="desc-pillar-hour">
-                            <p class="accordion-body-text view-short" data-th="{{ chart.pillar_interpretations.hour.desc_short_th }}" data-en="{{ chart.pillar_interpretations.hour.desc_short_en }}">
-                                {{ chart.pillar_interpretations.hour.desc_short_th }}
-                            </p>
-                            <p class="accordion-body-text view-full" style="display: none;" data-th="{{ chart.pillar_interpretations.hour.desc_full_th }}" data-en="{{ chart.pillar_interpretations.hour.desc_full_en }}">
-                                {{ chart.pillar_interpretations.hour.desc_full_th }}
-                            </p>
-                        </div>
-                        <button type="button" class="btn-desc-toggle" data-target="desc-pillar-hour" data-th="อ่านละเอียด" data-en="Show Detailed">
-                            อ่านละเอียด
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
     </main>
 
-    <!-- Floating Navigation Switcher for easy testing -->
+    <!-- Floating Navigation Switcher for testing -->
     <div class="screen-switcher-right">
         <a href="{% url 'bazi:form' %}" data-th="กรอกข้อมูล" data-en="Form">กรอกข้อมูล</a>
+        <a href="{% url 'bazi:booking' %}" data-th="จองปรึกษา" data-en="Booking">จองปรึกษา</a>
+        <a href="{% url 'bazi:history' %}" data-th="ประวัติ" data-en="History">ประวัติ</a>
         <a href="{% url 'bazi:login' %}" data-th="เข้าสู่ระบบ" data-en="Login">เข้าสู่ระบบ</a>
-        <a href="{% url 'bazi:result' %}" class="active" data-th="ผลวิเคราะห์" data-en="Result">ผลวิเคราะห์</a>
         <a href="{% url 'bazi:admin_dashboard' %}" data-th="แอดมิน" data-en="Admin">แอดมิน</a>
     </div>
 
