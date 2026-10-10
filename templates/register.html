@@ -1,0 +1,370 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4D0011">
+    <meta name="description" content="ลงทะเบียนสมาชิก Energy Flow เพื่อบันทึกผลการคำนวณดวงชะตาศาสตร์จีน">
+
+    <title>ลงทะเบียนสมาชิก | Energy Flow ดูดวงศาสตร์จีน</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Noto+Serif+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+
+<body>
+
+    <main class="login-wrapper">
+
+        <!-- Decorative Background -->
+        <div class="bg-orb orb-1" aria-hidden="true"></div>
+        <div class="bg-orb orb-2" aria-hidden="true"></div>
+        <div class="bg-pattern" aria-hidden="true">
+            <div class="bg-yinyang-watermark">☯</div>
+        </div>
+
+        <section class="login-card-container register-card-container">
+
+            <!-- Card Back Link -->
+            <a href="{% url 'login' %}{% if next_url %}?next={{ next_url }}{% endif %}" class="back-link" id="btn-back-login">
+                <span class="back-arrow">‹</span>
+                <span>กลับสู่หน้าเข้าสู่ระบบ</span>
+            </a>
+
+            <!-- Brand Header -->
+            <header class="card-brand">
+                <div class="brand-badge">
+                    <span class="yinyang-mini">☯</span>
+                    <span class="badge-text">BAZI PROFILE REGISTRATION</span>
+                </div>
+                <h1 class="brand-title">ลงทะเบียนสมาชิก</h1>
+                <p class="brand-subtitle">
+                    {% if is_from_google %}
+                    ยินดีต้อนรับ! กรุณากรอกข้อมูลส่วนตัวเพื่อเชื่อมต่อดวงชะตาของคุณ
+                    {% else %}
+                    สร้างบัญชีเพื่อบันทึกและติดตามประวัติการดูดวงชะตาศาสตร์จีนของคุณ
+                    {% endif %}
+                </p>
+            </header>
+
+            <!-- Alerts / Messages -->
+            {% if messages %}
+            <div class="messages-container" role="alert" aria-live="polite">
+                {% for message in messages %}
+                <div class="alert-box alert-{{ message.tags }}">
+                    <span class="alert-icon">
+                        {% if message.tags == 'error' %}⚠️{% elif message.tags == 'success' %}✓{% else %}ℹ️{% endif %}
+                    </span>
+                    <span class="alert-text">{{ message }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- Inline Email Conflict Warning (Dynamic) -->
+            <div id="email-exists-alert" class="alert-box alert-error" style="display: {% if email_already_exists %}flex{% else %}none{% endif %};">
+                <span class="alert-icon">⚠️</span>
+                <div class="alert-content">
+                    <span class="alert-text">อีเมลนี้มีอยู่ในระบบแล้ว</span>
+                    <a href="{% url 'login' %}" class="btn-alert-login">ไปหน้าเข้าสู่ระบบ →</a>
+                </div>
+            </div>
+
+            <!-- REGISTRATION FORM -->
+            <form action="{% url 'register' %}" method="POST" class="login-form register-form" id="form-register">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next_url }}">
+                <input type="hidden" name="from_google" value="{% if is_from_google %}1{% else %}0{% endif %}">
+
+                <!-- ROW 1: First Name & Last Name -->
+                <div class="form-row-duo">
+                    <div class="form-group">
+                        <label for="firstName" class="form-label">ชื่อจริง <span class="req">*</span></label>
+                        <div class="input-container">
+                            <span class="input-icon">👤</span>
+                            <input
+                                type="text"
+                                id="firstName"
+                                name="firstName"
+                                class="form-input"
+                                placeholder="ระบุชื่อจริง"
+                                value="{{ form_data.firstName|default:default_first_name }}"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName" class="form-label">นามสกุล <span class="req">*</span></label>
+                        <div class="input-container">
+                            <span class="input-icon">👤</span>
+                            <input
+                                type="text"
+                                id="lastName"
+                                name="lastName"
+                                class="form-input"
+                                placeholder="ระบุนามสกุล"
+                                value="{{ form_data.lastName|default:default_last_name }}"
+                                required
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROW 2: Email -->
+                <div class="form-group">
+                    <label for="email" class="form-label">
+                        อีเมล <span class="req">*</span>
+                        {% if is_from_google %}
+                        <span class="badge-locked">🔒 อิงตามบัญชี Google ไม่สามารถแก้ไขได้</span>
+                        {% endif %}
+                    </label>
+                    <div class="input-container">
+                        <span class="input-icon">✉️</span>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            class="form-input {% if is_from_google %}input-readonly{% endif %}"
+                            placeholder="example@gmail.com"
+                            value="{{ form_data.email|default:default_email }}"
+                            {% if is_from_google %}readonly{% endif %}
+                            required
+                        >
+                    </div>
+                </div>
+
+                <!-- ROW 3: Password (Only for non-Google users) -->
+                {% if not is_from_google %}
+                <div class="form-row-duo">
+                    <div class="form-group">
+                        <label for="password" class="form-label">รหัสผ่าน <span class="req">*</span></label>
+                        <div class="input-container">
+                            <span class="input-icon">🔒</span>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="form-input"
+                                placeholder="กำหนดรหัสผ่าน"
+                                required
+                                minlength="6"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm_password" class="form-label">ยืนยันรหัสผ่าน <span class="req">*</span></label>
+                        <div class="input-container">
+                            <span class="input-icon">🔒</span>
+                            <input
+                                type="password"
+                                id="confirm_password"
+                                name="confirm_password"
+                                class="form-input"
+                                placeholder="ยืนยันอีกครั้ง"
+                                required
+                                minlength="6"
+                            >
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- ROW 4: Gender -->
+                <div class="form-group">
+                    <label class="form-label">เพศ <span class="req">*</span></label>
+                    <div class="gender-selector">
+                        <label class="gender-pill">
+                            <input type="radio" name="gender" value="female" {% if form_data.gender == 'female' or not form_data.gender %}checked{% endif %} required>
+                            <span>หญิง</span>
+                        </label>
+                        <label class="gender-pill">
+                            <input type="radio" name="gender" value="male" {% if form_data.gender == 'male' %}checked{% endif %}>
+                            <span>ชาย</span>
+                        </label>
+                        <label class="gender-pill">
+                            <input type="radio" name="gender" value="other" {% if form_data.gender == 'other' %}checked{% endif %}>
+                            <span>อื่นๆ</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- ROW 5: Birth Date & Birth Time -->
+                <div class="form-row-duo">
+                    <div class="form-group">
+                        <label for="birthDate" class="form-label">วันเดือนปีเกิด <span class="req">*</span></label>
+                        <div class="input-container">
+                            <span class="input-icon">📅</span>
+                            <input
+                                type="date"
+                                id="birthDate"
+                                name="birthDate"
+                                class="form-input"
+                                value="{{ form_data.birthDate }}"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="label-with-checkbox">
+                            <label for="birthTime" class="form-label">เวลาเกิด</label>
+                            <label class="checkbox-inline">
+                                <input
+                                    type="checkbox"
+                                    id="unknownBirthTime"
+                                    name="unknownBirthTime"
+                                    value="1"
+                                    {% if form_data.unknownBirthTime == '1' %}checked{% endif %}
+                                >
+                                <span>ไม่ทราบเวลาเกิด</span>
+                            </label>
+                        </div>
+                        <div class="input-container">
+                            <span class="input-icon">⏰</span>
+                            <input
+                                type="time"
+                                id="birthTime"
+                                name="birthTime"
+                                class="form-input"
+                                value="{{ form_data.birthTime }}"
+                                {% if form_data.unknownBirthTime == '1' %}disabled{% endif %}
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROW 6: Birth Place -->
+                <div class="form-group">
+                    <label for="birthPlace" class="form-label">สถานที่เกิด (จังหวัด หรือ ประเทศ)</label>
+                    <div class="input-container">
+                        <span class="input-icon">📍</span>
+                        <input
+                            type="text"
+                            id="birthPlace"
+                            name="birthPlace"
+                            class="form-input"
+                            placeholder="เช่น กรุงเทพมหานคร, เชียงใหม่"
+                            value="{{ form_data.birthPlace }}"
+                        >
+                    </div>
+                </div>
+
+                <!-- ROW 7: Terms Agreement Checkbox -->
+                <div class="terms-group">
+                    <label class="terms-checkbox-label">
+                        <input
+                            type="checkbox"
+                            id="agreeTerms"
+                            name="agreeTerms"
+                            value="1"
+                            required
+                            {% if form_data.agreeTerms == '1' %}checked{% endif %}
+                        >
+                        <span class="terms-text">
+                            ฉันได้อ่านและยอมรับ <a href="#terms-modal" id="link-show-terms" class="terms-link">ข้อตกลงและเงื่อนไขการใช้งาน</a> และนโยบายความเป็นส่วนตัว
+                        </span>
+                    </label>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-submit" id="btn-submit-register">
+                    <span>ยืนยันการลงทะเบียน</span>
+                    <span class="btn-arrow" aria-hidden="true">→</span>
+                </button>
+
+                <!-- Already have account -->
+                <div class="register-prompt-row">
+                    <span>มีบัญชีอยู่แล้วใช่หรือไม่?</span>
+                    <a href="{% url 'login' %}{% if next_url %}?next={{ next_url }}{% endif %}" class="link-register">
+                        เข้าสู่ระบบ
+                    </a>
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <!-- Interactive Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Unknown birth time toggle
+            const unknownCheckbox = document.getElementById('unknownBirthTime');
+            const timeInput = document.getElementById('birthTime');
+
+            if (unknownCheckbox && timeInput) {
+                unknownCheckbox.addEventListener('change', function () {
+                    if (this.checked) {
+                        timeInput.value = '';
+                        timeInput.disabled = true;
+                        timeInput.classList.add('input-disabled');
+                    } else {
+                        timeInput.disabled = false;
+                        timeInput.classList.remove('input-disabled');
+                    }
+                });
+            }
+
+            // Real-time email conflict check for non-Google users
+            const emailInput = document.getElementById('email');
+            const alertBox = document.getElementById('email-exists-alert');
+            const isReadonly = emailInput && emailInput.hasAttribute('readonly');
+
+            if (emailInput && !isReadonly) {
+                let debounceTimeout = null;
+
+                emailInput.addEventListener('input', function () {
+                    clearTimeout(debounceTimeout);
+                    const email = this.value.trim();
+
+                    if (!email || !email.includes('@')) {
+                        alertBox.style.display = 'none';
+                        return;
+                    }
+
+                    debounceTimeout = setTimeout(() => {
+                        fetch(`/api/check-email/?email=${encodeURIComponent(email)}`)
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.exists) {
+                                    alertBox.style.display = 'flex';
+                                } else {
+                                    alertBox.style.display = 'none';
+                                }
+                            })
+                            .catch(() => {});
+                    }, 400);
+                });
+            }
+
+            // Client-side password validation
+            const pwInput = document.getElementById('password');
+            const confirmPwInput = document.getElementById('confirm_password');
+            const form = document.getElementById('form-register');
+
+            if (form && pwInput && confirmPwInput) {
+                form.addEventListener('submit', function (e) {
+                    if (pwInput.value !== confirmPwInput.value) {
+                        e.preventDefault();
+                        alert('รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน กรุณาตรวจสอบอีกครั้ง');
+                        confirmPwInput.focus();
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>

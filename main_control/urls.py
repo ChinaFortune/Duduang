@@ -26,6 +26,11 @@ from .views import (
     google_login,
     google_callback,
     logout_view,
+    register_view,
+    check_email_api,
+    save_fortune_view,
+    history_view,
+    delete_fortune_view,
 )
 
 urlpatterns = [
@@ -36,6 +41,11 @@ urlpatterns = [
     path('login/google/', google_login, name='google_login'),
     path('login/google/callback/', google_callback, name='google_callback'),
     path('logout/', logout_view, name='logout'),
+    path('register/', register_view, name='register'),
+    path('api/check-email/', check_email_api, name='check_email_api'),
+    path('save-fortune/<int:user_id>/', save_fortune_view, name='save_fortune'),
+    path('history/', history_view, name='history'),
+    path('history/delete/<int:fortune_id>/', delete_fortune_view, name='delete_fortune'),
 ]
 
 if settings.DEBUG:

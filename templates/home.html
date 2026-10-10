@@ -143,6 +143,9 @@
                         <span class="user-greeting" title="{{ user.get_full_name|default:user.username }}">
                             {{ user.first_name|default:user.username }}
                         </span>
+                        <a href="{% url 'history' %}" class="btn-history-nav" title="ดูประวัติการดูดวง">
+                            ประวัติดวง
+                        </a>
                         {% if user.is_staff %}
                             <a href="/admin/" class="btn-admin-link" title="ระบบจัดการหลังบ้าน">
                                 แอดมิน
@@ -336,6 +339,12 @@
 
                         {% csrf_token %}
 
+                        {% if user.is_authenticated and user_profile.is_profile_complete %}
+                        <div style="background: rgba(77, 0, 17, 0.04); border: 1px dashed rgba(77, 0, 17, 0.18); border-radius: 12px; padding: 8px 14px; font-size: 13px; color: #4D0011; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+                            <span>☯</span>
+                            <span>นำข้อมูลจากบัญชีของคุณมาใส่ให้อัตโนมัติ (สามารถแก้ไขได้ตามต้องการ)</span>
+                        </div>
+                        {% endif %}
 
                         <!-- NAME / GENDER -->
 
@@ -355,6 +364,7 @@
                 id="firstName"
                 name="firstName"
                 placeholder="ระบุชื่อจริง"
+                value="{{ request.user.first_name }}"
                 autocomplete="given-name"
                 required
             >
@@ -398,6 +408,7 @@
                 id="lastName"
                 name="lastName"
                 placeholder="ระบุนามสกุล"
+                value="{{ request.user.last_name }}"
                 autocomplete="family-name"
                 required
             >
@@ -443,6 +454,7 @@
                     type="radio"
                     name="gender"
                     value="female"
+                    {% if user_profile.gender == 'female' or not user_profile.gender %}checked{% endif %}
                     required
                 >
 
@@ -459,6 +471,7 @@
                     type="radio"
                     name="gender"
                     value="male"
+                    {% if user_profile.gender == 'male' %}checked{% endif %}
                 >
 
                 <span>
@@ -495,6 +508,7 @@
                                         type="date"
                                         id="birthDate"
                                         name="birthDate"
+                                        value="{{ user_profile.birth_date|date:'Y-m-d' }}"
                                         required
                                     >
 
@@ -541,6 +555,7 @@
                                         type="time"
                                         id="birthTime"
                                         name="birthTime"
+                                        value="{{ user_profile.birth_time|time:'H:i' }}"
                                     >
 
                                     <span class="input-icon">

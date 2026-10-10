@@ -1,0 +1,184 @@
+/* =========================================================
+   ENERGY FLOW - REGISTER PAGE STYLESHEET
+========================================================= */
+
+.register-card-container {
+    max-width: 580px;
+    padding: 2.25rem 2.5rem;
+}
+
+.req {
+    color: #C22035;
+    font-weight: 700;
+}
+
+.badge-locked {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: #8A5D00;
+    background: #FFF7DF;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    margin-left: 0.5rem;
+    display: inline-block;
+}
+
+.input-readonly {
+    background: #F1ECE7 !important;
+    color: #635C57 !important;
+    cursor: not-allowed;
+    border-color: rgba(77, 0, 17, 0.08) !important;
+}
+
+.input-disabled {
+    opacity: 0.5;
+    background: #EAE6E1 !important;
+    cursor: not-allowed;
+}
+
+/* Two-column layout */
+.form-row-duo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* Gender selector pills */
+.gender-selector {
+    display: flex;
+    gap: 0.65rem;
+}
+
+.gender-pill {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1rem;
+    background: #FAF7F5;
+    border: 1.5px solid rgba(77, 0, 17, 0.12);
+    border-radius: 12px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--color-wine);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.gender-pill input[type="radio"] {
+    display: none;
+}
+
+.gender-pill:hover {
+    background: #FDF9F6;
+    border-color: rgba(77, 0, 17, 0.25);
+}
+
+.gender-pill:has(input[type="radio"]:checked) {
+    background: linear-gradient(135deg, var(--color-wine) 0%, #700B22 100%);
+    color: #FFFFFF;
+    border-color: var(--color-wine);
+    box-shadow: 0 4px 12px rgba(77, 0, 17, 0.2);
+}
+
+/* Birth time with unknown checkbox */
+.label-with-checkbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.checkbox-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.78rem;
+    color: #78716C;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-inline input[type="checkbox"] {
+    accent-color: var(--color-wine);
+    cursor: pointer;
+}
+
+/* Terms group */
+.terms-group {
+    margin-top: 0.25rem;
+    padding: 0.75rem 0.85rem;
+    background: rgba(77, 0, 17, 0.02);
+    border: 1px solid rgba(77, 0, 17, 0.08);
+    border-radius: 12px;
+}
+
+.terms-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    cursor: pointer;
+    font-size: 0.82rem;
+    color: #4A4A4A;
+    line-height: 1.45;
+}
+
+.terms-checkbox-label input[type="checkbox"] {
+    accent-color: var(--color-wine);
+    margin-top: 0.2rem;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.terms-link {
+    color: var(--color-wine);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* Dynamic conflict alert */
+.alert-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1rem;
+}
+
+.btn-alert-login {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.75rem;
+    background: #A31221;
+    color: #FFFFFF !important;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+}
+
+.btn-alert-login:hover {
+    background: #7D0916;
+}
+
+/* Responsive adjustments */
+@media (max-width: 540px) {
+    .register-card-container {
+        padding: 2rem 1.25rem;
+    }
+
+    .form-row-duo {
+        grid-template-columns: 1fr;
+        gap: 1.15rem;
+    }
+
+    .gender-selector {
+        flex-direction: row;
+    }
+}

@@ -487,31 +487,27 @@ body {
     transform: translateX(4px);
 }
 
-/* =========================================================
-   CARD FOOTER
-========================================================= */
-
-.card-footer {
-    margin-top: 1.75rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid rgba(77, 0, 17, 0.08);
-}
-
-.admin-tip {
+.register-prompt-row {
+    margin-top: 1.25rem;
+    text-align: center;
+    font-size: 0.88rem;
+    color: #666;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.8rem;
-    color: #78716C;
-    line-height: 1.4;
+    justify-content: center;
+    gap: 0.4rem;
 }
 
-.tip-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--color-wine);
-    flex-shrink: 0;
+.link-register {
+    color: var(--color-wine);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+}
+
+.link-register:hover {
+    color: #700B22;
 }
 
 /* =========================================================

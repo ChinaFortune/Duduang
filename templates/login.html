@@ -78,7 +78,7 @@
                     <span class="btn-google-text">เข้าสู่ระบบด้วย Google</span>
                 </a>
                 <p class="google-hint">
-                    ✨ บัญชี Google ที่ใช้อีเมลเดียวกันกับแอดมิน จะเชื่อมสิทธิ์ผู้ดูแลระบบโดยอัตโนมัติ
+                    ✨ เข้าสู่ระบบสะดวกรวดเร็วและปลอดภัยด้วยบัญชี Google
                 </p>
                 {% else %}
                 <div class="google-pending-card">
@@ -126,7 +126,7 @@
                             id="username"
                             name="username"
                             class="form-input"
-                            placeholder="ระบุชื่อผู้ใช้ หรืออีเมลแอดมิน"
+                            placeholder="ระบุชื่อผู้ใช้ หรืออีเมล"
                             required
                             autocomplete="username"
                             autofocus
@@ -167,15 +167,15 @@
                     <span class="btn-arrow" aria-hidden="true">→</span>
                 </button>
 
-            </form>
-
-            <!-- Card Footer Note -->
-            <footer class="card-footer">
-                <div class="admin-tip">
-                    <span class="tip-dot"></span>
-                    <span>ผู้ดูแลระบบสามารถใช้บัญชี Superuser ที่สร้างไว้เข้าสู่ระบบได้ทันที</span>
+                <!-- Link to Register -->
+                <div class="register-prompt-row">
+                    <span>ยังไม่มีบัญชีใช่หรือไม่?</span>
+                    <a href="{% url 'register' %}{% if next_url %}?next={{ next_url }}{% endif %}" class="link-register">
+                        ลงทะเบียนที่นี่
+                    </a>
                 </div>
-            </footer>
+
+            </form>
 
         </section>
 

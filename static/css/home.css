@@ -525,6 +525,23 @@ input:focus-visible {
     text-overflow: ellipsis;
 }
 
+.btn-history-nav {
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: #FFF3EB;
+    color: #4D0011;
+    border: 1px solid rgba(77, 0, 17, 0.2);
+    padding: 0.2rem 0.55rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-history-nav:hover {
+    background: #4D0011;
+    color: #FFFFFF;
+}
+
 .btn-admin-link {
     font-size: 0.75rem;
     font-weight: 700;

@@ -51,6 +51,17 @@
 
         </a>
 
+        {% if messages %}
+        <div class="result-flash-messages" style="margin-bottom: 20px;">
+            {% for message in messages %}
+            <div style="background: rgba(16, 43, 31, 0.08); border: 1.5px solid rgba(16, 43, 31, 0.25); border-radius: 14px; padding: 12px 18px; font-size: 14px; font-weight: 600; color: #102B1F; display: flex; align-items: center; gap: 10px;">
+                <span>✨</span>
+                <span>{{ message }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
 
         <!-- =========================
              HEADER
@@ -595,6 +606,36 @@
 
         <div class="footer">
 
+            <!-- SAVE / HISTORY ACTIONS -->
+            <div class="fortune-save-box" id="fortuneSaveContainer">
+                {% if user.is_authenticated %}
+                    {% if is_saved %}
+                        <div class="saved-success-pill" id="savedSuccessBadge">
+                            <span class="save-icon">✓</span>
+                            <span>บันทึกผลดวงเรียบร้อยแล้ว</span>
+                        </div>
+                        <a href="{% url 'history' %}" class="btn-history-view" id="btnHistoryView">
+                            <span>📜</span>
+                            <span>ดูประวัติการดูดวง</span>
+                        </a>
+                    {% else %}
+                        <button type="button" class="btn-save-action" id="btnSaveFortune" data-url="{% url 'save_fortune' user_input.id %}">
+                            <span class="save-icon">💾</span>
+                            <span>บันทึกผลดวงไว้</span>
+                        </button>
+                        <a href="{% url 'history' %}" class="btn-history-view" id="btnHistoryView" style="display: none;">
+                            <span>📜</span>
+                            <span>ดูประวัติการดูดวง</span>
+                        </a>
+                    {% endif %}
+                {% else %}
+                    <a href="{% url 'login' %}?next={% url 'result' user_input.id %}&auto_save=1" class="btn-save-action btn-login-to-save" id="btnLoginToSave">
+                        <span class="save-icon">🔐</span>
+                        <span>เข้าสู่ระบบ / ลงทะเบียน เพื่อบันทึกผล</span>
+                    </a>
+                {% endif %}
+            </div>
+
             <button
                 type="button"
                 class="meaning-button"
@@ -817,6 +858,45 @@
 ===================================================== -->
 
 <script src="{% static 'js/result.js' %}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const btnSave = document.getElementById('btnSaveFortune');
+    const container = document.getElementById('fortuneSaveContainer');
+
+    if (btnSave && container) {
+        btnSave.addEventListener('click', function () {
+            const url = this.getAttribute('data-url');
+            btnSave.disabled = true;
+            btnSave.innerHTML = '<span class="save-icon">⏳</span><span>กำลังบันทึก...</span>';
+
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    container.innerHTML = `
+                        <div class="saved-success-pill">
+                            <span class="save-icon">✓</span>
+                            <span>บันทึกผลดวงเรียบร้อยแล้ว</span>
+                        </div>
+                        <a href="{% url 'history' %}" class="btn-history-view">
+                            <span>📜</span>
+                            <span>ดูประวัติการดูดวง</span>
+                        </a>
+                    `;
+                }
+            })
+            .catch(() => {
+                window.location.href = url;
+            });
+        });
+    }
+});
+</script>
 
 
 </body>
