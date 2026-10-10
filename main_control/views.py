@@ -2,6 +2,7 @@ import django
 from django.shortcuts import render, redirect
 from .models import UserInput
 from .calculation import calculate_birth_date
+from .auth_views import login_view, google_login, google_callback, logout_view
 
 
 def home(request):

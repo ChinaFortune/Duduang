@@ -18,12 +18,24 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from .views import home, intro, result
+from .views import (
+    home,
+    intro,
+    result,
+    login_view,
+    google_login,
+    google_callback,
+    logout_view,
+)
 
 urlpatterns = [
     path('', intro, name='intro'),
     path('home/', home, name='home'),
     path('result/<int:user_id>/', result, name='result'),
+    path('login/', login_view, name='login'),
+    path('login/google/', google_login, name='google_login'),
+    path('login/google/callback/', google_callback, name='google_callback'),
+    path('logout/', logout_view, name='logout'),
 ]
 
 if settings.DEBUG:

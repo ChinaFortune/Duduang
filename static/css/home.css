@@ -484,6 +484,76 @@ input:focus-visible {
         rgba(77, 0, 17, 0.22);
 }
 
+.btn-login-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.user-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.85rem;
+    background: #FFFFFF;
+    border: 1.5px solid rgba(77, 0, 17, 0.15);
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(77, 0, 17, 0.06);
+    font-size: clamp(11px, 1vw, 13px);
+}
+
+.user-avatar-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #102B1F;
+}
+
+.user-greeting {
+    font-weight: 600;
+    color: #4D0011;
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-admin-link {
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: #102B1F;
+    color: #FFFFFF;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.btn-admin-link:hover {
+    background: #194431;
+}
+
+.btn-logout {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #8C2234;
+    text-decoration: none;
+    padding: 0.2rem 0.45rem;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+}
+
+.btn-logout:hover {
+    background: rgba(140, 34, 52, 0.08);
+}
+
 
 /* =========================================================
    MAIN

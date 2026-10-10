@@ -134,14 +134,30 @@
 
 
 
-            <!-- HEADER CTA -->
+            <!-- HEADER AUTH ACTIONS -->
 
-            <button
-                type="button"
-                class="header-cta btn-disabled"
-            >
-                จองปรึกษา
-            </button>
+            <div class="header-actions">
+                {% if user.is_authenticated %}
+                    <div class="user-pill">
+                        <span class="user-avatar-dot"></span>
+                        <span class="user-greeting" title="{{ user.get_full_name|default:user.username }}">
+                            {{ user.first_name|default:user.username }}
+                        </span>
+                        {% if user.is_staff %}
+                            <a href="/admin/" class="btn-admin-link" title="ระบบจัดการหลังบ้าน">
+                                แอดมิน
+                            </a>
+                        {% endif %}
+                        <a href="{% url 'logout' %}" class="btn-logout" title="ออกจากระบบ">
+                            ออก
+                        </a>
+                    </div>
+                {% else %}
+                    <a href="{% url 'login' %}?next={% url 'home' %}" class="header-cta btn-login-nav">
+                        เข้าสู่ระบบ
+                    </a>
+                {% endif %}
+            </div>
 
 
         </div>
@@ -155,6 +171,17 @@
     ====================================================== -->
 
     <main class="main-content">
+
+        {% if messages %}
+        <div class="toast-messages-container" style="position: fixed; top: 85px; right: 25px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; max-width: 400px;">
+            {% for message in messages %}
+            <div style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-radius: 14px; padding: 12px 18px; box-shadow: 0 10px 30px rgba(77, 0, 17, 0.15); border-left: 4px solid #4D0011; font-size: 13.5px; font-weight: 500; color: #1E1E1E; display: flex; align-items: center; gap: 10px;">
+                <span>☯</span>
+                <span>{{ message }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
 
 
         <!-- =================================================

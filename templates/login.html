@@ -1,0 +1,202 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4D0011">
+    <meta name="description" content="เข้าสู่ระบบ Energy Flow ดูดวงศาสตร์จีน โป๊ยหยี่สี่เถียวและฮวงจุ้ย">
+
+    <title>เข้าสู่ระบบ | Energy Flow ดูดวงศาสตร์จีน</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Noto+Serif+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+
+<body>
+
+    <main class="login-wrapper">
+
+        <!-- Decorative Yin-Yang Background Elements -->
+        <div class="bg-orb orb-1" aria-hidden="true"></div>
+        <div class="bg-orb orb-2" aria-hidden="true"></div>
+        <div class="bg-pattern" aria-hidden="true">
+            <div class="bg-yinyang-watermark">☯</div>
+        </div>
+
+        <section class="login-card-container">
+
+            <!-- Card Back Link -->
+            <a href="{% url 'home' %}" class="back-link" id="btn-back-home" aria-label="กลับสู่หน้าหลัก">
+                <span class="back-arrow">‹</span>
+                <span>กลับสู่หน้าหลัก</span>
+            </a>
+
+            <!-- Brand Header -->
+            <header class="card-brand">
+                <div class="brand-badge">
+                    <span class="yinyang-mini">☯</span>
+                    <span class="badge-text">BAZI &bull; FENG SHUI</span>
+                </div>
+                <h1 class="brand-title">Energy Flow</h1>
+                <p class="brand-subtitle">ยินดีต้อนรับสู่ระบบทำนายดวงชะตาศาสตร์จีน</p>
+            </header>
+
+            <!-- Alerts / Messages -->
+            {% if messages %}
+            <div class="messages-container" role="alert" aria-live="polite">
+                {% for message in messages %}
+                <div class="alert-box alert-{{ message.tags }}">
+                    <span class="alert-icon">
+                        {% if message.tags == 'error' %}⚠️{% elif message.tags == 'success' %}✓{% else %}ℹ️{% endif %}
+                    </span>
+                    <span class="alert-text">{{ message }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- ==========================================
+                 GOOGLE OAUTH LOGIN SECTION
+            =========================================== -->
+            <div class="social-login-section">
+
+                {% if is_google_configured %}
+                <a href="{% url 'google_login' %}?next={{ next_url }}" class="btn-google" id="btn-google-login">
+                    <svg class="google-svg-icon" viewBox="0 0 24 24" width="22" height="22">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                    </svg>
+                    <span class="btn-google-text">เข้าสู่ระบบด้วย Google</span>
+                </a>
+                <p class="google-hint">
+                    ✨ บัญชี Google ที่ใช้อีเมลเดียวกันกับแอดมิน จะเชื่อมสิทธิ์ผู้ดูแลระบบโดยอัตโนมัติ
+                </p>
+                {% else %}
+                <div class="google-pending-card">
+                    <div class="google-pending-header">
+                        <svg class="google-svg-icon" viewBox="0 0 24 24" width="20" height="20">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                        </svg>
+                        <strong>Google Login พร้อมใช้งานเมื่อใส่กุญแจ API</strong>
+                    </div>
+                    <p class="google-pending-desc">
+                        กรุณาระบุ <code>GOOGLE_CLIENT_ID</code> และ <code>GOOGLE_CLIENT_SECRET</code> ในไฟล์ <code>.env</code> เพื่อเปิดใช้งานการเชื่อมต่อ Google
+                    </p>
+                    <a href="{% url 'google_login' %}" class="btn-google btn-google-disabled" title="ตั้งค่า .env ก่อนใช้งาน">
+                        <span class="btn-google-text">เข้าสู่ระบบด้วย Google (รอตั้งค่า .env)</span>
+                    </a>
+                </div>
+                {% endif %}
+
+            </div>
+
+            <!-- Divider -->
+            <div class="divider-wrapper">
+                <span class="divider-line"></span>
+                <span class="divider-text">หรือเข้าสู่ระบบด้วยบัญชีผู้ใช้</span>
+                <span class="divider-line"></span>
+            </div>
+
+            <!-- ==========================================
+                 STANDARD USERNAME / PASSWORD FORM
+            =========================================== -->
+            <form action="{% url 'login' %}" method="POST" class="login-form" id="form-login">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next_url }}">
+
+                <!-- Username or Email Field -->
+                <div class="form-group">
+                    <label for="username" class="form-label">ชื่อผู้ใช้ หรือ อีเมล</label>
+                    <div class="input-container">
+                        <span class="input-icon" aria-hidden="true">👤</span>
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            class="form-input"
+                            placeholder="ระบุชื่อผู้ใช้ หรืออีเมลแอดมิน"
+                            required
+                            autocomplete="username"
+                            autofocus
+                        >
+                    </div>
+                </div>
+
+                <!-- Password Field -->
+                <div class="form-group">
+                    <div class="label-row">
+                        <label for="password" class="form-label">รหัสผ่าน</label>
+                    </div>
+                    <div class="input-container">
+                        <span class="input-icon" aria-hidden="true">🔒</span>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-input"
+                            placeholder="••••••••••••"
+                            required
+                            autocomplete="current-password"
+                        >
+                        <button
+                            type="button"
+                            class="btn-toggle-pw"
+                            id="btn-toggle-password"
+                            aria-label="แสดงหรือซ่อนรหัสผ่าน"
+                        >
+                            👁️
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-submit" id="btn-submit-login">
+                    <span>เข้าสู่ระบบ</span>
+                    <span class="btn-arrow" aria-hidden="true">→</span>
+                </button>
+
+            </form>
+
+            <!-- Card Footer Note -->
+            <footer class="card-footer">
+                <div class="admin-tip">
+                    <span class="tip-dot"></span>
+                    <span>ผู้ดูแลระบบสามารถใช้บัญชี Superuser ที่สร้างไว้เข้าสู่ระบบได้ทันที</span>
+                </div>
+            </footer>
+
+        </section>
+
+    </main>
+
+    <!-- Interactive script for password toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleBtn = document.getElementById('btn-toggle-password');
+            const pwInput = document.getElementById('password');
+
+            if (toggleBtn && pwInput) {
+                toggleBtn.addEventListener('click', function () {
+                    const isPassword = pwInput.getAttribute('type') === 'password';
+                    pwInput.setAttribute('type', isPassword ? 'text' : 'password');
+                    toggleBtn.textContent = isPassword ? '🙈' : '👁️';
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>

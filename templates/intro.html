@@ -332,6 +332,18 @@
             ✦ ค้นพบตัวคุณ ผ่านศาสตร์แห่งดวงชะตา ✦
         </p>
 
+        <div style="margin-top: 10px; text-align: center;">
+            {% if user.is_authenticated %}
+                <a href="{% url 'home' %}" style="font-size: 13px; color: #4D0011; text-decoration: none; font-weight: 500;">
+                    ✓ เข้าสู่ระบบแล้ว ({{ user.first_name|default:user.username }})
+                </a>
+            {% else %}
+                <a href="{% url 'login' %}" style="font-size: 13px; color: #4D0011; opacity: 0.75; text-decoration: none; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.75'">
+                    เข้าสู่ระบบ / จัดการข้อมูล
+                </a>
+            {% endif %}
+        </div>
+
 
     </section>
 
