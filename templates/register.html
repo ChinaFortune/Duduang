@@ -13,7 +13,9 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Noto+Serif+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Noto+Serif+Thai:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
@@ -34,7 +36,8 @@
         <section class="login-card-container register-card-container">
 
             <!-- Card Back Link -->
-            <a href="{% url 'login' %}{% if next_url %}?next={{ next_url }}{% endif %}" class="back-link" id="btn-back-login">
+            <a href="{% url 'login' %}{% if next_url %}?next={{ next_url }}{% endif %}" class="back-link"
+                id="btn-back-login">
                 <span class="back-arrow">‹</span>
                 <span>กลับสู่หน้าเข้าสู่ระบบ</span>
             </a>
@@ -61,7 +64,26 @@
                 {% for message in messages %}
                 <div class="alert-box alert-{{ message.tags }}">
                     <span class="alert-icon">
-                        {% if message.tags == 'error' %}⚠️{% elif message.tags == 'success' %}✓{% else %}ℹ️{% endif %}
+                        {% if message.tags == 'error' %}
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        {% elif message.tags == 'success' %}
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        {% else %}
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                        {% endif %}
                     </span>
                     <span class="alert-text">{{ message }}</span>
                 </div>
@@ -70,8 +92,16 @@
             {% endif %}
 
             <!-- Inline Email Conflict Warning (Dynamic) -->
-            <div id="email-exists-alert" class="alert-box alert-error" style="display: {% if email_already_exists %}flex{% else %}none{% endif %};">
-                <span class="alert-icon">⚠️</span>
+            <div id="email-exists-alert" class="alert-box alert-error"
+                style="display: {% if email_already_exists %}flex{% else %}none{% endif %};">
+                <span class="alert-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                </span>
                 <div class="alert-content">
                     <span class="alert-text">อีเมลนี้มีอยู่ในระบบแล้ว</span>
                     <a href="{% url 'login' %}" class="btn-alert-login">ไปหน้าเข้าสู่ระบบ →</a>
@@ -89,32 +119,32 @@
                     <div class="form-group">
                         <label for="firstName" class="form-label">ชื่อจริง <span class="req">*</span></label>
                         <div class="input-container">
-                            <span class="input-icon">👤</span>
-                            <input
-                                type="text"
-                                id="firstName"
-                                name="firstName"
-                                class="form-input"
-                                placeholder="ระบุชื่อจริง"
-                                value="{{ form_data.firstName|default:default_first_name }}"
-                                required
-                            >
+                            <span class="input-icon" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                            </span>
+                            <input type="text" id="firstName" name="firstName" class="form-input"
+                                placeholder="ระบุชื่อจริง" value="{{ form_data.firstName|default:default_first_name }}"
+                                required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="lastName" class="form-label">นามสกุล <span class="req">*</span></label>
                         <div class="input-container">
-                            <span class="input-icon">👤</span>
-                            <input
-                                type="text"
-                                id="lastName"
-                                name="lastName"
-                                class="form-input"
-                                placeholder="ระบุนามสกุล"
-                                value="{{ form_data.lastName|default:default_last_name }}"
-                                required
-                            >
+                            <span class="input-icon" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                            </span>
+                            <input type="text" id="lastName" name="lastName" class="form-input"
+                                placeholder="ระบุนามสกุล" value="{{ form_data.lastName|default:default_last_name }}"
+                                required>
                         </div>
                     </div>
                 </div>
@@ -123,22 +153,22 @@
                 <div class="form-group">
                     <label for="email" class="form-label">
                         อีเมล <span class="req">*</span>
-                        {% if is_from_google %}
-                        <span class="badge-locked">🔒 อิงตามบัญชี Google ไม่สามารถแก้ไขได้</span>
-                        {% endif %}
                     </label>
                     <div class="input-container">
-                        <span class="input-icon">✉️</span>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
+                        <span class="input-icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </span>
+                        <input type="email" id="email" name="email"
                             class="form-input {% if is_from_google %}input-readonly{% endif %}"
                             placeholder="example@gmail.com"
                             value="{{ form_data.email|default:default_email }}"
                             {% if is_from_google %}readonly{% endif %}
-                            required
-                        >
+                            required>
                     </div>
                 </div>
 
@@ -148,32 +178,31 @@
                     <div class="form-group">
                         <label for="password" class="form-label">รหัสผ่าน <span class="req">*</span></label>
                         <div class="input-container">
-                            <span class="input-icon">🔒</span>
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                class="form-input"
-                                placeholder="กำหนดรหัสผ่าน"
-                                required
-                                minlength="6"
-                            >
+                            <span class="input-icon" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </span>
+                            <input type="password" id="password" name="password" class="form-input"
+                                placeholder="กำหนดรหัสผ่าน" required minlength="6">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="confirm_password" class="form-label">ยืนยันรหัสผ่าน <span class="req">*</span></label>
+                        <label for="confirm_password" class="form-label">ยืนยันรหัสผ่าน <span
+                                class="req">*</span></label>
                         <div class="input-container">
-                            <span class="input-icon">🔒</span>
-                            <input
-                                type="password"
-                                id="confirm_password"
-                                name="confirm_password"
-                                class="form-input"
-                                placeholder="ยืนยันอีกครั้ง"
-                                required
-                                minlength="6"
-                            >
+                            <span class="input-icon" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </span>
+                            <input type="password" id="confirm_password" name="confirm_password" class="form-input"
+                                placeholder="ยืนยันอีกครั้ง" required minlength="6">
                         </div>
                     </div>
                 </div>
@@ -181,7 +210,7 @@
 
                 <!-- ROW 4: Gender -->
                 <div class="form-group">
-                    <label class="form-label">เพศ <span class="req">*</span></label>
+                    <label class="form-label">เพศ (ตามสภาพกำเนิด) <span class="req">*</span></label>
                     <div class="gender-selector">
                         <label class="gender-pill">
                             <input type="radio" name="gender" value="female" {% if form_data.gender == 'female' or not form_data.gender %}checked{% endif %} required>
@@ -191,10 +220,6 @@
                             <input type="radio" name="gender" value="male" {% if form_data.gender == 'male' %}checked{% endif %}>
                             <span>ชาย</span>
                         </label>
-                        <label class="gender-pill">
-                            <input type="radio" name="gender" value="other" {% if form_data.gender == 'other' %}checked{% endif %}>
-                            <span>อื่นๆ</span>
-                        </label>
                     </div>
                 </div>
 
@@ -203,15 +228,17 @@
                     <div class="form-group">
                         <label for="birthDate" class="form-label">วันเดือนปีเกิด <span class="req">*</span></label>
                         <div class="input-container">
-                            <span class="input-icon">📅</span>
-                            <input
-                                type="date"
-                                id="birthDate"
-                                name="birthDate"
-                                class="form-input"
-                                value="{{ form_data.birthDate }}"
-                                required
-                            >
+                            <span class="input-icon" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                            </span>
+                            <input type="date" id="birthDate" name="birthDate" class="form-input"
+                                value="{{ form_data.birthDate }}" required>
                         </div>
                     </div>
 
@@ -219,26 +246,20 @@
                         <div class="label-with-checkbox">
                             <label for="birthTime" class="form-label">เวลาเกิด</label>
                             <label class="checkbox-inline">
-                                <input
-                                    type="checkbox"
-                                    id="unknownBirthTime"
-                                    name="unknownBirthTime"
-                                    value="1"
-                                    {% if form_data.unknownBirthTime == '1' %}checked{% endif %}
-                                >
+                                <input type="checkbox" id="unknownBirthTime" name="unknownBirthTime" value="1" {% if form_data.unknownBirthTime == '1' %}checked{% endif %}>
                                 <span>ไม่ทราบเวลาเกิด</span>
                             </label>
                         </div>
                         <div class="input-container">
-                            <span class="input-icon">⏰</span>
-                            <input
-                                type="time"
-                                id="birthTime"
-                                name="birthTime"
-                                class="form-input"
-                                value="{{ form_data.birthTime }}"
-                                {% if form_data.unknownBirthTime == '1' %}disabled{% endif %}
-                            >
+                            <span class="input-icon" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </span>
+                            <input type="time" id="birthTime" name="birthTime" class="form-input"
+                                value="{{ form_data.birthTime }}" {% if form_data.unknownBirthTime == '1' %}disabled{% endif %}>
                         </div>
                     </div>
                 </div>
@@ -247,31 +268,25 @@
                 <div class="form-group">
                     <label for="birthPlace" class="form-label">สถานที่เกิด (จังหวัด หรือ ประเทศ)</label>
                     <div class="input-container">
-                        <span class="input-icon">📍</span>
-                        <input
-                            type="text"
-                            id="birthPlace"
-                            name="birthPlace"
-                            class="form-input"
-                            placeholder="เช่น กรุงเทพมหานคร, เชียงใหม่"
-                            value="{{ form_data.birthPlace }}"
-                        >
+                        <span class="input-icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </span>
+                        <input type="text" id="birthPlace" name="birthPlace" class="form-input"
+                            placeholder="เช่น กรุงเทพมหานคร, เชียงใหม่" value="{{ form_data.birthPlace }}">
                     </div>
                 </div>
 
                 <!-- ROW 7: Terms Agreement Checkbox -->
                 <div class="terms-group">
                     <label class="terms-checkbox-label">
-                        <input
-                            type="checkbox"
-                            id="agreeTerms"
-                            name="agreeTerms"
-                            value="1"
-                            required
-                            {% if form_data.agreeTerms == '1' %}checked{% endif %}
-                        >
+                        <input type="checkbox" id="agreeTerms" name="agreeTerms" value="1" required {% if form_data.agreeTerms == '1' %}checked{% endif %}>
                         <span class="terms-text">
-                            ฉันได้อ่านและยอมรับ <a href="#terms-modal" id="link-show-terms" class="terms-link">ข้อตกลงและเงื่อนไขการใช้งาน</a> และนโยบายความเป็นส่วนตัว
+                            ฉันได้อ่านและยอมรับ <a href="#terms-modal" id="link-show-terms"
+                                class="terms-link">ข้อตกลงและเงื่อนไขการใช้งาน</a> และนโยบายความเป็นส่วนตัว
                         </span>
                     </label>
                 </div>
@@ -343,7 +358,7 @@
                                     alertBox.style.display = 'none';
                                 }
                             })
-                            .catch(() => {});
+                            .catch(() => { });
                     }, 400);
                 });
             }

@@ -398,9 +398,16 @@ body {
 .input-icon {
     position: absolute;
     left: 1rem;
-    font-size: 1.05rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     pointer-events: none;
-    opacity: 0.6;
+    color: #8C847E;
+    transition: color 0.2s ease;
+}
+
+.input-container:focus-within .input-icon {
+    color: var(--color-wine);
 }
 
 .form-input {
@@ -429,19 +436,21 @@ body {
 .btn-toggle-pw {
     position: absolute;
     right: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background: transparent;
     border: none;
     cursor: pointer;
-    font-size: 1.1rem;
-    padding: 0.4rem;
+    padding: 0.45rem;
     border-radius: 8px;
-    transition: background 0.2s ease;
-    opacity: 0.7;
+    color: #8C847E;
+    transition: all 0.2s ease;
 }
 
 .btn-toggle-pw:hover {
-    background: rgba(0, 0, 0, 0.05);
-    opacity: 1;
+    background: rgba(77, 0, 17, 0.06);
+    color: var(--color-wine);
 }
 
 /* =========================================================

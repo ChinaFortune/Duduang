@@ -12,17 +12,6 @@
     font-weight: 700;
 }
 
-.badge-locked {
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: #8A5D00;
-    background: #FFF7DF;
-    padding: 0.15rem 0.5rem;
-    border-radius: 999px;
-    border: 1px solid rgba(212, 175, 55, 0.4);
-    margin-left: 0.5rem;
-    display: inline-block;
-}
 
 .input-readonly {
     background: #F1ECE7 !important;
