@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
+from django.urls import Resolver404, resolve, reverse
 
 from .models import UserInput, UserProfile
 
@@ -54,10 +54,22 @@ def login_view(request):
             else:
                 messages.error(request, 'รหัสผ่านไม่ถูกต้อง โปรดลองอีกครั้ง')
 
+    result_back_url = None
+    next_parts = urllib.parse.urlsplit(next_url)
+    if not next_parts.scheme and not next_parts.netloc:
+        try:
+            destination = resolve(next_parts.path)
+        except Resolver404:
+            pass
+        else:
+            if destination.url_name == 'result':
+                result_back_url = reverse('result', kwargs=destination.kwargs)
+
     is_google_configured = bool(settings.GOOGLE_CLIENT_ID and settings.GOOGLE_CLIENT_SECRET)
 
     context = {
         'next_url': next_url,
+        'result_back_url': result_back_url,
         'is_google_configured': is_google_configured,
         'google_client_id': settings.GOOGLE_CLIENT_ID,
     }

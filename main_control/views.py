@@ -60,13 +60,15 @@ def intro(request):
 def result(request, user_id):
     user_input = get_object_or_404(UserInput, id=user_id)
 
+    save_success = False
+
     # If user arrived with auto_save flag after login/signup
     if request.user.is_authenticated and request.GET.get('auto_save') == '1':
         if not user_input.is_saved or user_input.user != request.user:
             user_input.user = request.user
             user_input.is_saved = True
             user_input.save()
-            messages.success(request, 'บันทึกผลดวงชะตาเข้าสู่ประวัติของคุณเรียบร้อยแล้ว!')
+            save_success = True
 
     is_saved = bool(user_input.is_saved and user_input.user == request.user)
 
@@ -76,6 +78,7 @@ def result(request, user_id):
         "user_input": user_input,
         "birth_result": birth_result,
         "is_saved": is_saved,
+        "save_success": save_success,
     }
 
     return render(

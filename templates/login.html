@@ -35,9 +35,9 @@
         <section class="login-card-container">
 
             <!-- Card Back Link -->
-            <a href="{% url 'home' %}" class="back-link" id="btn-back-home" aria-label="กลับสู่หน้าหลัก">
+            <a href="{% if result_back_url %}{{ result_back_url }}{% else %}{% url 'home' %}{% endif %}" class="back-link" id="btn-back-home" aria-label="{% if result_back_url %}กลับไปหน้าผลการดูดวง{% else %}กลับสู่หน้าหลัก{% endif %}">
                 <span class="back-arrow">‹</span>
-                <span>กลับสู่หน้าหลัก</span>
+                <span>{% if result_back_url %}กลับไปหน้าผลการดูดวง{% else %}กลับสู่หน้าหลัก{% endif %}</span>
             </a>
 
             <!-- Brand Header -->

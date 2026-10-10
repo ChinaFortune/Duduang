@@ -1036,24 +1036,25 @@ input:focus-visible {
 /* =========================================================
    CALCULATOR CARD
 
-   The card is sized proportionally to the available hero
-   height so the bottom never escapes the card.
+   Keep the card within the hero and scroll when space is limited.
 ========================================================= */
 
 .calculator-card {
     width:
         min(100%, 610px);
 
-    max-height: 94%;
+    max-height: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
 
     position: relative;
 
     z-index: 2;
 
     padding:
-        clamp(17px, 3.1dvh, 29px)
+        clamp(13px, 2.2dvh, 20px)
         clamp(25px, 3.34vw, 48px)
-        clamp(13px, 2.35dvh, 22px);
+        clamp(10px, 1.6dvh, 15px);
 
     border:
         1px solid
@@ -1077,6 +1078,11 @@ input:focus-visible {
 
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
+}
+
+
+.calculator-card::-webkit-scrollbar {
+    display: none;
 }
 
 
@@ -1112,7 +1118,7 @@ input:focus-visible {
     width: 100%;
 
     margin-bottom:
-        clamp(9px, 1.8dvh, 17px);
+        clamp(7px, 1.2dvh, 11px);
 }
 
 
@@ -2357,3 +2363,33 @@ input:focus-visible {
     display: none;
 }
 
+
+
+.calculator-heading-row {
+    position: relative;
+    padding-right: 120px;
+    margin-bottom: 4px;
+}
+.calculator-heading-row .calculator-kicker {
+    margin-bottom: 0;
+}
+.calculator-history-link {
+    position: absolute;
+    right: 0;
+    top: calc(50% + 10px);
+    transform: translateY(-50%);
+    white-space: nowrap;
+    padding: 7px 16px;
+    line-height: 1.4;
+    border: 1px solid rgba(77, 0, 17, 0.2);
+    border-radius: 12px;
+    color: #4D0011;
+    background: #FAF7F5;
+    font-size: clamp(12px, 1vw, 14px);
+    font-weight: 600;
+    text-decoration: none;
+}
+.calculator-history-link:hover,
+.calculator-history-link:focus-visible {
+    background: #F0E5E7;
+}

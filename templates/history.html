@@ -53,7 +53,7 @@
             <div class="messages-wrap">
                 {% for message in messages %}
                 <div class="msg-box">
-                    <span>✨</span>
+                    
                     <span>{{ message }}</span>
                 </div>
                 {% endfor %}
@@ -69,7 +69,7 @@
                         <span class="card-tag">
                             {% if fortune.gender == 'female' %}♀ หญิง{% elif fortune.gender == 'male' %}♂ ชาย{% else %}บุคคล{% endif %}
                         </span>
-                        <time class="card-date">{{ fortune.created_at|date:"d M Y, H:i" }}</time>
+                        <time class="card-date" title="เวลาที่ดูดวง (เวลาไทย)">{{ fortune.created_at|date:"d M Y, H:i" }} น.</time>
                     </div>
 
                     <h2 class="card-name">{{ fortune.first_name }} {{ fortune.last_name }}</h2>
@@ -96,8 +96,14 @@
                             <span>ดูผลดวงฉบับเต็ม</span>
                             <span>→</span>
                         </a>
-                        <a href="{% url 'delete_fortune' fortune.id %}" class="btn-del-card" onclick="return confirm('คุณต้องการลบผลการดูดวงนี้ออกจากประวัติใช่หรือไม่?');" title="ลบออกจากประวัติ">
-                            <span>🗑️</span>
+                        <a href="{% url 'delete_fortune' fortune.id %}" class="btn-del-card" onclick="return confirm('คุณต้องการลบผลการดูดวงนี้ออกจากประวัติใช่หรือไม่?');" title="ลบออกจากประวัติ" aria-label="ลบออกจากประวัติ">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+                                <path d="M10 11v6"></path>
+                                <path d="M14 11v6"></path>
+                                <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
+                            </svg>
                         </a>
                     </div>
                 </article>
