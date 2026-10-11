@@ -65,38 +65,6 @@
 
 
     <!-- =====================================================
-         TREE DECORATION
-    ====================================================== -->
-
-    <div
-        class="tree-decoration"
-        aria-hidden="true"
-    >
-
-        <div class="tree-branch branch-main"></div>
-
-        <div class="tree-branch branch-1"></div>
-
-        <div class="tree-branch branch-2"></div>
-
-        <div class="tree-branch branch-3"></div>
-
-        <div class="tree-leaf leaf-1"></div>
-
-        <div class="tree-leaf leaf-2"></div>
-
-        <div class="tree-leaf leaf-3"></div>
-
-        <div class="tree-leaf leaf-4"></div>
-
-        <div class="tree-leaf leaf-5"></div>
-
-        <div class="tree-leaf leaf-6"></div>
-
-    </div>
-
-
-    <!-- =====================================================
          MASTER IMAGE
     ====================================================== -->
 
@@ -115,237 +83,126 @@
          RIGHT CONTENT
     ====================================================== -->
 
+
     <section class="hero">
 
+        <!-- HEADER: ส่วนหัวด้านบน -->
+        <div class="hero-header">
 
-        <!-- =================================================
-             SMALL YIN YANG
-        ================================================== -->
-
-        <div
-            class="top-yinyang"
-            aria-hidden="true"
-        >
-            ☯
-        </div>
-
-
-        <!-- =================================================
-             BRAND
-        ================================================== -->
-
-        <div class="brand">
-
-            <div class="brand-line"></div>
-
-            <div class="brand-text">
-
-                <span class="brand-small">
-                    อ.หนิง
-                </span>
-
-                <strong>
-                    ENERGY FLOW
-                </strong>
-
+            <div class="top-yinyang" aria-hidden="true">
+                ☯
             </div>
 
-            <div class="brand-line"></div>
+            <div class="brand">
+                <div class="brand-line"></div>
+
+                <div class="brand-text">
+                    <span class="brand-small">อ.หนิง</span>
+                    <strong>ENERGY FLOWS</strong>
+                </div>
+
+                <div class="brand-line"></div>
+            </div>
+
+            <h1>
+                <span class="heading-green">เปิดประตูสู่</span>
+                <span class="heading-wine">ดวงชะตาของคุณ</span>
+            </h1>
 
         </div>
 
 
-        <!-- =================================================
-             MAIN HEADING
-        ================================================== -->
+        <!-- BOTTOM: Card และปุ่มด้านล่าง -->
+        <div class="hero-bottom">
 
-        <h1>
+            <div class="master-card">
 
-            <span class="heading-green">
-                เปิดประตูสู่
-            </span>
+                <div class="master-card-header">
+                    <div class="mini-yinyang" aria-hidden="true">
+                        ☯
+                    </div>
 
-            <span class="heading-wine">
-                ดวงชะตาของคุณ
-            </span>
-
-        </h1>
-
-
-        <!-- =================================================
-             MASTER CARD
-        ================================================== -->
-
-        <div class="master-card">
-
-
-            <!-- HEADER -->
-
-            <div class="master-card-header">
-
-                <div
-                    class="mini-yinyang"
-                    aria-hidden="true"
-                >
-                    ☯
+                    <div class="master-title">
+                        <span>อ.หนิง</span>
+                        <strong>ฮวงจุ้ย • ดวงจีน</strong>
+                    </div>
                 </div>
 
+                <div class="master-card-divider"></div>
 
-                <div class="master-title">
+                <p class="master-card-quote">
+                    “รับปรึกษาฮวงจุ้ย”
+                </p>
 
-                    <span>
-                        อ.หนิง
-                    </span>
+                <p class="master-card-description">
+                    วิเคราะห์ดวงชะตาด้วยศาสตร์จีน
+                </p>
 
-                    <strong>
-                        ฮวงจุ้ย • ดวงจีน
-                    </strong>
+                <div class="contact-list">
+
+                    <div class="contact-item phone-item" aria-hidden="true">
+                        <div class="contact-icon-box">
+                            <img
+                                src="{% static 'images/phone.webp' %}"
+                                alt=""
+                                class="contact-icon-image"
+                            >
+                        </div>
+
+                        <div class="contact-content">
+                            <span class="contact-label">โทร</span>
+                            <strong class="contact-main">0965654897</strong>
+                        </div>
+                    </div>
+
+                    <div class="contact-divider"></div>
+
+                    <div class="contact-item facebook-item">
+                        <div class="contact-icon-box">
+                            <img
+                                src="{% static 'images/facebook.webp' %}"
+                                alt="Facebook"
+                                class="contact-icon-image"
+                            >
+                        </div>
+
+                        <div class="contact-content">
+                            <span class="contact-label">FB : อ.หนิง</span>
+                            <strong class="contact-main">
+                                Ajarn Ning - Energy Flow
+                            </strong>
+                        </div>
+                    </div>
 
                 </div>
-
             </div>
 
+            <a href="/home/" class="home-button">
+                <span>เข้าสู่เว็บไซต์</span>
+                <span class="arrow">→</span>
+            </a>
 
-            <!-- DIVIDER -->
-
-            <div class="master-card-divider"></div>
-
-
-            <!-- DESCRIPTION -->
-
-            <p class="master-card-quote">
-                “รับปรึกษาฮวงจุ้ย”
+            <p class="footer-text">
+                ✦ ค้นพบตัวคุณ ผ่านศาสตร์แห่งดวงชะตา ✦
             </p>
 
-
-            <p class="master-card-description">
-                วิเคราะห์ดวงชะตาด้วยศาสตร์จีน
-            </p>
-
-
-            <!-- =================================================
-                 CONTACT
-            ================================================== -->
-
-            <div class="contact-list">
-
-
-                <!-- PHONE -->
-
-                <div
-                    class="contact-item phone-item"
-                    aria-hidden="true"
-                >
-
-                    <div class="contact-icon-box">
-
-                        <img
-                            src="{% static 'images/phone.webp' %}"
-                            alt=""
-                            class="contact-icon-image"
-                        >
-
-                    </div>
-
-
-                    <div class="contact-content">
-
-                        <span class="contact-label">
-                            โทร
-                        </span>
-
-                        <strong class="contact-main">
-                            0965654897
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
-                <!-- CONTACT DIVIDER -->
-
-                <div class="contact-divider"></div>
-
-
-                <!-- FACEBOOK -->
-
-                <div class="contact-item facebook-item">
-
-                    <div class="contact-icon-box">
-
-                        <img
-                            src="{% static 'images/facebook.webp' %}"
-                            alt="Facebook"
-                            class="contact-icon-image"
-                        >
-
-                    </div>
-
-
-                    <div class="contact-content">
-
-                        <span class="contact-label">
-                            FB : อ.หนิง
-                        </span>
-
-                        <strong class="contact-main">
-                            Ajarn Ning - Energy Flow
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
+            <div style="margin-top: 10px; text-align: center;">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'home' %}" style="font-size: 13px; color: #4D0011; text-decoration: none; font-weight: 500;">
+                        ✓ เข้าสู่ระบบแล้ว ({{ user.first_name|default:user.username }})
+                    </a>
+                {% else %}
+                    <a href="{% url 'login' %}" style="font-size: 13px; color: #4D0011; opacity: 0.75; text-decoration: none; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.75'">
+                        เข้าสู่ระบบ / จัดการข้อมูล
+                    </a>
+                {% endif %}
             </div>
 
-
         </div>
-
-
-        <!-- =================================================
-             NEXT BUTTON
-        ================================================== -->
-
-        <a
-            href="/home/"
-            class="home-button"
-        >
-
-            <span>
-                เข้าสู่เว็บไซต์
-            </span>
-
-            <span class="arrow">
-                →
-            </span>
-
-        </a>
-
-
-        <!-- =================================================
-             FOOTER
-        ================================================== -->
-
-        <p class="footer-text">
-            ✦ ค้นพบตัวคุณ ผ่านศาสตร์แห่งดวงชะตา ✦
-        </p>
-
-        <div style="margin-top: 10px; text-align: center;">
-            {% if user.is_authenticated %}
-                <a href="{% url 'home' %}" style="font-size: 13px; color: #4D0011; text-decoration: none; font-weight: 500;">
-                    ✓ เข้าสู่ระบบแล้ว ({{ user.first_name|default:user.username }})
-                </a>
-            {% else %}
-                <a href="{% url 'login' %}" style="font-size: 13px; color: #4D0011; opacity: 0.75; text-decoration: none; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.75'">
-                    เข้าสู่ระบบ / จัดการข้อมูล
-                </a>
-            {% endif %}
-        </div>
-
 
     </section>
+
+
 
 
 </main>

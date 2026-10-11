@@ -28,7 +28,10 @@
 <div class="page">
 
 
-    <main class="result-card">
+    <main 
+        class="result-card"
+        style="--theme-color: {{ birth_result.day.up.color }};"
+    >
 
 
         <!-- =========================
@@ -50,17 +53,6 @@
             </span>
 
         </a>
-
-        {% if messages %}
-        <div id="resultFlashMessages" class="result-flash-messages" style="margin-bottom: 20px; transition: opacity 0.6s ease, transform 0.6s ease;">
-            {% for message in messages %}
-            <div style="background: rgba(16, 43, 31, 0.08); border: 1.5px solid rgba(16, 43, 31, 0.25); border-radius: 14px; padding: 12px 18px; font-size: 14px; font-weight: 600; color: #102B1F; display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="this.parentElement.remove();" title="คลิกเพื่อปิด">
-                
-                <span>{{ message }}</span>
-            </div>
-            {% endfor %}
-        </div>
-        {% endif %}
 
 
         <!-- =========================
@@ -218,13 +210,13 @@
 
                 <div class="section-header output-header">
 
+                    <h1>
+                        คะแนนดวง {{ birth_result.total }}
+                    </h1>
+
                     <span class="section-kicker">
                         DESTINY RESULT
                     </span>
-
-                    <h2>
-                        ดวง 8 ตัว
-                    </h2>
 
                     <p>
                         ยังไม่ได้กำหนดวันและเวลาที่แน่นอนให้กับการเปลี่ยน index
@@ -493,6 +485,15 @@
                                 {% endif %}
 
 
+                                {% if birth_result.hour.down_element %}
+
+                                    <span class="bazi-th">
+                                        {{ birth_result.hour.down_element }}
+                                    </span>
+
+                                {% endif %}
+
+
                             {% endif %}
 
                         </div>
@@ -518,6 +519,15 @@
 
                                     <span class="bazi-th">
                                         {{ birth_result.day.down.result.th }}
+                                    </span>
+
+                                {% endif %}
+
+
+                                {% if birth_result.day.down_element %}
+
+                                    <span class="bazi-th">
+                                        {{ birth_result.day.down_element }}
                                     </span>
 
                                 {% endif %}
@@ -553,6 +563,15 @@
                                 {% endif %}
 
 
+                                {% if birth_result.month.down_element %}
+
+                                    <span class="bazi-th">
+                                        {{ birth_result.month.down_element }}
+                                    </span>
+
+                                {% endif %}
+
+
                             {% endif %}
 
                         </div>
@@ -578,6 +597,15 @@
 
                                     <span class="bazi-th">
                                         {{ birth_result.year.down.result.th }}
+                                    </span>
+
+                                {% endif %}
+
+
+                                {% if birth_result.year.down_element %}
+
+                                    <span class="bazi-th">
+                                        {{ birth_result.year.down_element }}
                                     </span>
 
                                 {% endif %}
@@ -858,87 +886,6 @@
 ===================================================== -->
 
 <script src="{% static 'js/result.js' %}"></script>
-
-<!-- Save Success Modal -->
-<dialog id="saveSuccessModal" aria-labelledby="saveSuccessTitle" data-auto-open="{{ save_success|yesno:'true,false' }}" style="border:0; padding:0; max-width:none; max-height:none; width:100%; height:100%; margin:0; position:fixed; inset:0; background:rgba(30,10,15,0.55); backdrop-filter:blur(6px); z-index:9999; align-items:center; justify-content:center;">
-    <div style="background:#FFFFFF; border-radius:24px; padding:2.5rem 2rem; max-width:380px; width:90%; text-align:center; box-shadow:0 24px 60px rgba(77,0,17,0.25); animation:modalIn 0.3s ease;">
-        <div style="width:56px; height:56px; background:linear-gradient(135deg,#4D0011,#700B22); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1.25rem;">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-        </div>
-        <h2 id="saveSuccessTitle" style="font-family:'Noto Serif Thai',serif; font-size:1.35rem; font-weight:700; color:#4D0011; margin-bottom:0.5rem;">บันทึกสำเร็จ</h2>
-        <p style="font-size:0.92rem; color:#6E6862; margin-bottom:1.75rem; line-height:1.55;">ผลการดูดวงถูกบันทึกเรียบร้อยแล้ว<br>คุณสามารถดูได้ที่หน้าประวัติดวงของคุณ</p>
-        <div style="display:flex; flex-direction:column; gap:0.75rem;">
-            <a id="modalBtnHistory" href="{% url 'history' %}" style="display:flex; align-items:center; justify-content:center; gap:0.5rem; padding:0.85rem 1.5rem; background:linear-gradient(135deg,#4D0011,#700B22); color:#fff; text-decoration:none; border-radius:14px; font-size:0.95rem; font-weight:600; transition:opacity 0.2s;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                <span>ดูประวัติการดูดวง</span>
-            </a>
-            <a href="{% url 'home' %}" style="display:flex; align-items:center; justify-content:center; gap:0.5rem; padding:0.85rem 1.5rem; background:#FAF7F5; border:1.5px solid rgba(77,0,17,0.15); color:#4D0011; text-decoration:none; border-radius:14px; font-size:0.95rem; font-weight:600;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                <span>กลับหน้าหลัก</span>
-            </a>
-        </div>
-    </div>
-</dialog>
-<style>
-#saveSuccessModal[open] { display: flex; }
-@keyframes modalIn { from { opacity:0; transform:scale(0.92); } to { opacity:1; transform:scale(1); } }
-</style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const btnSave = document.getElementById('btnSaveFortune');
-    const container = document.getElementById('fortuneSaveContainer');
-    const modal = document.getElementById('saveSuccessModal');
-
-    if (modal && modal.dataset.autoOpen === 'true') modal.showModal();
-
-    if (btnSave && container) {
-        const originalButton = btnSave.innerHTML;
-        btnSave.addEventListener('click', function () {
-            const url = this.getAttribute('data-url');
-            btnSave.disabled = true;
-            btnSave.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation:spin 1s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg><span>กำลังบันทึก...</span>';
-
-            fetch(url, {
-                method: 'GET',
-                headers: { 'X-Requested-With': 'XMLHttpRequest' }
-            })
-            .then(res => {
-                if (!res.ok) throw new Error('Save failed');
-                return res.json();
-            })
-            .then(data => {
-                if (!data.success) throw new Error('Save failed');
-                if (data.success) {
-                    container.innerHTML = `
-                        <div class="saved-success-pill">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            <span>บันทึกผลดวงเรียบร้อยแล้ว</span>
-                        </div>
-                    `;
-                    if (modal) {
-                        modal.showModal();
-                    }
-                }
-            })
-            .catch(() => {
-                btnSave.disabled = false;
-                btnSave.innerHTML = originalButton;
-                window.alert('บันทึกไม่สำเร็จ กรุณาลองอีกครั้ง');
-            });
-        });
-    }
-
-    const flashMsg = document.getElementById('resultFlashMessages');
-    if (flashMsg) {
-        setTimeout(function () {
-            flashMsg.style.opacity = '0';
-            flashMsg.style.transform = 'translateY(-10px)';
-            setTimeout(function () { flashMsg.remove(); }, 600);
-        }, 3200);
-    }
-});
-</script>
 
 
 </body>
