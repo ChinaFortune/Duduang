@@ -1,2267 +1,1068 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap');
 
-
 /* =========================================================
-   ENERGY FLOW
-   COLOR SYSTEM
+   ENERGY FLOW — RESPONSIVE INTRO
+   ========================================================= */
 
-   PRIMARY
-   Pine  : #102B1F
-
-   CTA
-   Wine  : #4D0011
-
-   SUPPORT
-   Rose  : #BD7880
-   Pink  : #FFD9D9
-
-   BACKGROUND
-   Ivory : #FFF9F5
-
-   TEXT
-   Charcoal : #1E1E1E
-========================================================= */
-
-
-/* =========================================================
-   RESET
-========================================================= */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root {
+    --pine: #102B1F;
+    --wine: #4D0011;
+    --rose: #BD7880;
+    --pink: #FFD9D9;
+    --ivory: #FFF9F5;
+    --charcoal: #1E1E1E;
+    --page-padding: clamp(10px, 3vw, 42px);
+    --card-padding-y: clamp(10px, 1.8vh, 22px);
+    --card-padding-x: clamp(12px, 2vw, 26px);
 }
 
+*, *::before, *::after { box-sizing: border-box; }
 
-/* =========================================================
-   HTML / BODY
-========================================================= */
-
-html,
-body {
-
+html, body {
     width: 100%;
     height: 100%;
-
+    margin: 0;
+    padding: 0;
     overflow: hidden;
+    overscroll-behavior: none;
 }
 
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
 
 body {
-
-    font-family:
-        'Noto Sans Thai',
-        sans-serif;
-
-    color:
-        #1E1E1E;
-
+    font-family: 'Noto Sans Thai', sans-serif;
+    color: var(--charcoal);
     background:
-
-        radial-gradient(
-            circle at 72% 38%,
-            rgba(189, 120, 128, 0.08),
-            transparent 32%
-        ),
-
-        radial-gradient(
-            circle at 82% 76%,
-            rgba(255, 217, 217, 0.28),
-            transparent 30%
-        ),
-
-        #FFF9F5;
+        radial-gradient(circle at 72% 38%, rgba(189,120,128,.08), transparent 32%),
+        radial-gradient(circle at 82% 76%, rgba(255,217,217,.28), transparent 30%),
+        var(--ivory);
 }
-
-
-/* =========================================================
-   MAIN CONTAINER
-========================================================= */
 
 .intro-container {
-
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
     width: 100%;
     height: 100vh;
+    height: 100svh;
     height: 100dvh;
-
-    position: relative;
-
+    min-height: 0;
+    padding: var(--page-padding);
     overflow: hidden;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    isolation: isolate;
+    overflow: clip;
 }
-
 
 /* =========================================================
    BACKGROUND YIN YANG
-========================================================= */
+   ========================================================= */
 
 .background-yinyang {
-
     --parallax-x: 0px;
     --parallax-y: 0px;
-
     position: absolute;
-
     left: 50%;
     top: 50%;
-
-    width: min(850px, 70vw);
-    height: min(850px, 70vw);
-
-    transform:
-        translate(
-            calc(-50% + var(--parallax-x)),
-            calc(-50% + var(--parallax-y))
-        );
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
-    z-index: -10;
-
+    width: min(70vw, 850px);
+    aspect-ratio: 1;
+    transform: translate(
+        calc(-50% + var(--parallax-x)),
+        calc(-50% + var(--parallax-y))
+    );
+    z-index: -1;
     pointer-events: none;
-
-    opacity: 0.07;
-
-    filter:
-        blur(0.15px);
-
-    animation:
-        backgroundYinYangFloat
-        9s
-        ease-in-out
-        infinite;
+    opacity: .07;
+    animation: backgroundYinYangFloat 9s ease-in-out infinite;
 }
-
-
-/* =========================================================
-   OUTER GLOW
-========================================================= */
 
 .background-yinyang::before {
-
     content: "";
-
     position: absolute;
-
-    inset: -45px;
-
+    inset: -5%;
     border-radius: 50%;
-
-    background:
-
-        radial-gradient(
-            circle,
-            rgba(77, 0, 17, 0.07),
-            transparent 65%
-        );
-
-    filter:
-        blur(20px);
-
+    background: radial-gradient(circle, rgba(77,0,17,.07), transparent 65%);
+    filter: blur(20px);
     pointer-events: none;
 }
-
-
-/* =========================================================
-   OUTER RING
-========================================================= */
 
 .background-yinyang::after {
-
     content: "";
-
     position: absolute;
-
     inset: 4%;
-
     border-radius: 50%;
-
-    border:
-        1px solid
-        rgba(16, 43, 31, 0.13);
-
+    border: 1px solid rgba(16,43,31,.13);
     box-shadow:
-
-        0 0 0 12px
-        rgba(189, 120, 128, 0.025),
-
-        0 0 0 24px
-        rgba(16, 43, 31, 0.018),
-
-        0 0 60px
-        rgba(77, 0, 17, 0.035);
+        0 0 0 12px rgba(189,120,128,.025),
+        0 0 0 24px rgba(16,43,31,.018),
+        0 0 60px rgba(77,0,17,.035);
 }
-
-
-/* =========================================================
-   YIN YANG BODY
-   =========================================================
-
-   โครงสร้างนี้ใช้หลักหยินหยางจริง:
-
-   1. วงกลมหลักแบ่งครึ่ง
-   2. วงกลม 50% สองวงสร้าง S-curve
-   3. จุดเล็กอยู่กลางวงกลมแต่ละฝั่ง
-
-   ไม่ใช้การเอาวงกลมหลายวงมาวางทับแบบสุ่ม
-========================================================= */
 
 .yin-yang-symbol {
-
     position: relative;
-
     width: 100%;
-    height: 100%;
-
-    /*
-       ต้องเป็นวงกลมสมบูรณ์
-    */
-
-    aspect-ratio: 1 / 1;
-
-    border-radius: 50%;
-
+    aspect-ratio: 1;
     overflow: hidden;
-
-    /*
-       ครึ่งซ้าย = Wine
-       ครึ่งขวา = Ivory
-
-       ใช้ 50% แบบตรง ๆ
-       เพื่อให้แกนสมมาตรสมบูรณ์
-    */
-
-    background:
-
-        linear-gradient(
-            90deg,
-            rgba(77, 0, 17, 0.88) 0%,
-            rgba(77, 0, 17, 0.88) 50%,
-            rgba(255, 249, 245, 0.96) 50%,
-            rgba(255, 249, 245, 0.96) 100%
-        );
-
-    border:
-        2px solid
-        rgba(77, 0, 17, 0.13);
-
+    border-radius: 50%;
+    background: linear-gradient(
+        90deg,
+        rgba(77,0,17,.88) 0 50%,
+        rgba(255,249,245,.96) 50% 100%
+    );
+    border: 2px solid rgba(77,0,17,.13);
     box-shadow:
-
-        inset
-        0 0 70px
-        rgba(77, 0, 17, 0.035),
-
-        inset
-        0 0 25px
-        rgba(255, 249, 245, 0.20),
-
-        0 0 80px
-        rgba(16, 43, 31, 0.04);
-
-    animation:
-        yinYangRotate
-        16s
-        linear
-        infinite;
-
-    transform-origin:
-        center center;
+        inset 0 0 70px rgba(77,0,17,.035),
+        inset 0 0 25px rgba(255,249,245,.20),
+        0 0 80px rgba(16,43,31,.04);
+    transform-origin: center;
+    animation: yinYangRotate 16s linear infinite;
 }
 
-
-/* =========================================================
-   YIN YANG TRUE S-CURVE
-=========================================================
-
-   วงกลมบน:
-       สี Ivory
-       ขนาด 50%
-       จุดศูนย์กลาง = 50% 25%
-
-   วงกลมล่าง:
-       สี Wine
-       ขนาด 50%
-       จุดศูนย์กลาง = 50% 75%
-
-   เมื่อซ้อนกับพื้นหลังที่แบ่งครึ่ง
-   จะได้เส้น S ที่เป็น geometry ของ
-   Yin Yang แบบมาตรฐาน
-========================================================= */
+.yin-yang-symbol::before,
+.yin-yang-symbol::after {
+    content: "";
+    position: absolute;
+    left: 25%;
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+    pointer-events: none;
+}
 
 .yin-yang-symbol::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 50%;
-    height: 50%;
-
-    left: 25%;
     top: 0;
-
-    border-radius: 50%;
-
-    /*
-       สีของ Yang
-    */
-
-    background:
-        rgba(255, 249, 245, 0.96);
-
-    /*
-       ขอบด้านในนุ่มมาก ๆ
-       ไม่ทำลาย geometry
-    */
-
+    background: rgba(255,249,245,.96);
     box-shadow:
-
-        inset
-        -5px 0 14px
-        rgba(189, 120, 128, 0.025),
-
-        inset
-        4px 0 12px
-        rgba(255, 255, 255, 0.10);
-
-    pointer-events: none;
+        inset -5px 0 14px rgba(189,120,128,.025),
+        inset 4px 0 12px rgba(255,255,255,.10);
 }
-
-
-/* =========================================================
-   LOWER YIN CIRCLE
-========================================================= */
 
 .yin-yang-symbol::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 50%;
-    height: 50%;
-
-    left: 25%;
     bottom: 0;
-
-    border-radius: 50%;
-
-    /*
-       สีของ Yin
-    */
-
-    background:
-        rgba(77, 0, 17, 0.88);
-
+    background: rgba(77,0,17,.88);
     box-shadow:
-
-        inset
-        5px 0 14px
-        rgba(16, 43, 31, 0.035),
-
-        inset
-        -4px 0 12px
-        rgba(189, 120, 128, 0.035);
-
-    pointer-events: none;
+        inset 5px 0 14px rgba(16,43,31,.035),
+        inset -4px 0 12px rgba(189,120,128,.035);
 }
-
-
-/* =========================================================
-   SMALL DOTS
-========================================================= */
 
 .yin-yang-small {
-
     position: absolute;
-
-    width: 13%;
-
-    aspect-ratio: 1 / 1;
-
-    border-radius: 50%;
-
-    z-index: 3;
-
-    /*
-       ทำให้ตำแหน่งของจุด
-       อยู่ตรงศูนย์กลางของวงกลม 50%
-    */
-
     left: 43.5%;
-
-    margin-left: 0;
+    width: 13%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    z-index: 3;
 }
-
-
-/* =========================================================
-   DARK DOT
-   อยู่ใน Yang ด้านบน
-========================================================= */
 
 .yin-yang-small.yin {
-
     top: 18.5%;
-
-    background:
-        rgba(77, 0, 17, 0.92);
-
-    border:
-        1px solid
-        rgba(77, 0, 17, 0.10);
-
+    background: rgba(77,0,17,.92);
+    border: 1px solid rgba(77,0,17,.10);
     box-shadow:
-
-        0 0 0 2px
-        rgba(255, 249, 245, 0.10),
-
-        0 0 15px
-        rgba(77, 0, 17, 0.08);
+        0 0 0 2px rgba(255,249,245,.10),
+        0 0 15px rgba(77,0,17,.08);
 }
-
-
-/* =========================================================
-   LIGHT DOT
-   อยู่ใน Yin ด้านล่าง
-========================================================= */
 
 .yin-yang-small.yang {
-
     bottom: 18.5%;
-
-    background:
-        rgba(255, 217, 217, 0.92);
-
-    border:
-        1px solid
-        rgba(189, 120, 128, 0.16);
-
+    background: rgba(255,217,217,.92);
+    border: 1px solid rgba(189,120,128,.16);
     box-shadow:
-
-        0 0 0 2px
-        rgba(77, 0, 17, 0.05),
-
-        0 0 20px
-        rgba(189, 120, 128, 0.08);
+        0 0 0 2px rgba(77,0,17,.05),
+        0 0 20px rgba(189,120,128,.08);
 }
-
-
-/* =========================================================
-   YIN YANG ROTATION
-========================================================= */
 
 @keyframes yinYangRotate {
-
-    from {
-
-        transform:
-            rotate(0deg);
-    }
-
-    to {
-
-        transform:
-            rotate(360deg);
-    }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
-
-
-/* =========================================================
-   BACKGROUND FLOAT
-========================================================= */
 
 @keyframes backgroundYinYangFloat {
-
-    0%,
-    100% {
-
-        transform:
-            translate(
-                calc(-50% + var(--parallax-x)),
-                calc(-50% + var(--parallax-y))
-            )
-            scale(0.98);
+    0%, 100% {
+        transform: translate(
+            calc(-50% + var(--parallax-x)),
+            calc(-50% + var(--parallax-y))
+        ) scale(.98);
     }
-
     50% {
-
-        transform:
-            translate(
-                calc(-50% + var(--parallax-x)),
-                calc(-50% + var(--parallax-y))
-            )
-            scale(1.02);
+        transform: translate(
+            calc(-50% + var(--parallax-x)),
+            calc(-50% + var(--parallax-y))
+        ) scale(1.02);
     }
 }
 
-
 /* =========================================================
-   WINE CURVE
-   ใช้ Wine เป็น Decorative Accent
-========================================================= */
+   DECORATIVE CURVES
+   ========================================================= */
+
+.wine-curve,
+.wine-curve-inner {
+    position: absolute;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    transform: rotate(-12deg);
+    z-index: -1;
+    pointer-events: none;
+}
 
 .wine-curve {
-
-    position: absolute;
-
-    left: -255px;
-    bottom: -430px;
-
-    width: 900px;
-    height: 900px;
-
-    border-radius: 50%;
-
-    border:
-        95px solid
-        rgba(77, 0, 17, 0.93);
-
-    transform:
-        rotate(-12deg);
-
-    z-index: -3;
-
-    pointer-events: none;
+    left: -18%;
+    bottom: -48%;
+    width: min(65vw, 900px);
+    border: clamp(30px, 7vw, 95px) solid rgba(77,0,17,.93);
 }
-
 
 .wine-curve-inner {
-
-    position: absolute;
-
-    left: -175px;
-    bottom: -350px;
-
-    width: 730px;
-    height: 730px;
-
-    border-radius: 50%;
-
-    border:
-        2px solid
-        rgba(189, 120, 128, 0.65);
-
-    transform:
-        rotate(-12deg);
-
-    z-index: -2;
-
-    pointer-events: none;
+    left: -12%;
+    bottom: -40%;
+    width: min(53vw, 730px);
+    border: 2px solid rgba(189,120,128,.65);
 }
-
-
-/* =========================================================
-   TREE DECORATION
-   Pine + Rose
-========================================================= */
-
-.tree-decoration {
-
-    position: absolute;
-
-    left: -10px;
-    top: -20px;
-
-    width: 300px;
-    height: 330px;
-
-    z-index: 1;
-
-    pointer-events: none;
-
-    transform:
-        rotate(-8deg);
-
-    opacity: 0.72;
-}
-
-
-.tree-branch {
-
-    position: absolute;
-
-    height: 5px;
-
-    border-radius: 100%;
-
-    background:
-
-        linear-gradient(
-            90deg,
-            #102B1F,
-            #27483A
-        );
-
-    transform-origin:
-        left center;
-}
-
-
-.branch-main {
-
-    width: 285px;
-
-    left: -20px;
-    top: 55px;
-
-    transform:
-        rotate(18deg);
-}
-
-
-.branch-1 {
-
-    width: 120px;
-
-    left: 75px;
-    top: 72px;
-
-    transform:
-        rotate(-55deg);
-}
-
-
-.branch-2 {
-
-    width: 105px;
-
-    left: 140px;
-    top: 90px;
-
-    transform:
-        rotate(45deg);
-}
-
-
-.branch-3 {
-
-    width: 90px;
-
-    left: 190px;
-    top: 105px;
-
-    transform:
-        rotate(-40deg);
-}
-
-
-/* =========================================================
-   TREE LEAVES
-========================================================= */
-
-.tree-leaf {
-
-    position: absolute;
-
-    width: 20px;
-    height: 10px;
-
-    border-radius:
-        100% 0 100% 0;
-
-    background:
-
-        linear-gradient(
-            135deg,
-            #102B1F,
-            #3C604F
-        );
-
-    transform:
-        rotate(-25deg);
-}
-
-
-.leaf-1 {
-
-    left: 55px;
-    top: 30px;
-}
-
-
-.leaf-2 {
-
-    left: 115px;
-    top: 47px;
-
-    transform:
-        rotate(25deg);
-}
-
-
-.leaf-3 {
-
-    left: 160px;
-    top: 52px;
-
-    transform:
-        rotate(-35deg);
-}
-
-
-.leaf-4 {
-
-    left: 215px;
-    top: 82px;
-
-    transform:
-        rotate(30deg);
-}
-
-
-.leaf-5 {
-
-    left: 100px;
-    top: 95px;
-
-    transform:
-        rotate(-20deg);
-}
-
-
-.leaf-6 {
-
-    left: 235px;
-    top: 45px;
-
-    transform:
-        rotate(-45deg);
-}
-
 
 /* =========================================================
    MASTER IMAGE
-========================================================= */
+   ========================================================= */
 
 .master-background {
-
     position: absolute;
-
-    left: 40px;
-    bottom: -25px;
-
-    width: min(46vw, 680px);
-    height: min(94vh, 880px);
-
+    left: 50%;
+    bottom: 0;
     display: flex;
-
     align-items: flex-end;
-    justify-content: flex-start;
-
-    z-index: 2;
-
+    justify-content: center;
+    width: min(100vw, 680px);
+    height: 100%;
+    transform: translateX(-50%);
+    z-index: 1;
     pointer-events: none;
-
     user-select: none;
+    overflow: hidden;
 }
-
 
 .master-background-image {
-
+    display: block;
     width: 100%;
     height: 100%;
-
-    display: block;
-
     object-fit: contain;
-
-    object-position:
-        left bottom;
-
-    opacity: 1;
-
-    filter:
-
-        drop-shadow(
-            12px 18px 30px
-            rgba(16, 43, 31, 0.14)
-        );
+    object-position: center bottom;
+    filter: drop-shadow(12px 18px 30px rgba(16,43,31,.14));
 }
 
-
 /* =========================================================
-   HERO
-========================================================= */
+   HERO CONTENT
+   ========================================================= */
 
 .hero {
-
-    width: 760px;
-    max-width: 760px;
-
     position: relative;
-
-    z-index: 10;
-
+    z-index: 2;
+    grid-column: 2;
+    justify-self: center;
+    width: 100%;
+    max-width: 760px;
+    min-width: 0;
+    max-height: 100%;
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     text-align: center;
-
-    margin-left: 390px;
-
-    padding: 15px;
+    margin: 0;
+    padding: clamp(6px, 1.2vh, 15px);
 }
-
-
-/* =========================================================
-   TOP YIN YANG
-========================================================= */
 
 .top-yinyang {
-
-    width: 58px;
-    height: 58px;
-
     flex-shrink: 0;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
+    width: clamp(34px, 4.2vw, 58px);
+    aspect-ratio: 1;
+    border: 1px solid rgba(189,120,128,.65);
     border-radius: 50%;
-
-    border:
-        1px solid
-        rgba(189, 120, 128, 0.65);
-
-    color:
-        #4D0011;
-
-    background:
-        rgba(255, 249, 245, 0.96);
-
+    color: var(--wine);
+    background: rgba(255,249,245,.96);
     box-shadow:
-
-        0 8px 25px
-        rgba(16, 43, 31, 0.08),
-
-        inset
-        0 0 10px
-        rgba(189, 120, 128, 0.06);
-
-    font-size: 31px;
-
+        0 8px 25px rgba(16,43,31,.08),
+        inset 0 0 10px rgba(189,120,128,.06);
+    font-size: clamp(20px, 2.4vw, 31px);
     line-height: 1;
-
-    margin-bottom: 9px;
-
-    z-index: 5;
+    margin-bottom: clamp(4px, .7vh, 9px);
 }
-
-
-/* =========================================================
-   BRAND
-========================================================= */
 
 .brand {
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
-    gap: 15px;
-
-    margin-bottom: 12px;
+    gap: clamp(6px, 1.2vw, 15px);
+    max-width: 100%;
+    min-width: 0;
+    margin-bottom: clamp(5px, .8vh, 12px);
 }
-
 
 .brand-line {
-
-    width: 58px;
+    width: clamp(18px, 4.2vw, 58px);
     height: 1px;
-
-    background:
-
-        linear-gradient(
-            90deg,
-            transparent,
-            #BD7880
-        );
+    flex-shrink: 1;
+    background: linear-gradient(90deg, transparent, var(--rose));
 }
-
 
 .brand-line:last-child {
-
-    background:
-
-        linear-gradient(
-            90deg,
-            #BD7880,
-            transparent
-        );
+    background: linear-gradient(90deg, var(--rose), transparent);
 }
-
 
 .brand-text {
-
     display: flex;
-
     flex-direction: column;
-
+    min-width: 0;
     line-height: 1.15;
 }
-
 
 .brand-small {
-
-    color:
-        #4D0011;
-
-    font-size: 13px;
-
+    color: var(--wine);
+    font-size: clamp(9px, 1vw, 13px);
     font-weight: 600;
-
-    letter-spacing: 2px;
+    letter-spacing: clamp(.5px, .15vw, 2px);
 }
-
 
 .brand-text strong {
-
-    color:
-        #102B1F;
-
-    font-size: 10px;
-
-    letter-spacing: 3px;
-
+    color: var(--pine);
+    font-size: clamp(7px, .8vw, 10px);
+    letter-spacing: clamp(.5px, .23vw, 3px);
     font-weight: 600;
 }
 
+/* HEADING */
 
-/* =========================================================
-   MAIN HEADING
-========================================================= */
-
-h1 {
-
+.hero h1 {
     width: 100%;
-
+    min-width: 0;
     display: flex;
-
+    flex-wrap: wrap;
     align-items: baseline;
     justify-content: center;
-
-    gap: 12px;
-
-    white-space: nowrap;
-
-    color:
-        #102B1F;
-
-    font-size:
-        clamp(
-            34px,
-            4vw,
-            54px
-        );
-
-    line-height: 1.15;
-
+    gap: clamp(2px, .6vw, 10px);
+    color: var(--pine);
+    font-size: clamp(24px, 3.4vw, 54px);
+    line-height: 1.3;
     font-weight: 700;
-
-    margin-bottom: 25px;
-
-    text-shadow:
-        0 5px 25px
-        rgba(255, 249, 245, 0.95);
+    margin: 0 0 clamp(8px, 1.4vh, 20px);
+    text-shadow: 0 5px 25px rgba(255,249,245,.95);
 }
 
-
-.heading-green {
-
-    display: inline;
-
-    color:
-        #102B1F;
-}
-
-
-.heading-wine {
-
-    display: inline;
-
-    color:
-        #4D0011;
-}
-
+.heading-green { color: var(--pine); }
+.heading-wine { color: var(--wine); }
 
 /* =========================================================
    MASTER CARD
-   Ivory / Pink support surface
-========================================================= */
+   ========================================================= */
 
 .master-card {
-
-    width: 560px;
-    max-width: 94%;
-
-    padding:
-        25px
-        30px
-        22px;
-
-    margin-bottom: 23px;
-
+    width: 100%;
+    max-width: 560px;
+    min-width: 0;
+    padding: var(--card-padding-y) var(--card-padding-x);
+    margin-bottom: clamp(7px, 1.2vh, 18px);
     border-radius: 17px;
-
-    background:
-
-        linear-gradient(
-            135deg,
-            rgba(255, 249, 245, 0.98),
-            rgba(255, 217, 217, 0.94)
-        );
-
-    border:
-        1px solid
-        rgba(189, 120, 128, 0.50);
-
+    background: linear-gradient(
+        135deg,
+        rgba(255,249,245,.93),
+        rgba(255,217,217,.89)
+    );
+    border: 1px solid rgba(189,120,128,.50);
     box-shadow:
-
-        0 22px 48px
-        rgba(16, 43, 31, 0.12),
-
-        0 5px 18px
-        rgba(77, 0, 17, 0.06),
-
-        inset
-        0 1px 0
-        rgba(255, 255, 255, 0.90);
-
-    color:
-        #1E1E1E;
-
-    text-align:
-        left;
+        0 22px 48px rgba(16,43,31,.12),
+        0 5px 18px rgba(77,0,17,.06),
+        inset 0 1px 0 rgba(255,255,255,.90);
+    color: var(--charcoal);
+    text-align: left;
 }
-
-
-/* =========================================================
-   CARD HEADER
-========================================================= */
 
 .master-card-header {
-
     display: flex;
-
     align-items: center;
-
-    gap: 15px;
+    gap: clamp(8px, 1.4vw, 15px);
 }
 
-
 .mini-yinyang {
-
-    width: 53px;
-    height: 53px;
-
     flex-shrink: 0;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
-    border:
-        1px solid
-        rgba(189, 120, 128, 0.70);
-
+    width: clamp(32px, 4vw, 53px);
+    aspect-ratio: 1;
+    border: 1px solid rgba(189,120,128,.70);
     border-radius: 50%;
-
-    color:
-        #4D0011;
-
-    background:
-        rgba(255, 249, 245, 0.70);
-
-    font-size: 29px;
-
+    color: var(--wine);
+    background: rgba(255,249,245,.78);
+    font-size: clamp(19px, 2.1vw, 29px);
     line-height: 1;
 }
 
-
 .master-title {
-
-    display: flex;
-
-    flex-direction: column;
-
-    line-height: 1.2;
-}
-
-
-.master-title span {
-
-    color:
-        #BD7880;
-
-    font-size: 12px;
-
-    letter-spacing: 2px;
-
-    font-weight: 600;
-}
-
-
-.master-title strong {
-
-    color:
-        #102B1F;
-
-    font-size: 21px;
-
-    font-weight: 700;
-}
-
-
-/* =========================================================
-   CARD DIVIDER
-========================================================= */
-
-.master-card-divider {
-
-    width: 100%;
-    height: 1px;
-
-    margin: 14px 0;
-
-    background:
-
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(189, 120, 128, 0.65),
-            transparent
-        );
-}
-
-
-/* =========================================================
-   QUOTE
-========================================================= */
-
-.master-card-quote {
-
-    color:
-        #4D0011;
-
-    font-size: 21px;
-
-    font-weight: 700;
-
-    margin-bottom: 4px;
-}
-
-
-/* =========================================================
-   DESCRIPTION
-========================================================= */
-
-.master-card-description {
-
-    color:
-        #1E1E1E;
-
-    font-size: 14px;
-
-    line-height: 1.6;
-}
-
-
-/* =========================================================
-   CONTACT
-========================================================= */
-
-.contact-list {
-
-    width: 100%;
-
-    margin-top: 16px;
-}
-
-
-.contact-item {
-
-    width: 100%;
-
-    min-height: 58px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 14px;
-
-    color:
-        #1E1E1E;
-
-    text-decoration:
-        none;
-
-    border-radius: 9px;
-}
-
-
-/* PHONE */
-
-.phone-item {
-
-    cursor:
-        default;
-
-    user-select:
-        none;
-
-    pointer-events:
-        none;
-}
-
-
-/* FACEBOOK */
-
-.facebook-item {
-
-    cursor:
-        default;
-
-    user-select:
-        none;
-}
-
-
-.contact-icon-box {
-
-    width: 47px;
-    height: 47px;
-
-    flex-shrink: 0;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255, 249, 245, 0.75);
-
-    border:
-        1px solid
-        rgba(189, 120, 128, 0.25);
-}
-
-
-.contact-icon-image {
-
-    width: 42px;
-    height: 42px;
-
-    display: block;
-
-    object-fit: contain;
-}
-
-
-.contact-content {
-
     min-width: 0;
-
     display: flex;
-
     flex-direction: column;
-
     line-height: 1.3;
 }
 
-
-.contact-label {
-
-    color:
-        #BD7880;
-
-    font-size: 11px;
-
-    margin-bottom: 2px;
-
+.master-title span {
+    color: var(--rose);
+    font-size: clamp(9px, 1vw, 12px);
+    letter-spacing: clamp(.5px, .15vw, 2px);
     font-weight: 600;
 }
 
-
-.contact-main {
-
-    color:
-        #102B1F;
-
-    font-size: 16px;
-
-    font-weight: 600;
-
-    word-break: break-word;
+.master-title strong {
+    color: var(--pine);
+    font-size: clamp(14px, 1.7vw, 21px);
+    font-weight: 700;
+    overflow-wrap: anywhere;
 }
 
-
-/* =========================================================
-   CONTACT DIVIDER
-========================================================= */
-
-.contact-divider {
-
+.master-card-divider {
     width: 100%;
     height: 1px;
-
-    margin: 2px 0;
-
-    background:
-
-        linear-gradient(
-            90deg,
-            rgba(16, 43, 31, 0.03),
-            rgba(189, 120, 128, 0.40),
-            rgba(16, 43, 31, 0.03)
-        );
+    margin: clamp(7px, 1.2vh, 14px) 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(189,120,128,.65),
+        transparent
+    );
 }
 
+.master-card-quote {
+    color: var(--wine);
+    font-size: clamp(14px, 1.7vw, 21px);
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 4px;
+}
+
+.master-card-description {
+    color: var(--charcoal);
+    font-size: clamp(11px, 1.2vw, 14px);
+    line-height: 1.55;
+}
+
+/* =========================================================
+   CONTACT DETAILS
+   ========================================================= */
+
+.contact-list {
+    width: 100%;
+    margin-top: clamp(5px, 1vh, 16px);
+}
+
+.contact-item {
+    width: 100%;
+    min-height: clamp(36px, 5.5vh, 58px);
+    display: flex;
+    align-items: center;
+    gap: clamp(7px, 1.2vw, 14px);
+    color: var(--charcoal);
+    text-decoration: none;
+    border-radius: 9px;
+}
+
+.phone-item {
+    cursor: default;
+    user-select: none;
+    pointer-events: none;
+}
+
+.facebook-item {
+    cursor: default;
+    user-select: none;
+}
+
+.contact-icon-box {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(30px, 3.8vw, 47px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: rgba(255,249,245,.82);
+    border: 1px solid rgba(189,120,128,.25);
+}
+
+.contact-icon-image {
+    display: block;
+    width: 88%;
+    height: 88%;
+    object-fit: contain;
+}
+
+.contact-content {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.4;
+}
+
+.contact-label {
+    color: var(--rose);
+    font-size: clamp(9px, .95vw, 11px);
+    margin-bottom: 2px;
+    font-weight: 600;
+}
+
+.contact-main {
+    color: var(--pine);
+    font-size: clamp(11px, 1.3vw, 16px);
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.contact-divider {
+    width: 100%;
+    height: 1px;
+    margin: 2px 0;
+    background: linear-gradient(
+        90deg,
+        rgba(16,43,31,.03),
+        rgba(189,120,128,.40),
+        rgba(16,43,31,.03)
+    );
+}
 
 /* =========================================================
    HOME BUTTON
-   CTA = WINE
-========================================================= */
+   ========================================================= */
 
 .home-button {
-
-    width: 350px;
-    max-width: 90%;
-
+    width: min(100%, 350px);
+    min-height: 42px;
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
-    gap: 16px;
-
-    padding:
-        15px
-        28px;
-
-    color:
-        #FFFFFF;
-
-    text-decoration:
-        none;
-
-    font-size: 20px;
-
+    gap: clamp(8px, 1.2vw, 16px);
+    padding: clamp(8px, 1.3vh, 15px) clamp(14px, 2.5vw, 28px);
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: clamp(14px, 1.7vw, 20px);
     font-weight: 700;
-
     border-radius: 15px;
-
-    background:
-        #4D0011;
-
-    border:
-        1px solid
-        rgba(77, 0, 17, 0.90);
-
-    box-shadow:
-
-        0 12px 32px
-        rgba(77, 0, 17, 0.22);
-
+    background: var(--wine);
+    border: 1px solid rgba(77,0,17,.90);
+    box-shadow: 0 12px 32px rgba(77,0,17,.22);
     transition:
-        transform 0.3s ease,
-        background-color 0.3s ease,
-        box-shadow 0.3s ease;
+        transform .3s ease,
+        background-color .3s ease,
+        box-shadow .3s ease;
 }
-
 
 .home-button:hover {
-
-    transform:
-        translateY(-5px)
-        scale(1.02);
-
-    background:
-        #620018;
-
-    box-shadow:
-
-        0 20px 45px
-        rgba(77, 0, 17, 0.30);
+    transform: translateY(-2px);
+    background: #620018;
+    box-shadow: 0 20px 45px rgba(77,0,17,.30);
 }
-
 
 .home-button:active {
-
-    transform:
-        translateY(0)
-        scale(0.98);
+    transform: translateY(0) scale(.98);
 }
-
-
-/* =========================================================
-   ARROW
-========================================================= */
 
 .arrow {
-
-    font-size: 29px;
-
+    flex-shrink: 0;
+    font-size: clamp(20px, 2.4vw, 29px);
     line-height: 1;
-
-    transition:
-        transform 0.3s ease;
+    transition: transform .3s ease;
 }
 
-
-.home-button:hover .arrow {
-
-    transform:
-        translateX(9px);
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
+.home-button:hover .arrow { transform: translateX(6px); }
 
 .footer-text {
-
-    margin-top: 11px;
-
-    color:
-        #102B1F;
-
-    font-size: 10px;
-
-    letter-spacing: 0.8px;
-
-    opacity: 0.78;
+    max-width: 100%;
+    margin-top: clamp(4px, .8vh, 11px);
+    color: var(--pine);
+    font-size: clamp(8px, .9vw, 10px);
+    line-height: 1.5;
+    letter-spacing: .3px;
+    opacity: .78;
 }
 
-
 /* =========================================================
-   TABLET
-========================================================= */
+   TABLET AND NARROW DESKTOP
+   ========================================================= */
 
-@media (max-width: 1100px) {
-
-    .master-background {
-
-        left: -10px;
-
-        width: 47vw;
+@media (max-width: 1000px) {
+    .intro-container {
+        grid-template-columns: minmax(0, 1fr);
+        padding: clamp(12px, 3vw, 30px);
     }
 
-
     .hero {
-
-        margin-left: 310px;
-
-        width: 680px;
-
+        grid-column: 1;
+        justify-self: center;
+        width: 100%;
         max-width: 680px;
     }
 
-
-    h1 {
-
-        font-size: 44px;
-
-        gap: 9px;
-    }
-
-
-    .master-card {
-
-        width: 520px;
-    }
-
-
-    .background-yinyang {
-
-        width: 700px;
-        height: 700px;
-    }
-}
-
-
-/* =========================================================
-   SMALL TABLET
-========================================================= */
-
-@media (max-width: 900px) {
-
     .master-background {
-
-        left: -70px;
-
-        width: 50vw;
-
-        height: 87vh;
-    }
-
-
-    .hero {
-
-        margin-left: 230px;
-
-        width: 620px;
-
-        max-width: 620px;
-    }
-
-
-    h1 {
-
-        font-size: 38px;
-
-        gap: 7px;
-    }
-
-
-    .master-card {
-
-        width: 470px;
-    }
-
-
-    .background-yinyang {
-
-        width: 620px;
-        height: 620px;
-
-        opacity: 0.065;
-    }
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 600px) {
-
-    .intro-container {
-
-        min-height: 100dvh;
-    }
-
-
-    /* BACKGROUND YIN YANG */
-
-    .background-yinyang {
-
-        width: 480px;
-        height: 480px;
-
-        opacity: 0.055;
-    }
-
-
-    /* MASTER */
-
-    .master-background {
-
         left: 50%;
-
-        top: -25px;
-
-        bottom: auto;
-
-        width: 250px;
-
-        height: 290px;
-
-        transform:
-            translateX(-50%);
-
-        justify-content:
-            center;
-
-        align-items:
-            flex-start;
-
-        opacity:
-            0.16;
+        width: min(60vw, 540px);
+        height: min(82dvh, 720px);
+        transform: translateX(-50%);
     }
 
+    .background-yinyang { width: min(80vw, 700px); }
+    .hero h1 { font-size: clamp(27px, 4.2vw, 44px); }
+    .master-card { max-width: 560px; }
+}
 
-    .master-background-image {
+/* =========================================================
+   MOBILE PORTRAIT
+   ========================================================= */
 
-        object-position:
-            center top;
+@media (max-width: 600px) and (orientation: portrait) {
+    .intro-container {
+        grid-template-columns: minmax(0, 1fr);
+        align-items: center;
+        padding: clamp(6px, 1.5dvh, 14px) clamp(10px, 3.5vw, 18px);
     }
 
-
-    /* WINE CURVE */
+    .background-yinyang {
+        width: min(100vw, 480px);
+        opacity: .055;
+    }
 
     .wine-curve {
-
-        left: -230px;
-
-        bottom: -400px;
-
-        width: 700px;
-        height: 700px;
-
-        border-width:
-            75px;
+        left: -35%;
+        bottom: -8%;
+        width: 120vw;
+        border-width: clamp(28px, 10vw, 65px);
     }
-
 
     .wine-curve-inner {
-
-        left: -170px;
-
-        bottom: -340px;
-
-        width: 590px;
-        height: 590px;
+        left: -25%;
+        bottom: -4%;
+        width: 105vw;
     }
 
-
-    /* TREE */
-
-    .tree-decoration {
-
-        transform:
-            scale(0.65)
-            rotate(-8deg);
-
-        transform-origin:
-            top left;
-
-        opacity:
-            0.45;
+    .master-background {
+        left: 50%;
+        right: auto;
+        top: auto;
+        bottom: 0;
+        width: min(100vw, 420px);
+        height: 100%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        opacity: .95;
+        z-index: 1;
+        overflow: hidden;
     }
 
-
-    /* HERO */
+    .master-background-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center bottom;
+    }
 
     .hero {
-
-        margin-left: 0;
-
+        grid-column: 1;
         width: 100%;
-
-        max-width: 500px;
-
-        padding: 10px;
+        max-width: 440px;
+        max-height: 100%;
+        padding: clamp(3px, .7dvh, 8px) 0;
     }
-
-
-    /* YIN YANG */
 
     .top-yinyang {
-
-        width: 48px;
-        height: 48px;
-
-        font-size: 25px;
-
-        margin-bottom: 7px;
+        width: clamp(30px, 9vw, 42px);
+        font-size: clamp(18px, 5vw, 23px);
+        margin-bottom: clamp(3px, .6dvh, 7px);
     }
-
-
-    /* BRAND */
 
     .brand {
-
-        margin-bottom: 9px;
-
-        gap: 9px;
+        gap: 7px;
+        margin-bottom: clamp(4px, .7dvh, 9px);
     }
 
-
-    .brand-line {
-
-        width: 35px;
-    }
-
-
-    .brand-small {
-
-        font-size: 10px;
-
-        letter-spacing: 1.5px;
-    }
-
+    .brand-line { width: clamp(15px, 6vw, 30px); }
+    .brand-small { font-size: clamp(9px, 2.7vw, 12px); }
 
     .brand-text strong {
-
-        font-size: 8px;
-
-        letter-spacing: 2px;
+        font-size: clamp(7px, 2vw, 9px);
+        letter-spacing: 1px;
     }
 
-
-    /* HEADING */
-
-    h1 {
-
-        width: 100%;
-
-        white-space: nowrap;
-
-        font-size: 27px;
-
-        gap: 5px;
-
-        margin-bottom: 14px;
+    .hero h1 {
+        font-size: clamp(21px, 5.7vw, 32px);
+        line-height: 1.3;
+        gap: 2px 6px;
+        margin-bottom: clamp(5px, 1dvh, 12px);
     }
-
-
-    /* CARD */
 
     .master-card {
-
-        width: 350px;
-
-        max-width: 94%;
-
-        padding:
-            16px
-            18px
-            15px;
-
-        margin-bottom: 14px;
-
-        border-radius: 13px;
+        width: 100%;
+        max-width: 440px;
+        padding: clamp(8px, 1.5dvh, 15px) clamp(10px, 3vw, 17px);
+        margin-bottom: clamp(5px, .9dvh, 12px);
+        border-radius: 14px;
     }
 
-
-    .master-card-header {
-
-        gap: 10px;
-    }
-
+    .master-card-header { gap: 9px; }
 
     .mini-yinyang {
-
-        width: 40px;
-        height: 40px;
-
-        font-size: 22px;
+        width: clamp(30px, 9vw, 40px);
+        font-size: clamp(18px, 5vw, 22px);
     }
-
 
     .master-title span {
-
-        font-size: 8px;
+        font-size: clamp(8px, 2.5vw, 10px);
+        letter-spacing: 1px;
     }
 
+    .master-title strong { font-size: clamp(13px, 3.8vw, 17px); }
 
-    .master-title strong {
-
-        font-size: 15px;
-    }
-
-
-    .master-card-divider {
-
-        margin: 9px 0;
-    }
-
+    .master-card-divider { margin: clamp(5px, .8dvh, 9px) 0; }
 
     .master-card-quote {
-
-        font-size: 15px;
+        font-size: clamp(13px, 3.8vw, 17px);
+        line-height: 1.35;
     }
-
 
     .master-card-description {
-
-        font-size: 10px;
+        font-size: clamp(10px, 2.8vw, 12px);
+        line-height: 1.45;
     }
 
-
-    /* CONTACT */
-
-    .contact-list {
-
-        margin-top: 10px;
-    }
-
+    .contact-list { margin-top: clamp(4px, .7dvh, 9px); }
 
     .contact-item {
-
-        min-height: 46px;
-
-        gap: 9px;
+        min-height: clamp(32px, 5dvh, 43px);
+        gap: 8px;
     }
 
-
-    .contact-icon-box {
-
-        width: 37px;
-        height: 37px;
-    }
-
-
-    .contact-icon-image {
-
-        width: 33px;
-        height: 33px;
-    }
-
+    .contact-icon-box { width: clamp(28px, 8vw, 36px); }
 
     .contact-label {
-
-        font-size: 8px;
+        font-size: clamp(8px, 2.3vw, 10px);
+        margin-bottom: 0;
     }
-
 
     .contact-main {
-
-        font-size: 10px;
+        font-size: clamp(10px, 3vw, 13px);
+        line-height: 1.35;
     }
-
-
-    /* BUTTON */
 
     .home-button {
-
-        width: 300px;
-
-        padding:
-            12px
-            20px;
-
-        font-size: 17px;
-
-        border-radius: 13px;
+        min-height: 36px;
+        width: min(100%, 330px);
+        padding: clamp(6px, 1dvh, 10px) 14px;
+        font-size: clamp(13px, 3.8vw, 16px);
+        border-radius: 12px;
     }
 
-
-    .arrow {
-
-        font-size: 25px;
-    }
-
-
-    /* FOOTER */
+    .arrow { font-size: clamp(18px, 5vw, 23px); }
 
     .footer-text {
-
-        margin-top: 8px;
-
-        font-size: 9px;
+        margin-top: clamp(3px, .6dvh, 7px);
+        font-size: clamp(7px, 2.1vw, 9px);
+        line-height: 1.35;
+        letter-spacing: 0;
     }
 }
 
+/* VERY NARROW MOBILE */
 
-/* =========================================================
-   SMALL MOBILE
-========================================================= */
+@media (max-width: 360px) and (orientation: portrait) {
+    .intro-container { padding-left: 8px; padding-right: 8px; }
 
-@media (max-width: 420px) {
-
-    .background-yinyang {
-
-        width: 390px;
-        height: 390px;
-
-        opacity: 0.045;
-    }
-
-
-    .master-background {
-
-        width: 220px;
-
-        height: 255px;
-
-        top: -15px;
-    }
-
-
-    .tree-decoration {
-
-        transform:
-            scale(0.52)
-            rotate(-8deg);
-    }
-
-
-    .top-yinyang {
-
-        width: 43px;
-        height: 43px;
-
-        font-size: 22px;
-    }
-
-
-    .hero {
-
-        padding: 7px;
-    }
-
-
-    .brand {
-
-        margin-bottom: 7px;
-    }
-
-
-    h1 {
-
-        font-size: 23px;
-
-        gap: 4px;
-
-        margin-bottom: 11px;
-    }
-
-
-    .master-card {
-
-        width: 320px;
-
-        padding:
-            13px
-            15px;
-    }
-
-
-    .master-card-quote {
-
-        font-size: 13px;
-    }
-
-
-    .master-card-description {
-
-        font-size: 9px;
-    }
-
-
-    .contact-item {
-
-        min-height: 42px;
-
-        gap: 7px;
-    }
-
-
-    .contact-icon-box {
-
-        width: 33px;
-        height: 33px;
-    }
-
-
-    .contact-icon-image {
-
-        width: 30px;
-        height: 30px;
-    }
-
-
-    .contact-label {
-
-        font-size: 7px;
-    }
-
-
-    .contact-main {
-
-        font-size: 9px;
-    }
-
-
-    .home-button {
-
-        width: 280px;
-
-        padding:
-            11px
-            17px;
-
-        font-size: 16px;
-    }
-
-
-    .arrow {
-
-        font-size: 23px;
-    }
-
-
-    .footer-text {
-
-        font-size: 8px;
-
-        margin-top: 6px;
-    }
-}
-
-
-/* =========================================================
-   SHORT DESKTOP
-========================================================= */
-
-@media (max-height: 700px) and (min-width: 601px) {
-
-    .master-background {
-
-        height: 82vh;
-    }
-
-
-    .top-yinyang {
-
-        width: 50px;
-        height: 50px;
-
-        font-size: 27px;
-
+    .hero h1 {
+        font-size: clamp(19px, 5.8vw, 22px);
         margin-bottom: 5px;
     }
 
-
-    .brand {
-
-        margin-bottom: 7px;
-    }
-
-
-    h1 {
-
-        font-size: 37px;
-
-        margin-bottom: 12px;
-    }
-
-
-    .master-card {
-
-        padding:
-            17px
-            23px
-            15px;
-
-        margin-bottom: 12px;
-    }
-
-
-    .master-card-quote {
-
-        font-size: 17px;
-    }
-
-
-    .master-card-description {
-
-        font-size: 11px;
-    }
-
-
-    .contact-item {
-
-        min-height: 45px;
-    }
-
-
-    .contact-icon-box {
-
-        width: 40px;
-        height: 40px;
-    }
-
-
-    .contact-icon-image {
-
-        width: 36px;
-        height: 36px;
-    }
-
-
-    .contact-main {
-
-        font-size: 12px;
-    }
-
-
-    .home-button {
-
-        padding:
-            11px
-            23px;
-
-        font-size: 16px;
-    }
-
-
-    .footer-text {
-
-        margin-top: 6px;
-    }
-
-
-    .background-yinyang {
-
-        width: 600px;
-        height: 600px;
-    }
+    .master-card { padding: 8px 10px; margin-bottom: 5px; }
+    .master-title strong, .master-card-quote { font-size: 13px; }
+    .master-card-description { font-size: 10px; }
+    .contact-item { min-height: 30px; }
+    .contact-main { font-size: 10px; }
+    .brand-line { width: 14px; }
+    .footer-text { font-size: 7px; }
 }
 
+/* LANDSCAPE PHONES AND SHORT VIEWPORTS */
 
-/* =========================================================
-   VERY SHORT
-========================================================= */
+@media (max-height: 500px) and (max-width: 1000px) {
+    .intro-container {
+        display: block;
+        height: 100vh;
+        height: 100svh;
+        height: 100dvh;
+        min-height: 0;
+        padding: 5px clamp(10px, 3vw, 24px);
+        overflow: hidden;
+        overflow: clip;
+    }
 
-@media (max-height: 600px) and (min-width: 601px) {
+    .background-yinyang { width: min(55vh, 400px); }
 
     .master-background {
-
-        height: 74vh;
+        left: 0;
+        bottom: 0;
+        width: min(48vw, 380px);
+        height: 100%;
+        transform: none;
+        justify-content: center;
+        opacity: 1;
+        overflow: hidden;
     }
 
-
-    .tree-decoration {
-
-        transform:
-            scale(0.7)
-            rotate(-8deg);
-
-        transform-origin:
-            top left;
+    .master-background-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center bottom;
     }
 
+    .hero {
+        width: min(100%, 600px);
+        height: 100%;
+        max-height: 100%;
+        margin-inline: auto;
+        padding: 3px 0;
+        justify-content: center;
+        overflow: hidden;
+    }
 
     .top-yinyang {
-
-        width: 45px;
-        height: 45px;
-
-        font-size: 24px;
+        width: clamp(24px, 7vh, 34px);
+        font-size: clamp(15px, 4vh, 20px);
+        margin-bottom: 2px;
     }
 
-
-    h1 {
-
-        font-size: 30px;
-
-        margin-bottom: 8px;
+    .brand {
+        gap: clamp(4px, 1vw, 10px);
+        margin-bottom: 3px;
     }
 
+    .brand-line { width: clamp(12px, 4vw, 35px); }
+    .brand-small { font-size: clamp(8px, 2.3vh, 11px); }
+
+    .brand-text strong {
+        font-size: clamp(6px, 1.8vh, 8px);
+        letter-spacing: .5px;
+    }
+
+    .hero h1 {
+        width: 100%;
+        max-width: 100%;
+        font-size: clamp(18px, 5vh, 27px);
+        line-height: 1.15;
+        gap: 2px 5px;
+        margin-bottom: 4px;
+    }
 
     .master-card {
-
-        padding:
-            11px
-            18px;
-
-        margin-bottom: 8px;
+        width: 100%;
+        max-width: 500px;
+        padding: 5px 10px;
+        margin-bottom: 4px;
+        border-radius: 10px;
     }
 
+    .master-card-header { gap: 7px; }
+
+    .mini-yinyang {
+        width: clamp(24px, 6vh, 32px);
+        font-size: clamp(15px, 4vh, 19px);
+    }
+
+    .master-title span {
+        font-size: clamp(7px, 1.8vh, 9px);
+        letter-spacing: .5px;
+    }
+
+    .master-title strong { font-size: clamp(11px, 2.7vh, 15px); }
+
+    .master-card-divider { margin: 4px 0; }
 
     .master-card-quote {
-
-        font-size: 14px;
+        font-size: clamp(11px, 2.8vh, 15px);
+        line-height: 1.2;
+        margin-bottom: 2px;
     }
-
 
     .master-card-description {
-
-        font-size: 9px;
+        font-size: clamp(9px, 2vh, 11px);
+        line-height: 1.25;
     }
 
+    .contact-list { margin-top: 3px; }
 
     .contact-item {
-
-        min-height: 38px;
+        min-height: clamp(24px, 6vh, 32px);
+        gap: 6px;
     }
 
-
-    .contact-icon-box {
-
-        width: 32px;
-        height: 32px;
-    }
-
-
-    .contact-icon-image {
-
-        width: 29px;
-        height: 29px;
-    }
-
+    .contact-icon-box { width: clamp(22px, 5.5vh, 28px); }
 
     .contact-label {
-
-        font-size: 7px;
+        font-size: clamp(7px, 1.8vh, 9px);
+        margin-bottom: 0;
     }
-
 
     .contact-main {
-
-        font-size: 9px;
+        font-size: clamp(9px, 2.2vh, 12px);
+        line-height: 1.2;
     }
-
 
     .home-button {
-
-        padding:
-            9px
-            17px;
-
-        font-size: 14px;
+        min-height: 28px;
+        width: min(100%, 280px);
+        padding: 4px 12px;
+        gap: 8px;
+        font-size: clamp(11px, 2.7vh, 14px);
+        border-radius: 9px;
     }
 
+    .arrow { font-size: clamp(15px, 3.5vh, 20px); }
 
     .footer-text {
-
-        font-size: 7px;
-
-        margin-top: 4px;
-    }
-
-
-    .background-yinyang {
-
-        width: 500px;
-        height: 500px;
+        margin-top: 2px;
+        font-size: clamp(6px, 1.5vh, 8px);
+        line-height: 1.2;
+        letter-spacing: 0;
     }
 }
 
+/* EXTREMELY SHORT VIEWPORT */
 
-/* =========================================================
-   REDUCE MOTION
-========================================================= */
+@media (max-height: 360px) {
+    .intro-container { padding-top: 2px; padding-bottom: 2px; }
+    .hero { padding-top: 0; padding-bottom: 0; }
+    .top-yinyang { display: none; }
+    .brand { margin-bottom: 2px; }
 
-@media (prefers-reduced-motion: reduce) {
-
-    .background-yinyang,
-    .yin-yang-symbol {
-
-        animation:
-            none !important;
+    .hero h1 {
+        font-size: clamp(16px, 4.5vh, 20px);
+        margin-bottom: 2px;
     }
 
+    .master-card { padding: 3px 8px; margin-bottom: 2px; }
+    .master-card-divider { margin: 2px 0; }
+    .master-card-description { line-height: 1.15; }
+    .contact-list { margin-top: 1px; }
+    .contact-item { min-height: 20px; }
+
+    .home-button {
+        min-height: 24px;
+        padding: 2px 8px;
+    }
+
+    .footer-text { margin-top: 1px; }
+}
+
+/* =========================================================
+   FINAL MOBILE PORTRAIT OVERRIDES
+   Keep header at top, card and button raised
+   ========================================================= */
+
+@media (max-width: 600px) and (orientation: portrait) {
+    .intro-container { align-items: flex-start; }
+
+    .master-background {
+        left: 50%;
+        bottom: 0;
+        width: min(100vw, 420px);
+        height: 100%;
+        transform: translateX(-50%);
+    }
+
+    .hero {
+        position: relative;
+        align-self: flex-start;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
+        padding: 8px 0 10px;
+        gap: 8px;
+    }
+
+    .hero-header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        transform: translateY(50%);
+    }
+
+    .top-yinyang,
+    .brand,
+    .hero-header h1 {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .hero-bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
+        min-height: 0;
+        margin-top: auto;
+        gap: 8px;
+    }
+
+    .master-card {
+        width: 100%;
+        margin-top: 0;
+        transform: translateY(-75px);
+    }
+
+    .home-button {
+        position: relative;
+        z-index: 3;
+        flex-shrink: 0;
+        margin-top: 0;
+        transform: translateY(-75px);
+    }
+
+    .footer-text { margin-top: 0; margin-bottom: 0; }
+}
+
+/* DESKTOP: MASTER IMAGE ON LEFT */
+
+@media (min-width: 1001px) {
+    .master-background {
+        left: 0;
+        width: min(50vw, 680px);
+        height: 100%;
+        transform: none;
+    }
+}
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+    .background-yinyang,
+    .yin-yang-symbol {
+        animation: none !important;
+    }
 
     *,
     *::before,
     *::after {
-
-        transition-duration:
-            0.01ms !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
     }
 }

@@ -1,471 +1,289 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Noto+Serif+Thai:wght@400;500;600;700&display=swap');
 
-
 /* =========================================================
-   ENERGY FLOW
-   RESPONSIVE FIXED VIEWPORT SYSTEM
-
-   Pine       #102B1F
-   Wine       #4D0011
-   Rose       #BD7880
-   Pink       #FFD9D9
-   Ivory      #FFF9F5
-   Charcoal   #1E1E1E
-
-   IMPORTANT
-   ---------------------------------------------------------
-   Layout is based on viewport ratio rather than fixed
-   page height. The entire desktop composition fits inside
-   the visible browser viewport.
+   ENERGY FLOW — FULL RESPONSIVE CSS
+   Flexible layout for desktop, tablet and mobile
+   No fixed page-height layout
 ========================================================= */
 
-
-/* =========================================================
-   RESET
-========================================================= */
-
+/* RESET */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-
 html {
     width: 100%;
-    height: 100%;
-
-    overflow: hidden;
-
-    scroll-behavior: auto;
+    min-height: 100%;
+    overflow-x: clip;
+    scroll-behavior: smooth;
 }
-
 
 body {
     width: 100%;
-    height: 100%;
-
     min-width: 320px;
+    min-height: 100%;
+    overflow-x: clip;
 
-    overflow: hidden;
-
-    font-family:
-        'Noto Sans Thai',
-        sans-serif;
-
+    font-family: 'Noto Sans Thai', sans-serif;
     color: #1E1E1E;
-
     background: #FFF9F5;
 
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
 }
 
-
 button,
 input {
-    font-family: inherit;
+    font: inherit;
 }
-
 
 button {
     border: none;
     outline: none;
+    cursor: pointer;
 }
-
 
 button:focus-visible,
 input:focus-visible {
-    outline:
-        clamp(2px, 0.2dvh, 3px)
-        solid
-        rgba(189, 120, 128, 0.35);
-
-    outline-offset:
-        clamp(1px, 0.25dvh, 3px);
+    outline: 2px solid rgba(189, 120, 128, 0.7);
+    outline-offset: 3px;
 }
 
+img,
+svg {
+    max-width: 100%;
+}
 
-/* =========================================================
-   PAGE
-========================================================= */
-
+/* PAGE */
 .page {
     width: 100%;
-    height: 100dvh;
+    min-height: 100vh;
+    min-height: 100dvh;
 
-    min-height: 0;
-
-    display: grid;
-
-    /*
-       Browser viewport is divided proportionally:
-
-       Header   ≈ 9.8%
-       Hero     ≈ 60%
-       Services ≈ 30.2%
-    */
-
-    grid-template-rows:
-        9.9%
-        59.5%
-        30.6%;
-
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 
     background: #FFF9F5;
 }
 
-
-/* =========================================================
-   HEADER
-========================================================= */
-
+/* HEADER */
 .site-header {
     width: 100%;
-    height: 100%;
-
+    flex: 0 0 auto;
     position: relative;
     z-index: 20;
 
-    background:
-        rgba(255, 249, 245, 0.97);
-
-    border-bottom:
-        1px solid
-        rgba(16, 43, 31, 0.035);
+    background: rgba(255, 249, 245, 0.97);
+    border-bottom: 1px solid rgba(16, 43, 31, 0.08);
 
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
 }
 
-
 .header-inner {
-    width:
-        min(
-            93.75vw,
-            1440px
-        );
-
-    height: 100%;
+    width: min(93.75%, 1440px);
+    min-height: 86px;
 
     margin: 0 auto;
+    padding: 14px 0;
 
     display: flex;
-
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
 
-    gap:
-        clamp(18px, 2.8vw, 40px);
+    gap: 16px 28px;
 }
 
-
-/* =========================================================
-   BRAND
-========================================================= */
-
+/* BRAND */
 .brand {
     display: flex;
-
     align-items: center;
-
-    gap:
-        clamp(9px, 1.05vw, 15px);
-
-    flex-shrink: 0;
+    flex: 0 0 auto;
+    gap: 12px;
+    min-width: 0;
 }
-
 
 .brand-mark {
-    width:
-        clamp(35px, 3.2vw, 46px);
-
+    width: 44px;
     aspect-ratio: 1;
+    flex: 0 0 auto;
 
     position: relative;
-
     overflow: hidden;
 
-    border:
-        1px solid
-        rgba(189, 120, 128, 0.65);
-
+    border: 1px solid rgba(189, 120, 128, 0.65);
     border-radius: 50%;
-
     background: #102B1F;
 
-    box-shadow:
-        0 5px 16px
-        rgba(16, 43, 31, 0.10);
+    box-shadow: 0 5px 16px rgba(16, 43, 31, 0.10);
 }
-
 
 .brand-mark::before {
     content: "";
-
     position: absolute;
-
     width: 50%;
     height: 100%;
-
     left: 0;
     top: 0;
 
     background: #BD7880;
-
-    border-radius:
-        100% 0 0 100%;
+    border-radius: 100% 0 0 100%;
 }
-
 
 .brand-mark::after {
     content: "";
-
     position: absolute;
-
     width: 33%;
     height: 33%;
-
     left: 33%;
     top: 33%;
 
     border-radius: 50%;
-
     background: #FFF9F5;
-
-    box-shadow:
-        0 -100% 0 -33%
-        #FFF9F5;
+    box-shadow: 0 -100% 0 -33% #FFF9F5;
 }
-
 
 .brand-mark-dot {
     position: absolute;
-
-    width:
-        clamp(5px, 0.42vw, 6px);
-
-    aspect-ratio: 1;
-
     z-index: 3;
-
+    width: 6px;
+    aspect-ratio: 1;
     border-radius: 50%;
 }
-
 
 .brand-mark-dot-light {
     left: 28%;
     top: 20%;
-
     background: #102B1F;
 }
-
 
 .brand-mark-dot-dark {
     left: 61%;
     bottom: 20%;
-
     background: #BD7880;
 }
-
 
 .brand-mark-center {
     position: absolute;
-
+    z-index: 4;
     width: 100%;
     height: 1px;
-
     left: 0;
     top: 50%;
 
-    z-index: 4;
-
-    background:
-        rgba(255, 249, 245, 0.35);
-
+    background: rgba(255, 249, 245, 0.35);
     transform: rotate(-90deg);
 }
 
-
-/* =========================================================
-   BRAND TEXT
-========================================================= */
-
 .brand-content {
     display: flex;
-
     flex-direction: column;
-
     min-width: 0;
 }
 
-
 .brand-name {
     color: #102B1F;
-
-    font-size:
-        clamp(17px, 1.74vw, 25px);
-
-    line-height: 1.1;
-
+    font-size: clamp(17px, 1.74vw, 25px);
+    line-height: 1.2;
     font-weight: 800;
-
-    letter-spacing:
-        clamp(0.1px, 0.02vw, 0.3px);
+    letter-spacing: 0.2px;
 }
 
-
 .brand-subtitle {
-    margin-top:
-        clamp(2px, 0.35dvh, 5px);
-
+    margin-top: 4px;
     color: #BD7880;
 
-    font-size:
-        clamp(6.5px, 0.63vw, 9px);
-
-    line-height: 1;
-
+    font-size: clamp(7px, 0.63vw, 9px);
+    line-height: 1.4;
     font-weight: 700;
-
-    letter-spacing:
-        clamp(0.6px, 0.09vw, 1.3px);
-
+    letter-spacing: 1px;
     white-space: nowrap;
 }
 
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
+/* NAVIGATION */
 .main-nav {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 
+    gap: 8px clamp(14px, 2.5vw, 36px);
+    margin-left: auto;
+}
+
+.nav-item {
+    min-height: 40px;
+    padding: 8px 4px;
+
+    position: relative;
+    display: flex;
     align-items: center;
     justify-content: center;
 
-    gap:
-        clamp(25px, 4vw, 58px);
-
-    margin-left: auto;
-
-    margin-right:
-        clamp(15px, 3.1vw, 45px);
-
-    height: 100%;
-}
-
-
-.nav-item {
-    position: relative;
-
-    height: 100%;
-
-    padding:
-        0
-        clamp(3px, 0.2vw, 5px);
-
-    display: flex;
-
-    align-items: center;
-
     color: #1E1E1E;
-
     background: transparent;
 
-    font-size:
-        clamp(11px, 0.97vw, 14px);
-
+    font-size: clamp(12px, 0.97vw, 14px);
     font-weight: 700;
+    white-space: nowrap;
 
-    cursor: pointer;
-
-    transition:
-        color 0.2s ease;
+    transition: color 0.2s ease;
 }
-
 
 .nav-item::after {
     content: "";
-
     position: absolute;
-
     left: 50%;
-
-    bottom:
-        24%;
+    bottom: 2px;
 
     width: 0;
-
-    height:
-        clamp(1px, 0.22dvh, 2px);
+    height: 2px;
 
     background: #BD7880;
-
     border-radius: 10px;
-
     transform: translateX(-50%);
 
-    transition:
-        width 0.25s ease;
+    transition: width 0.25s ease;
 }
-
 
 .nav-item:hover {
     color: #4D0011;
 }
 
-
 .nav-item:hover::after {
-    width:
-        clamp(30px, 2.8vw, 40px);
+    width: 75%;
 }
-
 
 .nav-item.active {
     color: #102B1F;
 }
 
-
 .nav-item.active::after {
-    width:
-        clamp(34px, 3.05vw, 44px);
+    width: 75%;
 }
 
-
-/* =========================================================
-   HEADER CTA
-========================================================= */
-
+/* HEADER CTA */
 .header-cta {
-    min-width:
-        clamp(130px, 13.2vw, 190px);
+    min-height: 44px;
+    min-width: 0;
+    max-width: 100%;
+    flex: 0 0 auto;
 
-    height:
-        clamp(37px, 5.1dvh, 46px);
-
-    padding:
-        0
-        clamp(17px, 1.95vw, 28px);
-
+    padding: 10px 24px;
     border-radius: 999px;
 
     background: #4D0011;
-
     color: #FFFFFF;
 
-    font-size:
-        clamp(11px, 1.04vw, 15px);
-
+    font-size: 14px;
     font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
 
-    cursor: pointer;
-
-    box-shadow:
-        0 8px 20px
-        rgba(77, 0, 17, 0.16);
+    box-shadow: 0 8px 20px rgba(77, 0, 17, 0.16);
 
     transition:
         transform 0.25s ease,
@@ -473,371 +291,123 @@ input:focus-visible {
         box-shadow 0.25s ease;
 }
 
-
 .header-cta:hover {
     background: #620018;
-
     transform: translateY(-2px);
-
-    box-shadow:
-        0 12px 26px
-        rgba(77, 0, 17, 0.22);
+    box-shadow: 0 12px 26px rgba(77, 0, 17, 0.22);
 }
 
-.btn-login-nav {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-}
-
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.user-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.35rem 0.85rem;
-    background: #FFFFFF;
-    border: 1.5px solid rgba(77, 0, 17, 0.15);
-    border-radius: 999px;
-    box-shadow: 0 4px 12px rgba(77, 0, 17, 0.06);
-    font-size: clamp(11px, 1vw, 13px);
-}
-
-.user-avatar-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #102B1F;
-}
-
-.user-greeting {
-    font-weight: 600;
-    color: #4D0011;
-    max-width: 120px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.btn-history-nav {
-    font-size: 0.75rem;
-    font-weight: 700;
-    background: #FFF3EB;
-    color: #4D0011;
-    border: 1px solid rgba(77, 0, 17, 0.2);
-    padding: 0.2rem 0.55rem;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: all 0.2s ease;
-}
-
-.btn-history-nav:hover {
-    background: #4D0011;
-    color: #FFFFFF;
-}
-
-.btn-admin-link {
-    font-size: 0.75rem;
-    font-weight: 700;
-    background: #102B1F;
-    color: #FFFFFF;
-    padding: 0.2rem 0.5rem;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: background 0.2s ease;
-}
-
-.btn-admin-link:hover {
-    background: #194431;
-}
-
-.btn-logout {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #8C2234;
-    text-decoration: none;
-    padding: 0.2rem 0.45rem;
-    border-radius: 6px;
-    transition: background 0.2s ease;
-}
-
-.btn-logout:hover {
-    background: rgba(140, 34, 52, 0.08);
-}
-
-
-/* =========================================================
-   MAIN
-========================================================= */
-
+/* MAIN */
 .main-content {
     width: 100%;
-    height: 100%;
-
-    min-height: 0;
-
     display: contents;
 }
 
-
-/* =========================================================
-   HERO
-========================================================= */
-
+/* HERO + CALCULATOR */
 .hero-section {
     width: 100%;
-    height: 100%;
-
-    min-height: 0;
+    min-width: 0;
 
     display: grid;
-
-    grid-template-columns:
-        minmax(0, 1.08fr)
-        minmax(0, 0.92fr);
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    align-items: stretch;
 
     position: relative;
-
-    overflow: hidden;
+    overflow: visible;
 
     background: #FFF9F5;
 }
 
-
-/* =========================================================
-   HERO DECORATION
-========================================================= */
-
-.hero-section::before {
-    content: "";
-
-    position: absolute;
-
-    width:
-        min(40vw, 580px);
-
-    aspect-ratio: 1;
-
-    left:
-        -29vw;
-
-    bottom:
-        -46%;
-
-    border:
-        1px solid
-        rgba(189, 120, 128, 0.25);
-
-    border-radius: 50%;
-
-    pointer-events: none;
-}
-
-
-.hero-section::after {
-    content: "";
-
-    position: absolute;
-
-    width:
-        min(24.3vw, 350px);
-
-    aspect-ratio: 1;
-
-    left:
-        -21vw;
-
-    bottom:
-        -32%;
-
-    border:
-        clamp(25px, 3.35vw, 48px)
-        solid
-        rgba(77, 0, 17, 0.96);
-
-    border-radius: 50%;
-
-    pointer-events: none;
-}
-
-
-/* =========================================================
-   HERO CONTENT
-========================================================= */
-
+/* HERO CONTENT */
 .hero-content {
     width: 100%;
-    height: 100%;
-
     min-width: 0;
-    min-height: 0;
 
     position: relative;
-
-    z-index: 2;
-
-    padding:
-        clamp(28px, 6.8dvh, 94px)
-        clamp(25px, 3.82vw, 55px)
-        clamp(20px, 3.5dvh, 48px)
-        max(
-            3vw,
-            calc((100vw - 1440px) / 2 + 3.82vw)
-        );
+    z-index: 1;
 
     display: flex;
-
     flex-direction: column;
-
     justify-content: center;
+    align-items: flex-start;
+
+    padding: clamp(44px, 6vw, 88px) clamp(24px, 4vw, 58px);
 }
-
-
-/* =========================================================
-   HERO EYEBROW
-========================================================= */
 
 .hero-eyebrow {
     display: flex;
-
     align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
 
-    gap:
-        clamp(6px, 0.7vw, 10px);
-
-    margin-bottom:
-        clamp(12px, 2.2dvh, 24px);
+    margin-bottom: 20px;
 
     color: #BD7880;
-
-    font-size:
-        clamp(9px, 0.97vw, 14px);
-
+    font-size: clamp(10px, 0.97vw, 14px);
     font-weight: 800;
-
-    letter-spacing:
-        clamp(0.5px, 0.07vw, 1px);
+    letter-spacing: 0.8px;
 }
 
-
 .hero-eyebrow i {
-    font-style: normal;
-
     color: #BD7880;
-
+    font-style: normal;
     opacity: 0.8;
 }
 
-
-/* =========================================================
-   HERO TITLE
-========================================================= */
-
 .hero-title {
-    max-width:
-        min(700px, 100%);
-
+    max-width: 700px;
     color: #102B1F;
 
-    font-family:
-        'Noto Sans Thai',
-        sans-serif;
-
-    font-size:
-        clamp(
-            34px,
-            4.3vw,
-            68px
-        );
-
+    font-family: 'Noto Sans Thai', sans-serif;
+    font-size: clamp(34px, 4.3vw, 68px);
     font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.5px;
 
-    line-height: 1.22;
-
-    letter-spacing:
-        clamp(-1.8px, -0.12vw, -0.5px);
+    overflow-wrap: anywhere;
 }
-
 
 .hero-title span,
 .hero-title strong {
     display: block;
 }
 
-
 .hero-title strong {
     color: #4D0011;
-
     font-weight: 700;
 }
 
-
-/* =========================================================
-   HERO DESCRIPTION
-========================================================= */
-
 .hero-description {
-    max-width:
-        min(570px, 100%);
-
-    margin-top:
-        clamp(10px, 2.2dvh, 20px);
+    max-width: 570px;
+    margin-top: 18px;
 
     color: #1E1E1E;
-
-    font-size:
-        clamp(12px, 1.25vw, 18px);
-
-    line-height: 1.75;
-
+    font-size: clamp(13px, 1.25vw, 18px);
+    line-height: 1.85;
     font-weight: 400;
-
     opacity: 0.9;
 }
 
-
-/* =========================================================
-   HERO ACTIONS
-========================================================= */
-
 .hero-actions {
     display: flex;
-
     align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
 
-    gap:
-        clamp(9px, 1.25vw, 18px);
-
-    margin-top:
-        clamp(14px, 3dvh, 27px);
+    margin-top: 26px;
 }
 
-
 .btn {
-    min-width:
-        clamp(165px, 15.3vw, 220px);
+    min-height: 48px;
+    min-width: 0;
 
-    height:
-        clamp(42px, 6.2dvh, 56px);
-
-    padding:
-        0
-        clamp(17px, 1.95vw, 28px);
-
+    padding: 12px 24px;
     border-radius: 999px;
 
-    font-size:
-        clamp(12px, 1.11vw, 16px);
-
+    font-size: clamp(12px, 1.11vw, 16px);
     font-weight: 700;
-
-    cursor: pointer;
+    line-height: 1.5;
+    text-align: center;
 
     transition:
         transform 0.25s ease,
@@ -845,357 +415,204 @@ input:focus-visible {
         background-color 0.25s ease;
 }
 
-
 .btn-primary {
     background: #4D0011;
-
     color: #FFFFFF;
 
-    box-shadow:
-        0 9px 22px
-        rgba(77, 0, 17, 0.17);
+    box-shadow: 0 9px 22px rgba(77, 0, 17, 0.17);
 }
-
 
 .btn-primary:hover {
     background: #620018;
-
     transform: translateY(-2px);
-
-    box-shadow:
-        0 13px 28px
-        rgba(77, 0, 17, 0.23);
+    box-shadow: 0 13px 28px rgba(77, 0, 17, 0.23);
 }
-
 
 .btn-secondary {
     background: transparent;
-
     color: #102B1F;
-
-    border:
-        clamp(1px, 0.1vw, 1.5px)
-        solid
-        #102B1F;
+    border: 1px solid #102B1F;
 }
-
 
 .btn-secondary:hover {
-    background:
-        rgba(16, 43, 31, 0.04);
-
+    background: rgba(16, 43, 31, 0.04);
     transform: translateY(-2px);
-
-    box-shadow:
-        0 8px 18px
-        rgba(16, 43, 31, 0.08);
+    box-shadow: 0 8px 18px rgba(16, 43, 31, 0.08);
 }
-
-
-/* =========================================================
-   HERO FEATURES
-========================================================= */
 
 .hero-features {
     display: flex;
-
     align-items: center;
-
     flex-wrap: wrap;
+    gap: 14px 28px;
 
-    gap:
-        clamp(18px, 2.65vw, 38px);
-
-    margin-top:
-        clamp(14px, 3.1dvh, 28px);
+    margin-top: 26px;
 }
-
 
 .hero-feature {
     display: flex;
-
     align-items: center;
-
-    gap:
-        clamp(7px, 0.7vw, 10px);
+    gap: 9px;
 
     color: #102B1F;
-
-    font-size:
-        clamp(11px, 0.97vw, 14px);
-
+    font-size: clamp(11px, 0.97vw, 14px);
     font-weight: 600;
 }
 
-
 .feature-dot {
-    width:
-        clamp(9px, 0.83vw, 12px);
-
-    height:
-        clamp(9px, 0.83vw, 12px);
-
+    width: 11px;
+    height: 11px;
     flex: 0 0 auto;
 
     border-radius: 50%;
-
     background: #BD7880;
-
-    box-shadow:
-        0 0 0
-        clamp(2px, 0.28vw, 4px)
-        rgba(189, 120, 128, 0.10);
+    box-shadow: 0 0 0 4px rgba(189, 120, 128, 0.10);
 }
 
-
-/* =========================================================
-   CALCULATOR AREA
-========================================================= */
-
+/* CALCULATOR AREA */
 .calculator-area {
     width: 100%;
-    height: 100%;
-
     min-width: 0;
-    min-height: 0;
 
     position: relative;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
-    padding:
-        clamp(15px, 3.8dvh, 35px)
-        clamp(18px, 3.82vw, 55px);
+    padding: clamp(32px, 4vw, 58px) clamp(20px, 3.8vw, 55px);
 
-    overflow: hidden;
+    overflow: visible;
 
-    background:
-        linear-gradient(
-            135deg,
-            #FFD9D9 0%,
-            #FFE5E5 48%,
-            #FFD2D2 100%
-        );
+    background: linear-gradient(
+        135deg,
+        #FFD9D9 0%,
+        #FFE5E5 48%,
+        #FFD2D2 100%
+    );
 }
-
 
 .calculator-area::before {
     content: "";
-
     position: absolute;
 
-    width:
-        min(25.7vw, 370px);
-
+    width: min(25.7vw, 370px);
     aspect-ratio: 1;
-
-    right:
-        -15.3vw;
-
-    top:
-        -28%;
+    right: -15.3vw;
+    top: -28%;
 
     border-radius: 50%;
-
-    background:
-        rgba(189, 120, 128, 0.13);
-
+    background: rgba(189, 120, 128, 0.13);
     pointer-events: none;
 }
-
 
 .calculator-area::after {
     content: "";
-
     position: absolute;
 
-    width:
-        min(34.7vw, 500px);
-
+    width: min(34.7vw, 500px);
     aspect-ratio: 1;
+    left: -30.5vw;
+    bottom: -55%;
 
-    left:
-        -30.5vw;
-
-    bottom:
-        -55%;
-
-    border:
-        1px solid
-        rgba(77, 0, 17, 0.10);
-
+    border: 1px solid rgba(77, 0, 17, 0.10);
     border-radius: 50%;
-
     pointer-events: none;
 }
 
-
-/* =========================================================
-   CALCULATOR CARD
-
-   Keep the card within the hero and scroll when space is limited.
-========================================================= */
-
+/* CALCULATOR CARD */
 .calculator-card {
-    width:
-        min(100%, 610px);
-
-    max-height: 100%;
-    overflow-y: auto;
-    scrollbar-width: none;
+    width: 100%;
+    max-width: 610px;
+    min-width: 0;
 
     position: relative;
-
     z-index: 2;
 
-    padding:
-        clamp(13px, 2.2dvh, 20px)
-        clamp(25px, 3.34vw, 48px)
-        clamp(10px, 1.6dvh, 15px);
+    padding: clamp(22px, 3vw, 34px) clamp(18px, 3.3vw, 40px);
 
-    border:
-        1px solid
-        rgba(189, 120, 128, 0.25);
+    border: 1px solid rgba(189, 120, 128, 0.25);
+    border-radius: 22px;
 
-    border-radius:
-        clamp(16px, 1.6vw, 23px);
-
-    background:
-        rgba(255, 249, 245, 0.96);
+    background: rgba(255, 249, 245, 0.97);
 
     box-shadow:
-        0 24px 55px
-        rgba(77, 0, 17, 0.12),
-
-        0 7px 18px
-        rgba(16, 43, 31, 0.05),
-
-        inset 0 1px 0
-        rgba(255, 255, 255, 0.95);
+        0 24px 55px rgba(77, 0, 17, 0.12),
+        0 7px 18px rgba(16, 43, 31, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
 
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
 }
 
-
-.calculator-card::-webkit-scrollbar {
-    display: none;
-}
-
-
 .calculator-card::before {
     content: "";
-
     position: absolute;
 
-    width:
-        clamp(55px, 5.2vw, 75px);
-
-    height:
-        clamp(2px, 0.35dvh, 3px);
-
+    width: 70px;
+    height: 3px;
     top: 0;
-
     left: 50%;
 
-    border-radius:
-        0 0 5px 5px;
-
+    border-radius: 0 0 5px 5px;
     background: #4D0011;
-
     transform: translateX(-50%);
 }
 
-
-/* =========================================================
-   CALCULATOR HEADER
-========================================================= */
-
+/* CALCULATOR HEADER */
 .calculator-header {
     width: 100%;
-
-    margin-bottom:
-        clamp(7px, 1.2dvh, 11px);
+    margin-bottom: 18px;
 }
-
 
 .calculator-kicker {
     display: block;
-
-    margin-bottom:
-        clamp(2px, 0.45dvh, 4px);
+    margin-bottom: 5px;
 
     color: #BD7880;
-
-    font-size:
-        clamp(8px, 0.7vw, 10px);
-
+    font-size: 10px;
     font-weight: 800;
-
-    letter-spacing:
-        clamp(1.3px, 0.14vw, 2px);
+    letter-spacing: 1.5px;
 }
-
 
 .calculator-header h2 {
     color: #102B1F;
-
-    font-size:
-        clamp(20px, 1.74vw, 25px);
-
+    font-size: clamp(21px, 1.74vw, 25px);
     font-weight: 800;
-
-    line-height: 1.35;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
 }
 
-
 .calculator-header p {
-    margin-top:
-        clamp(1px, 0.25dvh, 2px);
+    margin-top: 4px;
 
     color: #1E1E1E;
-
-    font-size:
-        clamp(9px, 0.83vw, 12px);
-
-    line-height: 1.5;
-
+    font-size: 12px;
+    line-height: 1.7;
     opacity: 0.7;
 }
 
-
-/* =========================================================
-   FORM
-========================================================= */
-
+/* FORM */
 .destiny-form {
     width: 100%;
+    min-width: 0;
 }
-
 
 .form-row {
     width: 100%;
+    min-width: 0;
 
     display: grid;
-
     align-items: end;
+    gap: 14px;
 }
-
 
 .form-row-name-gender {
     grid-template-columns:
-        minmax(0, 1.2fr)
-        minmax(0, 1.2fr)
-        clamp(150px, 13.2vw, 190px);
-
-    gap:
-        clamp(13px, 1.53vw, 22px);
+        minmax(0, 1fr)
+        minmax(0, 1fr)
+        minmax(125px, 1fr);
 }
-
-
 
 .form-row-birth {
     grid-template-columns:
@@ -1203,77 +620,45 @@ input:focus-visible {
         minmax(0, 0.85fr)
         auto;
 
-    gap:
-        clamp(11px, 1.18vw, 17px);
-
-    margin-top:
-        clamp(9px, 1.65dvh, 15px);
+    margin-top: 15px;
 }
-
-
-/* =========================================================
-   FORM FIELD
-========================================================= */
 
 .form-field {
     min-width: 0;
 }
 
-
 .form-field label {
     display: block;
-
-    margin-bottom:
-        clamp(3px, 0.55dvh, 5px);
+    margin-bottom: 5px;
 
     color: #102B1F;
-
-    font-size:
-        clamp(10px, 0.83vw, 12px);
-
+    font-size: 12px;
     font-weight: 700;
+    line-height: 1.5;
 }
 
-
-/* =========================================================
-   INPUT BOX
-========================================================= */
-
+/* INPUTS */
 .input-box {
     width: 100%;
-
-    height:
-        clamp(38px, 5.1dvh, 46px);
-
+    min-width: 0;
+    height: 44px;
     position: relative;
 }
 
-
 .input-box input {
     width: 100%;
+    min-width: 0;
     height: 100%;
 
-    padding:
-        0
-        clamp(34px, 2.98vw, 43px)
-        0
-        clamp(11px, 0.97vw, 14px);
+    padding: 0 38px 0 12px;
 
-    border:
-        1px solid
-        rgba(16, 43, 31, 0.20);
+    border: 1px solid rgba(16, 43, 31, 0.20);
+    border-radius: 8px;
 
-    border-radius:
-        clamp(7px, 0.63vw, 9px);
-
-    background:
-        rgba(255, 255, 255, 0.56);
-
+    background: rgba(255, 255, 255, 0.65);
     color: #1E1E1E;
 
-    font-size:
-        clamp(11px, 0.9vw, 13px);
-
+    font-size: 13px;
     font-weight: 400;
 
     outline: none;
@@ -1284,355 +669,217 @@ input:focus-visible {
         box-shadow 0.2s ease;
 }
 
-
 .input-box input::placeholder {
     color: #8F8B88;
-
     opacity: 0.85;
 }
 
-
 .input-box input:hover {
-    border-color:
-        rgba(189, 120, 128, 0.6);
+    border-color: rgba(189, 120, 128, 0.6);
 }
-
 
 .input-box input:focus {
     background: #FFFFFF;
-
     border-color: #BD7880;
-
-    box-shadow:
-        0 0 0
-        clamp(2px, 0.2vw, 3px)
-        rgba(189, 120, 128, 0.11);
+    box-shadow: 0 0 0 3px rgba(189, 120, 128, 0.11);
 }
 
-
-/* =========================================================
-   INPUT ICON
-========================================================= */
-
 .input-icon {
-    width:
-        clamp(15px, 1.32vw, 19px);
-
-    height:
-        clamp(15px, 1.32vw, 19px);
+    width: 18px;
+    height: 18px;
 
     position: absolute;
-
-    right:
-        clamp(9px, 0.9vw, 13px);
-
+    right: 11px;
     top: 50%;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
     color: #1E1E1E;
-
     transform: translateY(-50%);
-
     pointer-events: none;
-
     opacity: 0.85;
 }
-
 
 .input-icon svg {
     width: 100%;
     height: 100%;
 
     fill: none;
-
     stroke: currentColor;
-
     stroke-width: 1.6;
-
     stroke-linecap: round;
     stroke-linejoin: round;
 }
 
-
-/* =========================================================
-   DATE / TIME
-========================================================= */
-
 .input-box input[type="date"],
 .input-box input[type="time"] {
-    padding-right:
-        clamp(32px, 2.8vw, 40px);
-
+    padding-right: 34px;
     cursor: pointer;
 }
-
 
 .input-box input[type="date"]::-webkit-calendar-picker-indicator,
 .input-box input[type="time"]::-webkit-calendar-picker-indicator {
     position: absolute;
+    right: 8px;
 
-    right:
-        clamp(8px, 0.76vw, 11px);
-
-    width:
-        clamp(16px, 1.4vw, 20px);
-
-    height:
-        clamp(16px, 1.4vw, 20px);
+    width: 18px;
+    height: 18px;
 
     opacity: 0;
-
     cursor: pointer;
 }
 
-
-/* =========================================================
-   GENDER
-========================================================= */
-
+/* GENDER */
 .gender-toggle {
     width: 100%;
-
-    height:
-        clamp(38px, 5.1dvh, 46px);
+    min-width: 0;
+    height: 44px;
 
     display: grid;
-
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 
     overflow: hidden;
 
-    border:
-        1px solid
-        rgba(16, 43, 31, 0.20);
-
-    border-radius:
-        clamp(7px, 0.63vw, 9px);
-
-    background:
-        rgba(255, 255, 255, 0.56);
+    border: 1px solid rgba(16, 43, 31, 0.20);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.65);
 }
 
-
 .gender-option {
+    min-width: 0;
     position: relative;
-
     cursor: pointer;
 }
 
-
 .gender-option input {
     position: absolute;
-
     width: 1px;
     height: 1px;
-
     opacity: 0;
 }
-
 
 .gender-option span {
     width: 100%;
     height: 100%;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
     color: #1E1E1E;
-
-    font-size:
-        clamp(11px, 0.9vw, 13px);
-
+    font-size: 13px;
     font-weight: 600;
+    white-space: nowrap;
 
-    transition:
-        background-color 0.2s ease,
-        color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
-
 
 .gender-option + .gender-option span {
-    border-left:
-        1px solid
-        rgba(16, 43, 31, 0.15);
+    border-left: 1px solid rgba(16, 43, 31, 0.15);
 }
-
 
 .gender-option input:checked + span {
     color: #FFFFFF;
-
     background: #4D0011;
 }
 
-
 .gender-option:hover span {
-    background:
-        rgba(189, 120, 128, 0.10);
+    background: rgba(189, 120, 128, 0.10);
 }
-
 
 .gender-option input:checked:hover + span {
     background: #620018;
 }
 
-
-/* =========================================================
-   UNKNOWN TIME
-========================================================= */
-
+/* UNKNOWN TIME */
 .unknown-time {
-    height:
-        clamp(38px, 5.1dvh, 46px);
+    min-width: 0;
+    min-height: 44px;
 
     display: flex;
-
     align-items: center;
-
-    gap:
-        clamp(5px, 0.48vw, 7px);
-
-    padding-bottom: 1px;
+    gap: 7px;
 
     color: #1E1E1E;
-
-    font-size:
-        clamp(9px, 0.76vw, 11px);
-
-    white-space: nowrap;
+    font-size: 11px;
+    line-height: 1.5;
 
     cursor: pointer;
 }
 
-
 .unknown-time input {
     position: absolute;
-
     opacity: 0;
-
     pointer-events: none;
 }
 
-
 .checkmark {
-    width:
-        clamp(14px, 1.18vw, 17px);
-
-    height:
-        clamp(14px, 1.18vw, 17px);
-
+    width: 17px;
+    height: 17px;
     flex: 0 0 auto;
 
     position: relative;
 
-    border:
-        1.5px solid
-        rgba(16, 43, 31, 0.45);
-
-    border-radius:
-        clamp(3px, 0.28vw, 4px);
-
+    border: 1.5px solid rgba(16, 43, 31, 0.45);
+    border-radius: 4px;
     background: #FFFFFF;
 
-    transition:
-        background-color 0.2s ease,
-        border-color 0.2s ease;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
-
 
 .unknown-time input:checked + .checkmark {
     background: #4D0011;
-
     border-color: #4D0011;
 }
 
-
 .unknown-time input:checked + .checkmark::after {
     content: "";
-
     position: absolute;
 
-    width:
-        clamp(6px, 0.55vw, 8px);
+    width: 8px;
+    height: 4px;
+    left: 3px;
+    top: 4px;
 
-    height:
-        clamp(3px, 0.28vw, 4px);
-
-    left:
-        clamp(3px, 0.28vw, 4px);
-
-    top:
-        clamp(3px, 0.28vw, 4px);
-
-    border-left:
-        2px solid #FFFFFF;
-
-    border-bottom:
-        2px solid #FFFFFF;
-
+    border-left: 2px solid #FFFFFF;
+    border-bottom: 2px solid #FFFFFF;
     transform: rotate(-45deg);
 }
 
-
-/* =========================================================
-   LOCATION
-========================================================= */
-
+/* LOCATION */
 .location-field {
-    margin-top:
-        clamp(8px, 1.55dvh, 14px);
+    margin-top: 14px;
 }
-
 
 .location-field .input-box {
-    height:
-        clamp(38px, 5.1dvh, 46px);
+    height: 44px;
 }
 
-
-/* =========================================================
-   CALCULATE BUTTON
-========================================================= */
-
+/* CALCULATE BUTTON */
 .calculate-btn {
     width: 100%;
-
-    height:
-        clamp(38px, 5dvh, 45px);
+    min-height: 46px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
+    gap: 12px;
 
-    gap:
-        clamp(8px, 0.83vw, 12px);
+    margin-top: 16px;
+    padding: 12px 18px;
 
-    margin-top:
-        clamp(9px, 1.65dvh, 15px);
-
-    border-radius:
-        clamp(6px, 0.56vw, 8px);
-
+    border-radius: 8px;
     background: #4D0011;
-
     color: #FFFFFF;
 
-    font-size:
-        clamp(12px, 1.11vw, 16px);
-
+    font-size: 15px;
     font-weight: 800;
+    line-height: 1.5;
+    text-align: center;
 
-    cursor: pointer;
-
-    box-shadow:
-        0 8px 20px
-        rgba(77, 0, 17, 0.18);
+    box-shadow: 0 8px 20px rgba(77, 0, 17, 0.18);
 
     transition:
         transform 0.2s ease,
@@ -1640,756 +887,927 @@ input:focus-visible {
         box-shadow 0.2s ease;
 }
 
-
 .calculate-btn:hover {
     background: #620018;
-
     transform: translateY(-2px);
-
-    box-shadow:
-        0 12px 25px
-        rgba(77, 0, 17, 0.25);
+    box-shadow: 0 12px 25px rgba(77, 0, 17, 0.25);
 }
-
 
 .calculate-btn:active {
     transform: translateY(0);
 }
 
-
 .calculate-arrow {
-    font-size:
-        clamp(16px, 1.39vw, 20px);
-
+    font-size: 20px;
     line-height: 1;
-
-    transition:
-        transform 0.2s ease;
+    transition: transform 0.2s ease;
 }
-
 
 .calculate-btn:hover .calculate-arrow {
     transform: translateX(4px);
 }
 
-
-/* =========================================================
-   PRIVACY
-========================================================= */
-
+/* PRIVACY */
 .privacy-note {
     display: flex;
-
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
 
-    gap:
-        clamp(5px, 0.48vw, 7px);
-
-    margin-top:
-        clamp(5px, 0.9dvh, 8px);
+    margin-top: 9px;
 
     color: #1E1E1E;
-
-    font-size:
-        clamp(8px, 0.7vw, 10px);
-
-    opacity: 0.58;
+    font-size: 10px;
+    line-height: 1.6;
+    text-align: center;
+    opacity: 0.65;
 }
 
-
 .privacy-note svg {
-    width:
-        clamp(11px, 0.97vw, 14px);
-
-    height:
-        clamp(11px, 0.97vw, 14px);
-
-    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    flex: 0 0 auto;
 
     fill: none;
-
     stroke: currentColor;
-
     stroke-width: 1.7;
-
     stroke-linecap: round;
     stroke-linejoin: round;
 }
 
-
-/* =========================================================
-   SERVICES
-========================================================= */
-
+/* SERVICES */
 .services-section {
     width: 100%;
-    height: 100%;
-
-    min-height: 0;
-
-    display: grid;
-
-    grid-template-columns:
-        clamp(230px, 20.8vw, 300px)
-        minmax(0, 1fr);
-
-    gap:
-        clamp(25px, 3.82vw, 55px);
-
-    padding:
-        clamp(17px, 3.45dvh, 31px)
-        max(
-            3vw,
-            calc((100vw - 1440px) / 2 + 3.82vw)
-        );
-
-    background: #102B1F;
-
-    color: #FFFFFF;
-
-    overflow: hidden;
-}
-
-
-/* =========================================================
-   SERVICES INTRO
-========================================================= */
-
-.services-intro {
     min-width: 0;
 
-    padding-top:
-        clamp(1px, 0.35dvh, 3px);
+    display: grid;
+    grid-template-columns: minmax(220px, 0.75fr) minmax(0, 2.25fr);
+    align-items: stretch;
+
+    gap: clamp(24px, 3.8vw, 55px);
+    padding: clamp(30px, 4vw, 52px) max(4vw, calc((100vw - 1440px) / 2 + 3.8vw));
+
+    background: #102B1F;
+    color: #FFFFFF;
+    overflow: visible;
 }
 
+/* SERVICES INTRO */
+.services-intro {
+    min-width: 0;
+    padding-top: 4px;
+}
 
 .services-kicker {
     display: block;
-
-    margin-bottom:
-        clamp(4px, 0.8dvh, 7px);
+    margin-bottom: 8px;
 
     color: #BD7880;
-
-    font-size:
-        clamp(9px, 0.76vw, 11px);
-
+    font-size: 11px;
     font-weight: 800;
-
-    letter-spacing:
-        clamp(1px, 0.125vw, 1.8px);
+    letter-spacing: 1.5px;
 }
-
 
 .services-intro h2 {
     color: #FFF9F5;
-
-    font-size:
-        clamp(17px, 1.6vw, 23px);
-
-    line-height: 1.55;
-
+    font-size: clamp(20px, 1.6vw, 26px);
+    line-height: 1.6;
     font-weight: 700;
+    overflow-wrap: anywhere;
 }
-
 
 .services-intro p {
-    margin-top:
-        clamp(10px, 2dvh, 18px);
+    margin-top: 16px;
 
     color: #BD7880;
-
-    font-size:
-        clamp(9px, 0.76vw, 11px);
-
+    font-size: 11px;
+    line-height: 1.7;
     font-weight: 800;
-
-    letter-spacing:
-        clamp(0.9px, 0.105vw, 1.5px);
+    letter-spacing: 1.2px;
 }
 
-
-/* =========================================================
-   SERVICE LIST
-========================================================= */
-
+/* SERVICE LIST */
 .service-list {
+    width: 100%;
     min-width: 0;
-    min-height: 0;
 
     display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
 
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap:
-        clamp(11px, 1.53vw, 22px);
+    gap: clamp(12px, 1.5vw, 22px);
 }
 
-
-/* =========================================================
-   SERVICE CARD
-========================================================= */
-
+/* SERVICE CARD */
 .service-card {
+    width: 100%;
     min-width: 0;
-    min-height: 0;
-
-    height: 100%;
+    min-height: 220px;
 
     position: relative;
 
     display: flex;
-
     flex-direction: column;
+    align-items: flex-start;
 
-    padding:
-        clamp(16px, 2.65dvh, 24px)
-        clamp(17px, 1.67vw, 24px)
-        clamp(15px, 2.2dvh, 20px);
+    padding: clamp(20px, 2vw, 28px);
 
-    overflow: hidden;
-
-    border:
-        1px solid
-        rgba(189, 120, 128, 0.15);
-
-    border-radius:
-        clamp(15px, 1.53vw, 22px);
+    border: 1px solid rgba(189, 120, 128, 0.15);
+    border-radius: 20px;
 
     background: #FFF9F5;
-
     color: #1E1E1E;
 
-    box-shadow:
-        0 8px 20px
-        rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-
 
 .service-card:hover {
     transform: translateY(-4px);
-
-    box-shadow:
-        0 14px 30px
-        rgba(0, 0, 0, 0.13);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.13);
 }
 
-
-/* =========================================================
-   SERVICE NUMBER
-========================================================= */
-
 .service-number {
-    width:
-        clamp(33px, 2.85vw, 41px);
-
-    height:
-        clamp(33px, 2.85vw, 41px);
-
-    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 auto;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
-    margin-bottom:
-        clamp(6px, 1.1dvh, 10px);
+    margin-bottom: 12px;
 
     border-radius: 50%;
-
     background: #FFD9D9;
-
     color: #4D0011;
 
-    font-size:
-        clamp(11px, 0.9vw, 13px);
-
+    font-size: 13px;
     font-weight: 800;
 }
 
-
 .service-card:nth-child(2) .service-number {
-    background:
-        rgba(189, 120, 128, 0.28);
+    background: rgba(189, 120, 128, 0.28);
 }
-
 
 .service-card:nth-child(3) .service-number {
     background: #FFD9D9;
 }
 
-
-/* =========================================================
-   SERVICE TITLE
-========================================================= */
-
 .service-card h3 {
     color: #102B1F;
 
-    font-family:
-        'Noto Serif Thai',
-        serif;
-
-    font-size:
-        clamp(15px, 1.25vw, 18px);
-
+    font-family: 'Noto Serif Thai', serif;
+    font-size: clamp(16px, 1.25vw, 19px);
     font-weight: 700;
+    line-height: 1.6;
 
-    line-height: 1.4;
+    overflow-wrap: anywhere;
 }
 
-
-/* =========================================================
-   SERVICE DESCRIPTION
-========================================================= */
-
 .service-card p {
-    max-width: 230px;
-
-    margin-top:
-        clamp(6px, 1.1dvh, 10px);
+    max-width: 100%;
+    margin-top: 10px;
 
     color: #1E1E1E;
-
-    font-size:
-        clamp(11px, 0.9vw, 13px);
-
-    line-height: 1.7;
-
+    font-size: 13px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
     opacity: 0.86;
 }
 
-
-/* =========================================================
-   SERVICE LINE
-========================================================= */
-
 .service-line {
-    width:
-        calc(100% - clamp(34px, 3.34vw, 48px));
-
-    height:
-        clamp(1px, 0.22dvh, 2px);
+    width: calc(100% - 48px);
+    height: 2px;
 
     position: absolute;
-
-    left:
-        clamp(17px, 1.67vw, 24px);
-
-    bottom:
-        clamp(15px, 2.55dvh, 23px);
+    left: 24px;
+    bottom: 18px;
 
     background: #FFD9D9;
-
     border-radius: 999px;
 }
-
 
 .service-card:nth-child(2) .service-line {
     background: #BD7880;
 }
 
-
 .service-card:nth-child(3) .service-line {
     background: #FFD9D9;
 }
 
-
-/* =========================================================
-   MEDIUM DESKTOP
-========================================================= */
-
-@media (max-width: 1100px) {
-
-    .main-nav {
-        gap: 22px;
-
-        margin-right: 10px;
-    }
-
-
-    .header-cta {
-        min-width: 140px;
-    }
-
-
-    .hero-section {
-        grid-template-columns:
-            minmax(0, 1fr)
-            minmax(420px, 0.9fr);
-    }
-
-
-    .services-section {
-        grid-template-columns:
-            250px
-            minmax(0, 1fr);
-
-        gap: 28px;
-    }
-}
-
-
-/* =========================================================
-   TABLET / NARROW DESKTOP
-========================================================= */
-
-@media (max-width: 850px) {
-
-    /*
-       Keep page fixed but change composition to a vertical
-       layout so content remains visible without scrolling.
-    */
-
-    .page {
-        grid-template-rows:
-            10%
-            62%
-            28%;
-    }
-
-
-    .main-nav {
-        display: none;
-    }
-
-
-    .hero-section {
-        grid-template-columns:
-            1fr
-            1fr;
-    }
-
-
-    .hero-content {
-        padding-left: 5vw;
-    }
-
-
-    .hero-actions {
-        flex-wrap: wrap;
-    }
-
-
-    .btn {
-        min-width: 0;
-    }
-
-
-    .form-row-name-gender {
-        grid-template-columns:
-            1fr;
-    }
-
-
-    .form-row-birth {
-        grid-template-columns:
-            1fr 1fr;
-    }
-
-
-    .unknown-time {
-        grid-column: 1 / -1;
-        height: auto;
-
-        margin-top: 1dvh;
-    }
-
-
-    .services-section {
-        grid-template-columns:
-            220px
-            minmax(0, 1fr);
-
-        gap: 20px;
-
-        padding-left: 4vw;
-        padding-right: 4vw;
-    }
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 650px) {
-
-    .page {
-        grid-template-rows:
-            9%
-            67%
-            24%;
-    }
-
-
-    .header-inner {
-        width: calc(100% - 28px);
-    }
-
-
-    .header-cta {
-        min-width: auto;
-
-        padding:
-            0
-            16px;
-    }
-
-
-    .brand-subtitle {
-        display: none;
-    }
-
-
-    .hero-section {
-        grid-template-columns: 1fr;
-
-        overflow-y: hidden;
-    }
-
-
-    .hero-content {
-        height: 52%;
-
-        min-height: 0;
-
-        padding:
-            4dvh
-            5vw
-            2dvh;
-    }
-
-
-    .calculator-area {
-        height: 48%;
-
-        min-height: 0;
-
-        padding:
-            2dvh
-            4vw;
-    }
-
-
-    .calculator-card {
-        width: 100%;
-        max-height: 100%;
-
-        padding:
-            2dvh
-            4vw
-            1.5dvh;
-    }
-
-
-    .hero-title {
-        font-size:
-            clamp(30px, 8vw, 48px);
-    }
-
-
-    .hero-description {
-        font-size:
-            clamp(11px, 3.2vw, 15px);
-    }
-
-
-    .hero-actions {
-        width: 100%;
-
-        flex-direction: column;
-
-        gap: 8px;
-    }
-
-
-    .btn {
-        width: 100%;
-
-        height: 44px;
-    }
-
-
-    .hero-features {
-        gap: 10px 18px;
-    }
-
-
-    .services-section {
-        grid-template-columns: 1fr;
-
-        overflow: hidden;
-
-        padding:
-            2dvh
-            4vw;
-    }
-
-
-    .services-intro {
-        display: none;
-    }
-
-
-    .service-list {
-        height: 100%;
-
-        grid-template-columns:
-            repeat(3, minmax(0, 1fr));
-
-        gap: 10px;
-    }
-
-
-    .service-card {
-        padding:
-            13px;
-    }
-
-
-    .service-card p {
-        font-size: 10px;
-    }
-
-
-    .service-line {
-        left: 13px;
-
-        width:
-            calc(100% - 26px);
-
-        bottom: 13px;
-    }
-}
-
-
-/* =========================================================
-   VERY SMALL MOBILE
-========================================================= */
-
-@media (max-width: 480px) {
-
-    .service-list {
-        grid-template-columns: 1fr;
-    }
-
-
-    .service-card:nth-child(n + 2) {
-        display: none;
-    }
-
-
-    .calculator-card {
-        padding-left: 4vw;
-        padding-right: 4vw;
-    }
-
-
-    .form-row-birth {
-        grid-template-columns: 1fr;
-    }
-
-
-    .unknown-time {
-        grid-column: auto;
-    }
-}
-
-
-/* =========================================================
-   REDUCE MOTION
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        transition-duration: 0.01ms !important;
-
-        animation-duration: 0.01ms !important;
-
-        animation-iteration-count: 1 !important;
-    }
-}
-
-/* =========================================================
-   DISABLED BUTTON
-========================================================= */
-
+/* DISABLED BUTTON */
 .btn-disabled {
     background: #E9E5E3 !important;
-
     color: #A8A2A0 !important;
-
     border-color: #DDD7D4 !important;
 
     cursor: not-allowed !important;
-
     box-shadow: none !important;
-
     transform: none !important;
-
     pointer-events: none;
-
     opacity: 0.7;
 }
 
-
-/* =========================================================
-   DISABLED NAV ITEM
-========================================================= */
-
+/* DISABLED NAV ITEM */
 .nav-item.btn-disabled {
     background: transparent !important;
-
     color: #AAA4A1 !important;
-
     border-color: transparent !important;
-
     opacity: 0.65;
 }
-
 
 .nav-item.btn-disabled::after {
     display: none;
 }
 
+/* =========================================================
+   MEDIUM SCREENS
+========================================================= */
 
+@media (max-width: 1100px) {
+    .header-inner {
+        gap: 14px 20px;
+    }
 
+    .main-nav {
+        gap: 8px 18px;
+    }
+
+    .header-cta {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .hero-section {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+    }
+
+    .hero-content {
+        padding: 44px 28px;
+    }
+
+    .calculator-area {
+        padding: 36px 24px;
+    }
+
+    .calculator-card {
+        padding: 28px 24px;
+    }
+
+    .form-row {
+        gap: 12px;
+    }
+
+    .form-row-name-gender {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .form-row-name-gender .form-field:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .services-section {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+        padding: 36px 5%;
+    }
+
+    .services-intro {
+        max-width: 700px;
+    }
+}
+
+/* TABLETS AND NARROW WINDOWS */
+@media (max-width: 900px) {
+    .header-inner {
+        width: calc(100% - 40px);
+        justify-content: center;
+        gap: 12px 20px;
+    }
+
+    .brand {
+        margin-right: auto;
+    }
+
+    .header-cta {
+        margin-left: auto;
+    }
+
+    .main-nav {
+        order: 3;
+        width: 100%;
+        margin: 0;
+
+        justify-content: center;
+        gap: 4px clamp(12px, 3vw, 26px);
+    }
+
+    .hero-section {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hero-content {
+        padding: 44px 6%;
+    }
+
+    .hero-title {
+        max-width: 760px;
+        font-size: clamp(34px, 6vw, 54px);
+    }
+
+    .hero-description {
+        max-width: 680px;
+    }
+
+    .calculator-area {
+        padding: 36px 5%;
+    }
+
+    .calculator-card {
+        max-width: 680px;
+    }
+
+    .form-row-name-gender {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .form-row-name-gender .form-field:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .services-section {
+        padding: 36px 5%;
+    }
+
+    .services-intro {
+        display: block;
+    }
+
+    .service-card {
+        min-height: 210px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 650px) {
+    .header-inner {
+        width: calc(100% - 28px);
+        padding: 12px 0;
+        gap: 12px;
+    }
+
+    .brand {
+        gap: 9px;
+    }
+
+    .brand-mark {
+        width: 34px;
+    }
+
+    .brand-name {
+        font-size: clamp(16px, 4.5vw, 21px);
+    }
+
+    .brand-subtitle {
+        display: none;
+    }
+
+    .header-cta {
+        min-height: 40px;
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .main-nav {
+        gap: 4px clamp(8px, 3vw, 18px);
+    }
+
+    .nav-item {
+        min-height: 38px;
+        padding: 7px 3px;
+        font-size: clamp(11px, 2.8vw, 13px);
+    }
+
+    .hero-content {
+        padding: 34px 5%;
+    }
+
+    .hero-eyebrow {
+        margin-bottom: 14px;
+        font-size: 11px;
+    }
+
+    .hero-title {
+        font-size: clamp(30px, 8vw, 44px);
+        line-height: 1.4;
+    }
+
+    .hero-description {
+        margin-top: 14px;
+        font-size: 14px;
+        line-height: 1.85;
+    }
+
+    .hero-actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .btn {
+        width: 100%;
+        min-height: 46px;
+        padding: 12px 18px;
+    }
+
+    .hero-features {
+        gap: 12px 18px;
+        margin-top: 20px;
+    }
+
+    .hero-feature {
+        font-size: 12px;
+    }
+
+    .calculator-area {
+        padding: 28px 4%;
+    }
+
+    .calculator-card {
+        padding: 26px 18px 22px;
+        border-radius: 18px;
+    }
+
+    .calculator-header {
+        margin-bottom: 18px;
+    }
+
+    .calculator-header h2 {
+        font-size: 22px;
+    }
+
+    .calculator-header p {
+        font-size: 12px;
+    }
+
+    .form-row {
+        gap: 14px;
+    }
+
+    .form-row-name-gender {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .form-row-name-gender .form-field:last-child {
+        grid-column: auto;
+    }
+
+    .form-row-birth {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px 12px;
+    }
+
+    .form-field label {
+        font-size: 12px;
+    }
+
+    .input-box,
+    .gender-toggle,
+    .location-field .input-box {
+        height: 44px;
+    }
+
+    .input-box input {
+        font-size: 14px;
+    }
+
+    .gender-option span {
+        font-size: 13px;
+    }
+
+    .unknown-time {
+        grid-column: 1 / -1;
+        min-height: 38px;
+        white-space: normal;
+        font-size: 12px;
+    }
+
+    .calculate-btn {
+        min-height: 46px;
+        font-size: 14px;
+    }
+
+    .privacy-note {
+        font-size: 10px;
+    }
+
+    .services-section {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 22px;
+        padding: 30px 4%;
+    }
+
+    .services-intro {
+        display: block;
+    }
+
+    .services-intro h2 {
+        font-size: 22px;
+    }
+
+    .services-intro p {
+        margin-top: 10px;
+    }
+
+    .service-list {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+
+    .service-card,
+    .service-card:nth-child(n + 2) {
+        display: flex;
+        min-height: 175px;
+        padding: 22px;
+    }
+
+    .service-card h3 {
+        font-size: 18px;
+    }
+
+    .service-card p {
+        font-size: 13px;
+        line-height: 1.8;
+    }
+
+    .service-line {
+        left: 22px;
+        width: calc(100% - 44px);
+        bottom: 14px;
+    }
+}
+
+/* VERY SMALL MOBILE */
+@media (max-width: 380px) {
+    .header-inner {
+        width: calc(100% - 20px);
+    }
+
+    .header-cta {
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+
+    .brand-mark {
+        width: 30px;
+    }
+
+    .brand-name {
+        font-size: 15px;
+    }
+
+    .main-nav {
+        column-gap: 8px;
+    }
+
+    .nav-item {
+        font-size: 10px;
+    }
+
+    .calculator-card {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .form-row-birth {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .unknown-time {
+        grid-column: auto;
+    }
+
+    .service-card {
+        padding: 20px;
+    }
+
+    .service-line {
+        left: 20px;
+        width: calc(100% - 40px);
+    }
+}
+
+/* LANDSCAPE PHONES
+   Keep natural document flow; do not constrain page height. */
+@media (max-width: 950px) and (orientation: landscape) {
+    .header-inner {
+        min-height: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        gap: 8px 14px;
+    }
+
+    .brand-mark {
+        width: 32px;
+    }
+
+    .main-nav {
+        gap: 4px 18px;
+    }
+
+    .hero-content {
+        padding-top: 32px;
+        padding-bottom: 32px;
+    }
+
+    .calculator-area {
+        padding-top: 28px;
+        padding-bottom: 28px;
+    }
+
+    .services-section {
+        padding-top: 28px;
+        padding-bottom: 28px;
+    }
+}
+
+/* REDUCE MOTION */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
+/* =========================================================
+   ENERGY FLOW — AUTHENTICATION & HISTORY BUTTONS
+   Compatible with the new responsive CSS
+========================================================= */
+
+/* HEADER ACTIONS */
+.header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex: 0 0 auto;
+    min-width: 0;
+}
+
+/* LOGIN BUTTON */
+.btn-login-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+/* USER PILL */
+.user-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    max-width: 100%;
+    padding: 7px 12px;
+
+    background: #FFFFFF;
+    border: 1.5px solid rgba(77, 0, 17, 0.15);
+    border-radius: 999px;
+
+    box-shadow: 0 4px 12px rgba(77, 0, 17, 0.06);
+
+    font-size: 13px;
+}
+
+/* USER AVATAR DOT */
+.user-avatar-dot {
+    width: 8px;
+    height: 8px;
+    flex: 0 0 auto;
+
+    border-radius: 50%;
+    background: #102B1F;
+}
+
+/* USER NAME */
+.user-greeting {
+    max-width: 120px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    color: #4D0011;
+    font-weight: 600;
+}
+
+/* ADMIN BUTTON */
+.btn-admin-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px 9px;
+    border-radius: 7px;
+
+    background: #102B1F;
+    color: #FFFFFF;
+
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.4;
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.btn-admin-link:hover {
+    background: #194431;
+    transform: translateY(-1px);
+}
+
+/* LOGOUT BUTTON */
+.btn-logout {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px 8px;
+    border-radius: 7px;
+
+    color: #8C2234;
+    background: transparent;
+
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.btn-logout:hover {
+    color: #4D0011;
+    background: rgba(140, 34, 52, 0.08);
+}
+
+/* HISTORY BUTTON IN CALCULATOR HEADER */
 .calculator-heading-row {
     position: relative;
-    padding-right: 120px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    gap: 8px;
     margin-bottom: 4px;
 }
+
 .calculator-heading-row .calculator-kicker {
     margin-bottom: 0;
 }
+
+/* HISTORY LINK */
 .calculator-history-link {
-    position: absolute;
-    right: 0;
-    top: calc(50% + 10px);
-    transform: translateY(-50%);
-    white-space: nowrap;
-    padding: 7px 16px;
-    line-height: 1.4;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 auto;
+    max-width: 100%;
+
+    padding: 7px 14px;
     border: 1px solid rgba(77, 0, 17, 0.2);
-    border-radius: 12px;
-    color: #4D0011;
+    border-radius: 10px;
+
     background: #FAF7F5;
-    font-size: clamp(12px, 1vw, 14px);
+    color: #4D0011;
+
+    font-size: 12px;
     font-weight: 600;
+    line-height: 1.5;
     text-decoration: none;
+    white-space: nowrap;
+
+    box-shadow: 0 2px 6px rgba(77, 0, 17, 0.04);
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
-.calculator-history-link:hover,
-.calculator-history-link:focus-visible {
+
+.calculator-history-link:hover {
     background: #F0E5E7;
+    border-color: rgba(77, 0, 17, 0.35);
+    color: #620018;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 4px 10px rgba(77, 0, 17, 0.08);
+}
+
+.calculator-history-link:focus-visible {
+    outline: 2px solid rgba(189, 120, 128, 0.7);
+    outline-offset: 3px;
+}
+
+/* TABLET */
+@media (max-width: 900px) {
+    .header-actions {
+        gap: 6px;
+    }
+
+    .user-pill {
+        gap: 6px;
+        padding: 6px 9px;
+    }
+
+    .user-greeting {
+        max-width: 100px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 650px) {
+    .header-actions {
+        gap: 5px;
+    }
+
+    .user-pill {
+        gap: 5px;
+        padding: 5px 8px;
+        font-size: 11px;
+    }
+
+    .user-greeting {
+        max-width: 75px;
+    }
+
+    .btn-admin-link,
+    .btn-logout {
+        padding: 4px 6px;
+        font-size: 11px;
+    }
+
+    .calculator-heading-row {
+        gap: 8px;
+    }
+
+    .calculator-history-link {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+}
+
+/* VERY SMALL MOBILE */
+@media (max-width: 380px) {
+    .user-pill {
+        gap: 4px;
+        padding: 4px 6px;
+    }
+
+    .user-greeting {
+        max-width: 55px;
+    }
+
+    .btn-admin-link,
+    .btn-logout {
+        padding: 4px 5px;
+        font-size: 10px;
+    }
+
+    .calculator-history-link {
+        padding: 5px 8px;
+        font-size: 10px;
+    }
+}
+
+/* KEYBOARD ACCESSIBILITY FOR HIDDEN RADIO/CHECKBOX */
+.gender-option input:focus-visible + span,
+.unknown-time input:focus-visible + .checkmark {
+    outline: 2px solid rgba(189, 120, 128, 0.8);
+    outline-offset: 2px;
 }
