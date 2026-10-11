@@ -1,3 +1,4 @@
+
 from datetime import date
 from . import data
 
@@ -6,16 +7,10 @@ def _get_up_rasi(index):
     """
     คืนข้อมูลราศีบน พร้อม index และสี
     """
-
     if index is None:
-        return {
-            "index": None,
-            "result": None,
-            "color": None,
-        }
+        return {"index": None, "result": None, "color": None}
 
     result = data.rasi_up[index]
-
     return {
         "index": index,
         "result": result,
@@ -28,52 +23,69 @@ def _get_down_rasi(index):
     คืนข้อมูลราศีล่าง พร้อม index
     ราศีล่างไม่มีสี
     """
-
     if index is None:
-        return {
-            "index": None,
-            "result": None,
-        }
+        return {"index": None, "result": None}
 
-    result = data.rasi_down[index]
-
-    return {
-        "index": index,
-        "result": result,
-    }
+    return {"index": index, "result": data.rasi_down[index]}
 
 
-def _get_up_rasi_by_zh(zh):
-    """
-    ค้นหาราศีบนจาก zh
-    """
+def _get_down_element(down_rasi):
+    if not down_rasi or not down_rasi.get("result"):
+        return None
 
-    for index, rasi in enumerate(data.rasi_up):
-
-        if rasi["zh"] == zh:
-            return _get_up_rasi(index)
-
-    return {
-        "index": None,
-        "result": None,
-        "color": None,
-    }
+    rasi_th = down_rasi["result"]["th"]
+    return data.element_of_rasi.get(rasi_th)
 
 
-def _get_down_rasi_by_zh(zh):
-    """
-    ค้นหาราศีล่างจาก zh
-    """
+def _get_rasi_index_by_zh(zh, rasis):
+    return next(
+        (index for index, rasi in enumerate(rasis) if rasi["zh"] == zh),
+        None,
+    )
 
-    for index, rasi in enumerate(data.rasi_down):
 
-        if rasi["zh"] == zh:
-            return _get_down_rasi(index)
+def calculate_secondary_score(
+    secondary_elements,
+    day_up, day_down,
+    month_up, month_down,
+    year_up, year_down,
+    hour_up, hour_down,
+    day_up_num, day_down_num,
+    month_up_num, month_down_num,
+    year_up_num, year_down_num,
+    hour_up_num, hour_down_num,
+):
+    rasis = [
+        (day_up, day_up_num),
+        (day_down, day_down_num),
+        (month_up, month_up_num),
+        (month_down, month_down_num),
+        (year_up, year_up_num),
+        (year_down, year_down_num),
+        (hour_up, hour_up_num),
+        (hour_down, hour_down_num),
+    ]
 
-    return {
-        "index": None,
-        "result": None,
-    }
+    total = 0
+
+    for rasi, num in rasis:
+        if not rasi or not rasi.get("result"):
+            continue
+
+        th = rasi["result"]["th"]
+        element_text = (
+            th if "color" in rasi
+            else data.element_of_rasi.get(th, "")
+        )
+
+        element = next(
+            (e for e in data.useful_elements if element_text.startswith(e)),
+            None,
+        )
+
+        total += (1 if element in secondary_elements else 0) * num
+
+    return total
 
 
 def calculate_birth_date(user_input):
@@ -85,20 +97,14 @@ def calculate_birth_date(user_input):
     birth_date = user_input.birth_date
     birth_time = user_input.birth_time
 
-    day = birth_date.day
-    month = birth_date.month
-    year = birth_date.year
+    day, month, year = birth_date.day, birth_date.month, birth_date.year
 
     # =========================================================
     # ข้อมูลเวลาเกิด
     # =========================================================
 
-    hour = None
-    minute = None
-
-    if birth_time:
-        hour = birth_time.hour
-        minute = birth_time.minute
+    hour = birth_time.hour if birth_time else None
+    minute = birth_time.minute if birth_time else None
 
     # =========================================================
     # วันที่เริ่มต้น
@@ -127,23 +133,23 @@ def calculate_birth_date(user_input):
     day_down = _get_down_rasi(day_down_index)
 
     # =========================================================
+    # คะแนนราศีวัน
+    # =========================================================
+
+    day_up_num = 1
+    day_down_num = 1.5
+
+    # =========================================================
     # ความหมายราศีบนของวัน
     #
     # ใช้เฉพาะ day -> up -> result -> zh
     # =========================================================
 
     day_up_result = day_up["result"]
-
-    if day_up_result:
-
-        day_up_meaning = data.element_meaning.get(
-            day_up_result["zh"]
-        )
-
-    else:
-
-        day_up_meaning = None
-
+    day_up_meaning = (
+        data.element_meaning.get(day_up_result["zh"])
+        if day_up_result else None
+    )
     day_up["meaning"] = day_up_meaning
 
     # =========================================================
@@ -179,10 +185,7 @@ def calculate_birth_date(user_input):
     # จะยังนับเป็นปี 1926
     # ---------------------------------------------------------
 
-    if birth_date < year_change_date:
-        year_cycle = year - 1927
-    else:
-        year_cycle = year - 1926
+    year_cycle = year - 1927 if birth_date < year_change_date else year - 1926
 
     # ---------------------------------------------------------
     # ป้องกันค่าติดลบสำหรับข้อมูลก่อนปี 1926
@@ -191,7 +194,7 @@ def calculate_birth_date(user_input):
     if year_cycle < 0:
         raise ValueError("Year must be >= 1926")
 
-    year_up_index = (2 +year_cycle) % 10
+    year_up_index = (2 + year_cycle) % 10
     year_down_index = (2 + year_cycle) % 12
 
     # =========================================================
@@ -200,6 +203,13 @@ def calculate_birth_date(user_input):
 
     year_up = _get_up_rasi(year_up_index)
     year_down = _get_down_rasi(year_down_index)
+
+    # =========================================================
+    # คะแนนราศีปี
+    # =========================================================
+
+    year_up_num = 1
+    year_down_num = 1
 
     # =========================================================
     # Index เดือน
@@ -224,10 +234,7 @@ def calculate_birth_date(user_input):
     # หาแถวจากวัน / เดือนเกิด
     # =========================================================
 
-    for index, month_data in enumerate(
-        data.table_rasi_month_down
-    ):
-
+    for index, month_data in enumerate(data.table_rasi_month_down):
         start_month, start_day = month_data["start"]
         end_month, end_day = month_data["end"]
 
@@ -236,40 +243,19 @@ def calculate_birth_date(user_input):
         # =====================================================
 
         if start_month <= end_month:
-
-            start_point = (
-                start_month,
-                start_day,
-            )
-
-            end_point = (
-                end_month,
-                end_day,
-            )
-
-            birth_point = (
-                month,
-                day,
-            )
+            start_point = (start_month, start_day)
+            end_point = (end_month, end_day)
+            birth_point = (month, day)
 
             if start_point <= birth_point <= end_point:
-
                 # ---------------------------------------------
                 # ราศีเดือนล่าง
                 # ---------------------------------------------
 
                 month_down_zh = month_data["zh"]
-
-                month_down_index = None
-
-                for rasi_index, rasi in enumerate(
-                    data.rasi_down
-                ):
-
-                    if rasi["zh"] == month_down_zh:
-
-                        month_down_index = rasi_index
-                        break
+                month_down_index = _get_rasi_index_by_zh(
+                    month_down_zh, data.rasi_down
+                )
 
                 # ---------------------------------------------
                 # ราศีเดือนบน
@@ -278,16 +264,9 @@ def calculate_birth_date(user_input):
                 month_up_zh = data.table_rasi_month_up[index][
                     buddhist_year_last_digit
                 ]
-
-                for rasi_index, rasi in enumerate(
-                    data.rasi_up
-                ):
-
-                    if rasi["zh"] == month_up_zh:
-
-                        month_up_index = rasi_index
-                        break
-
+                month_up_index = _get_rasi_index_by_zh(
+                    month_up_zh, data.rasi_up
+                )
                 break
 
         # =====================================================
@@ -296,39 +275,20 @@ def calculate_birth_date(user_input):
         # =====================================================
 
         else:
-
             if (
-                (
-                    month == start_month
-                    and day >= start_day
-                )
-                or
-                (
-                    month == end_month
-                    and day <= end_day
-                )
-                or
-                (month > start_month)
-                or
-                (month < end_month)
+                (month == start_month and day >= start_day)
+                or (month == end_month and day <= end_day)
+                or (month > start_month)
+                or (month < end_month)
             ):
-
                 # ---------------------------------------------
                 # ราศีเดือนล่าง
                 # ---------------------------------------------
 
                 month_down_zh = month_data["zh"]
-
-                month_down_index = None
-
-                for rasi_index, rasi in enumerate(
-                    data.rasi_down
-                ):
-
-                    if rasi["zh"] == month_down_zh:
-
-                        month_down_index = rasi_index
-                        break
+                month_down_index = _get_rasi_index_by_zh(
+                    month_down_zh, data.rasi_down
+                )
 
                 # ---------------------------------------------
                 # ราศีเดือนบน
@@ -337,16 +297,9 @@ def calculate_birth_date(user_input):
                 month_up_zh = data.table_rasi_month_up[index][
                     buddhist_year_last_digit
                 ]
-
-                for rasi_index, rasi in enumerate(
-                    data.rasi_up
-                ):
-
-                    if rasi["zh"] == month_up_zh:
-
-                        month_up_index = rasi_index
-                        break
-
+                month_up_index = _get_rasi_index_by_zh(
+                    month_up_zh, data.rasi_up
+                )
                 break
 
     # =========================================================
@@ -355,6 +308,13 @@ def calculate_birth_date(user_input):
 
     month_up = _get_up_rasi(month_up_index)
     month_down = _get_down_rasi(month_down_index)
+
+    # =========================================================
+    # คะแนนราศีเดือน
+    # =========================================================
+
+    month_up_num = 1
+    month_down_num = 2
 
     # =========================================================
     # ราศียาม
@@ -366,7 +326,6 @@ def calculate_birth_date(user_input):
     hour_down_index = None
 
     if birth_time:
-
         day_up_zh = day_up["result"]["zh"]
 
         # =====================================================
@@ -374,7 +333,6 @@ def calculate_birth_date(user_input):
         # =====================================================
 
         if day_up_zh in data.table_rasi_hour:
-
             hour_table = data.table_rasi_hour[day_up_zh]
 
             # =================================================
@@ -382,7 +340,6 @@ def calculate_birth_date(user_input):
             # =================================================
 
             for hour_data in hour_table:
-
                 start_hour, start_minute = hour_data["start"]
                 end_hour, end_minute = hour_data["end"]
 
@@ -392,27 +349,22 @@ def calculate_birth_date(user_input):
                 # =================================================
 
                 if start_hour > end_hour:
-
                     if (
                         (
                             hour > start_hour
-                            or
-                            (
+                            or (
                                 hour == start_hour
                                 and minute >= start_minute
                             )
                         )
-                        or
-                        (
+                        or (
                             hour < end_hour
-                            or
-                            (
+                            or (
                                 hour == end_hour
                                 and minute <= end_minute
                             )
                         )
                     ):
-
                         hour_up_zh = hour_data["up"]
                         hour_down_zh = hour_data["down"]
 
@@ -420,28 +372,17 @@ def calculate_birth_date(user_input):
                         # ราศียามบน
                         # -----------------------------------------
 
-                        for rasi_index, rasi in enumerate(
-                            data.rasi_up
-                        ):
-
-                            if rasi["zh"] == hour_up_zh:
-
-                                hour_up_index = rasi_index
-                                break
+                        hour_up_index = _get_rasi_index_by_zh(
+                            hour_up_zh, data.rasi_up
+                        )
 
                         # -----------------------------------------
                         # ราศียามล่าง
                         # -----------------------------------------
 
-                        for rasi_index, rasi in enumerate(
-                            data.rasi_down
-                        ):
-
-                            if rasi["zh"] == hour_down_zh:
-
-                                hour_down_index = rasi_index
-                                break
-
+                        hour_down_index = _get_rasi_index_by_zh(
+                            hour_down_zh, data.rasi_down
+                        )
                         break
 
                 # =================================================
@@ -449,24 +390,11 @@ def calculate_birth_date(user_input):
                 # =================================================
 
                 else:
-
-                    start_point = (
-                        start_hour,
-                        start_minute,
-                    )
-
-                    end_point = (
-                        end_hour,
-                        end_minute,
-                    )
-
-                    birth_point = (
-                        hour,
-                        minute,
-                    )
+                    start_point = (start_hour, start_minute)
+                    end_point = (end_hour, end_minute)
+                    birth_point = (hour, minute)
 
                     if start_point <= birth_point <= end_point:
-
                         hour_up_zh = hour_data["up"]
                         hour_down_zh = hour_data["down"]
 
@@ -474,28 +402,17 @@ def calculate_birth_date(user_input):
                         # ราศียามบน
                         # -----------------------------------------
 
-                        for rasi_index, rasi in enumerate(
-                            data.rasi_up
-                        ):
-
-                            if rasi["zh"] == hour_up_zh:
-
-                                hour_up_index = rasi_index
-                                break
+                        hour_up_index = _get_rasi_index_by_zh(
+                            hour_up_zh, data.rasi_up
+                        )
 
                         # -----------------------------------------
                         # ราศียามล่าง
                         # -----------------------------------------
 
-                        for rasi_index, rasi in enumerate(
-                            data.rasi_down
-                        ):
-
-                            if rasi["zh"] == hour_down_zh:
-
-                                hour_down_index = rasi_index
-                                break
-
+                        hour_down_index = _get_rasi_index_by_zh(
+                            hour_down_zh, data.rasi_down
+                        )
                         break
 
     # =========================================================
@@ -504,6 +421,37 @@ def calculate_birth_date(user_input):
 
     hour_up = _get_up_rasi(hour_up_index)
     hour_down = _get_down_rasi(hour_down_index)
+
+    # =========================================================
+    # คะแนนราศียาม
+    # =========================================================
+
+    hour_up_num = 1
+    hour_down_num = 1
+
+    # =========================================================
+    # คำนวณคะแนนรวม
+    # =========================================================
+
+    day_up_element = day_up["result"]["th"] if day_up["result"] else ""
+    day_up_element = next(
+        (e for e in data.useful_elements if day_up_element.startswith(e)),
+        None,
+    )
+
+    useful_elements = data.useful_elements.get(day_up_element, [])
+
+    score = calculate_secondary_score(
+        useful_elements,
+        day_up, day_down,
+        month_up, month_down,
+        year_up, year_down,
+        hour_up, hour_down,
+        day_up_num, day_down_num,
+        month_up_num, month_down_num,
+        year_up_num, year_down_num,
+        hour_up_num, hour_down_num,
+    )
 
     # =========================================================
     # ผลลัพธ์
@@ -530,25 +478,17 @@ def calculate_birth_date(user_input):
     # =========================================================
 
     return {
-
         # =====================================================
         # ข้อมูลวันเกิด
         # =====================================================
 
-        "date": {
-            "day": day,
-            "month": month,
-            "year": year,
-        },
+        "date": {"day": day, "month": month, "year": year},
 
         # =====================================================
         # ข้อมูลเวลาเกิด
         # =====================================================
 
-        "time": {
-            "hour": hour,
-            "minute": minute,
-        },
+        "time": {"hour": hour, "minute": minute},
 
         # =====================================================
         # วัน
@@ -557,6 +497,7 @@ def calculate_birth_date(user_input):
         "day": {
             "up": day_up,
             "down": day_down,
+            "down_element": _get_down_element(day_down),
         },
 
         # =====================================================
@@ -566,6 +507,7 @@ def calculate_birth_date(user_input):
         "month": {
             "up": month_up,
             "down": month_down,
+            "down_element": _get_down_element(month_down),
         },
 
         # =====================================================
@@ -575,6 +517,7 @@ def calculate_birth_date(user_input):
         "year": {
             "up": year_up,
             "down": year_down,
+            "down_element": _get_down_element(year_down),
         },
 
         # =====================================================
@@ -584,5 +527,8 @@ def calculate_birth_date(user_input):
         "hour": {
             "up": hour_up,
             "down": hour_down,
+            "down_element": _get_down_element(hour_down),
         },
+
+        "total": score,
     }
